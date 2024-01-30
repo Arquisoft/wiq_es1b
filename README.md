@@ -15,7 +15,10 @@ This repo is a basic application composed of several components.
 
 Both the user and auth service share a Mongo database that is accessed with mongoose.
 
+
 ## Contributors
+- María López García-Consuegra
+- Álex Fernández Salé
 - Lucas Castro Antuña
 
 ## Quick start guide
