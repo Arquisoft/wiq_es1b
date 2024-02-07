@@ -3,6 +3,15 @@ ifndef::imagesdir[:imagesdir: ../images]
 [[section-design-decisions]]
 == Architecture Decisions
 
+|===
+|Decision |Reason
+|React.js |We decided to use React.js because it is one of the most popular libraries of Javascript most used nowadays
+and we thought that, even though not even one of us knew how to use it, it would make programming the front-end part of the app better
+and easier for us.
+|Javascript |Our decision was to stick with Javascript for the development of this web app because we already knew about this languaje
+from other subjects and we thought it was an easy languaje to be able to do everything that the app requires in matters of using APIs like the one from wikidata
+and other things.
+|===
 
 [role="arc42help"]
 ****
