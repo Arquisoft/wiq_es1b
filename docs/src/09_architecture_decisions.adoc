@@ -3,6 +3,7 @@ ifndef::imagesdir[:imagesdir: ../images]
 [[section-design-decisions]]
 == Architecture Decisions
 
+[options="header",cols="1,2"]
 |===
 |Decision |Reason
 |React.js |We decided to use React.js because it is one of the most popular Javascript libraries used nowadays.
