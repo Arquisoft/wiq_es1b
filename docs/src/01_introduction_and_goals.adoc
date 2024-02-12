@@ -2,38 +2,26 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 [[section-introduction-and-goals]]
 == Introduction and Goals
+HappySw, a software development company, has been hired by RTVE in order to develop an experimental online version of the famous spanish program “Saber y Ganar”, a well-known question and answer contest.
 
-[role="arc42help"]
-****
-Describes the relevant requirements and the driving forces that software architects and development team must consider. 
-These include
+Our main objective is to create a web application in which users have to sign up and answer a series of questions generated automatically from the data stored in Wikidata. After that, users will be awarded according to the number of correct answers.
 
-* underlying business goals, 
-* essential features, 
-* essential functional requirements, 
-* quality goals for the architecture and
-* relevant stakeholders and their expectations
-****
+We also expect to provide a practical software that fulfills customer expectations.
+
 
 === Requirements Overview
 
+[options="header",cols="1,2"]
+|===
+|Requirement|Description
+| *Users registration* | Users must sign up first to be able to access their historial of the game: number of games, times, correct/incorrect answers, etc.
+| *Automatic generation of data* | Questions and answers have to be generated automatically from Wikidata
+| *Questions must have a timer* | Questions must be answered on a determined time, otherwise the response will be count as a fail
+| *Only one correct answer* | System must originate only one correct answer and the rest of them will be wrong so as not to confuse the player
+| *Data access through an API* | System must allow access to the information about users and the generated answers through an API
+|===
 [role="arc42help"]
 ****
-.Contents
-Short description of the functional requirements, driving forces, extract (or abstract)
-of requirements. Link to (hopefully existing) requirements documents
-(with version number and information where to find it).
-
-.Motivation
-From the point of view of the end users a system is created or modified to
-improve support of a business activity and/or improve the quality.
-
-.Form
-Short textual description, probably in tabular use-case format.
-If requirements documents exist this overview should refer to these documents.
-
-Keep these excerpts as short as possible. Balance readability of this document with potential redundancy w.r.t to requirements documents.
-
 
 .Further Information
 
@@ -65,29 +53,24 @@ A table with quality goals and concrete scenarios, ordered by priorities
 
 === Stakeholders
 
-[role="arc42help"]
-****
-.Contents
-Explicit overview of stakeholders of the system, i.e. all person, roles or organizations that
-
-* should know the architecture
-* have to be convinced of the architecture
-* have to work with the architecture or with code
-* need the documentation of the architecture for their work
-* have to come up with decisions about the system or its development
-
-.Motivation
-You should know all parties involved in development of the system or affected by the system.
-Otherwise, you may get nasty surprises later in the development process.
-These stakeholders determine the extent and the level of detail of your work and its results.
-
-.Form
-Table with role names, person names, and their expectations with respect to the architecture and its documentation.
-****
-
-[options="header",cols="1,2,2"]
+[options="header",cols="1,2"]
 |===
-|Role/Name|Contact|Expectations
-| _<Role-1>_ | _<Contact-1>_ | _<Expectation-1>_
-| _<Role-2>_ | _<Contact-2>_ | _<Expectation-2>_
+|Role/Name|Expectations
+| *Teachers* | Providing guidance to the development team in order to build the required functional software
+| *Development team* | The group of people in charge of developing the application which goals are to satisfy the stakeholders, learn new technologies, maintain a good relationship between us and be proud of the effort put into the project
+| *Other students* | They can be interested in this project to learn how we work as a team and to have other points of view
+| *Users* | Every one that will be using the application and who should find it practical, enjoyable and easy to use
+| *RTVE* | The main client, it´s the company that hired us and provided the requirements needed
+| *Businesses* | Companies involved in software development that might be looking for future engineers
+|===
+
+=== Group members
+
+[options="header",cols="1,2"]
+|===
+|Role/Name|Contact
+| _Álex Fernández Salé_ | 
+| _María López García-Consuegra_ | uo289029@uniovi.es
+| _Mauro Varea Fernández_ | uo270734@uniovi.es
+| _Lucas Castro Antuña_ | uo289769@uniovi.es
 |===
