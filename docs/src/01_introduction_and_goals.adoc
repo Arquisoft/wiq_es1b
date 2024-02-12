@@ -69,7 +69,7 @@ A table with quality goals and concrete scenarios, ordered by priorities
 [options="header",cols="1,2"]
 |===
 |Role/Name|Contact
-| _Álex Fernández Salé_ | 
+| _Álex Fernández Salé_ | uo279375@uniovi.es
 | _María López García-Consuegra_ | uo289029@uniovi.es
 | _Mauro Varea Fernández_ | uo270734@uniovi.es
 | _Lucas Castro Antuña_ | uo289769@uniovi.es
