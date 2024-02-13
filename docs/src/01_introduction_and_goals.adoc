@@ -14,6 +14,7 @@ We also expect to provide a practical software that fulfills customer expectatio
 [options="header",cols="1,2"]
 |===
 |Requirement|Description
+| *Web access* | The system will rely on at least one web frontend that will be deployed and access will be through web
 | *Users registration* | Users must sign up first to be able to access their historial of the game: number of games, times, correct/incorrect answers, etc.
 | *Automatic generation of data* | Questions and answers have to be generated automatically from Wikidata
 | *Questions must have a timer* | Questions must be answered on a determined time, otherwise the response will be count as a fail
@@ -30,6 +31,19 @@ See https://docs.arc42.org/section-1/[Introduction and Goals] in the arc42 docum
 ****
 
 === Quality Goals
+
+[options="header",cols="1,2,2"]
+|===
+|Priority|Quality goal|Motivation
+| _High_ | *Privacy* | Personal data and information shouldn´t be something that just anyone can play with, so 
+                        the system must guarantee their users´ information to be safe and hidden to other people
+| _High_ | *Usability* | The application interface has to be satisfying and easy to handle to users even if their web
+                        skills are zero
+| _High_ | *Maintainability* | Our software should be designed in a way that it won´t be difficult to modify, extend and
+                        adjust to changes that could suddenly happen
+| _Medium_ | *Availability* | Users may consider a basic that the system let them watch their personal data and results
+                        whenever they want
+|===
 
 [role="arc42help"]
 ****
