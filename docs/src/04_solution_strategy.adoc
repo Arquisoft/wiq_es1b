@@ -5,8 +5,18 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 Summary and explanation of the fundamental decisions and solution strategies that we are going to follow while we develop the web app WIQ.
 
-===Technology decisions
+=== Technology decisions
+* Javascript as the language to program in. The best option between the ones we considered as it is the best suited to use APIs easily in our opinion.
+* React.js as the Javascript library chosen to program the user interface of the app as it is easy to use and really famous nowadays.
+* Wikidata API to use in the question generator as it is a requirement of the app.
+* Docker to deploy de app locally and test it.
 
+=== Top-level decomposition of the system decisions
+
+=== How to achieve key quality goals decisions
+
+=== Relevant organizational decisions
+* Github to keep all of our modifications of the code saved and to have Git version control.
 
 [role="arc42help"]
 ****
