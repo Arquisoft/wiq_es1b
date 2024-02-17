@@ -459,7 +459,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_technical_context">3.2. Technical Context</a></li>
 </ul>
 </li>
-<li><a href="#section-solution-strategy">4. Solution Strategy</a></li>
+<li><a href="#section-solution-strategy">4. Solution Strategy</a>
+<ul class="sectlevel2">
+<li><a href="#_technology_decisions">4.1. Technology decisions</a></li>
+<li><a href="#_top_level_decomposition_of_the_system_decisions">4.2. Top-level decomposition of the system decisions</a></li>
+<li><a href="#_how_to_achieve_key_quality_goals_decisions">4.3. How to achieve key quality goals decisions</a></li>
+<li><a href="#_relevant_organizational_decisions">4.4. Relevant organizational decisions</a></li>
+</ul>
+</li>
 <li><a href="#section-building-block-view">5. Building Block View</a>
 <ul class="sectlevel2">
 <li><a href="#_whitebox_overall_system">5.1. Whitebox Overall System</a></li>
@@ -775,8 +782,8 @@ If you as an architect do not know how the quality of your work will be judged&#
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Web app</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The app we are developing is a web game called WIQ consisting of questions and answers generated automatically and users, logged in, must answer within a certain time to win prizes.
-The users will also have access to the history of their games.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The application we are developing is a web game called WIQ consisting of automatically generated questions and answers. Users, once logged in, must answer within a certain time to win prizes.
+Additionally, users will also have access to the history of their games.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Documentation</p></td>
@@ -784,24 +791,23 @@ The users will also have access to the history of their games.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">API</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">To generate the questions and answers for the game we will use tha API of wikidata as it is a great source of information to be able to provide
-different types of questions to the users and make the game versatil and not repetitive.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To generate the questions and answers for the game, we will use tha API of Wikidata as it is a great source of information to provide
+different types of questions to the users, making the game versatile and non-repetitive.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Question generator</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Using the Wikidata API the questions will be automatically generated as well as the correct and 3 incorrect answers. This questinos will be
-answered by the user and will be saved in their history. By using this generator, we asure that the likelihood of getting que same question in other game is almost none.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Using the Wikidata API, questions will be automatically generated along with the correct and three incorrect answers. This questions will be
+answered by the user and saved in their history. By using this generator, we ensure that the likelihood of getting the same question in another game is almost none.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Users Login</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The login of the users must be the first thing that shows up when you open the web of the game, the users will be able register and to log in. When the
-user registers it will be necessary to log in after it to access the website and be able to start the game. The users who already have an account will have
-the option to start the game or view their data from previus games (number of games, correct and incorrect answers, time played, etc).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The login of the users must be the first thing that shows up when you open the web of the game. Users will be able to register and to log in. After registering, it will be necessary to log in to access the website and start the game.
+Users who already have an account will have the option to start the game or view their data from previus games (number of games, correct and incorrect answers, time played, etc).</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Deployment</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The web app must have a frontend to be able to interact with the game through a web which will be deployed in a virtual machine. To deploy locally
-to test the app before relasing we will use Docker</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The web app must have a frontend to interact with the game through a web interface, which will be deployed in a virtual machine. To deploy locally
+for testing before releasing, we will use Docker</p></td>
 </tr>
 </tbody>
 </table>
@@ -819,13 +825,13 @@ to test the app before relasing we will use Docker</p></td>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Github</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Github will be used to keep the web app in a repository with Git version control. In this platform will also be projects to keep track of who and when someome takes up
+<td class="tableblock halign-left valign-top"><p class="tableblock">Github will be used to keep the web app in a repository with Git version control. Projects will also be used to track who and when someome takes up
 a task and completes it. Issues will be opened for every task involving the web app.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Class reunions</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">We will use the time of the classes to talk about new tasks that need to be done as well as put in common problems we might face to be able to solve them as soon as possible.
-Other forms of communication, like a group in Whatsapp, can be used to communicate between the developers.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">We will use the time during classes to discuss new tasks that need to be done, as well as to address any common problems we might face in order to solve them as soon as possible.
+Other forms of communication, like a Whatsapp group, can be used to communicate between developers.</p></td>
 </tr>
 </tbody>
 </table>
@@ -958,6 +964,65 @@ together with a mapping table showing the relationships between channels and inp
 <div class="sect1">
 <h2 id="section-solution-strategy">4. Solution Strategy</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Summary and explanation of the fundamental decisions and solution strategies that we are going to follow while we develop the web app WIQ.</p>
+</div>
+<div class="sect2">
+<h3 id="_technology_decisions">4.1. Technology decisions</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Javascript as the programming language. It was chosen as the best option among the others we considered (Java, Spring Boot, etc) as it is well-suited for using APIs easily and is a simple language.</p>
+</li>
+<li>
+<p>React.js as the Javascript library chosen to program the user interface of the app due to its ease of use and popularity nowadays.</p>
+</li>
+<li>
+<p>Wikidata API to use in the question generator, as it is a requirement of the app.</p>
+</li>
+<li>
+<p>Docker for deploying de app locally and testing it.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_top_level_decomposition_of_the_system_decisions">4.2. Top-level decomposition of the system decisions</h3>
+<div class="paragraph">
+<p>The system will be separated into different microservices, one for each characteristic of the app. It consists of modules or packages with classes dedicated to only one responsibility each.
+We decided to do it this way so that each developer can program their own feature in their branch, reducing potential conflicts when merging code.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_how_to_achieve_key_quality_goals_decisions">4.3. How to achieve key quality goals decisions</h3>
+<div class="paragraph">
+<p>We want the web app to be quick and easy to use, as well as to keep all the users' data secure in the system. To make this possible,
+Docker will help by providing a way to test every aspect of the app before making the release. Moreover,
+multiple tests will be done to ensure everything works as intended.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_relevant_organizational_decisions">4.4. Relevant organizational decisions</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Github will be used to keep all of our code modifications saved and to have Git version control.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Issues will be used to assign tasks to the members.</p>
+</li>
+<li>
+<p>Projects will be used to track the progress of the tasks.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>A Whatsapp group will be used to communicate instantly with each other about important matters.</p>
+</li>
+</ul>
+</div>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1000,6 +1065,7 @@ Refer to details in the following sections.</p>
 </div>
 </div>
 <div style="page-break-after: always;"></div>
+</div>
 </div>
 </div>
 <div class="sect1">
