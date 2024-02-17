@@ -3,6 +3,15 @@ ifndef::imagesdir[:imagesdir: ../images]
 [[section-architecture-constraints]]
 == Architecture Constraints
 
+[options="header",cols="1,2"]
+|===
+|Architecture Constraint |Reason
+|Web app | The app we are developing is a web game called WIQ consisting of questions and answers generated automatically and users, logged in, must answer to win prizes. 
+|Documentation | PlantUML and ASCIIDoc will be used along with the Arc42 template to keep the documentation updated throughout the development of the web app.
+|API | To generate the questions and answers for the game we will use tha API of wikidata as it is a great source of information to be able to provide
+different types of questions to the users and make the game versatil and not repetitive.
+|Question generator | 
+|===
 
 [role="arc42help"]
 ****
