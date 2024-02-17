@@ -6,24 +6,27 @@ ifndef::imagesdir[:imagesdir: ../images]
 [options="header",cols="1,2"]
 |===
 |Technical Constraint |Reason
-|Web app | The app we are developing is a web game called WIQ consisting of questions and answers generated automatically and users, logged in, must answer to win prizes. 
+|Web app | The app we are developing is a web game called WIQ consisting of questions and answers generated automatically and users, logged in, must answer within a certain time to win prizes. 
 The users will also have access to the history of their games. 
 |Documentation | PlantUML and ASCIIDoc will be used along with the Arc42 template to keep the documentation updated throughout the development of the web app.
 |API | To generate the questions and answers for the game we will use tha API of wikidata as it is a great source of information to be able to provide
 different types of questions to the users and make the game versatil and not repetitive.
-|Question generator | Using the Wikidata API the questions will be automatically generated as well as the correct and incorrect answers. This questinos will be 
+|Question generator | Using the Wikidata API the questions will be automatically generated as well as the correct and 3 incorrect answers. This questinos will be 
 answered by the user and will be saved in their history. By using this generator, we asure that the likelihood of getting que same question in other game is almost none.
 |Users Login| The login of the users must be the first thing that shows up when you open the web of the game, the users will be able register and to log in. When the
 user registers it will be necessary to log in after it to access the website and be able to start the game. The users who already have an account will have
-the option to start the game or view their data from previus games.
+the option to start the game or view their data from previus games (number of games, correct and incorrect answers, time played, etc).
+|Deployment | The web app must have a frontend to be able to interact with the game through a web which will be deployed in a virtual machine. To deploy locally 
+to test the app before relasing we will use Docker
 |===
 
 [options="header",cols="1,2"]
 |===
 |Organizational Constraint |Reason
-|Web app | The app we are developing is a web game called WIQ consisting of questions and answers generated automatically and users, logged in, must answer to win prizes. 
-The users will also have access to the history of their games. 
-|Documentation | PlantUML and ASCIIDoc will be used along with the Arc42 template to keep the documentation updated throughout the development of the web app.
+|Github | Github will be used to keep the web app in a repository with Git version control. In this platform will also be projects to keep track of who and when someome takes up 
+a task and completes it. Issues will be opened for every task involving the web app.
+|Class reunions | We will use the time of the classes to talk about new tasks that need to be done as well as put in common problems we might face to be able to solve them as soon as possible.
+Other forms of communication, like a group in Whatsapp, can be used to communicate between the developers.
 |===
 
 [role="arc42help"]
