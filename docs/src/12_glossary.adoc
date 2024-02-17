@@ -2,9 +2,9 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 [[section-glossary]]
 == Glossary
+Definition on some of the most important terms of this documentation.
 
-
-[cols="e,2e" options="header"]
+[options="header",cols="1,2"]
 |===
 |Term |Definition
 
@@ -60,22 +60,6 @@ It abstracts the hardware resources of a computer, such as the CPU, memory, and 
 |WIQ | Online version (web app) of the famous spanish program "Saber y Ganar", a question and answer contest.
 
 |===
-: 
-: 
-: 
-: 
-:
-: 
-: 
-: 
-: 
- : 
-:
-: 
-
-: 
-
- : 
 
 
 [role="arc42help"]
