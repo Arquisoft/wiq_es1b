@@ -5,12 +5,25 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 [options="header",cols="1,2"]
 |===
-|Architecture Constraint |Reason
+|Technical Constraint |Reason
 |Web app | The app we are developing is a web game called WIQ consisting of questions and answers generated automatically and users, logged in, must answer to win prizes. 
+The users will also have access to the history of their games. 
 |Documentation | PlantUML and ASCIIDoc will be used along with the Arc42 template to keep the documentation updated throughout the development of the web app.
 |API | To generate the questions and answers for the game we will use tha API of wikidata as it is a great source of information to be able to provide
 different types of questions to the users and make the game versatil and not repetitive.
-|Question generator | 
+|Question generator | Using the Wikidata API the questions will be automatically generated as well as the correct and incorrect answers. This questinos will be 
+answered by the user and will be saved in their history. By using this generator, we asure that the likelihood of getting que same question in other game is almost none.
+|Users Login| The login of the users must be the first thing that shows up when you open the web of the game, the users will be able register and to log in. When the
+user registers it will be necessary to log in after it to access the website and be able to start the game. The users who already have an account will have
+the option to start the game or view their data from previus games.
+|===
+
+[options="header",cols="1,2"]
+|===
+|Organizational Constraint |Reason
+|Web app | The app we are developing is a web game called WIQ consisting of questions and answers generated automatically and users, logged in, must answer to win prizes. 
+The users will also have access to the history of their games. 
+|Documentation | PlantUML and ASCIIDoc will be used along with the Arc42 template to keep the documentation updated throughout the development of the web app.
 |===
 
 [role="arc42help"]
