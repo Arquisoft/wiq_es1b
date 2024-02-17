@@ -52,6 +52,13 @@ and monitor progress efficiently. They serve as a centralized hub for coordinati
  a repository typically refers to a version control system, such as Git, where developers can store and track changes to their codebase. 
  It serves as a single source of truth for the project, allowing collaborators to access, modify, and contribute to the codebase while maintaining a history of changes.
 
+|Virtual Machine |A software-based emulation of a physical computer system that allows multiple operating systems to run simultaneously on a single physical machine. 
+It abstracts the hardware resources of a computer, such as the CPU, memory, and storage, providing an isolated environment for running applications or executing tasks.
+
+|Wikidata | A collaborative, open database that stores structured data to support Wikimedia and other knowledge-related projects.
+
+|WIQ | Online version (web app) of the famous spanish program "Saber y Ganar", a question and answer contest.
+
 |===
 : 
 : 
@@ -66,10 +73,9 @@ and monitor progress efficiently. They serve as a centralized hub for coordinati
 :
 : 
 
-Virtual Machine: A software-based emulation of a physical computer system that allows multiple operating systems to run simultaneously on a single physical machine. It abstracts the hardware resources of a computer, such as the CPU, memory, and storage, providing an isolated environment for running applications or executing tasks.
+: 
 
-WIQ : online version (web app) of the famous spanish program "Saber y Ganar", a question and answer contest.
-Wikidata : A collaborative, open database that stores structured data to support Wikimedia and other knowledge-related projects.
+ : 
 
 
 [role="arc42help"]
