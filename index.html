@@ -449,6 +449,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_requirements_overview">1.1. Requirements Overview</a></li>
 <li><a href="#_quality_goals">1.2. Quality Goals</a></li>
 <li><a href="#_stakeholders">1.3. Stakeholders</a></li>
+<li><a href="#_group_members">1.4. Group members</a></li>
 </ul>
 </li>
 <li><a href="#section-architecture-constraints">2. Architecture Constraints</a></li>
@@ -551,56 +552,57 @@ For documentation of your own system you use better the <em>plain</em> version.<
 <div class="sect1">
 <h2 id="section-introduction-and-goals">1. Introduction and Goals</h2>
 <div class="sectionbody">
-<div class="sidebarblock arc42help">
-<div class="content">
 <div class="paragraph">
-<p>Describes the relevant requirements and the driving forces that software architects and development team must consider.
-These include</p>
+<p>HappySw, a software development company, has been hired by RTVE in order to develop an experimental online version of the famous spanish program “Saber y Ganar”, a well-known question and answer contest.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>underlying business goals,</p>
-</li>
-<li>
-<p>essential features,</p>
-</li>
-<li>
-<p>essential functional requirements,</p>
-</li>
-<li>
-<p>quality goals for the architecture and</p>
-</li>
-<li>
-<p>relevant stakeholders and their expectations</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>Our main objective is to create a web application in which users have to sign up and answer a series of questions generated automatically from the data stored in Wikidata. After that, users will be awarded according to the number of correct answers.</p>
 </div>
-</div>
+<div class="paragraph">
+<p>We also expect to provide a practical software that fulfills customer expectations.</p>
 </div>
 <div class="sect2">
 <h3 id="_requirements_overview">1.1. Requirements Overview</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Requirement</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Web access</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The system will rely on at least one web frontend that will be deployed and access will be through web</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Users registration</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Users must sign up first to be able to access their historial of the game: number of games, times, correct/incorrect answers, etc.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Automatic generation of data</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Questions and answers have to be generated automatically from Wikidata</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Questions must have a timer</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Questions must be answered on a determined time, otherwise the response will be count as a fail</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Only one correct answer</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">System must originate only one correct answer and the rest of them will be wrong so as not to confuse the player</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Data access through an API</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">System must allow access to the information about users and the generated answers through an API</p></td>
+</tr>
+</tbody>
+</table>
 <div class="sidebarblock arc42help">
 <div class="content">
-<div class="paragraph">
-<div class="title">Contents</div>
-<p>Short description of the functional requirements, driving forces, extract (or abstract)
-of requirements. Link to (hopefully existing) requirements documents
-(with version number and information where to find it).</p>
-</div>
-<div class="paragraph">
-<div class="title">Motivation</div>
-<p>From the point of view of the end users a system is created or modified to
-improve support of a business activity and/or improve the quality.</p>
-</div>
-<div class="paragraph">
-<div class="title">Form</div>
-<p>Short textual description, probably in tabular use-case format.
-If requirements documents exist this overview should refer to these documents.</p>
-</div>
-<div class="paragraph">
-<p>Keep these excerpts as short as possible. Balance readability of this document with potential redundancy w.r.t to requirements documents.</p>
-</div>
 <div class="paragraph">
 <div class="title">Further Information</div>
 <p>See <a href="https://docs.arc42.org/section-1/">Introduction and Goals</a> in the arc42 documentation.</p>
@@ -610,6 +612,46 @@ If requirements documents exist this overview should refer to these documents.</
 </div>
 <div class="sect2">
 <h3 id="_quality_goals">1.2. Quality Goals</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 40%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Priority</th>
+<th class="tableblock halign-left valign-top">Quality goal</th>
+<th class="tableblock halign-left valign-top">Motivation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>High</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Privacy</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Personal data and information shouldn´t be something that just anyone can play with, so
+                        the system must guarantee their users´ information to be safe and hidden to other people</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>High</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Usability</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The application interface has to be satisfying and easy to handle to users even if their web
+                        skills are zero</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>High</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Maintainability</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Our software should be designed in a way that it won´t be difficult to modify, extend and
+                        adjust to changes that could suddenly happen</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Medium</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Availability</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Users may consider a basic that the system let them watch their personal data and results
+                        whenever they want</p></td>
+</tr>
+</tbody>
+</table>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -641,66 +683,74 @@ If you as an architect do not know how the quality of your work will be judged&#
 </div>
 <div class="sect2">
 <h3 id="_stakeholders">1.3. Stakeholders</h3>
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<div class="title">Contents</div>
-<p>Explicit overview of stakeholders of the system, i.e. all person, roles or organizations that</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>should know the architecture</p>
-</li>
-<li>
-<p>have to be convinced of the architecture</p>
-</li>
-<li>
-<p>have to work with the architecture or with code</p>
-</li>
-<li>
-<p>need the documentation of the architecture for their work</p>
-</li>
-<li>
-<p>have to come up with decisions about the system or its development</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<div class="title">Motivation</div>
-<p>You should know all parties involved in development of the system or affected by the system.
-Otherwise, you may get nasty surprises later in the development process.
-These stakeholders determine the extent and the level of detail of your work and its results.</p>
-</div>
-<div class="paragraph">
-<div class="title">Form</div>
-<p>Table with role names, person names, and their expectations with respect to the architecture and its documentation.</p>
-</div>
-</div>
-</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 20%;">
-<col style="width: 40%;">
-<col style="width: 40%;">
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Role/Name</th>
-<th class="tableblock halign-left valign-top">Contact</th>
 <th class="tableblock halign-left valign-top">Expectations</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;Role-1&gt;</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;Contact-1&gt;</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;Expectation-1&gt;</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Teachers</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Providing guidance to the development team in order to build the required functional software</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;Role-2&gt;</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;Contact-2&gt;</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;Expectation-2&gt;</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Development team</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The group of people in charge of developing the application which goals are to satisfy the stakeholders, learn new technologies, maintain a good relationship between us and be proud of the effort put into the project</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Other students</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">They can be interested in this project to learn how we work as a team and to have other points of view</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Users</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Every one that will be using the application and who should find it practical, enjoyable and easy to use</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>RTVE</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The main client, it´s the company that hired us and provided the requirements needed</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Businesses</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Companies involved in software development that might be looking for future engineers</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_group_members">1.4. Group members</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Role/Name</th>
+<th class="tableblock halign-left valign-top">Contact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Álex Fernández Salé</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="mailto:uo279375@uniovi.es">uo279375@uniovi.es</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>María López García-Consuegra</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="mailto:uo289029@uniovi.es">uo289029@uniovi.es</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Mauro Varea Fernández</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="mailto:uo270734@uniovi.es">uo270734@uniovi.es</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Lucas Castro Antuña</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="mailto:uo289769@uniovi.es">uo289769@uniovi.es</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -711,6 +761,74 @@ These stakeholders determine the extent and the level of detail of your work and
 <div class="sect1">
 <h2 id="section-architecture-constraints">2. Architecture Constraints</h2>
 <div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Technical Constraint</th>
+<th class="tableblock halign-left valign-top">Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Web app</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The app we are developing is a web game called WIQ consisting of questions and answers generated automatically and users, logged in, must answer within a certain time to win prizes.
+The users will also have access to the history of their games.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Documentation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PlantUML and ASCIIDoc will be used along with the Arc42 template to keep the documentation updated throughout the development of the web app.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">API</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To generate the questions and answers for the game we will use tha API of wikidata as it is a great source of information to be able to provide
+different types of questions to the users and make the game versatil and not repetitive.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Question generator</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Using the Wikidata API the questions will be automatically generated as well as the correct and 3 incorrect answers. This questinos will be
+answered by the user and will be saved in their history. By using this generator, we asure that the likelihood of getting que same question in other game is almost none.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Users Login</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The login of the users must be the first thing that shows up when you open the web of the game, the users will be able register and to log in. When the
+user registers it will be necessary to log in after it to access the website and be able to start the game. The users who already have an account will have
+the option to start the game or view their data from previus games (number of games, correct and incorrect answers, time played, etc).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deployment</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The web app must have a frontend to be able to interact with the game through a web which will be deployed in a virtual machine. To deploy locally
+to test the app before relasing we will use Docker</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Organizational Constraint</th>
+<th class="tableblock halign-left valign-top">Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Github</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Github will be used to keep the web app in a repository with Git version control. In this platform will also be projects to keep track of who and when someome takes up
+a task and completes it. Issues will be opened for every task involving the web app.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Class reunions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">We will use the time of the classes to talk about new tasks that need to be done as well as put in common problems we might face to be able to solve them as soon as possible.
+Other forms of communication, like a group in Whatsapp, can be used to communicate between the developers.</p></td>
+</tr>
+</tbody>
+</table>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1833,7 +1951,7 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 <div id="footer">
 <div id="footer-text">
 Version 8.2 EN<br>
-Last updated 2024-02-13 10:23:58 +0100
+Last updated 2024-02-16 20:31:27 +0100
 </div>
 </div>
 </body>
