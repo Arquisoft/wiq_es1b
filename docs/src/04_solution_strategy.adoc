@@ -3,6 +3,10 @@ ifndef::imagesdir[:imagesdir: ../images]
 [[section-solution-strategy]]
 == Solution Strategy
 
+Summary and explanation of the fundamental decisions and solution strategies that we are going to follow while we develop the web app WIQ.
+
+===Technology decisions
+
 
 [role="arc42help"]
 ****
