@@ -110,7 +110,7 @@ Its headline is the name of the black box.
 ****
 
 
-==== <Name black box 1>
+
 
 [role="arc42help"]
 ****
@@ -125,40 +125,17 @@ according the the following black box template:
 * (Optional) Open issues/problems/risks
 
 ****
+==== WebApp
 
-_<Purpose/Responsibility>_
+The WebApp box consists of the entire game with all the different responsibilities the game might have all together.
+The interface of the WebApp will be the frontend of a web that will be seen better in other diagrams.
 
-_<Interface(s)>_
+==== Wikdata
 
-_<(Optional) Quality/Performance Characteristics>_
-
-_<(Optional) Directory/File Location>_
-
-_<(Optional) Fulfilled Requirements>_
-
-_<(optional) Open Issues/Problems/Risks>_
+The purpose of the Wikidata box is to get the necessary information to generate all the questions of all the games.
+The game will interact with Wikidata by its API. 
 
 
-
-
-==== <Name black box 2>
-
-_<black box template>_
-
-==== <Name black box n>
-
-_<black box template>_
-
-
-==== <Name interface 1>
-
-...
-
-==== <Name interface m>
-
-
-
-=== Level 2
 
 [role="arc42help"]
 ****
@@ -169,30 +146,30 @@ Please prefer relevance over completeness. Specify important, surprising, risky,
 Leave out normal, simple, boring or standardized parts of your system
 ****
 
-==== White Box _<building block 1>_
+=== Level 2
+
+image::buildingblock2.png["More detailed webApp diagram"]
+
+==== White Box Interfaces
+
+It consists of the interfaces with which the user will interact to play the game and use all of the different services it provides.
+There will be differente interfaces for all different services of the game and the users will be able to go through all of them.
+These interfaces will be atractive to the user and easy to use, as well as fast-charging not to make the users wait much.
+
+==== White Box Microservices
+
+The components of the webApp are the microservices, apart from the interfaces, which will have all the logic of the game and are the ones
+who will interact with the external services (Wikidata). There will be one microservice for each one of the responsibilities of the game.
+These microservices will need to be fast in getting all the data they need and they need to communicate with the interfaces to be able to show 
+the user all they need to know to play the game.
 
 [role="arc42help"]
 ****
 ...describes the internal structure of _building block 1_.
 ****
 
-_<white box template>_
-
-==== White Box _<building block 2>_
 
 
-_<white box template>_
-
-...
-
-==== White Box _<building block m>_
-
-
-_<white box template>_
-
-
-
-=== Level 3
 
 [role="arc42help"]
 ****
@@ -201,6 +178,9 @@ Here you can specify the inner structure of (some) building blocks from level 2 
 When you need more detailed levels of your architecture please copy this
 part of arc42 for additional levels.
 ****
+
+=== Level 3
+
 
 
 ==== White Box <_building block x.1_>
