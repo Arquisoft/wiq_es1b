@@ -78,4 +78,8 @@ the application can deliver timely and responsive interactions, enhancing user s
 will be challenging_
 
 
+=== _User experience_
+
+_This is a key element in the design of every application because it directly impacts on user satisfaction and retention.
+Crafting intuitive interfaces that facilitate effortless interaction with the system is sure something to take into account._
 
