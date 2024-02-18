@@ -56,18 +56,17 @@ See https://docs.arc42.org/section-8/[Concepts] in the arc42 documentation.
 ****
 
 
-=== _<Concept 1>_
+=== _Security_
 
-_<explanation>_
+_Deployment of secure user authentication systems to ensure that only the own user can access his personal data and
+specific functionalities._
 
 
 
-=== _<Concept 2>_
+=== _Ethics_
 
-_<explanation>_
+_Ensuring users are clearly informed about what data is collected, how it will be used and with whom it is shared
+by obtaining their explicit consent for its processing._
 
-...
 
-=== _<Concept n>_
 
-_<explanation>_
