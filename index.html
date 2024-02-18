@@ -472,6 +472,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_whitebox_overall_system">5.1. Whitebox Overall System</a></li>
 <li><a href="#_level_2">5.2. Level 2</a></li>
 <li><a href="#_level_3">5.3. Level 3</a></li>
+<li><a href="#_level_4">5.4. Level 4</a></li>
 </ul>
 </li>
 <li><a href="#section-runtime-view">6. Runtime View</a>
@@ -1071,6 +1072,11 @@ Refer to details in the following sections.</p>
 <div class="sect1">
 <h2 id="section-building-block-view">5. Building Block View</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>The Building Block view shows the decomposition of the WIQ system into different building blocks that will represent different
+aspects of the webapp. It will help by giving a clear image of the overall system and also the inside of it.
+It is a preliminary decomposition of the webApp as it might change, not drastically, throughout the development of the game.</p>
+</div>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1116,8 +1122,6 @@ Thus it contains the white box description of selected building blocks of level 
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_whitebox_overall_system">5.1. Whitebox Overall System</h3>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1156,22 +1160,51 @@ In the best case you will get away with examples or simple signatures.</p>
 </div>
 </div>
 </div>
-<div class="paragraph">
-<p><em><strong>&lt;Overview Diagram&gt;</strong></em></p>
+<div class="sect2">
+<h3 id="_whitebox_overall_system">5.1. Whitebox Overall System</h3>
+<div class="imageblock">
+<div class="content">
+<img src="./images/buildingBlock1.png" alt="Overall System">
+</div>
 </div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Motivation</dt>
 <dd>
-<p><em>&lt;text explanation&gt;</em></p>
+<p>The user interacts with the webapp interface to be able to play the game. In the diagram it is clear to see that the webbApp interacts
+with an external box which is Wikidata as it is a requirement of the game to generate the qestions. In other levels, the webApp will decompose
+in more detail.</p>
 </dd>
 <dt class="hdlist1">Contained Building Blocks</dt>
-<dd>
-<p><em>&lt;Description of contained building block (black boxes)&gt;</em></p>
-</dd>
+</dl>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">User</th>
+<th class="tableblock halign-left valign-top">The users who interact with the webApp and play the game.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WebApp</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The WebApp called WIQ which consists in a game of questions and answers.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wikidata</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The external source of information that the webApp uses to generate que questions.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="dlist">
+<dl>
 <dt class="hdlist1">Important Interfaces</dt>
 <dd>
-<p><em>&lt;Description of important interfaces&gt;</em></p>
+<p>There are not important interfaces in this diagram.</p>
 </dd>
 </dl>
 </div>
@@ -1212,8 +1245,6 @@ Its headline is the name of the black box.</p>
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_name_black_box_1">5.1.1. &lt;Name black box 1&gt;</h4>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1244,50 +1275,19 @@ according the the following black box template:</p>
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_webapp">5.1.1. WebApp</h4>
 <div class="paragraph">
-<p><em>&lt;Purpose/Responsibility&gt;</em></p>
-</div>
-<div class="paragraph">
-<p><em>&lt;Interface(s)&gt;</em></p>
-</div>
-<div class="paragraph">
-<p><em>&lt;(Optional) Quality/Performance Characteristics&gt;</em></p>
-</div>
-<div class="paragraph">
-<p><em>&lt;(Optional) Directory/File Location&gt;</em></p>
-</div>
-<div class="paragraph">
-<p><em>&lt;(Optional) Fulfilled Requirements&gt;</em></p>
-</div>
-<div class="paragraph">
-<p><em>&lt;(optional) Open Issues/Problems/Risks&gt;</em></p>
+<p>The WebApp box consists of the entire game with all the different responsibilities the game might have all together.
+The interface of the WebApp will be the frontend of a web that will be seen better in other diagrams.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_name_black_box_2">5.1.2. &lt;Name black box 2&gt;</h4>
+<h4 id="_wikdata">5.1.2. Wikdata</h4>
 <div class="paragraph">
-<p><em>&lt;black box template&gt;</em></p>
+<p>The purpose of the Wikidata box is to get the necessary information to generate all the questions of all the games.
+The game will interact with Wikidata by its API.</p>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_name_black_box_n">5.1.3. &lt;Name black box n&gt;</h4>
-<div class="paragraph">
-<p><em>&lt;black box template&gt;</em></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_name_interface_1">5.1.4. &lt;Name interface 1&gt;</h4>
-<div class="paragraph">
-<p>&#8230;&#8203;</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_name_interface_m">5.1.5. &lt;Name interface m&gt;</h4>
-
-</div>
-</div>
-<div class="sect2">
-<h3 id="_level_2">5.2. Level 2</h3>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1300,8 +1300,31 @@ Leave out normal, simple, boring or standardized parts of your system</p>
 </div>
 </div>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_level_2">5.2. Level 2</h3>
+<div class="imageblock">
+<div class="content">
+<img src="./images/buildingblock2.png" alt="More detailed webApp diagram">
+</div>
+</div>
 <div class="sect3">
-<h4 id="_white_box_building_block_1">5.2.1. White Box <em>&lt;building block 1&gt;</em></h4>
+<h4 id="_white_box_interfaces">5.2.1. White Box Interfaces</h4>
+<div class="paragraph">
+<p>It consists of the interfaces with which the user will interact to play the game and use all of the different services it provides.
+There will be differente interfaces for all different services of the game and the users will be able to go through all of them.
+These interfaces will be atractive to the user and easy to use, as well as fast-charging not to make the users wait much.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_white_box_microservices">5.2.2. White Box Microservices</h4>
+<div class="paragraph">
+<p>The components of the webApp are the microservices, apart from the interfaces, which will have all the logic of the game and are the ones
+who will interact with the external services (Wikidata). There will be one microservice for each one of the responsibilities of the game.
+These microservices will need to be fast in getting all the data they need and they need to communicate with the interfaces to be able to show
+the user all they need to know to play the game.</p>
+</div>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1309,28 +1332,6 @@ Leave out normal, simple, boring or standardized parts of your system</p>
 </div>
 </div>
 </div>
-<div class="paragraph">
-<p><em>&lt;white box template&gt;</em></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_white_box_building_block_2">5.2.2. White Box <em>&lt;building block 2&gt;</em></h4>
-<div class="paragraph">
-<p><em>&lt;white box template&gt;</em></p>
-</div>
-<div class="paragraph">
-<p>&#8230;&#8203;</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_white_box_building_block_m">5.2.3. White Box <em>&lt;building block m&gt;</em></h4>
-<div class="paragraph">
-<p><em>&lt;white box template&gt;</em></p>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_level_3">5.3. Level 3</h3>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1342,29 +1343,57 @@ part of arc42 for additional levels.</p>
 </div>
 </div>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_level_3">5.3. Level 3</h3>
+<div class="imageblock">
+<div class="content">
+<img src="./images/buildingBlock3.png" alt="More detailed microservices diagram">
+</div>
+</div>
 <div class="sect3">
-<h4 id="_white_box_building_block_x_1">5.3.1. White Box &lt;_building block x.1_&gt;</h4>
+<h4 id="_white_box_question_generator">5.3.1. White Box Question Generator</h4>
+<div class="paragraph">
+<p>The Question Generator is the microservice that interacts with the Wikidata external service through their API.
+It is the microservice dedicated to generate the questions and the answers and pass them to the interface to show them to the user.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_white_box_users_service">5.3.2. White Box Users service</h4>
+<div class="paragraph">
+<p>The users service is another microservice. It is the one in charge of collecting all the data from the users when they register and
+to retrieve all their data when they login.
+They also interact with the interface of the game.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_level_4">5.4. Level 4</h3>
+<div class="imageblock">
+<div class="content">
+<img src="./images/buildingBlock4.png" alt="More detailed users service diagram">
+</div>
+</div>
+<div class="sect3">
+<h4 id="_white_box_auth_service">5.4.1. White Box Auth service</h4>
+<div class="paragraph">
+<p>This is one microservice inside of the microservice Users service. It is in charge of authenticate the users when they register for the
+first time in the game. All the data gets collected and saved in the database MongoDb for when they login later.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_white_box_login_service">5.4.2. White Box Login service</h4>
+<div class="paragraph">
+<p>This is another microservice inside the Users service. This one is the one users use everytime when they log in. It retrieves
+all their data from the database MongoDb and shows them in the webApp as the users will have an option to view all their past data.</p>
+</div>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
 <p>Specifies the internal structure of <em>building block x.1</em>.</p>
 </div>
 </div>
-</div>
-<div class="paragraph">
-<p><em>&lt;white box template&gt;</em></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_white_box_building_block_x_2">5.3.2. White Box &lt;_building block x.2_&gt;</h4>
-<div class="paragraph">
-<p><em>&lt;white box template&gt;</em></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_white_box_building_block_y_1">5.3.3. White Box &lt;_building block y.1_&gt;</h4>
-<div class="paragraph">
-<p><em>&lt;white box template&gt;</em></p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
