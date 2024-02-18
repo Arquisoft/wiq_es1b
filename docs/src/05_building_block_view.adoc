@@ -5,6 +5,8 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 == Building Block View
 
+
+
 [role="arc42help"]
 ****
 .Content
@@ -40,7 +42,7 @@ See https://docs.arc42.org/section-5/[Building Block View] in the arc42 document
 
 ****
 
-=== Whitebox Overall System
+
 
 [role="arc42help"]
 ****
@@ -63,12 +65,13 @@ In the best case you will get away with examples or simple signatures.
 
 ****
 
-_**<Overview Diagram>**_
+=== Whitebox Overall System
+
+image::buildingBlock1.png["Overall System"]
 
 Motivation::
 
-_<text explanation>_
-
+The user interacts with the webapp interface 
 
 Contained Building Blocks::
 _<Description of contained building block (black boxes)>_
