@@ -70,3 +70,12 @@ by obtaining their explicit consent for its processing._
 
 
 
+=== _Performance_
+
+_Optimizing performance is crucial for ensuring a seamless user experience. This involves implementing efficient algorithms 
+and database structures to minimize response times and maximize scalability. By prioritizing performance considerations,
+the application can deliver timely and responsive interactions, enhancing user satisfaction. However, maintaining decent timings
+will be challenging_
+
+
+
