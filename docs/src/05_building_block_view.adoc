@@ -5,7 +5,8 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 == Building Block View
 
-
+The Building Block view shows the decomposition of the WIQ system into different building blocks that will represent different
+aspects of the webapp. It will help by giving a clear image of the overall system and also the inside of it.
 
 [role="arc42help"]
 ****
@@ -71,13 +72,22 @@ image::buildingBlock1.png["Overall System"]
 
 Motivation::
 
-The user interacts with the webapp interface 
+The user interacts with the webapp interface to be able to play the game. In the diagram it is clear to see that the webbApp interacts
+with an external box which is Wikidata as it is a requirement of the game to generate the qestions. In other levels, the webApp will decompose
+in more detail.
 
 Contained Building Blocks::
-_<Description of contained building block (black boxes)>_
+
+[options="header",cols="1,2"]
+|===
+|User | The users who interact with the webApp and play the game.
+|WebApp | The WebApp called WIQ which consists in a game of questions and answers.
+|Wikidata | The external source of information that the webApp uses to generate que questions.
+|===
+
 
 Important Interfaces::
-_<Description of important interfaces>_
+There are not important interfaces in this diagram.
 
 [role="arc42help"]
 ****
