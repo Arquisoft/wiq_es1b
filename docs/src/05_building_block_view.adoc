@@ -7,6 +7,7 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 The Building Block view shows the decomposition of the WIQ system into different building blocks that will represent different
 aspects of the webapp. It will help by giving a clear image of the overall system and also the inside of it.
+It is a preliminary decomposition of the webApp as it might change, not drastically, throughout the development of the game.
 
 [role="arc42help"]
 ****
@@ -181,25 +182,32 @@ part of arc42 for additional levels.
 
 === Level 3
 
+image::buildingBlock3.png["More detailed microservices diagram"]
 
+==== White Box Question Generator
 
-==== White Box <_building block x.1_>
+The Question Generator is the microservice that interacts with the Wikidata external service through their API.
+It is the microservice dedicated to generate the questions and the answers and pass them to the interface to show them to the user. 
+
+==== White Box Users service
+
+The users service is another microservice. It is the one in charge of collecting all the data from the users when they register and
+to retrieve all their data when they login.
+They also interact with the interface of the game.
+
+=== Level 4
+
+image::buildingBlock4.png["More detailed users service diagram"]
+
+==== White Box Auth service
+This is one microservice inside of the microservice Users service. It is in charge of authenticate the users when they register for the 
+first time in the game. All the data gets collected and saved in the database MongoDb for when they login later.
+
+==== White Box Login service
+This is another microservice inside the Users service. This one is the one users use everytime when they log in. It retrieves
+all their data from the database MongoDb and shows them in the webApp as the users will have an option to view all their past data.
 
 [role="arc42help"]
 ****
 Specifies the internal structure of _building block x.1_.
 ****
-
-
-_<white box template>_
-
-
-==== White Box <_building block x.2_>
-
-_<white box template>_
-
-
-
-==== White Box <_building block y.1_>
-
-_<white box template>_
