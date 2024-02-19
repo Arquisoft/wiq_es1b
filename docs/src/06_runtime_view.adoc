@@ -65,6 +65,8 @@ Alice <-- Bob: another authentication Response
 
 === Register Scenario
 image::registerScenarioDiagram.png["Diagram of a user registering in the application"]
+
+
 The diagram shows a sequence of consecutive actions that a user takes in order to access to the main 
 interface of the application.
 
@@ -76,4 +78,5 @@ auth service, which is the one in charge of validating the fields previously spe
 the connection with the database will be made and, if everything is correct, the user information will be saved.
 
 
-=== <Runtime Scenario n>
+=== Login Scenario
+
