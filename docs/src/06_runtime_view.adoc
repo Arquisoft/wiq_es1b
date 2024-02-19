@@ -79,4 +79,4 @@ the connection with the database will be made and, if everything is correct, the
 
 
 === Login Scenario
-
+image::loginScenarioDiagram.png["Diagram of a user logging into the application"]
