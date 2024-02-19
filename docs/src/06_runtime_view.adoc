@@ -85,5 +85,10 @@ image::loginScenarioDiagram.png["Diagram of a user logging into the application"
 This diagram explains the sequence that every user follows in order to sign into the application.
 
 
-
+This flowchart is very similar to the previous one because the actions are basically the same:
+insert the user data in the fields. However, the system reacts in a different way than before, that´s 
+because the user has already signed up previously and the database has registered that information on 
+the system. This time, the action sent by the auth service to the database is to search if there´s
+any user whose data corresponds to those obtained previously. If the user has not signed up yet 
+the application will notify him that an error on the authentication has ocurred.
 
