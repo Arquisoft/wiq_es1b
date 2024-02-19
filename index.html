@@ -491,9 +491,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#section-concepts">8. Cross-cutting Concepts</a>
 <ul class="sectlevel2">
-<li><a href="#_concept_1">8.1. <em>&lt;Concept 1&gt;</em></a></li>
-<li><a href="#_concept_2">8.2. <em>&lt;Concept 2&gt;</em></a></li>
-<li><a href="#_concept_n">8.3. <em>&lt;Concept n&gt;</em></a></li>
+<li><a href="#_security">8.1. <em>Security</em></a></li>
+<li><a href="#_ethics">8.2. <em>Ethics</em></a></li>
+<li><a href="#_performance">8.3. <em>Performance</em></a></li>
+<li><a href="#_user_experience">8.4. <em>User experience</em></a></li>
 </ul>
 </li>
 <li><a href="#section-design-decisions">9. Architecture Decisions</a></li>
@@ -1746,24 +1747,33 @@ on this list.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_concept_1">8.1. <em>&lt;Concept 1&gt;</em></h3>
+<h3 id="_security">8.1. <em>Security</em></h3>
 <div class="paragraph">
-<p><em>&lt;explanation&gt;</em></p>
+<p><em>Deployment of secure user authentication systems to ensure that only the own user can access his personal data and
+specific functionalities.</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_concept_2">8.2. <em>&lt;Concept 2&gt;</em></h3>
+<h3 id="_ethics">8.2. <em>Ethics</em></h3>
 <div class="paragraph">
-<p><em>&lt;explanation&gt;</em></p>
-</div>
-<div class="paragraph">
-<p>&#8230;&#8203;</p>
+<p><em>Ensuring users are clearly informed about what data is collected, how it will be used and with whom it is shared
+by obtaining their explicit consent for its processing.</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_concept_n">8.3. <em>&lt;Concept n&gt;</em></h3>
+<h3 id="_performance">8.3. <em>Performance</em></h3>
 <div class="paragraph">
-<p><em>&lt;explanation&gt;</em></p>
+<p><em>Optimizing performance is crucial for ensuring a seamless user experience. This involves implementing efficient algorithms
+and database structures to minimize response times and maximize scalability. By prioritizing performance considerations,
+the application can deliver timely and responsive interactions, enhancing user satisfaction. However, maintaining decent timings
+will be challenging</em></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_user_experience">8.4. <em>User experience</em></h3>
+<div class="paragraph">
+<p><em>This is a key element in the design of every application because it directly impacts on user satisfaction and retention.
+Crafting intuitive interfaces that facilitate effortless interaction with the system is sure something to take into account.</em></p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -1852,101 +1862,144 @@ There you will find links and examples about ADR.</p>
 <div class="sect1">
 <h2 id="section-quality-scenarios">10. Quality Requirements</h2>
 <div class="sectionbody">
-<div class="sidebarblock arc42help">
-<div class="content">
 <div class="paragraph">
-<div class="title">Content</div>
-<p>This section contains all quality requirements as quality tree with scenarios. The most important ones have already been described in section 1.2. (quality goals)</p>
-</div>
-<div class="paragraph">
-<p>Here you can also capture quality requirements with lesser priority,
-which will not create high risks when they are not fully achieved.</p>
-</div>
-<div class="paragraph">
-<div class="title">Motivation</div>
-<p>Since quality requirements will have a lot of influence on architectural
-decisions you should know for every stakeholder what is really important to them,
-concrete and measurable.</p>
-</div>
-<div class="paragraph">
-<div class="title">Further Information</div>
-<p>See <a href="https://docs.arc42.org/section-10/">Quality Requirements</a> in the arc42 documentation.</p>
-</div>
-</div>
+<p>The main quality objectives of the project will be:
+- Performance: The system will provide fast and effective responses to the user.
+- Usability: The system will be intuitive, through a simple and clear interface.
+- Security: The system will ensure the privacy and integrity of user data.
+- Maintainability: The system will be easy to maintain, upgrade or extend, without putting the whole project at risk.</p>
 </div>
 <div class="sect2">
 <h3 id="_quality_tree">10.1. Quality Tree</h3>
-<div class="sidebarblock arc42help">
+<div class="imageblock">
 <div class="content">
-<div class="paragraph">
-<div class="title">Content</div>
-<p>The quality tree (as defined in ATAM – Architecture Tradeoff Analysis Method) with quality/evaluation scenarios as leafs.</p>
-</div>
-<div class="paragraph">
-<div class="title">Motivation</div>
-<p>The tree structure with priorities provides an overview for a sometimes large number of quality requirements.</p>
-</div>
-<div class="paragraph">
-<div class="title">Form</div>
-<p>The quality tree is a high-level overview of the quality goals and requirements:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>tree-like refinement of the term "quality". Use "quality" or "usefulness" as a root</p>
-</li>
-<li>
-<p>a mind map with quality categories as main branches</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>In any case the tree should include links to the scenarios of the following section.</p>
-</div>
+<img src="./images/quality_tree.png" alt="Quality tree">
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_quality_scenarios">10.2. Quality Scenarios</h3>
-<div class="sidebarblock arc42help">
-<div class="content">
 <div class="paragraph">
-<div class="title">Contents</div>
-<p>Concretization of (sometimes vague or implicit) quality requirements using (quality) scenarios.</p>
+<p>Dividiremos los escenarios de calidad en escenarios de uso, cambio y fallo.</p>
 </div>
-<div class="paragraph">
-<p>These scenarios describe what should happen when a stimulus arrives at the system.</p>
+<div class="sect3">
+<h4 id="_usage_scenarios">10.2.1. Usage scenarios</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.667%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Source</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Stimulus</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Attribute</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Artifact/Environment</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Reply</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Response measure</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Players</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A player wants to start a game</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Performance</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Game Interface</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The system creates the game</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Game creation time less than 0.5s</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Players</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A player wants to answer a question</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Performance</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Game Interface</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The system updates the question interface</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Question update time less than 0.5s</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Players</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A player wants to login with username and password</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Security</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User Interface</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The system stores these credentials</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">These credentials will be encrypted to maintain their security.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
-<div class="paragraph">
-<p>For architects, two kinds of scenarios are important:</p>
+<div class="sect3">
+<h4 id="_change_scenarios">10.2.2. Change scenarios</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.667%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Source</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Stimulus</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Attribute</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Artifact/Environment</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Reply</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Response measure</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Developers</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The game must have more modes to play</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maintainability</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Game Interface</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A new game mode must be implemented</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The implementation of these new mode should be independent of the other game modes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Developers</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">We want to migrate the database to another database system</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maintainability</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Database</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The system do the migration</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Encrypted data will be migrated in encrypted form</p></td>
+</tr>
+</tbody>
+</table>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Usage scenarios (also called application scenarios or use case scenarios) describe the system’s runtime reaction to a certain stimulus. This also includes scenarios that describe the system’s efficiency or performance. Example: The system reacts to a user’s request within one second.</p>
-</li>
-<li>
-<p>Change scenarios describe a modification of the system or of its immediate environment. Example: Additional functionality is implemented or requirements for a quality attribute change.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<div class="title">Motivation</div>
-<p>Scenarios make quality requirements concrete and allow to
-more easily measure or decide whether they are fulfilled.</p>
-</div>
-<div class="paragraph">
-<p>Especially when you want to assess your architecture using methods like
-ATAM you need to describe your quality goals (from section 1.2)
-more precisely down to a level of scenarios that can be discussed and evaluated.</p>
-</div>
-<div class="paragraph">
-<div class="title">Form</div>
-<p>Tabular or free form text.</p>
-</div>
-</div>
-</div>
+<div class="sect3">
+<h4 id="_failure_scenarios">10.2.3. Failure scenarios</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.667%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Source</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Stimulus</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Attribute</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Artifact/Environment</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Reply</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Response measure</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Game error</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An error occurs during the creation of a game</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Failure</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Game Interface</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The system doesn&#8217;t create the game</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The system will alert the user of the error in the creation</p></td>
+</tr>
+</tbody>
+</table>
 <div style="page-break-after: always;"></div>
+</div>
 </div>
 </div>
 </div>
