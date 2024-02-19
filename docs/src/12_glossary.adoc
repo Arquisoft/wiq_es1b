@@ -59,6 +59,7 @@ It abstracts the hardware resources of a computer, such as the CPU, memory, and 
 
 |WIQ | Online version (web app) of the famous spanish program "Saber y Ganar", a question and answer contest.
 
+| Quality attribute | Measurable property of a system, which indicates how well the system meets the needs of stakeholders.
 |===
 
 
