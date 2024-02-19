@@ -65,6 +65,4 @@ Alice <-- Bob: another authentication Response
 
 === <Runtime Scenario 2>
 
-=== ...
-
 === <Runtime Scenario n>
