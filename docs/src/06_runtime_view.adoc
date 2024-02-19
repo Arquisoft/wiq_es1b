@@ -37,7 +37,12 @@ See https://docs.arc42.org/section-6/[Runtime View] in the arc42 documentation.
 
 ****
 
-=== <Runtime Scenario 1>
+=== 6.1 Question Scenario
+image::questionScenarioDiagram.png["Diagram of a user asking for and answering a question of the game"]
+In the diagram we can see one user interacting with the app by getting and answering a question of the game.
+In this scenario there can be two different sub-scenarios, one where the user chooses the right answer and
+the game shows in the view that it is correct, and other where the answer choosed is wrong and the game 
+also makes it seen to the user.
 
 
 * _<insert runtime diagram or textual description of the scenario>_
