@@ -42,6 +42,8 @@ See https://docs.arc42.org/section-7/[Deployment View] in the arc42 documentatio
 
 ****
 
+image::07_Deployment_View.png["Deployment view"]
+
 === Infrastructure Level 1
 
 [role="arc42help"]
