@@ -63,6 +63,35 @@ Alice -> Bob: Another authentication Request
 Alice <-- Bob: another authentication Response
 ----
 
-=== <Runtime Scenario 2>
+=== Register Scenario
+image::registerScenarioDiagram.png["Diagram of a user registering in the application"]
+The diagram shows a sequence of consecutive actions that a user takes in order to access to the main 
+interface of the application.
+
+
+The user first insert his/her data into the corresponding fields, after that, clicking on the register button
+will perform a series of actions inside the system that the user won´t be seeing. 
+First, the gateway service will recognize the action of adding the user and it will redirect the request to the
+auth service, which is the one in charge of validating the fields previously specified by the user. Finally, 
+the connection with the database will be made and, if everything is correct, the user information will be saved.
+
+
+* _<insert runtime diagram or textual description of the scenario>_
+* _<insert description of the notable aspects of the interactions between the
+building block instances depicted in this diagram.>_
+
+It is possible to use a sequence diagram:
+
+[plantuml,"Sequence diagram",png]
+----
+actor Alice
+actor Bob
+database Pod as "Bob's Pod"
+Alice -> Bob: Authentication Request
+Bob --> Alice: Authentication Response
+Alice  --> Pod: Store route
+Alice -> Bob: Another authentication Request
+Alice <-- Bob: another authentication Response
+----
 
 === <Runtime Scenario n>
