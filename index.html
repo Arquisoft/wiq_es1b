@@ -478,9 +478,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#section-runtime-view">6. Runtime View</a>
 <ul class="sectlevel2">
 <li><a href="#_question_scenario">6.1. Question Scenario</a></li>
-<li><a href="#_runtime_scenario_2">6.2. &lt;Runtime Scenario 2&gt;</a></li>
-<li><a href="#">6.3. &#8230;&#8203;</a></li>
-<li><a href="#_runtime_scenario_n">6.4. &lt;Runtime Scenario n&gt;</a></li>
+<li><a href="#_register_scenario">6.2. Register Scenario</a></li>
+<li><a href="#_login_scenario">6.3. Login Scenario</a></li>
 </ul>
 </li>
 <li><a href="#section-deployment-view">7. Deployment View</a>
@@ -1561,15 +1560,42 @@ building block instances depicted in this diagram.&gt;</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_runtime_scenario_2">6.2. &lt;Runtime Scenario 2&gt;</h3>
-
+<h3 id="_register_scenario">6.2. Register Scenario</h3>
+<div class="imageblock">
+<div class="content">
+<img src="./images/registerScenarioDiagram.png" alt="Diagram of a user registering in the application">
+</div>
+</div>
+<div class="paragraph">
+<p>The diagram shows a sequence of consecutive actions that a user takes in order to access to the main
+interface of the application.</p>
+</div>
+<div class="paragraph">
+<p>The user first insert his/her data into the corresponding fields, after that, clicking on the register button
+will perform a series of actions inside the system that the user won´t be seeing.
+First, the gateway service will recognize the action of adding the user and it will redirect the request to the
+auth service, which is the one in charge of validating the fields previously specified by the user. Finally,
+the connection with the database will be made and, if everything is correct, the user information will be saved.</p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="">6.3. &#8230;&#8203;</h3>
-
+<h3 id="_login_scenario">6.3. Login Scenario</h3>
+<div class="imageblock">
+<div class="content">
+<img src="./images/loginScenarioDiagram.png" alt="Diagram of a user logging into the application">
 </div>
-<div class="sect2">
-<h3 id="_runtime_scenario_n">6.4. &lt;Runtime Scenario n&gt;</h3>
+</div>
+<div class="paragraph">
+<p>This diagram explains the sequence that every user follows in order to sign into the application.</p>
+</div>
+<div class="paragraph">
+<p>This flowchart is very similar to the previous one because the actions are basically the same:
+insert the user data in the fields. However, the system reacts in a different way than before, that´s
+because the user has already signed up previously and the database has registered that information on
+the system. This time, the action sent by the auth service to the database is to search if there´s
+any user whose data corresponds to those obtained previously. If the user has not signed up yet
+the application will notify him that an error on the authentication has ocurred.</p>
+</div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -2299,7 +2325,7 @@ It abstracts the hardware resources of a computer, such as the CPU, memory, and 
 <div id="footer">
 <div id="footer-text">
 Version 8.2 EN<br>
-Last updated 2024-02-16 20:31:27 +0100
+Last updated 2024-02-13 10:23:58 +0100
 </div>
 </div>
 </body>
