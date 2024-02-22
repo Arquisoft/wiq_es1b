@@ -37,7 +37,7 @@ See https://docs.arc42.org/section-6/[Runtime View] in the arc42 documentation.
 
 ****
 
-=== 6.1 Question Scenario
+=== Question Scenario
 image::questionScenarioDiagram.png["Diagram of a user asking for and answering a question of the game"]
 In the diagram we can see one user interacting with the app by getting and answering a question of the game.
 In this scenario there can be two different sub-scenarios, one where the user chooses the right answer and
@@ -63,8 +63,32 @@ Alice -> Bob: Another authentication Request
 Alice <-- Bob: another authentication Response
 ----
 
-=== <Runtime Scenario 2>
+=== Register Scenario
+image::registerScenarioDiagram.png["Diagram of a user registering in the application"]
 
-=== ...
 
-=== <Runtime Scenario n>
+The diagram shows a sequence of consecutive actions that a user takes in order to access to the main 
+interface of the application.
+
+
+The user first insert his/her data into the corresponding fields, after that, clicking on the register button
+will perform a series of actions inside the system that the user won´t be seeing. 
+First, the gateway service will recognize the action of adding the user and it will redirect the request to the
+auth service, which is the one in charge of validating the fields previously specified by the user. Finally, 
+the connection with the database will be made and, if everything is correct, the user information will be saved.
+
+
+=== Login Scenario
+image::loginScenarioDiagram.png["Diagram of a user logging into the application"]
+
+
+This diagram explains the sequence that every user follows in order to sign into the application.
+
+
+This flowchart is very similar to the previous one because the actions are basically the same:
+insert the user data in the fields. However, the system reacts in a different way than before, that´s 
+because the user has already signed up previously and the database has registered that information on 
+the system. This time, the action sent by the auth service to the database is to search if there´s
+any user whose data corresponds to those obtained previously. If the user has not signed up yet 
+the application will notify him that an error on the authentication has ocurred.
+
