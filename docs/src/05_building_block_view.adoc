@@ -68,7 +68,7 @@ image::buildingBlock3.png["More detailed microservices diagram"]
 
 ==== White Box Question Generator
 
-The Question Generator is the microservice that interacts with the Wikidata external service through their API.
+The Question Generator is the microservice that interacts with the Wikidata external service through SPARQL.
 It is the microservice dedicated to generate the questions and the answers and pass them to the interface to show them to the user. 
 
 ==== White Box Users service
