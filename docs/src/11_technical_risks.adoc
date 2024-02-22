@@ -11,22 +11,4 @@ We must take into account all risks and problems, as they are very useful to pre
 | Risk | Github | GitHub is a very powerful tool when it comes to working in a coordinated and parallel way, but without a good organization and communication in the conflicts generated, functionalities can be lost | Low
 | Risk | Autonomy | En general, los proyectos realizados durante la carrera son muy guiados, con revisiones y entregas parciales muy frecuentes, y documentos para guiar al equipo en el proyecto. Trabajar de forma totalmente autónoma puede llegar a ser un proglema para organizarnos | Medium
 |===
-[role="arc42help"]
-****
-.Contents
-A list of identified technical risks or technical debts, ordered by priority
 
-.Motivation
-“Risk management is project management for grown-ups” (Tim Lister, Atlantic Systems Guild.) 
-
-This should be your motto for systematic detection and evaluation of risks and technical debts in the architecture, which will be needed by management stakeholders (e.g. project managers, product owners) as part of the overall risk analysis and measurement planning.
-
-.Form
-List of risks and/or technical debts, probably including suggested measures to minimize, mitigate or avoid risks or reduce technical debts.
-
-
-.Further Information
-
-See https://docs.arc42.org/section-11/[Risks and Technical Debt] in the arc42 documentation.
-
-****
