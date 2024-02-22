@@ -6,7 +6,7 @@
 // configure EN settings for asciidoc
 include::src/config.adoc[]
 
-= image:arc42-logo.png[arc42] Template
+= image:arc42-logo.png[arc42] WIQ!
 :revnumber: 8.2 EN
 :revdate: January 2023
 :revremark: (based upon AsciiDoc version)
@@ -28,8 +28,6 @@ ifdef::backend-html5[]
 ++++
 endif::backend-html5[]
 
-
-include::src/about-arc42.adoc[]
 
 // horizontal line
 ***
