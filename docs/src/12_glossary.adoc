@@ -29,31 +29,8 @@ streamlining the deployment process and enhancing scalability and efficiency.
 graphical elements, and other visual elements, as well as the logic that controls user interactions. The frontend is responsible for presenting data and functionality
  to users in an intuitive and accessible manner.
 
-|GitHub | A web-based platform for version control using Git, primarily used for hosting and collaborating on software development projects. 
-It provides tools for managing source code, tracking changes, and facilitating collaboration among developers through features like pull requests, 
-issue tracking, and project management tools.
-
-|Issues (GitHub) | A feature in GitHub used for tracking tasks, bugs, or enhancements within a software project. Issues provide a centralized platform for team members
- to report problems, suggest improvements, or discuss ideas related to the project. They typically include details such as a title, description, labels, assignees, 
- and comments, facilitating communication and collaboration among contributors.
-
 |Microservices |A software architectural style where an application is composed of loosely coupled, independently deployable services that are organized around specific
  business capabilities. Each microservice is responsible for a single function or feature and communicates with other services through well-defined APIs.
-This approach enables teams to develop, deploy, and scale components independently, fostering agility, flexibility, and easier maintenance of complex systems.
-
-|PlantUML |A textual diagramming tool that allows users to create diagrams such as UML (Unified Modeling Language) diagrams using a simple and intuitive syntax,
- which is then automatically rendered into graphical representations.
-
-|Projects (GitHub) | A feature within GitHub that enables teams to organize and prioritize work by creating visual boards to track tasks, issues, 
-or pull requests related to a software project. Projects provide customizable columns and cards, allowing users to define workflows, assign tasks, 
-and monitor progress efficiently. They serve as a centralized hub for coordinating and managing project activities, fostering collaboration and transparency among team members.
-
-|Repository |A central location where data, files, or software are stored and managed. In the context of software development,
- a repository typically refers to a version control system, such as Git, where developers can store and track changes to their codebase. 
- It serves as a single source of truth for the project, allowing collaborators to access, modify, and contribute to the codebase while maintaining a history of changes.
-
-|Virtual Machine |A software-based emulation of a physical computer system that allows multiple operating systems to run simultaneously on a single physical machine. 
-It abstracts the hardware resources of a computer, such as the CPU, memory, and storage, providing an isolated environment for running applications or executing tasks.
 
 |Wikidata | A collaborative, open database that stores structured data to support Wikimedia and other knowledge-related projects.
 
@@ -63,30 +40,4 @@ It abstracts the hardware resources of a computer, such as the CPU, memory, and 
 |===
 
 
-[role="arc42help"]
-****
-.Contents
-The most important domain and technical terms that your stakeholders use when discussing the system.
-
-You can also see the glossary as source for translations if you work in multi-language teams.
-
-.Motivation
-You should clearly define your terms, so that all stakeholders
-
-* have an identical understanding of these terms
-* do not use synonyms and homonyms
-
-
-.Form
-
-A table with columns <Term> and <Definition>.
-
-Potentially more columns in case you need translations.
-
-
-.Further Information
-
-See https://docs.arc42.org/section-12/[Glossary] in the arc42 documentation.
-
-****
 
