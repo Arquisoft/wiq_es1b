@@ -1,9 +1,10 @@
-// user-service.js
+// questions-service.js
 const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
-const User = require('./user-model')
+const QuestionGenerator = require('question-generator.js');
+
 
 const app = express();
 const port = 8003;
@@ -16,7 +17,10 @@ const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/userdb';
 mongoose.connect(mongoUri);
 
 
-//generating a question
+//An instance of the question generator
+const generator = new QuestionGenerator();
+
+
 
 
 
