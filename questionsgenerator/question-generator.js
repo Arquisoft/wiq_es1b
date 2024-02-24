@@ -1,9 +1,6 @@
 /**
- * template json
- * guardar: pregunta en español sin dato especifico (completar al hacer la pregunta), 
- * sparqlquery pa esa pregunta
+ * Class of the question generator, gets data from wikidata.
  */
-
 class questionGenerator{
 
   /**
