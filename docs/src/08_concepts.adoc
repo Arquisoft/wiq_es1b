@@ -4,11 +4,6 @@ ifndef::imagesdir[:imagesdir: ../images]
 == Cross-cutting Concepts
 
 
-=== _Security_
-
-_Deployment of secure user authentication systems to ensure that only the own user can access his personal data and
-specific functionalities._
-
 
 
 === _Ethics_
