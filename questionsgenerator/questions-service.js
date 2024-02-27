@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const QuestionGenerator = require('question-generator.js');
-
+const Question = require('./question-model')
 
 const app = express();
 const port = 8003;
@@ -18,6 +18,11 @@ mongoose.connect(mongoUri);
 
 //TODO: TAKE FROM THE DATABASE ONE RANDOM QUERY OR DEPENDING OF THE THEME OF THE GAME TO MAKE THE QUESTION
 //in the database has to be the question in spanish and the sparql query
+
+// Find the user by username in the database
+const queryTitle = await Question.findOne({ username });
+const entradaAleatoria = await collection.aggregate([{ $sample: { size: 1 } }]).toArray();
+
 
 //THEME: countries
 
