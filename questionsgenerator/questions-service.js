@@ -20,10 +20,10 @@ mongoose.connect(mongoUri);
 
 // Find a question in the database randomly
 const randomQuestion = await Question.aggregate([{ $sample: { size: 1 } }]);
-if (randomQuestion.length > 0) {
+//if (randomQuestion.length > 0) {
   //Get que information of the random question
   const { title, query } = randomQuestion[0];
-}
+//}
 //THEME: countries
 
 //question to get the countries and their capital, fast to execute
@@ -86,50 +86,61 @@ var sparqlQuery6 = "SELECT ?entity ?entityLabel ?answer ?answerLabel\n" +
 //get the question from the database, the SPARQL
 //hacer la consulta como abajo
 
+//to respond to the /getQuestion request 
 app.post('/getQuestion', async (req,res) => {
-  
+  try {
+
+    //An instance of the question generator
+    const generator = new QuestionGenerator();
+
+    //We get que question and save the data, the results of que sparql query
+    var questionData;
+    var numberOfCorrectAnswer;
+
+    //data of the answers
+    var correctLabel;
+    var correctAnswerLabel;
+    var incorrectAnswersLabels = new Set();
+
+    generator.makeSPARQLQuery(sparqlQuery)
+              //wait for the answer from wikidata
+              .then(function(data) {
+                questionData = data.results.bindings;
+
+                //number of options of responses, the length of the array from wikidata
+                var numOptions = questionData.length
+
+                //randomly choose the correct answer
+                numberOfCorrectAnswer = Math.floor(Math.random() * numOptions);
+                //get the label for the question and que right answer
+                correctLabel = questionData[numberOfCorrectAnswer].labelTitle.value;
+                correctAnswerLabel = questionData[numberOfCorrectAnswer].label.value;
+
+                //choose the 3 incorrect answers randomly
+                for (let i = 0; i < 3; i++) {
+
+                    var numberChosen = Math.floor(Math.random() * numOptions);  
+                    //check que number selected is not the same as the correct answer
+                    //or has already been chose for other wrong answer
+                    while (numberChosen === numberOfCorrectAnswer || incorrectAnswers.has(numberChosen)) {
+                        numberChosen = Math.floor(Math.random() * numOptions);
+                    }
+                    //get the wrong answer
+                    incorrectAnswersLabels.add(questionData[numberChosen].label.value);
+                }
+
+                //in the response goes the title of the question, the correct answer and a set of the three incorrect answers
+                res.json({question: title, correctAnswerLabel: correctAnswerLabel, incorrectAnswerLabelSet: incorrectAnswersLabels});
+
+              }
+    );
+
+  } catch(error){
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
-//An instance of the question generator
-const generator = new QuestionGenerator();
 
-//We get que question and save the data, the results of que sparql query
-var questionData;
-var numberOfCorrectAnswer;
-
-//data of the answers
-var correctLabel;
-var correctAnswerLabel;
-var incorrectAnswersLabels = new Set();
-
-generator.makeSPARQLQuery(sparqlQuery)
-          //wait for the answer from wikidata
-          .then(function(data) {
-            questionData = data.results.bindings;
-
-            //number of options of responses, the length of the array from wikidata
-            var numOptions = questionData.length
-
-            //randomly choose the correct answer
-            numberOfCorrectAnswer = Math.floor(Math.random() * numOptions);
-            //get the label for the question and que right answer
-            correctLabel = questionData[numberOfCorrectAnswer].labelTitle.value;
-            correctAnswerLabel = questionData[numberOfCorrectAnswer].label.value;
-
-            //choose the 3 incorrect answers randomly
-            for (let i = 0; i < 3; i++) {
-
-                var numberChosen = Math.floor(Math.random() * numOptions);  
-                //check que number selected is not the same as the correct answer
-                //or has already been chose for other wrong answer
-                while (numberChosen === numberOfCorrectAnswer || incorrectAnswers.has(numberChosen)) {
-                    numberChosen = Math.floor(Math.random() * numOptions);
-                }
-                //get the wrong answer
-                incorrectAnswersLabels.add(questionData[numberChosen].label.value);
-            }
-          }
-);
 
 const server = app.listen(port, () => {
   console.log(`Question Generator Service listening at http://localhost:${port}`);
