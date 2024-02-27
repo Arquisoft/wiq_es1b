@@ -18,9 +18,8 @@ mongoose.connect(mongoUri);
 //TODO: TAKE FROM THE DATABASE ONE RANDOM QUERY OR DEPENDING OF THE THEME OF THE GAME TO MAKE THE QUESTION
 //in the database has to be the question in spanish and the sparql query
 
-// Find a question in the database
+// Find a question in the database randomly
 const randomQuestion = await Question.aggregate([{ $sample: { size: 1 } }]);
-
 if (randomQuestion.length > 0) {
   //Get que information of the random question
   const { title, query } = randomQuestion[0];
@@ -87,18 +86,20 @@ var sparqlQuery6 = "SELECT ?entity ?entityLabel ?answer ?answerLabel\n" +
 //get the question from the database, the SPARQL
 //hacer la consulta como abajo
 
+app.post('/getQuestion', async (req,res) => {
+  
+});
+
 //An instance of the question generator
 const generator = new QuestionGenerator();
 
 //We get que question and save the data, the results of que sparql query
 var questionData;
 var numberOfCorrectAnswer;
-var incorrectAnswers = new Set();
 
 //data of the answers
 var correctLabel;
 var correctAnswerLabel;
-
 var incorrectAnswersLabels = new Set();
 
 generator.makeSPARQLQuery(sparqlQuery)
@@ -111,6 +112,7 @@ generator.makeSPARQLQuery(sparqlQuery)
 
             //randomly choose the correct answer
             numberOfCorrectAnswer = Math.floor(Math.random() * numOptions);
+            //get the label for the question and que right answer
             correctLabel = questionData[numberOfCorrectAnswer].labelTitle.value;
             correctAnswerLabel = questionData[numberOfCorrectAnswer].label.value;
 
@@ -123,10 +125,9 @@ generator.makeSPARQLQuery(sparqlQuery)
                 while (numberChosen === numberOfCorrectAnswer || incorrectAnswers.has(numberChosen)) {
                     numberChosen = Math.floor(Math.random() * numOptions);
                 }
+                //get the wrong answer
                 incorrectAnswersLabels.add(questionData[numberChosen].label.value);
-                incorrectAnswers.add(numberChosen);
             }
-
           }
 );
 
