@@ -74,6 +74,10 @@ var sparqlQuery6 = "SELECT ?country ?countryLabel ?flag ?flagLabel\n" +
 "}";
 
 
+//get the question title (la pregunta en español)
+//get the question from the database, the SPARQL
+//hacer la consulta como abajo
+
 //An instance of the question generator
 const generator = new QuestionGenerator();
 
