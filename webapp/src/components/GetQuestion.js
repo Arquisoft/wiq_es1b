@@ -1,5 +1,5 @@
 // src/components/AddUser.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Typography, TextField, Button, Snackbar } from '@mui/material';
 
@@ -10,6 +10,7 @@ const GetQuestion = () => {
   const [incorrectAnswer1, setIncorrectAnswer1] = useState('');
   const [incorrectAnswer2, setIncorrectAnswer2] = useState('');
   const [incorrectAnswer3, setIncorrectAnswer3] = useState('');
+  const [error, setError] = useState('');
 
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
@@ -17,6 +18,7 @@ const GetQuestion = () => {
   const getQuestion = async () => {
     try {
       //call to get a question
+      console.log("entro");
       const response = await axios.post(`${apiEndpoint}/getQuestion`, {});
       
       // Extract data from the response, the question, the correct and the incorrect answers
@@ -34,11 +36,28 @@ const GetQuestion = () => {
     }
   };
 
+  useEffect(() => {
+    getQuestion();
+  }, []);
 
   return (
-    <Container component="main" maxWidth="xs" sx={{ marginTop: 4 }}>
-      
-    </Container>
+    <div>
+        <h2>
+          {question}
+        </h2>
+        <button>
+          {correctAnswer}
+        </button>
+        <button>
+          {incorrectAnswer1}
+        </button>
+        <button>
+          {incorrectAnswer2}
+        </button>
+        <button>
+          {incorrectAnswer3}
+        </button>
+    </div>
   );
 };
 

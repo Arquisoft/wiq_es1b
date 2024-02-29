@@ -9,7 +9,7 @@ const app = express();
 const port = 8003;
 
 // Middleware to parse JSON in request body
-app.use(bodyParser.json());
+app.use(express.json());
 
 // Connect to MongoDB
 //const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/questiondb';
@@ -82,7 +82,6 @@ var sparqlQuery6 = "SELECT ?entity ?entityLabel ?answer ?answerLabel\n" +
 "  SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\". }\n" +
 "}";
 
-const title = "";
 
 
 //get the question title (la pregunta en español)
@@ -90,9 +89,10 @@ const title = "";
 //hacer la consulta como abajo
 
 //to respond to the /getQuestion request 
-app.post('/getQuestion', async (req,res) => {
+app.get('/getQuestion', async (req,res) => {
   try {
 
+    console.log("entro service");
     //An instance of the question generator
     const generator = new QuestionGenerator();
 
@@ -132,14 +132,17 @@ app.post('/getQuestion', async (req,res) => {
                     incorrectAnswersLabels.add(questionData[numberChosen].label.value);
                 }
 
+                //replace the ? in the questions with the information about the question
+                const replacedTitle = questionTitle.replace('?', correctLabel);
+
                 //in the response goes the title of the question, the correct answer and a set of the three incorrect answers
-                res.json({question: title, correctAnswerLabel: correctAnswerLabel, incorrectAnswerLabelSet: incorrectAnswersLabels});
+                res.json({question: replacedTitle, correctAnswerLabel: correctAnswerLabel, incorrectAnswerLabelSet: incorrectAnswersLabels});
 
               }
     );
 
   } catch(error){
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: 'Internal Server Error inside service' });
   }
 });
 
