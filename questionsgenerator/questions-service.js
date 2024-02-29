@@ -2,7 +2,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const QuestionGenerator = require('question-generator.js');
+const QuestionGenerator = require('./question-generator.js');
 const Question = require('./question-model')
 
 const app = express();
@@ -12,17 +12,18 @@ const port = 8003;
 app.use(bodyParser.json());
 
 // Connect to MongoDB
-const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/questiondb';
-mongoose.connect(mongoUri);
+//const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/questiondb';
+//mongoose.connect(mongoUri);
 
 //TODO: TAKE FROM THE DATABASE ONE RANDOM QUERY OR DEPENDING OF THE THEME OF THE GAME TO MAKE THE QUESTION
 //in the database has to be the question in spanish and the sparql query
 
 // Find a question in the database randomly
-const randomQuestion = await Question.aggregate([{ $sample: { size: 1 } }]);
+//const randomQuestion = await Question.aggregate([{ $sample: { size: 1 } }]);
+//const randomQuestion = await Question.findOne();
 //if (randomQuestion.length > 0) {
   //Get que information of the random question
-  const { title, query } = randomQuestion[0];
+  //const { title, query } = randomQuestion[0];
 //}
 //THEME: countries
 
@@ -80,6 +81,8 @@ var sparqlQuery6 = "SELECT ?entity ?entityLabel ?answer ?answerLabel\n" +
 "           wdt:P41 ?answer.                # Propiedad para la bandera\\n\" +\n" +
 "  SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\". }\n" +
 "}";
+
+const title = "";
 
 
 //get the question title (la pregunta en español)
@@ -147,9 +150,9 @@ const server = app.listen(port, () => {
 });
 
 // Listen for the 'close' event on the Express.js server
-server.on('close', () => {
+/**server.on('close', () => {
     // Close the Mongoose connection
     mongoose.connection.close();
-  });
+  });**/
 
 module.exports = server

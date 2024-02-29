@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Container, Typography, TextField, Button, Snackbar } from '@mui/material';
 
-
 const GetQuestion = () => {
   //all the information about the question
   const [question, setQuestion] = useState('');

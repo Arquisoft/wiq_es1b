@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Container, Typography, TextField, Button, Snackbar } from '@mui/material';
+import GetQuestion from './GetQuestion.js';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -29,6 +30,7 @@ const Login = () => {
     }
   };
 
+
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
   };
@@ -43,6 +45,7 @@ const Login = () => {
           <Typography component="p" variant="body1" sx={{ textAlign: 'center', marginTop: 2 }}>
             Your account was created on {new Date(createdAt).toLocaleDateString()}.
           </Typography>
+          <GetQuestion />
         </div>
       ) : (
         <div>
@@ -67,6 +70,7 @@ const Login = () => {
           <Button variant="contained" color="primary" onClick={loginUser}>
             Login
           </Button>
+          
           <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar} message="Login successful" />
           {error && (
             <Snackbar open={!!error} autoHideDuration={6000} onClose={() => setError('')} message={`Error: ${error}`} />

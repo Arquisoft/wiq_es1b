@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Question generator, in charge of generating the questions of the game",
   "main": "questions-service.js",
+  "scripts": {
+    "start": "node questions-service.js",
+    "test": "jest"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/arquisoft/wiq_es1b.git"
