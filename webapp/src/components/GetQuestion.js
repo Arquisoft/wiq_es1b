@@ -27,7 +27,6 @@ const GetQuestion = () => {
       //save the data 
       setQuestion(q);
       setCorrectAnswer(correctAnswer);
-      console.log(incorrect3Answers);
       setIncorrectAnswer1(incorrect3Answers[0]);
       setIncorrectAnswer2(incorrect3Answers[1]);
       setIncorrectAnswer3(incorrect3Answers[2]);
