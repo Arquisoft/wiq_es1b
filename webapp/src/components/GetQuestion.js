@@ -11,6 +11,7 @@ const GetQuestion = () => {
   const [incorrectAnswer2, setIncorrectAnswer2] = useState('');
   const [incorrectAnswer3, setIncorrectAnswer3] = useState('');
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(true); 
 
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
@@ -19,8 +20,8 @@ const GetQuestion = () => {
     try {
       //call to get a question
       console.log("entro");
-      const response = await axios.post(`${apiEndpoint}/getQuestion`, {});
-      
+      const response = await axios.post(`${apiEndpoint}/getQuestion`);
+
       // Extract data from the response, the question, the correct and the incorrect answers
       const { question: q, correctAnswerLabel:correctAnswer, incorrectAnswerLabelSet:incorrect3Answers } = response.data;
 
@@ -33,12 +34,19 @@ const GetQuestion = () => {
 
     } catch (error) {
       setError(error.response.data.error);
+    }finally {
+      // Indicar que la carga ha terminado
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
     getQuestion();
   }, []);
+
+  if (isLoading) {
+    return <div>Cargando...</div>; // Muestra un mensaje de carga mientras se está realizando la solicitud
+  }
 
   return (
     <div>

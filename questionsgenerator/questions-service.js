@@ -89,58 +89,48 @@ var sparqlQuery6 = "SELECT ?entity ?entityLabel ?answer ?answerLabel\n" +
 //hacer la consulta como abajo
 
 //to respond to the /getQuestion request 
-app.get('/getQuestion', async (req,res) => {
+app.post('/getQuestion', async (req,res) => {
   try {
 
-    console.log("entro service");
     //An instance of the question generator
     const generator = new QuestionGenerator();
 
-    //We get que question and save the data, the results of que sparql query
-    var questionData;
-    var numberOfCorrectAnswer;
+    const questionData = await generator.makeSPARQLQuery(sparqlQuery);
 
     //data of the answers
+    var numberOfCorrectAnswer;
     var correctLabel;
     var correctAnswerLabel;
     var incorrectAnswersLabels = new Set();
+    
+    //number of options of responses, the length of the array from wikidata
+    var numOptions = questionData.length
 
-    generator.makeSPARQLQuery(sparqlQuery)
-              //wait for the answer from wikidata
-              .then(function(data) {
-                questionData = data.results.bindings;
+    //randomly choose the correct answer
+    numberOfCorrectAnswer = Math.floor(Math.random() * numOptions);
+    //get the label for the question and que right answer
+    correctLabel = questionData[numberOfCorrectAnswer].entityLabel.value;
+    correctAnswerLabel = questionData[numberOfCorrectAnswer].answerLabel.value;
 
-                //number of options of responses, the length of the array from wikidata
-                var numOptions = questionData.length
+    //choose the 3 incorrect answers randomly
+    for (let i = 0; i < 3; i++) {
+      
+      var numberChosen = Math.floor(Math.random() * numOptions);  
 
-                //randomly choose the correct answer
-                numberOfCorrectAnswer = Math.floor(Math.random() * numOptions);
-                //get the label for the question and que right answer
-                correctLabel = questionData[numberOfCorrectAnswer].labelTitle.value;
-                correctAnswerLabel = questionData[numberOfCorrectAnswer].label.value;
+      //check que number selected is not the same as the correct answer
+      //or has already been chose for other wrong answer
+      while (questionData[numberChosen].answerLabel.value === correctAnswerLabel || incorrectAnswersLabels.has(questionData[numberChosen].answerLabel.value)) {
+            numberChosen = Math.floor(Math.random() * numOptions);
+      }
+      //get the wrong answer
+      incorrectAnswersLabels.add(questionData[numberChosen].answerLabel.value);
+    }
 
-                //choose the 3 incorrect answers randomly
-                for (let i = 0; i < 3; i++) {
+    //replace the ? in the questions with the information about the question
+    const replacedTitle = questionTitle.replace('?', correctLabel);
 
-                    var numberChosen = Math.floor(Math.random() * numOptions);  
-                    //check que number selected is not the same as the correct answer
-                    //or has already been chose for other wrong answer
-                    while (numberChosen === numberOfCorrectAnswer || incorrectAnswers.has(numberChosen)) {
-                        numberChosen = Math.floor(Math.random() * numOptions);
-                    }
-                    //get the wrong answer
-                    incorrectAnswersLabels.add(questionData[numberChosen].label.value);
-                }
-
-                //replace the ? in the questions with the information about the question
-                const replacedTitle = questionTitle.replace('?', correctLabel);
-
-                //in the response goes the title of the question, the correct answer and a set of the three incorrect answers
-                res.json({question: replacedTitle, correctAnswerLabel: correctAnswerLabel, incorrectAnswerLabelSet: incorrectAnswersLabels});
-
-              }
-    );
-
+    //in the response goes the title of the question, the correct answer and a set of the three incorrect answers
+    res.json({question: replacedTitle, correctAnswerLabel: correctAnswerLabel, incorrectAnswerLabelSet: incorrectAnswersLabels});
   } catch(error){
     res.status(500).json({ error: 'Internal Server Error inside service' });
   }
