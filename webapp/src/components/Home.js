@@ -1,14 +1,16 @@
 // src/components/Home.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Container, Typography, TextField, Button, Snackbar } from '@mui/material';
+import { Container, Typography, TextField, Button, Snackbar, Stack } from '@mui/material';
 
 const Home = () => {
+  const [error, setError] = useState('');
+
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
   const loginUser = async () => {
     try {
-      const response = await axios.post(`${apiEndpoint}/home`, { username, password });
+      const response = await axios.post(`${apiEndpoint}/home`);
 
       // Extract data from the response
       const { createdAt: userCreatedAt } = response.data;
