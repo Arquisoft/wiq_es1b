@@ -115,6 +115,7 @@ app.post('/getQuestion', async (req,res) => {
     //choose the 3 incorrect answers randomly
     for (let i = 0; i < 3; i++) {
       
+      //choose a random number
       var numberChosen = Math.floor(Math.random() * numOptions);  
 
       //check que number selected is not the same as the correct answer
@@ -128,9 +129,12 @@ app.post('/getQuestion', async (req,res) => {
 
     //replace the ? in the questions with the information about the question
     const replacedTitle = questionTitle.replace('?', correctLabel);
+    
+    //transform the set into an array
+    const incorrectAnswersArray = Array.from(incorrectAnswersLabels);
 
     //in the response goes the title of the question, the correct answer and a set of the three incorrect answers
-    res.json({question: replacedTitle, correctAnswerLabel: correctAnswerLabel, incorrectAnswerLabelSet: incorrectAnswersLabels});
+    res.json({question: replacedTitle, correctAnswerLabel: correctAnswerLabel, incorrectAnswerLabelSet: incorrectAnswersArray});
   } catch(error){
     res.status(500).json({ error: 'Internal Server Error inside service' });
   }
