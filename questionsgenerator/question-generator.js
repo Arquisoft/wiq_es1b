@@ -17,15 +17,11 @@ class questionGenerator{
    */
   async makeSPARQLQuery(sparqlQuery) {
   
+    //url to get the query
     const url = `https://query.wikidata.org/sparql?query=${encodeURIComponent(
       sparqlQuery
     )}&format=json`;
 
-    /*await axios.get(url).then((response) => {
-        const data = response.data;
-        console.log(data.results.bindings);
-        return data.results.bindings;
-      });*/
     const response = await axios.get(url);
     const data = response.data;
     return data.results.bindings;

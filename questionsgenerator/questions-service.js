@@ -130,17 +130,29 @@ app.post('/getQuestion', async (req,res) => {
     //replace the ? in the questions with the information about the question
     const replacedTitle = questionTitle.replace('?', correctLabel);
     
+    //add the correct answer to the set to shuffle it later
+    incorrectAnswersLabels.add(correctAnswerLabel);
+
     //transform the set into an array
-    const incorrectAnswersArray = Array.from(incorrectAnswersLabels);
+    const incorrectAnswersArray = shuffleArray(Array.from(incorrectAnswersLabels));
+
+    console.log(incorrectAnswersArray);
 
     //in the response goes the title of the question, the correct answer and a set of the three incorrect answers
-    res.json({question: replacedTitle, correctAnswerLabel: correctAnswerLabel, incorrectAnswerLabelSet: incorrectAnswersArray});
+    res.json({question: replacedTitle, correctAnswerLabel: correctAnswerLabel, answerLabelSet: incorrectAnswersArray});
   } catch(error){
     res.status(500).json({ error: 'Internal Server Error inside service' });
   }
 });
 
-
+//method to shuffle the array of the answers
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
 
 const server = app.listen(port, () => {
   console.log(`Question Generator Service listening at http://localhost:${port}`);
