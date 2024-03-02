@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Container, Typography, TextField, Button, Snackbar, Stack } from '@mui/material';
+import logo from '../logo.svg';
 
 const Home = () => {
   const [error, setError] = useState('');
@@ -31,6 +32,10 @@ const Home = () => {
 
   return (
     <Container component="main" maxWidth="xs" sx={{ marginTop: 4 }}>
+      <Typography component="h1" variant="h5" align="center" sx={{ marginTop: 2 }}>
+        Welcome to the 2024 edition of the Software Architecture course
+      </Typography>
+      <img src={logo} alt="Logo" style={{ width: '100px', position: 'absolute', top: '20px', left: '20px' }} />
       <Stack spacing={2} sx={{ marginTop: 4 }}>
         <Button variant="contained" color="primary" size="large" onClick={handleStartGame}>
           Nuevo Juego
