@@ -16,7 +16,7 @@ const Home = ({ username, createdAt }) => {
       // Extract data from the response
       const { createdAt: userCreatedAt } = response.data;
     } catch (error) {
-      setError(error.response.data.error);
+      setError(error.response.data.error);h
     }
   };
 */
