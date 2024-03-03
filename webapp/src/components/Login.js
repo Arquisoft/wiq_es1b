@@ -35,13 +35,16 @@ const Login = () => {
   };
 
   return (
-    <Container component="main" maxWidth="xs" sx={{ marginTop: 4 }}>
+    <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
       {loginSuccess ? (
         <div>
           <Home username={username} createdAt={createdAt} />
         </div>
       ) : (
         <div>
+          <Typography component="h1" variant="h5" align="center" sx={{ marginTop: 2 }}>
+            Welcome to the 2024 edition of the Software Architecture course
+          </Typography>
           <Typography component="h1" variant="h5">
             Login
           </Typography>

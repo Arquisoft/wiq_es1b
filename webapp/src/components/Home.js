@@ -31,23 +31,16 @@ const Home = ({ username, createdAt }) => {
   };
 
   return (
-<<<<<<< HEAD
     <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
       <Typography component="h1" variant="h5" align="center" sx={{ marginTop: 2 }}>
         Welcome to the 2024 edition of the Software Architecture course
       </Typography>
-      <Typography component="h1" variant="h5" sx={{ textAlign: 'center' }}>
+      <Typography component="h2" variant="h5" sx={{ textAlign: 'center' }}>
         Hello {username}!
       </Typography>
       <Typography component="p" variant="body1" sx={{ textAlign: 'center', marginTop: 2 }}>
         Your account was created on {new Date(createdAt).toLocaleDateString()}.
       </Typography>
-=======
-    <Container component="main" maxWidth="xs" sx={{ marginTop: 4 }}>
-      <Typography component="h1" variant="h5" align="center" sx={{ marginTop: 2 }}>
-        Welcome to the 2024 edition of the Software Architecture course
-      </Typography>
->>>>>>> 5dcfa15de9688c14df765de8684690107864487b
       <img src={logo} alt="Logo" style={{ width: '100px', position: 'absolute', top: '20px', left: '20px' }} />
       <Stack spacing={2} sx={{ marginTop: 4 }}>
         <Button variant="contained" color="primary" size="large" onClick={handleStartGame}>
