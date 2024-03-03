@@ -136,8 +136,6 @@ app.post('/getQuestion', async (req,res) => {
     //transform the set into an array
     const incorrectAnswersArray = shuffleArray(Array.from(incorrectAnswersLabels));
 
-    console.log(incorrectAnswersArray);
-
     //in the response goes the title of the question, the correct answer and a set of the three incorrect answers
     res.json({question: replacedTitle, correctAnswerLabel: correctAnswerLabel, answerLabelSet: incorrectAnswersArray});
   } catch(error){
