@@ -8,10 +8,11 @@ const GetQuestion = () => {
   const [question, setQuestion] = useState('');
   const [correctAnswer, setCorrectAnswer] = useState('');
   const [answersArray, setAnswersArray] = useState([]);
-  const [error, setError] = useState('');
   const [isRedy, setIsRedy] = useState(false); 
+  const [error, setError] = useState('');
   const [answerFeedback, setAnswerFeedback] = useState('');
   const [nextQuestion, setNextQuestion] = useState(false);
+  const [timer, setTimer] = useState(15); 
 
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
@@ -41,6 +42,8 @@ const GetQuestion = () => {
       //set the background of the buttons grey when it is a new question
       backgroundButtonColorGrey();
 
+      setTimer(15);
+
     } catch (error) {
       setError(error.response.data.error);
     }
@@ -57,6 +60,8 @@ const GetQuestion = () => {
     if(answerFeedback == ''){
       if(selectedAnswer == correctAnswer){
         setAnswerFeedback("You have won! Congratulations!");
+      }else if(timer == 0){
+        setAnswerFeedback("You lost! You didn't answer in time :(");
       } else {
         setAnswerFeedback("You lost! Try again :(");
       }
@@ -101,6 +106,18 @@ const GetQuestion = () => {
     }
   };
 
+  useEffect(() => {
+    if (timer > 0 && nextQuestion) {
+      const interval = setInterval(() => {
+        setTimer(prevTimer => prevTimer - 1);
+      }, 1000);
+      return () => clearInterval(interval);
+    } else if (timer === 0 && nextQuestion) {
+      checkAnswer(null);
+    }
+  }, [timer, nextQuestion]);
+
+
   return (
     <Container>
       {isRedy ?  
@@ -116,15 +133,20 @@ const GetQuestion = () => {
 
           {/* To show the feedback after answering */}
           <p>{answerFeedback}</p>
+          
+          {/* To show the time left */}
+          <p>Time left: {timer} seconds</p>
+        
         </div>
       :
         <div>
-          
+          {/* Message for when the time is up */}   
+          {timer == 0 && <p>Time's up! You didn't answer in time.</p>}
         </div>
       }
       <div>
           {/* Button to request a new question It will be disabled when the question is not answered */}
-          <button onClick={getQuestion} disabled={nextQuestion}>Siguiente Pregunta</button>
+          <button onClick={getQuestion} disabled={nextQuestion}>Next question</button>
       </div>
       
     </Container>
