@@ -12,7 +12,7 @@ const GetQuestion = () => {
   const [isRedy, setIsRedy] = useState(false); 
   const [error, setError] = useState('');
   const [answerFeedback, setAnswerFeedback] = useState('');
-  const [nextQuestion, setNextQuestion] = useState(false);
+  const [nextQuestion, setNextQuestion] = useState(true);
   const [timer, setTimer] = useState(15); 
 
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
@@ -20,6 +20,14 @@ const GetQuestion = () => {
   //method to get que information of the question
   const getQuestion = async () => {
     try {
+
+      //to wait for the question, show the charging dots
+      setIsRedy(false);
+      //set nextQuestiona true to make the button to get another question disabled
+      setNextQuestion(true);
+      //set answer feedback to none
+      setAnswerFeedback('');
+
       //call to get a question
       const response = await axios.post(`${apiEndpoint}/getQuestion`);
 
@@ -34,12 +42,6 @@ const GetQuestion = () => {
       //set the attribute to show it is ready to true
       setIsRedy(true);
 
-      //set nextQuestiona true to make the button to get another question disabled
-      setNextQuestion(true);
-
-      //set answer feedback to none
-      setAnswerFeedback('');
-
       //set the background of the buttons grey when it is a new question
       backgroundButtonColorGrey();
 
@@ -49,6 +51,10 @@ const GetQuestion = () => {
       setError(error.response.data.error);
     }
   };
+
+  useEffect(() => {
+    getQuestion();
+  }, []);
 
   /**
    * Method to check the answer, sets the feedback to show the user if
@@ -107,6 +113,7 @@ const GetQuestion = () => {
     }
   };
 
+  //the timer of each question, checks if the question is answered or not, to stop or keep counting until 0
   useEffect(() => {
     if (timer > 0 && nextQuestion) {
       const interval = setInterval(() => {
@@ -145,6 +152,15 @@ const GetQuestion = () => {
           {timer == 0 && <p>Time's up! You didn't answer in time.</p>}
         </div>
       }
+
+      {/* if the question is charging shows two circles to show it is charging */}  
+      {!isRedy && (
+        <div className='charging'>
+            <div className='ball one'></div>
+            <div className='ball two'></div>
+        </div>
+      )}
+
       <div>
           {/* Button to request a new question It will be disabled when the question is not answered */}
           <button onClick={getQuestion} disabled={nextQuestion}>Next question</button>

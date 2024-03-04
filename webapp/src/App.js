@@ -21,15 +21,18 @@ function App() {
       </Typography>
       {showLogin ? <Login /> : <AddUser />}
       <Typography component="div" align="center" sx={{ marginTop: 2 }}>
-        {showLogin ? (
-          <Link name="gotoregister" component="button" variant="body2" onClick={handleToggleView}>
-            Don't have an account? Register here.
-          </Link>
-        ) : (
-          <Link component="button" variant="body2" onClick={handleToggleView}>
-            Already have an account? Login here.
-          </Link>
-        )}
+        
+            {showLogin ? (
+              <Link name="gotoregister" component="button" variant="body2" onClick={handleToggleView}>
+                Don't have an account? Register here.
+              </Link>
+            ) : (
+              <Link component="button" variant="body2" onClick={handleToggleView}>
+                Already have an account? Login here.
+              </Link>
+            )}
+          
+        
       </Typography>
     </Container>
   );

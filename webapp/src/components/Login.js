@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Container, Typography, TextField, Button, Snackbar } from '@mui/material';
 import GetQuestion from './GetQuestion.js';
 
-const Login = () => {
+const Login = (onLoginSuccess) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -23,6 +23,8 @@ const Login = () => {
 
       setCreatedAt(userCreatedAt);
       setLoginSuccess(true);
+
+      //onLoginSuccess();
 
       setOpenSnackbar(true);
     } catch (error) {
