@@ -1,9 +1,9 @@
 // src/components/Record.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Container, Typography, List, ListItem, ListItemText } from '@mui/material';
+import { Container, Typography, List, ListItem, ListItemAvatar, Avatar, ListItemText } from '@mui/material';
 
-const Record = ({ history }) => {
+const Record = ({ record }) => {
 
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
@@ -13,12 +13,12 @@ const Record = ({ history }) => {
         Record
       </Typography>
       <List>
-        {history.map((nCorrect, nFailed, time, score, index) => (
+        {record.map((entrada, index) => (
             <ListItem key={index}>
                 <ListItemAvatar>
                     <Avatar sx={{ bgcolor: 'primary.main' }}>{index + 1}</Avatar>
                 </ListItemAvatar>
-                <ListItemText primary={`Partida ${index + 1}`} secondary={`Preguntas acertadas: ${nCorrect}`} />
+                <ListItemText primary={`Partida ${index + 1}`} secondary={`Preguntas acertadas: ${entrada.nCorrect}`} />
             </ListItem>
         ))}
       </List>

@@ -3,31 +3,31 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Container, Typography, TextField, Button, Snackbar, Stack } from '@mui/material';
 import logo from '../logo.svg';
+import Record from './Record';
 
 const Home = ({ username, createdAt }) => {
   const [error, setError] = useState('');
+  const [record, setRecord] = useState([]);
 
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
-  /*
-  const loginUser = async () => {
-    try {
-      const response = await axios.post(`${apiEndpoint}/home`);
-
-      // Extract data from the response
-      const { createdAt: userCreatedAt } = response.data;
-    } catch (error) {
-      setError(error.response.data.error);
-    }
-  };
-*/
+  
   const handleStartGame = () => {
     // Lógica para iniciar la partida
     console.log('Iniciar partida...');
   };
+  
+  const addToRecord = (nCorrect, nIncorrect, time, points) => {
+    const newEntrada = { nCorrect, nIncorrect, time, points};
+    setRecord([...record, newEntrada]);
+  }
 
-  const handleShowHistory = () => {
-    // Lógica para mostrar el historial de partidas
-    console.log('Mostrar historial de partidas...');
+  const handleShowRecord = () => {
+    const correctAnswers = 5; // Ejemplo de número de respuestas correctas
+    const incorrectAnswers = 2; // Ejemplo de número de respuestas incorrectas
+    const time = '10:30'; // Ejemplo de tiempo de juego
+    const points = 100; // Ejemplo de puntos obtenidos
+    addToRecord(correctAnswers, incorrectAnswers, time, points);
+    <Record record={record}/>
   };
 
   return (
@@ -46,7 +46,7 @@ const Home = ({ username, createdAt }) => {
         <Button variant="contained" color="primary" size="large" onClick={handleStartGame}>
           Nuevo Juego
         </Button>
-        <Button variant="contained" color="secondary" size="large" onClick={handleShowHistory}>
+        <Button variant="contained" color="secondary" size="large" onClick={handleShowRecord}>
           Historial
         </Button>
       </Stack>
