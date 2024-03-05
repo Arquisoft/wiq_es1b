@@ -1,7 +1,7 @@
 // src/components/AddUser.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container, Typography, TextField, Button, Snackbar } from '@mui/material';
+import { Container } from '@mui/material';
 import './GetQuestionCss.css';
 
 const GetQuestion = () => {

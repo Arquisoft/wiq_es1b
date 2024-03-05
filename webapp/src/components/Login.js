@@ -24,8 +24,6 @@ const Login = (onLoginSuccess) => {
       setCreatedAt(userCreatedAt);
       setLoginSuccess(true);
 
-      //onLoginSuccess();
-
       setOpenSnackbar(true);
     } catch (error) {
       setError(error.response.data.error);
