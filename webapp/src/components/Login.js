@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Container, Typography, TextField, Button, Snackbar } from '@mui/material';
-import GetQuestion from './GetQuestion.js';
+import {useNavigate} from "react-router-dom";
 
 const Login = (onLoginSuccess) => {
   const [username, setUsername] = useState('');
@@ -11,6 +11,7 @@ const Login = (onLoginSuccess) => {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [createdAt, setCreatedAt] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const navigate = useNavigate();
 
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
@@ -24,6 +25,8 @@ const Login = (onLoginSuccess) => {
       setCreatedAt(userCreatedAt);
       setLoginSuccess(true);
 
+      localStorage.setItem("username", username);
+
       setOpenSnackbar(true);
     } catch (error) {
       setError(error.response.data.error);
@@ -35,20 +38,19 @@ const Login = (onLoginSuccess) => {
     setOpenSnackbar(false);
   };
 
+  const redirectToHome = () => {
+     navigate("/home");
+  };
+
   return (
-    <Container component="main" maxWidth="xs" sx={{ marginTop: 4 }}>
+    <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
       {loginSuccess ? (
-        <div>
-          <Typography component="h1" variant="h5" sx={{ textAlign: 'center' }}>
-            Hello {username}!
-          </Typography>
-          <Typography component="p" variant="body1" sx={{ textAlign: 'center', marginTop: 2 }}>
-            Your account was created on {new Date(createdAt).toLocaleDateString()}.
-          </Typography>
-          <GetQuestion />
-        </div>
+        redirectToHome()
       ) : (
         <div>
+          <Typography component="h1" variant="h5" align="center" sx={{ marginTop: 2 }}>
+            Welcome to the 2024 edition of the Software Architecture course
+          </Typography>
           <Typography component="h1" variant="h5">
             Login
           </Typography>
@@ -70,7 +72,6 @@ const Login = (onLoginSuccess) => {
           <Button variant="contained" color="primary" onClick={loginUser}>
             Login
           </Button>
-          
           <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar} message="Login successful" />
           {error && (
             <Snackbar open={!!error} autoHideDuration={6000} onClose={() => setError('')} message={`Error: ${error}`} />

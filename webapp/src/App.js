@@ -5,6 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
+import ReactDOM from 'react-dom';
 
 function App() {
   const [showLogin, setShowLogin] = useState(true);
@@ -13,12 +14,12 @@ function App() {
     setShowLogin(!showLogin);
   };
 
+
   return (
+
+
     <Container component="main" maxWidth="xs">
       <CssBaseline />
-      <Typography component="h1" variant="h5" align="center" sx={{ marginTop: 2 }}>
-        Welcome to the 2024 edition of the Software Architecture course
-      </Typography>
       {showLogin ? <Login /> : <AddUser />}
       <Typography component="div" align="center" sx={{ marginTop: 2 }}>
         
@@ -32,7 +33,6 @@ function App() {
               </Link>
             )}
           
-        
       </Typography>
     </Container>
   );
