@@ -21,11 +21,6 @@ mongoose.connect(mongoUri)
         .then(()=>{return Question.insertMany(questionsData);});
 
 
-//the flag label is the url of the flag, to show it
-var questionTitle6 = "¿Cual es la bandera de ? ?";
-var sparqlQuery6 = "SELECT ?entity ?entityLabel ?answer ?answerLabel WHERE { ?entity wdt:P31 wd:Q6256; wdt:P41 ?answer. SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\". } }";
-
-
 //to respond to the /getQuestion request 
 app.post('/getQuestion', async (req,res) => {
   try {
@@ -44,13 +39,13 @@ app.post('/getQuestion', async (req,res) => {
     const questionData = await generator.makeSPARQLQuery(query);
 
     //data of the answers
-    var numberOfCorrectAnswer;
-    var correctLabel;
-    var correctAnswerLabel;
-    var incorrectAnswersLabels = new Set();
+    let numberOfCorrectAnswer;
+    let correctLabel;
+    let correctAnswerLabel;
+    let incorrectAnswersLabels = new Set();
     
     //number of options of responses, the length of the array from wikidata
-    var numOptions = questionData.length
+    let numOptions = questionData.length
 
     //randomly choose the correct answer
     numberOfCorrectAnswer = Math.floor(Math.random() * numOptions);
@@ -62,7 +57,7 @@ app.post('/getQuestion', async (req,res) => {
     for (let i = 0; i < 3; i++) {
       
       //choose a random number
-      var numberChosen = Math.floor(Math.random() * numOptions);  
+      let numberChosen = Math.floor(Math.random() * numOptions);  
 
       //check que number selected is not the same as the correct answer
       //or has already been chose for other wrong answer
@@ -103,9 +98,9 @@ const server = app.listen(port, () => {
 });
 
 // Listen for the 'close' event on the Express.js server
-/**server.on('close', () => {
-    // Close the Mongoose connection
-    mongoose.connection.close();
-  });**/
+server.on('close', () => {
+  // Close the Mongoose connection
+  mongoose.connection.close();
+});
 
 module.exports = server
