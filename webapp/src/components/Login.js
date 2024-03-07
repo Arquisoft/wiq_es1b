@@ -38,12 +38,13 @@ const Login = (onLoginSuccess) => {
     setOpenSnackbar(false);
   };
 
+  
   useEffect(() => {
-    // Redireccionar a la página de inicio cuando loginSuccess se actualice
+    // Redireccionar a la página de inicio cuando loginSuccess se actualice a true
     if (loginSuccess) {
-      navigate("/home");
+      navigate("/home", { state: { username, createdAt } });
     }
-  }, [loginSuccess, navigate]);
+  }, [loginSuccess, navigate, username, createdAt]);
 
   return (
     <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>

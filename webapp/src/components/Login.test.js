@@ -1,8 +1,15 @@
 import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { render, fireEvent, screen, waitFor, act } from '@testing-library/react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import Login from './Login';
+import { useNavigate } from 'react-router-dom';
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: jest.fn(),
+}));
 
 const mockAxios = new MockAdapter(axios);
 
@@ -12,8 +19,12 @@ describe('Login component', () => {
   });
 
   it('should log in successfully', async () => {
-    render(<Login />);
+    render(
+    <Router>
+      <Login />
+    </Router>);
 
+    const navigate = useNavigate();
     const usernameInput = screen.getByLabelText(/Username/i);
     const passwordInput = screen.getByLabelText(/Password/i);
     const loginButton = screen.getByRole('button', { name: /Login/i });
@@ -28,13 +39,16 @@ describe('Login component', () => {
         fireEvent.click(loginButton);
       });
 
-    // Verify that the user information is displayed
-    expect(screen.getByText(/Hello testUser!/i)).toBeInTheDocument();
-    expect(screen.getByText(/Your account was created on 1\/1\/2024/i)).toBeInTheDocument();
+    // Verify that the navigate function is called with the correct arguments
+    expect(navigate).toHaveBeenCalledWith('/home', { state: { username: 'testUser', createdAt: '2024-01-01T12:34:56Z' } });
+    
   });
+    
 
   it('should handle error when logging in', async () => {
-    render(<Login />);
+    render(<Router>
+      <Login />
+    </Router>);
 
     const usernameInput = screen.getByLabelText(/Username/i);
     const passwordInput = screen.getByLabelText(/Password/i);
@@ -59,4 +73,5 @@ describe('Login component', () => {
     expect(screen.queryByText(/Hello testUser!/i)).toBeNull();
     expect(screen.queryByText(/Your account was created on/i)).toBeNull();
   });
+
 });

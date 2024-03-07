@@ -3,11 +3,15 @@ import React, { useState } from 'react';
 import { Container, Typography, Button, Stack } from '@mui/material';
 import logo from '../logo.svg';
 import {useNavigate} from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 
-const Home = ({ username, createdAt }) => {
+const Home = () => {
   const [record, setRecord] = useState([]);
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const { username, createdAt } = location.state || {};
 
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
   
