@@ -6,13 +6,13 @@
 // configure EN settings for asciidoc
 include::src/config.adoc[]
 
-= image:favicon-256.png[WIQ logo] WIQ!
+= image:favicon-256.png[WIQ logo]
 :revnumber: 8.2 EN
 :revdate: January 2023
 :revremark: (based upon AsciiDoc version)
 // toc-title definition MUST follow document title without blank line!
 :toc-title: Table of Contents
-:favicon: favicon.ico
+:favicon: images/favicon.ico
 
 //additional style for arc42 help callouts
 ifdef::backend-html5[]
