@@ -8,7 +8,7 @@ Summary and explanation of the fundamental decisions and solution strategies tha
 === Technology decisions
 * Javascript as the programming language. It was chosen as the best option among the others we considered (Java, Spring Boot, etc) as it is well-suited for using APIs easily and is a simple language.
 * React.js as the Javascript library chosen to program the user interface of the app due to its ease of use and popularity nowadays.
-* Wikidata API to use in the question generator, as it is a requirement of the app.
+* Sparql with Wikidata to use in the question generator, as it is a requirement of the app.
 * Docker for deploying de app locally and testing it.
 
 === Top-level decomposition of the system decisions
