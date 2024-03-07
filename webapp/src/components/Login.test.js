@@ -39,7 +39,7 @@ describe('Login component', () => {
         fireEvent.click(loginButton);
       });
 
-    // Verify that the navigate function is called with the correct arguments
+    // Verify that the user information is displayed
     expect(navigate).toHaveBeenCalledWith('/home', { state: { username: 'testUser', createdAt: '2024-01-01T12:34:56Z' } });
     
   });
