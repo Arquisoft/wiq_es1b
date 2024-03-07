@@ -435,7 +435,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article">
 <div id="header">
-<h1><span class="image"><img src="./images/arc42-logo.png" alt="arc42"></span> WIQ!</h1>
+<h1><span class="image"><img src="./images/logo192.png" alt="WIQ logo"></span> WIQ!</h1>
 <div class="details">
 <span id="revnumber">version 8.2 EN,</span>
 <span id="revdate">January 2023</span>
@@ -516,26 +516,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 }
 </style>
 <hr>
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>This version of the template contains some help and explanations.
-It is used for familiarization with arc42 and the understanding of the concepts.
-For documentation of your own system you use better the <em>plain</em> version.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -734,7 +714,7 @@ Additionally, users will also have access to the history of their games.</p></td
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Documentation</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PlantUML and ASCIIDoc will be used along with the Arc42 template to keep the documentation updated throughout the development of the web app.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Diagrams and ASCIIDoc will be used along with the Arc42 template to keep the documentation updated throughout the development of the web app.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">SPARQL</p></td>
@@ -743,7 +723,7 @@ different types of questions to the users, making the game versatile and non-rep
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Question generator</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Using the Wikidata API, questions will be automatically generated along with the correct and three incorrect answers. This questions will be
+<td class="tableblock halign-left valign-top"><p class="tableblock">Using the Sparql querys, questions will be automatically generated along with the correct and three incorrect answers. This questions will be
 answered by the user and saved in their history. By using this generator, we ensure that the likelihood of getting the same question in another game is almost none.</p></td>
 </tr>
 <tr>
@@ -754,7 +734,7 @@ Users who already have an account will have the option to start the game or view
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Deployment</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The web app must have a frontend to interact with the game through a web interface, which will be deployed in a virtual machine. To deploy locally
-for testing before releasing, we will use Docker</p></td>
+for testing before releasing, we will use Docker and npm.</p></td>
 </tr>
 </tbody>
 </table>
@@ -890,7 +870,7 @@ GitHub and MongoDB in the process of creating and maintaining this project.</p>
 <p>React.js as the Javascript library chosen to program the user interface of the app due to its ease of use and popularity nowadays.</p>
 </li>
 <li>
-<p>Wikidata API to use in the question generator, as it is a requirement of the app.</p>
+<p>Sparql with Wikidata to use in the question generator, as it is a requirement of the app.</p>
 </li>
 <li>
 <p>Docker for deploying de app locally and testing it.</p>
@@ -987,14 +967,6 @@ in more detail.</p>
 </tr>
 </tbody>
 </table>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Important Interfaces</dt>
-<dd>
-<p>There are not important interfaces in this diagram.</p>
-</dd>
-</dl>
-</div>
 <div class="sect3">
 <h4 id="_webapp">5.1.1. WebApp</h4>
 <div class="paragraph">
@@ -1006,7 +978,7 @@ The interface of the WebApp will be the frontend of a web that will be seen bett
 <h4 id="_wikdata">5.1.2. Wikdata</h4>
 <div class="paragraph">
 <p>The purpose of the Wikidata box is to get the necessary information to generate all the questions of all the games.
-The game will interact with Wikidata by its API.</p>
+The game will interact with Wikidata by sparql querys.</p>
 </div>
 </div>
 </div>
@@ -1029,7 +1001,7 @@ These interfaces will be atractive to the user and easy to use, as well as fast-
 <h4 id="_white_box_microservices">5.2.2. White Box Microservices</h4>
 <div class="paragraph">
 <p>The components of the webApp are the microservices, apart from the interfaces, which will have all the logic of the game and are the ones
-who will interact with the external services (Wikidata). There will be one microservice for each one of the responsibilities of the game.
+who will interact with the external services (Wikidata, mongodb). There will be one microservice for each one of the responsibilities of the game.
 These microservices will need to be fast in getting all the data they need and they need to communicate with the interfaces to be able to show
 the user all they need to know to play the game.</p>
 </div>
@@ -1493,7 +1465,7 @@ graphical elements, and other visual elements, as well as the logic that control
 <div id="footer">
 <div id="footer-text">
 Version 8.2 EN<br>
-Last updated 2024-02-22 23:02:17 +0100
+Last updated 2024-03-07 12:30:52 +0100
 </div>
 </div>
 </body>
