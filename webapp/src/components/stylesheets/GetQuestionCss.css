@@ -16,6 +16,7 @@ body{
     position: relative;
     height: 2em;
     width: 4.1em;
+    margin: 1em;
 }
 .ball{
     position: absolute;

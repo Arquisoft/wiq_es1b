@@ -1,7 +1,7 @@
 // src/components/AddUser.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container } from '@mui/material';
+import { Container, Typography, Box, Button } from '@mui/material';
 import './stylesheets/GetQuestionCss.css';
 
 const GetQuestion = () => {
@@ -9,7 +9,7 @@ const GetQuestion = () => {
   const [question, setQuestion] = useState('');
   const [correctAnswer, setCorrectAnswer] = useState('');
   const [answersArray, setAnswersArray] = useState([]);
-  const [isRedy, setIsRedy] = useState(false); 
+  const [isReady, setIsReady] = useState(false); 
   const [error, setError] = useState('');
   const [answerFeedback, setAnswerFeedback] = useState('');
   const [nextQuestion, setNextQuestion] = useState(true);
@@ -22,7 +22,7 @@ const GetQuestion = () => {
     try {
 
       //to wait for the question, show the charging dots
-      setIsRedy(false);
+      setIsReady(false);
       //set nextQuestiona true to make the button to get another question disabled
       setNextQuestion(true);
       //set answer feedback to none
@@ -40,7 +40,7 @@ const GetQuestion = () => {
       setAnswersArray(answers);
 
       //set the attribute to show it is ready to true
-      setIsRedy(true);
+      setIsReady(true);
 
       //set the background of the buttons grey when it is a new question
       backgroundButtonColorGrey();
@@ -115,7 +115,7 @@ const GetQuestion = () => {
 
   //the timer of each question, checks if the question is answered or not, to stop or keep counting until 0
   useEffect(() => {
-    if (isRedy && timer > 0 && nextQuestion) {
+    if (isReady && timer > 0 && nextQuestion) {
       const interval = setInterval(() => {
         setTimer(prevTimer => prevTimer - 1);
       }, 1000);
@@ -124,44 +124,66 @@ const GetQuestion = () => {
       checkAnswer(null);
       setTimer(15); 
     }
-  }, [isRedy, timer, nextQuestion]);
+  }, [isReady, timer, nextQuestion]);
 
 
   return (
     <Container>
-      {isRedy && (
+      {isReady && (
         <div className='answers'>
-          <h2>
+          <Typography component="h2" variant="h5" className='question-text' style={{ fontWeight: 'bold' }}>
             {question}
-          </h2>
+          </Typography>
         
           {/* Generate buttons for the answers */}
           {answersArray.map((answer, index) => (
-            <button key={index} onClick={() => checkAnswer(answer)}>{answer}</button>
-          ))}
+            <Box key={answer} sx={{ display: 'flex', alignItems: 'center', marginY: '0.6em'}}>
+              <Typography component="span" variant="h5" sx={{ marginRight: '0.35em' }}>
+                {index + 1}. 
+              </Typography>
+              <Button 
+                  variant="contained" 
+                  sx={{ backgroundColor: 'dimgrey', fontWeight: 'bold', '&:hover': { backgroundColor: 'black' }}}
+                  key={index} 
+                  onClick={() => checkAnswer(answer)}
+                  disabled={!nextQuestion}>
+                    {answer}
+                </Button>
+            </Box>
+          ))}                
+          
+          {/* To show the time left */}          
+          <Typography component="h2" variant="h6" className='question-text'>
+            <p>Time left: {timer} seconds</p>
+          </Typography>
 
           {/* To show the feedback after answering */}
-          <p>{answerFeedback}</p>
-          
-          {/* To show the time left */}
-          <p>Time left: {timer} seconds</p>
-        
+          <Typography component="h2" variant="h6" className='question-text'>
+            <p>{answerFeedback}</p>
+          </Typography>    
         </div>
+      )}     
+
+      {isReady && (
+      <div>
+          {/* Button to request a new question It will be disabled when the question is not answered */}
+          <Button
+            variant="contained" 
+            style={{ width: '100%', fontWeight: 'bold' }}
+            onClick={getQuestion}
+            disabled={nextQuestion}>
+              Next question
+            </Button>
+      </div>      
       )}
 
       {/* if the question is charging shows two circles to show it is charging */}  
-      {!isRedy && (
+      {!isReady && (
         <div className='charging'>
             <div className='ball one'></div>
             <div className='ball two'></div>
         </div>
       )}
-
-      <div>
-          {/* Button to request a new question It will be disabled when the question is not answered */}
-          <button onClick={getQuestion} disabled={nextQuestion}>Next question</button>
-      </div>
-      
     </Container>
   );
 };
