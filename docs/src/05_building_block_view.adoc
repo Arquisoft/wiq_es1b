@@ -29,8 +29,6 @@ Contained Building Blocks::
 |Wikidata | The external source of information that the webApp uses to generate que questions.
 |===
 
-Important Interfaces::
-There are not important interfaces in this diagram.
 
 ==== WebApp
 
@@ -40,7 +38,7 @@ The interface of the WebApp will be the frontend of a web that will be seen bett
 ==== Wikdata
 
 The purpose of the Wikidata box is to get the necessary information to generate all the questions of all the games.
-The game will interact with Wikidata by its API. 
+The game will interact with Wikidata by sparql querys. 
 
 
 
@@ -57,7 +55,7 @@ These interfaces will be atractive to the user and easy to use, as well as fast-
 ==== White Box Microservices
 
 The components of the webApp are the microservices, apart from the interfaces, which will have all the logic of the game and are the ones
-who will interact with the external services (Wikidata). There will be one microservice for each one of the responsibilities of the game.
+who will interact with the external services (Wikidata, mongodb). There will be one microservice for each one of the responsibilities of the game.
 These microservices will need to be fast in getting all the data they need and they need to communicate with the interfaces to be able to show 
 the user all they need to know to play the game.
 
