@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container } from '@mui/material';
-import './GetQuestionCss.css';
+import './stylesheets/GetQuestionCss.css';
 
 const GetQuestion = () => {
   //all the information about the question
@@ -115,20 +115,21 @@ const GetQuestion = () => {
 
   //the timer of each question, checks if the question is answered or not, to stop or keep counting until 0
   useEffect(() => {
-    if (timer > 0 && nextQuestion) {
+    if (isRedy && timer > 0 && nextQuestion) {
       const interval = setInterval(() => {
         setTimer(prevTimer => prevTimer - 1);
       }, 1000);
       return () => clearInterval(interval);
     } else if (timer === 0 && nextQuestion) {
       checkAnswer(null);
+      setTimer(15); 
     }
-  }, [timer, nextQuestion]);
+  }, [isRedy, timer, nextQuestion]);
 
 
   return (
     <Container>
-      {isRedy ?  
+      {isRedy && (
         <div className='answers'>
           <h2>
             {question}
@@ -146,12 +147,7 @@ const GetQuestion = () => {
           <p>Time left: {timer} seconds</p>
         
         </div>
-      :
-        <div>
-          {/* Message for when the time is up */}   
-          {timer == 0 && <p>Time's up! You didn't answer in time.</p>}
-        </div>
-      }
+      )}
 
       {/* if the question is charging shows two circles to show it is charging */}  
       {!isRedy && (

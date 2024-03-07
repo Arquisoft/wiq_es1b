@@ -1,16 +1,11 @@
 // src/components/Home.js
 import React, { useState } from 'react';
-import axios from 'axios';
 import { Container, Typography, Button, Stack } from '@mui/material';
 import logo from '../logo.svg';
-import Record from './Record';
-import GetQuestion from "./GetQuestion.js";
-import {Link} from 'react-router-dom';
 import {useNavigate} from "react-router-dom";
 
 
 const Home = ({ username, createdAt }) => {
-  const [error, setError] = useState('');
   const [record, setRecord] = useState([]);
   const navigate = useNavigate();
 

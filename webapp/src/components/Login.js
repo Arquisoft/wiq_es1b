@@ -1,5 +1,5 @@
 // src/components/Login.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Typography, TextField, Button, Snackbar } from '@mui/material';
 import {useNavigate} from "react-router-dom";
@@ -38,15 +38,16 @@ const Login = (onLoginSuccess) => {
     setOpenSnackbar(false);
   };
 
-  const redirectToHome = () => {
-     navigate("/home");
-  };
+  useEffect(() => {
+    // Redireccionar a la página de inicio cuando loginSuccess se actualice
+    if (loginSuccess) {
+      navigate("/home");
+    }
+  }, [loginSuccess, navigate]);
 
   return (
     <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
-      {loginSuccess ? (
-        redirectToHome()
-      ) : (
+      
         <div>
           <Typography component="h1" variant="h5" align="center" sx={{ marginTop: 2 }}>
             Welcome to the 2024 edition of the Software Architecture course
@@ -77,7 +78,7 @@ const Login = (onLoginSuccess) => {
             <Snackbar open={!!error} autoHideDuration={6000} onClose={() => setError('')} message={`Error: ${error}`} />
           )}
         </div>
-      )}
+      
     </Container>
   );
 };

@@ -5,7 +5,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-import ReactDOM from 'react-dom';
 
 function App() {
   const [showLogin, setShowLogin] = useState(true);
