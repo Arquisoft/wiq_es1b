@@ -48,6 +48,10 @@ const GetQuestion = () => {
     }
   };
 
+  const saveHistorial = async (selectedAnswer) => {
+    await axios.post(`${apiEndpoint}/saveHistorial`, {question: question, answers: answersArray, correctAnswer: correctAnswer, selectedAnswer: selectedAnswer, correct: true});
+  }
+
   useEffect(() => {
     getQuestion();
   }, []);
@@ -63,6 +67,7 @@ const GetQuestion = () => {
     if(answerFeedback == ''){
       if(selectedAnswer == correctAnswer){
         setAnswerFeedback("You have won! Congratulations!");
+        saveHistorial(selectedAnswer);
       }else if(timer == 0){
         setAnswerFeedback("You lost! You didn't answer in time :(");
       } else {
