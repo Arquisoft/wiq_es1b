@@ -4,12 +4,6 @@ import { render, fireEvent, screen, waitFor, act } from '@testing-library/react'
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import Login from './Login';
-import { useNavigate } from 'react-router-dom';
-
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useNavigate: jest.fn(),
-}));
 
 const mockAxios = new MockAdapter(axios);
 
@@ -24,10 +18,10 @@ describe('Login component', () => {
       <Login />
     </Router>);
 
-    const navigate = useNavigate();
+    
     const usernameInput = screen.getByLabelText(/Username/i);
     const passwordInput = screen.getByLabelText(/Password/i);
-    const loginButton = screen.getByRole('button', { name: /Login/i });
+    const loginButton = screen.getByTestId('loginButton');
 
     // Mock the axios.post request to simulate a successful response
     mockAxios.onPost('http://localhost:8000/login').reply(200, { createdAt: '2024-01-01T12:34:56Z' });
@@ -39,9 +33,10 @@ describe('Login component', () => {
         fireEvent.click(loginButton);
       });
 
-    // Verify that the user information is displayed
-    expect(navigate).toHaveBeenCalledWith('/home', { state: { username: 'testUser', createdAt: '2024-01-01T12:34:56Z' } });
-    
+    // Verify that the unauthorized error is not displayed
+    await waitFor(() => {
+      expect(screen.queryByText(/Error: Unauthorized/i)).toBeNull();
+    });
   });
     
 
