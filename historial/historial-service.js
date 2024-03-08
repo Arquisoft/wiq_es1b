@@ -18,12 +18,12 @@ mongoose.connect(mongoUri);
 app.post('/saveHistorial', async (req,res) => {
   try {
 
-    const { question, answers, correctAnswer, selectedAnswer, correct  } = req.body;
+    const { question, answersArray, correctAnswer, selectedAnswer, correct  } = req.body;
 
     console.log(req.body);
     // Ahora puedes usar las variables question, answer y correct
     console.log(question);
-    console.log(answers);
+    console.log(answersArray);
     console.log(correctAnswer);
     console.log(selectedAnswer);
     console.log(correct);

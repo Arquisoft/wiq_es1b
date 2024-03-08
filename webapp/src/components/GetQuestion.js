@@ -49,7 +49,8 @@ const GetQuestion = () => {
   };
 
   const saveHistorial = async (selectedAnswer) => {
-    await axios.post(`${apiEndpoint}/saveHistorial`, {question: question, answers: answersArray, correctAnswer: correctAnswer, selectedAnswer: selectedAnswer, correct: true});
+    const correct = true;
+    const response = await axios.post(`${apiEndpoint}/saveHistorial`, {question, answersArray, correctAnswer, selectedAnswer, correct});
   }
 
   useEffect(() => {
