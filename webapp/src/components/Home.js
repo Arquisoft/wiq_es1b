@@ -4,7 +4,7 @@ import { Container, Typography, Button, Stack } from '@mui/material';
 import logo from '../logo.svg';
 import {useNavigate} from "react-router-dom";
 import { useLocation } from "react-router-dom";
-
+import './stylesheets/home.css';
 
 const Home = () => {
   const [record, setRecord] = useState([]);
@@ -39,7 +39,10 @@ const Home = () => {
 
   return (
     <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
-      <Typography component="h1" variant="h5" align="center" sx={{ marginTop: 2 }}>
+      <div className='logoContainer'>
+        <img src={logo} alt="Logo" className="logo" style={{ width: '100px', position: 'relative', left: '50%', transform: 'translate(-50%, -50%)' }} />
+      </div>
+     <Typography component="h1" variant="h5" align="center" sx={{ marginTop: 2 }}>
         Welcome to the 2024 edition of the Software Architecture course
       </Typography>
       <Typography component="h2" variant="h5" sx={{ textAlign: 'center' }}>
@@ -48,7 +51,6 @@ const Home = () => {
       <Typography component="p" variant="body1" sx={{ textAlign: 'center', marginTop: 2 }}>
         Your account was created on {new Date(createdAt).toLocaleDateString()}.
       </Typography>
-      <img src={logo} alt="Logo" style={{ width: '100px', position: 'absolute', top: '20px', left: '20px' }} />
       <Stack spacing={2} sx={{ marginTop: 4 }}>
         
       <Button variant="contained" color="primary" size="large" onClick={handleStartGame}>

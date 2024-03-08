@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Typography, TextField, Button, Snackbar } from '@mui/material';
 import {useNavigate} from "react-router-dom";
+import './stylesheets/login.css';
 
 const Login = (onLoginSuccess) => {
   const [username, setUsername] = useState('');
@@ -47,7 +48,7 @@ const Login = (onLoginSuccess) => {
   }, [loginSuccess, navigate, username, createdAt]);
 
   return (
-    <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
+    <Container component="main" className='wrapper' maxWidth="sm" sx={{ marginTop: 4 }}>
       
         <div>
           <Typography component="h1" variant="h5" align="center" sx={{ marginTop: 2 }}>
