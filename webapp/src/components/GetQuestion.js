@@ -20,6 +20,7 @@ const GetQuestion = () => {
   //method to get que information of the question
   const getQuestion = async () => {
     try {
+      setTimer(15);
 
       //to wait for the question, show the charging dots
       setIsReady(false);
@@ -41,11 +42,6 @@ const GetQuestion = () => {
 
       //set the attribute to show it is ready to true
       setIsReady(true);
-
-      //set the background of the buttons grey when it is a new question
-      backgroundButtonColorGrey();
-
-      setTimer(15);
 
     } catch (error) {
       setError(error.response.data.error);
@@ -98,22 +94,8 @@ const GetQuestion = () => {
   };
 
   /**
-   * Changes the background color of the buttons back to grey as it is a new question
+   * The timer of each question, checks if the question is answered or not, to stop or keep counting until 0
    */
-  const backgroundButtonColorGrey = () => {
-    const answersDiv = document.querySelector('.answers');
-    if (answersDiv) {
-      const buttons = answersDiv.querySelectorAll('button');
-      buttons.forEach(button => {
-        button.style.backgroundColor = 'lightgrey';
-        button.style.color = 'black';
-        //let the user be able to click a button to choose an answer
-        button.disabled = false;
-      });
-    }
-  };
-
-  //the timer of each question, checks if the question is answered or not, to stop or keep counting until 0
   useEffect(() => {
     if (isReady && timer > 0 && nextQuestion) {
       const interval = setInterval(() => {
@@ -122,7 +104,6 @@ const GetQuestion = () => {
       return () => clearInterval(interval);
     } else if (timer === 0 && nextQuestion) {
       checkAnswer(null);
-      setTimer(15); 
     }
   }, [isReady, timer, nextQuestion]);
 
@@ -135,7 +116,8 @@ const GetQuestion = () => {
             {question}
           </Typography>
         
-          {/* Generate buttons for the answers */}
+          {/* Generate buttons for the answers 
+              Box used to display the buttons in one row each */}
           {answersArray.map((answer, index) => (
             <Box key={answer} sx={{ display: 'flex', alignItems: 'center', marginY: '0.6em'}}>
               <Typography component="span" variant="h5" sx={{ marginRight: '0.35em' }}>
@@ -177,7 +159,7 @@ const GetQuestion = () => {
       </div>      
       )}
 
-      {/* if the question is charging shows two circles to show it is charging */}  
+      {/* If the question is charging shows two circles to show it is charging */}  
       {!isReady && (
         <div className='charging'>
             <div className='ball one'></div>
