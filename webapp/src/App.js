@@ -5,7 +5,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-import Game from './components/Game';
 
 function App() {
   const [showLogin, setShowLogin] = useState(true);
@@ -35,7 +34,7 @@ function App() {
             )}
           
       </Typography>
-      <Game></Game>
+
     </Container>
   );
 }
