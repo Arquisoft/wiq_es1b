@@ -17,7 +17,7 @@ const Home = () => {
   
   function handleStartGame(){
     // Lógica para iniciar la partida
-    navigate("/getQuestion");
+    navigate("/getQuestion", {state: {username}});
   };
   
 

@@ -4,9 +4,9 @@ const gameSchema = new mongoose.Schema({
   correctAnswer: {
     type: String,
   },
-  incorrectAnswers: {
+  answers: {
     type: [String], // Array of strings
-    validate: [arrayLimit, '{PATH} exceeds the limit of 3'],
+    validate: [arrayLimit, '{PATH} exceeds the limit of 4'],
   },
   title: {
     type: String,

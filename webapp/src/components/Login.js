@@ -41,7 +41,7 @@ const Login = (onLoginSuccess) => {
 
   
   useEffect(() => {
-    // Redireccionar a la página de inicio cuando loginSuccess se actualice a true
+    // Redireccionar a la página de inicio cuando loginSuccess se actualice a true con el nombre de usuario y la fecha de creacion de su cuenta
     if (loginSuccess) {
       navigate("/home", { state: { username, createdAt } });
     }

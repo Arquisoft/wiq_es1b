@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Typography, Box, Button } from '@mui/material';
 import './stylesheets/GetQuestionCss.css';
+import { useLocation } from "react-router-dom";
 
 const GetQuestion = () => {
   //all the information about the question
@@ -14,6 +15,10 @@ const GetQuestion = () => {
   const [answerFeedback, setAnswerFeedback] = useState('');
   const [nextQuestion, setNextQuestion] = useState(true);
   const [timer, setTimer] = useState(15); 
+
+  //accedo al usuario logeado
+  const location = useLocation();
+  const { username } = location.state || {};
 
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
@@ -50,7 +55,8 @@ const GetQuestion = () => {
 
   const saveHistorial = async (selectedAnswer) => {
     const correct = true;
-    const response = await axios.post(`${apiEndpoint}/saveHistorial`, {question, answersArray, correctAnswer, selectedAnswer, correct});
+    const user = username;
+    const response = await axios.post(`${apiEndpoint}/saveHistorial`, {question, answersArray, correctAnswer, selectedAnswer, correct, user});
   }
 
   useEffect(() => {
@@ -67,6 +73,7 @@ const GetQuestion = () => {
     //only executes the first time a button is clicked
     if(answerFeedback == ''){
       if(selectedAnswer == correctAnswer){
+        console.log(selectedAnswer);
         setAnswerFeedback("You have won! Congratulations!");
         saveHistorial(selectedAnswer);
       }else if(timer == 0){
