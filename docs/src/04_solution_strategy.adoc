@@ -8,7 +8,7 @@ Summary and explanation of the fundamental decisions and solution strategies tha
 === Technology decisions
 * Javascript as the programming language. It was chosen as the best option among the others we considered (Java, Spring Boot, etc) as it is well-suited for using APIs easily and is a simple language.
 * React.js as the Javascript library chosen to program the user interface of the app due to its ease of use and popularity nowadays.
-* Wikidata API to use in the question generator, as it is a requirement of the app.
+* Sparql with Wikidata to use in the question generator, as it is a requirement of the app.
 * Docker for deploying de app locally and testing it.
 
 === Top-level decomposition of the system decisions
@@ -26,29 +26,3 @@ multiple tests will be done to ensure everything works as intended.
     - Projects will be used to track the progress of the tasks.
 * A Whatsapp group will be used to communicate instantly with each other about important matters.
 
-[role="arc42help"]
-****
-.Contents
-A short summary and explanation of the fundamental decisions and solution strategies, that shape system architecture. It includes
-
-* technology decisions
-* decisions about the top-level decomposition of the system, e.g. usage of an architectural pattern or design pattern
-* decisions on how to achieve key quality goals
-* relevant organizational decisions, e.g. selecting a development process or delegating certain tasks to third parties.
-
-.Motivation
-These decisions form the cornerstones for your architecture. They are the foundation for many other detailed decisions or implementation rules.
-
-.Form
-Keep the explanations of such key decisions short.
-
-Motivate what was decided and why it was decided that way,
-based upon problem statement, quality goals and key constraints.
-Refer to details in the following sections.
-
-
-.Further Information
-
-See https://docs.arc42.org/section-4/[Solution Strategy] in the arc42 documentation.
-
-****

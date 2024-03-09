@@ -14,24 +14,26 @@ function App() {
     setShowLogin(!showLogin);
   };
 
+
   return (
+
+
     <Container component="main" maxWidth="xs">
    
       <CssBaseline />
-      <Typography component="h1" variant="h5" align="center" sx={{ marginTop: 2 }}>
-        Welcome to the 2024 edition of the Software Architecture course
-      </Typography>
       {showLogin ? <Login /> : <AddUser />}
       <Typography component="div" align="center" sx={{ marginTop: 2 }}>
-        {showLogin ? (
-          <Link name="gotoregister" component="button" variant="body2" onClick={handleToggleView}>
-            Don't have an account? Register here.
-          </Link>
-        ) : (
-          <Link component="button" variant="body2" onClick={handleToggleView}>
-            Already have an account? Login here.
-          </Link>
-        )}
+        
+            {showLogin ? (
+              <Link name="gotoregister" component="button" variant="body2" onClick={handleToggleView}>
+                Don't have an account? Register here.
+              </Link>
+            ) : (
+              <Link component="button" variant="body2" onClick={handleToggleView}>
+                Already have an account? Login here.
+              </Link>
+            )}
+          
       </Typography>
       <Game></Game>
     </Container>

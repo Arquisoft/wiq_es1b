@@ -9,63 +9,6 @@ The Building Block view shows the decomposition of the WIQ system into different
 aspects of the webapp. It will help by giving a clear image of the overall system and also the inside of it.
 It is a preliminary decomposition of the webApp as it might change, not drastically, throughout the development of the game.
 
-[role="arc42help"]
-****
-.Content
-The building block view shows the static decomposition of the system into building blocks (modules, components, subsystems, classes, interfaces, packages, libraries, frameworks, layers, partitions, tiers, functions, macros, operations, data structures, ...) as well as their dependencies (relationships, associations, ...)
-
-This view is mandatory for every architecture documentation.
-In analogy to a house this is the _floor plan_.
-
-.Motivation
-Maintain an overview of your source code by making its structure understandable through
-abstraction.
-
-This allows you to communicate with your stakeholder on an abstract level without disclosing implementation details.
-
-.Form
-The building block view is a hierarchical collection of black boxes and white boxes
-(see figure below) and their descriptions.
-
-image::05_building_blocks-EN.png["Hierarchy of building blocks"]
-
-*Level 1* is the white box description of the overall system together with black
-box descriptions of all contained building blocks.
-
-*Level 2* zooms into some building blocks of level 1.
-Thus it contains the white box description of selected building blocks of level 1, together with black box descriptions of their internal building blocks.
-
-*Level 3* zooms into selected building blocks of level 2, and so on.
-
-
-.Further Information
-
-See https://docs.arc42.org/section-5/[Building Block View] in the arc42 documentation.
-
-****
-
-
-
-[role="arc42help"]
-****
-Here you describe the decomposition of the overall system using the following white box template. It contains
-
- * an overview diagram
- * a motivation for the decomposition
- * black box descriptions of the contained building blocks. For these we offer you alternatives:
-
-   ** use _one_ table for a short and pragmatic overview of all contained building blocks and their interfaces
-   ** use a list of black box descriptions of the building blocks according to the black box template (see below).
-   Depending on your choice of tool this list could be sub-chapters (in text files), sub-pages (in a Wiki) or nested elements (in a modeling tool).
-
-
- * (optional:) important interfaces, that are not explained in the black box templates of a building block, but are very important for understanding the white box.
-Since there are so many ways to specify interfaces why do not provide a specific template for them.
- In the worst case you have to specify and describe syntax, semantics, protocols, error handling,
- restrictions, versions, qualities, necessary compatibilities and many things more.
-In the best case you will get away with examples or simple signatures.
-
-****
 
 === Whitebox Overall System
 
@@ -87,45 +30,6 @@ Contained Building Blocks::
 |===
 
 
-Important Interfaces::
-There are not important interfaces in this diagram.
-
-[role="arc42help"]
-****
-Insert your explanations of black boxes from level 1:
-
-If you use tabular form you will only describe your black boxes with name and
-responsibility according to the following schema:
-
-[cols="1,2" options="header"]
-|===
-| **Name** | **Responsibility**
-| _<black box 1>_ | _<Text>_
-| _<black box 2>_ | _<Text>_
-|===
-
-
-
-If you use a list of black box descriptions then you fill in a separate black box template for every important building block .
-Its headline is the name of the black box.
-****
-
-
-
-
-[role="arc42help"]
-****
-Here you describe <black box 1>
-according the the following black box template:
-
-* Purpose/Responsibility
-* Interface(s), when they are not extracted as separate paragraphs. This interfaces may include qualities and performance characteristics.
-* (Optional) Quality-/Performance characteristics of the black box, e.g.availability, run time behavior, ....
-* (Optional) directory/file location
-* (Optional) Fulfilled requirements (if you need traceability to requirements).
-* (Optional) Open issues/problems/risks
-
-****
 ==== WebApp
 
 The WebApp box consists of the entire game with all the different responsibilities the game might have all together.
@@ -134,18 +38,9 @@ The interface of the WebApp will be the frontend of a web that will be seen bett
 ==== Wikdata
 
 The purpose of the Wikidata box is to get the necessary information to generate all the questions of all the games.
-The game will interact with Wikidata by its API. 
+The game will interact with Wikidata by sparql querys. 
 
 
-
-[role="arc42help"]
-****
-Here you can specify the inner structure of (some) building blocks from level 1 as white boxes.
-
-You have to decide which building blocks of your system are important enough to justify such a detailed description.
-Please prefer relevance over completeness. Specify important, surprising, risky, complex or volatile building blocks.
-Leave out normal, simple, boring or standardized parts of your system
-****
 
 === Level 2
 
@@ -160,25 +55,10 @@ These interfaces will be atractive to the user and easy to use, as well as fast-
 ==== White Box Microservices
 
 The components of the webApp are the microservices, apart from the interfaces, which will have all the logic of the game and are the ones
-who will interact with the external services (Wikidata). There will be one microservice for each one of the responsibilities of the game.
+who will interact with the external services (Wikidata, mongodb). There will be one microservice for each one of the responsibilities of the game.
 These microservices will need to be fast in getting all the data they need and they need to communicate with the interfaces to be able to show 
 the user all they need to know to play the game.
 
-[role="arc42help"]
-****
-...describes the internal structure of _building block 1_.
-****
-
-
-
-
-[role="arc42help"]
-****
-Here you can specify the inner structure of (some) building blocks from level 2 as white boxes.
-
-When you need more detailed levels of your architecture please copy this
-part of arc42 for additional levels.
-****
 
 === Level 3
 
@@ -186,7 +66,7 @@ image::buildingBlock3.png["More detailed microservices diagram"]
 
 ==== White Box Question Generator
 
-The Question Generator is the microservice that interacts with the Wikidata external service through their API.
+The Question Generator is the microservice that interacts with the Wikidata external service through SPARQL.
 It is the microservice dedicated to generate the questions and the answers and pass them to the interface to show them to the user. 
 
 ==== White Box Users service
@@ -206,8 +86,3 @@ first time in the game. All the data gets collected and saved in the database Mo
 ==== White Box Login service
 This is another microservice inside the Users service. This one is the one users use everytime when they log in. It retrieves
 all their data from the database MongoDb and shows them in the webApp as the users will have an option to view all their past data.
-
-[role="arc42help"]
-****
-Specifies the internal structure of _building block x.1_.
-****
