@@ -2,15 +2,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const User = require('../users/userservice/user-model');
+const User = require('./auth-model');
 
 const app = express();
 const port = 8004;
 
 // Middleware to parse JSON in request body
-app.use(bodyParser.json());
+app.use(express.json());
 
-// Connect to MongoDB
+//Connect to MongoDB
 const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/userdb';
 mongoose.connect(mongoUri);
 
@@ -20,11 +20,14 @@ app.post('/saveHistorial', async (req,res) => {
   try {
 
     //extract the infrmation from the request to save it in the user
-    const { question, answersArray, correctAnswer, selectedAnswer, correct, user  } = req.body;
+    const { question, answersArray, correctAnswer, selectedAnswer, correct, username2  } = req.body;
+
+    const username = username2;
 
     //search for the user with username=user in the bd
-    const usuario = await User.findOne({ username: user });
-
+    const user = await User.findOne({ username });
+    
+    //creamos la pregunta para guardarla en el historial
     const partida = {
       correctAnswer: correctAnswer,
       answers: answersArray,
@@ -33,9 +36,11 @@ app.post('/saveHistorial', async (req,res) => {
       selectedAnswer: selectedAnswer
     }
 
-    usuario.games.push(partida);
+    //guardamos la partida en el array de preguntas del usuario 
+    user.games.push(partida);
 
-    await usuario.save();
+    //guardamos los cambios realizados en el usuario
+    await user.save();
 
     res.json({ msg: "Saves the data correctly" });
 
@@ -54,14 +59,15 @@ app.post('/getHistorial', async (req,res) => {
 });
 
 
+
 const server = app.listen(port, () => {
   console.log(`Historial Service listening at http://localhost:${port}`);
 });
 
-// Listen for the 'close' event on the Express.js server
 server.on('close', () => {
   // Close the Mongoose connection
   mongoose.connection.close();
 });
+
 
 module.exports = server

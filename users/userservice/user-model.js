@@ -20,13 +20,14 @@ const gameSchema = new mongoose.Schema({
 });
 
 function arrayLimit(val) {
-  return val.length <= 3;
+  return val.length <= 4;
 }
 
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
+    unique: true,
   },
   password: {
     type: String,
