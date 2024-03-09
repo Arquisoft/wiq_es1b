@@ -17,7 +17,7 @@ mongoose.connect(mongoUri);
 //to respond to the /saveHistorial request 
 app.post('/saveHistorial', async (req,res) => {
   try {
-
+    
     const { question, answersArray, correctAnswer, selectedAnswer, correct  } = req.body;
 
     console.log(req.body);
