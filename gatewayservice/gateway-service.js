@@ -9,6 +9,7 @@ const port = 8000;
 const authServiceUrl = process.env.AUTH_SERVICE_URL || 'http://localhost:8002';
 const userServiceUrl = process.env.USER_SERVICE_URL || 'http://localhost:8001';
 const getQuestionUrl = process.env.QUESTION_SERVICE_URL || 'http://localhost:8003';
+const getHistorialUrl = process.env.HISTORIAL_SERVICE_URL || 'http://localhost:8004';
 
 app.use(cors());
 app.use(express.json());
@@ -46,6 +47,26 @@ app.post('/getQuestion', async (req, res) => {
   try {
     // Forward the getQuestion request to the question service
     const questionResponse = await axios.post(getQuestionUrl+'/getQuestion');
+    res.json(questionResponse.data);
+  } catch (error) {
+    res.status(error.response.status).json({ error: error.response.data.error });
+  }
+});
+
+app.post('/saveHistorial', async (req, res) => {
+  try {
+    // Forward the getQuestion request to the question service
+    const questionResponse = await axios.post(getHistorialUrl+'/saveHistorial');
+    res.json(questionResponse.data);
+  } catch (error) {
+    res.status(error.response.status).json({ error: error.response.data.error });
+  }
+});
+
+app.post('/getHistorial', async (req, res) => {
+  try {
+    // Forward the getQuestion request to the question service
+    const questionResponse = await axios.post(getHistorialUrl+'/getHistorial');
     res.json(questionResponse.data);
   } catch (error) {
     res.status(error.response.status).json({ error: error.response.data.error });

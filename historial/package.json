@@ -1,10 +1,10 @@
 {
-  "name": "questionsgenerator",
+  "name": "historial-service",
   "version": "1.0.0",
-  "description": "Question generator, in charge of generating the questions of the game",
-  "main": "questions-service.js",
+  "description": "Historial, in charge of showing and saving the users data during the game",
+  "main": "historial-service.js",
   "scripts": {
-    "start": "node questions-service.js",
+    "start": "node --inspect historial-service.js",
     "test": "jest"
   },
   "repository": {
