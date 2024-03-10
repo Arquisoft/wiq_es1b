@@ -27,7 +27,7 @@ const AddUser = () => {
   return (
     <Container component="main" maxWidth="xs" className='wrapper' sx={{ marginTop: 4 }}>
       <Typography component="h1" variant="h5" align="center" sx={{ marginTop: 2 }}>
-            Welcome to the 2024 edition of the Software Architecture course
+            Welcome to WIQ! Create an account to start playing!
           </Typography>
       <Typography component="h1" variant="h5">
         Add User

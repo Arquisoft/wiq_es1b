@@ -56,7 +56,7 @@ app.post('/getQuestion', async (req, res) => {
 app.post('/saveHistorial', async (req, res) => {
   try {
     // Forward the getQuestion request to the question service
-    const questionResponse = await axios.post(getHistorialUrl+'/saveHistorial');
+    const questionResponse = await axios.post(getHistorialUrl+'/saveHistorial', req.body);
     res.json(questionResponse.data);
   } catch (error) {
     res.status(error.response.status).json({ error: error.response.data.error });
@@ -66,7 +66,7 @@ app.post('/saveHistorial', async (req, res) => {
 app.post('/getHistorial', async (req, res) => {
   try {
     // Forward the getQuestion request to the question service
-    const questionResponse = await axios.post(getHistorialUrl+'/getHistorial');
+    const questionResponse = await axios.post(getHistorialUrl+'/getHistorial', req.body);
     res.json(questionResponse.data);
   } catch (error) {
     res.status(error.response.status).json({ error: error.response.data.error });

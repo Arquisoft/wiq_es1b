@@ -2,6 +2,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const User = require('./auth-model');
 
 const app = express();
 const port = 8004;
@@ -9,7 +10,7 @@ const port = 8004;
 // Middleware to parse JSON in request body
 app.use(express.json());
 
-// Connect to MongoDB
+//Connect to MongoDB
 const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/userdb';
 mongoose.connect(mongoUri);
 
@@ -18,15 +19,30 @@ mongoose.connect(mongoUri);
 app.post('/saveHistorial', async (req,res) => {
   try {
 
-    const { question, answersArray, correctAnswer, selectedAnswer, correct  } = req.body;
+    //extract the infrmation from the request to save it in the user
+    const { question, answersArray, correctAnswer, selectedAnswer, correct, username2  } = req.body;
 
-    console.log(req.body);
-    // Ahora puedes usar las variables question, answer y correct
-    console.log(question);
-    console.log(answersArray);
-    console.log(correctAnswer);
-    console.log(selectedAnswer);
-    console.log(correct);
+    const username = username2;
+
+    //search for the user with username=user in the bd
+    const user = await User.findOne({ username });
+    
+    //creamos la pregunta para guardarla en el historial
+    const partida = {
+      correctAnswer: correctAnswer,
+      answers: answersArray,
+      title: question,
+      answeredRight: correct,
+      selectedAnswer: selectedAnswer
+    }
+
+    //guardamos la partida en el array de preguntas del usuario 
+    user.games.push(partida);
+
+    //guardamos los cambios realizados en el usuario
+    await user.save();
+
+    res.json({ msg: "Saves the data correctly" });
 
   } catch(error){
     res.status(500).json({ error: 'Internal Server Error inside service' });
@@ -37,20 +53,34 @@ app.post('/saveHistorial', async (req,res) => {
 app.post('/getHistorial', async (req,res) => {
   try {
 
+    //extract the infrmation from the request to save it in the user
+    const { username2 } = req.body;
+
+    const username = username2;
+
+    //search for the user with username=user in the bd
+    const user = await User.findOne({ username });
+
+    const gamesUser = user.games;
+
+    //respond with the user's games
+    res.json({ games: gamesUser });
+
   } catch(error){
     res.status(500).json({ error: 'Internal Server Error inside service' });
   }
 });
 
 
+
 const server = app.listen(port, () => {
   console.log(`Historial Service listening at http://localhost:${port}`);
 });
 
-// Listen for the 'close' event on the Express.js server
 server.on('close', () => {
   // Close the Mongoose connection
   mongoose.connection.close();
 });
+
 
 module.exports = server

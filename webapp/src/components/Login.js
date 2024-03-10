@@ -41,7 +41,7 @@ const Login = (onLoginSuccess) => {
 
   
   useEffect(() => {
-    // Redireccionar a la página de inicio cuando loginSuccess se actualice a true
+    // Redireccionar a la página de inicio cuando loginSuccess se actualice a true con el nombre de usuario y la fecha de creacion de su cuenta
     if (loginSuccess) {
       navigate("/home", { state: { username, createdAt } });
     }
@@ -52,7 +52,7 @@ const Login = (onLoginSuccess) => {
       
         <div>
           <Typography component="h1" variant="h5" align="center" sx={{ marginTop: 2 }}>
-            Welcome to the 2024 edition of the Software Architecture course
+            Welcome to WIQ! Log in to start playing!
           </Typography>
           <Typography component="h1" variant="h5">
             Login
