@@ -3,26 +3,24 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { render, fireEvent, screen, waitFor, act } from '@testing-library/react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import Question from './GetQuestion';
+import Record from './Record';
 
 const mockAxios = new MockAdapter(axios);
 
-describe('Login component', () => {
+describe('Record component', () => {
   beforeEach(() => {
     mockAxios.reset();
   });
 
-  it('should log in successfully', async () => {
+  it('should render succesfully', async () => {
     render(
     <Router>
-      <Question />
+      <Record />
     </Router>);
+
+    const linkElement = screen.getByText(/Here you can see your record! All about your past games and all!/i);
+    expect(linkElement).toBeInTheDocument();
 
   });
 
-  it('should handle error when logging in', async () => {
-    render(<Router>
-      <Question />
-    </Router>);
-  });
 });

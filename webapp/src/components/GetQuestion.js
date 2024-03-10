@@ -49,7 +49,12 @@ const GetQuestion = () => {
       setIsReady(true);
 
     } catch (error) {
-      setError(error.response.data.error);
+      //setError(error.response.data.error);
+      if (error.response) {
+        setError(error.response.data.error);
+      } else {
+        setError(error.message);
+      }
     }
   };
 

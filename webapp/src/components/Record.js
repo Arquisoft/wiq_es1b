@@ -32,7 +32,7 @@ const Record = () => {
   return (
     <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
       <Typography component="h1" variant="h5">
-        Record
+        Here you can see your record! All about your past games and all!
       </Typography>
      <button onClick={llamaHistorial}>Get Historial</button> 
       <List>
