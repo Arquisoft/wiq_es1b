@@ -52,7 +52,7 @@ const Login = (onLoginSuccess) => {
       
         <div>
           <Typography component="h1" variant="h5" align="center" sx={{ marginTop: 2 }}>
-            Welcome to the 2024 edition of the Software Architecture course
+            Welcome to WIQ! Log in to start playing!
           </Typography>
           <Typography component="h1" variant="h5">
             Login
