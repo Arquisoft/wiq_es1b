@@ -4,7 +4,6 @@ import axios from 'axios';
 import { Container, Typography, Box, Button } from '@mui/material';
 import './stylesheets/GetQuestionCss.css';
 import { useLocation } from "react-router-dom";
-import { set } from 'mongoose';
 
 const GetQuestion = () => {
   //all the information about the question
@@ -54,8 +53,8 @@ const GetQuestion = () => {
     }
   };
 
-  const saveHistorial = async (selectedAnswer) => {
-    const correct = true;
+  const saveHistorial = async (selectedAnswer, correct) => {
+    
     const username2 = username;
     const response = await axios.post(`${apiEndpoint}/saveHistorial`, {question, answersArray, correctAnswer, selectedAnswer, correct, username2});
   }
@@ -72,15 +71,18 @@ const GetQuestion = () => {
    */
   const checkAnswer = (selectedAnswer) => {
     //only executes the first time a button is clicked
+    var correct = false;
     if(answerFeedback == ''){
       if(selectedAnswer == correctAnswer){
+        correct = true;
         setAnswerFeedback("You have won! Congratulations!");
-        saveHistorial(selectedAnswer);
       }else if(timer == 0){
+        selectedAnswer = "Time out";
         setAnswerFeedback("You lost! You didn't answer in time :(");
       } else {
         setAnswerFeedback("You lost! Try again :(");
       }
+      saveHistorial(selectedAnswer, correct);
       showAnswerColors();
       setNextQuestion(false);
     }

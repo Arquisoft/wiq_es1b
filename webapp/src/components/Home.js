@@ -32,7 +32,7 @@ const Home = () => {
     const time = '10:30'; // Ejemplo de tiempo de juego
     const points = 100; // Ejemplo de puntos obtenidos
     addToRecord(correctAnswers, incorrectAnswers, time, points);
-    navigate("/record");
+    navigate("/record", {state: {username}});
   };
 
 

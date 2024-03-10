@@ -53,6 +53,19 @@ app.post('/saveHistorial', async (req,res) => {
 app.post('/getHistorial', async (req,res) => {
   try {
 
+    //extract the infrmation from the request to save it in the user
+    const { username2 } = req.body;
+
+    const username = username2;
+
+    //search for the user with username=user in the bd
+    const user = await User.findOne({ username });
+
+    const gamesUser = user.games;
+
+    //respond with the user's games
+    res.json({ games: gamesUser });
+
   } catch(error){
     res.status(500).json({ error: 'Internal Server Error inside service' });
   }
