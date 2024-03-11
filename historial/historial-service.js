@@ -1,9 +1,8 @@
-// historial-service.js
+// questions-service.js
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const User = require('../users/authservice/auth-model');
-const Partida = require('./historial-model')
+const User = require('./auth-model');
 
 const app = express();
 const port = 8004;
@@ -19,26 +18,23 @@ mongoose.connect(mongoUri);
 //to respond to the /saveHistorial request 
 app.post('/saveHistorial', async (req,res) => {
   try {
-    
-    console.log("ESTOY")
+
     //extract the infrmation from the request to save it in the user
     const { question, answersArray, correctAnswer, selectedAnswer, correct, username2  } = req.body;
 
     const username = username2;
 
-    console.log("USERNAME: " + username);
-
     //search for the user with username=user in the bd
     const user = await User.findOne({ username });
     
     //creamos la pregunta para guardarla en el historial
-    const partida = new Partida({
+    const partida = {
       correctAnswer: correctAnswer,
       answers: answersArray,
       title: question,
       answeredRight: correct,
       selectedAnswer: selectedAnswer
-    });
+    }
 
     //guardamos la partida en el array de preguntas del usuario 
     user.games.push(partida);
