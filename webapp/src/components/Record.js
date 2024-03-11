@@ -41,15 +41,21 @@ const Record = () => {
         Here you can see your record! All about your past games and all!
       </Typography>
      
-      {/*<List>
-        {record.map((game, index) => 
-        <ListItem key={index}>
-          <ListItemAvatar>
-            <Avatar>game.partida.title</Avatar>
-          </ListItemAvatar>
-          <ListItemText primary={`Game ${index + 1}`} secondary={`Score: ${game.score}`} />
-        </ListItem>)}
-        </List>*/}
+      <List>
+        {record.map((game, index) => (
+          <ListItem key={index}>
+            <ListItemText
+              primary={game.title}
+              secondary={
+                <React.Fragment>
+                  <Typography variant="body1">{`Correct answer: ${game.correctAnswer}`}</Typography>
+                  <Typography variant="body2">{`Selected: ${game.selectedAnswer}`}</Typography>
+                </React.Fragment>
+              }
+            />
+          </ListItem>
+        ))}
+      </List>
     </Container>
   );
 };

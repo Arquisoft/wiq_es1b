@@ -36,6 +36,7 @@ app.post('/saveHistorial', async (req,res) => {
       selectedAnswer: selectedAnswer
     }
 
+    console.log(partida.selectedAnswer);
     //guardamos la partida en el array de preguntas del usuario 
     user.games.push(partida);
 
