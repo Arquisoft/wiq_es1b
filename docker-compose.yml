@@ -65,7 +65,7 @@ services:
     networks:
       - mynetwork
     environment:
-      MONGODB_URI: mongodb://mongodb:27017/usersdb
+      MONGODB_URI: mongodb://mongodb:27017/userdb
 
   gatewayservice:
     container_name: gatewayservice-${teamname:-defaultASW}
@@ -86,6 +86,7 @@ services:
       AUTH_SERVICE_URL: http://authservice:8002
       USER_SERVICE_URL: http://userservice:8001
       QUESTION_SERVICE_URL: http://questionsservice:8003
+      HISTORIAL_SERVICE_URL: http://historialservice:8004
 
   webapp:
     container_name: webapp-${teamname:-defaultASW}
