@@ -3,8 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Typography, Box, Button } from '@mui/material';
 import './stylesheets/GetQuestionCss.css';
-import { useLocation } from "react-router-dom";
-import {useNavigate} from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const GetQuestion = () => {
   //all the information about the question
@@ -12,7 +11,6 @@ const GetQuestion = () => {
   const [correctAnswer, setCorrectAnswer] = useState('');
   const [answersArray, setAnswersArray] = useState([]);
   const [isReady, setIsReady] = useState(false); 
-  const [error, setError] = useState('');
   const [answerFeedback, setAnswerFeedback] = useState('');
   const [nextQuestion, setNextQuestion] = useState(true);
   const [timer, setTimer] = useState(15); 
@@ -51,11 +49,10 @@ const GetQuestion = () => {
       setIsReady(true);
 
     } catch (error) {
-      //setError(error.response.data.error);
       if (error.response) {
-        setError(error.response.data.error);
+        console.error(error.response.data.error);
       } else {
-        setError(error.message);
+        console.error(error.message);
       }
     }
   };
@@ -73,11 +70,12 @@ const GetQuestion = () => {
   const saveHistorial = async (selectedAnswer, correct) => {
     
     const username2 = username;
-    const response = await axios.post(`${apiEndpoint}/saveHistorial`, {question, answersArray, correctAnswer, selectedAnswer, correct, username2});
+    await axios.post(`${apiEndpoint}/saveHistorial`, {question, answersArray, correctAnswer, selectedAnswer, correct, username2});
   }
 
   useEffect(() => {
     getQuestion();
+    // eslint-disable-next-line
   }, []);
 
   /**
@@ -89,11 +87,11 @@ const GetQuestion = () => {
   const checkAnswer = (selectedAnswer) => {
     //only executes the first time a button is clicked
     var correct = false;
-    if(answerFeedback == ''){
-      if(selectedAnswer == correctAnswer){
+    if(answerFeedback === ''){
+      if(selectedAnswer === correctAnswer){
         correct = true;
         setAnswerFeedback("You have won! Congratulations!");
-      }else if(timer == 0){
+      }else if(timer === 0){
         selectedAnswer = "Time out";
         setAnswerFeedback("You lost! You didn't answer in time :(");
       } else {
@@ -137,6 +135,7 @@ const GetQuestion = () => {
     } else if (timer === 0 && nextQuestion) {
       checkAnswer(null);
     }
+    // eslint-disable-next-line
   }, [isReady, timer, nextQuestion]);
 
 
