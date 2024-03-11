@@ -1,10 +1,14 @@
 // src/components/Record.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container, Typography, List, ListItem, ListItemAvatar, Avatar, ListItemText } from '@mui/material';
+import { Container, Typography, List, ListItem, ListItemText, Button } from '@mui/material';
 import { useLocation } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
+
 
 const Record = () => {
+
+  const navigate = useNavigate();
 
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
   
@@ -23,9 +27,11 @@ const Record = () => {
     const { games: userGames } = response.data;
     setRecord(userGames);
 
-    
-
   }
+
+  const showHome = () => {
+    navigate("/home", {state: {username}});
+  };
 
   /*const llamaHistorial = () => {
     getHistorialForLoggedUser();
@@ -56,6 +62,12 @@ const Record = () => {
           </ListItem>
         ))}
       </List>
+      <Button
+          variant="contained" 
+          style={{ width: '100%', fontWeight: 'bold' }}
+          onClick={showHome}>
+            Home
+          </Button>
     </Container>
   );
 };
