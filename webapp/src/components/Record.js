@@ -18,8 +18,6 @@ const Record = () => {
 
     const username2 = username;
 
-    console.log("ESTOY EN RECORDS.JS y username es " + username2);
-
     const response = await axios.post(`${apiEndpoint}/getHistorial`, { username2 });
     // Extract data from the response
     const { games: userGames } = response.data;
@@ -45,7 +43,12 @@ const Record = () => {
      
       <List>
         {record.map((game, index) => 
-
+        <ListItem key={index}>
+          <ListItemAvatar>
+            <Avatar>game.partida.title</Avatar>
+          </ListItemAvatar>
+          <ListItemText primary={`Game ${index + 1}`} secondary={`Score: ${game.score}`} />
+        </ListItem>)}
       </List>
     </Container>
   );
