@@ -11,7 +11,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   const location = useLocation();
-  const { username, createdAt } = location.state || {};
+  const { username } = location.state || {};
   
   function handleStartGame(){
     // Lógica para iniciar la partida
