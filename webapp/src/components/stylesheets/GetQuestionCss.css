@@ -1,0 +1,64 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    overflow: hidden;
+    background: linear-gradient(
+        #B3E0FF, #FFFFFF
+    );
+    min-height: 100vh;
+}
+.answers{
+    padding: 5em;
+}
+.charging{
+    position: relative;
+    height: 2em;
+    width: 4.1em;
+    margin: 1em;
+}
+.ball{
+    position: absolute;
+    height: 2em;
+    width: 2em;
+    border-radius: 50%;
+    mix-blend-mode: multiply;
+}
+.ball.one{
+    left: 0;
+    background: #008FDB;
+    animation: 0.7s one-move ease-in-out infinite;
+}
+.ball.two{
+    right: 0;
+    background: #024BAC;
+    animation: 0.7s two-move ease-in-out infinite;
+}
+@keyframes two-move{
+    25%{
+        transform: scale(0.7);
+    }
+    50%{
+        right: 1.9em;
+    }
+    75%{
+        transform: scale(1.2);
+    }
+    100%{
+        right: 0;
+    }
+}
+@keyframes one-move{
+    25%{
+        transform: scale(1.2);
+    }
+    50%{
+        left: 1.9em;
+    }
+    75%{
+        transform: scale(0.7);
+    }
+    100%{
+        left: 0;
+    }
+}

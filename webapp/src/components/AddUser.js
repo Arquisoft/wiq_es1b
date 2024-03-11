@@ -25,7 +25,10 @@ const AddUser = () => {
   };
 
   return (
-    <Container component="main" maxWidth="xs" sx={{ marginTop: 4 }}>
+    <Container component="main" maxWidth="xs" className='wrapper' sx={{ marginTop: 4 }}>
+      <Typography component="h1" variant="h5" align="center" sx={{ marginTop: 2 }}>
+            Welcome to WIQ! Create an account to start playing!
+          </Typography>
       <Typography component="h1" variant="h5">
         Add User
       </Typography>

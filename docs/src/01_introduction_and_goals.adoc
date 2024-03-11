@@ -29,8 +29,6 @@ We also expect to provide a practical software that fulfills customer expectatio
 [options="header",cols="1,2,2"]
 |===
 |Priority|Quality goal|Motivation
-| _High_ | *Privacy* | Personal data and information shouldn´t be something that just anyone can play with, so 
-                        the system must guarantee their users´ information to be safe and hidden to other people
 | _High_ | *Usability* | The application interface has to be satisfying and easy to handle to users even if their web
                         skills are zero
 | _High_ | *Maintainability* | Our software should be designed in a way that it won´t be difficult to modify, extend and
