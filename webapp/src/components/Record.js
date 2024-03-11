@@ -41,7 +41,7 @@ const Record = () => {
         Here you can see your record! All about your past games and all!
       </Typography>
      
-      <List>
+      {/*<List>
         {record.map((game, index) => 
         <ListItem key={index}>
           <ListItemAvatar>
@@ -49,7 +49,7 @@ const Record = () => {
           </ListItemAvatar>
           <ListItemText primary={`Game ${index + 1}`} secondary={`Score: ${game.score}`} />
         </ListItem>)}
-      </List>
+        </List>*/}
     </Container>
   );
 };

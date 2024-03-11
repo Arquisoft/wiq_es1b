@@ -67,8 +67,9 @@ app.post('/getHistorial', async (req, res) => {
   try {
     // Forward the getHistorial request to the historial service
     const questionResponse = await axios.post(getHistorialUrl+'/getHistorial', req.body);
-  } catch (error) {
     res.json(questionResponse.data);
+  } catch (error) {
+    
     res.status(error.response.status).json({ error: error.response.data.error });
   }
 });
