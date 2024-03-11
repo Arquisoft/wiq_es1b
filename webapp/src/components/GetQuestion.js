@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Container, Typography, Box, Button } from '@mui/material';
 import './stylesheets/GetQuestionCss.css';
 import { useLocation } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 const GetQuestion = () => {
   //all the information about the question
@@ -15,6 +16,7 @@ const GetQuestion = () => {
   const [answerFeedback, setAnswerFeedback] = useState('');
   const [nextQuestion, setNextQuestion] = useState(true);
   const [timer, setTimer] = useState(15); 
+  const navigate = useNavigate();
 
   //accedo al usuario logeado
   const location = useLocation();
@@ -56,6 +58,16 @@ const GetQuestion = () => {
         setError(error.message);
       }
     }
+  };
+
+  const showRecord = () => {
+    getQuestion();
+    navigate("/record", {state: {username}});
+  };
+
+  const showHome = () => {
+    getQuestion();
+    navigate("/home", {state: {username}});
   };
 
   const saveHistorial = async (selectedAnswer, correct) => {
@@ -176,6 +188,20 @@ const GetQuestion = () => {
           onClick={getQuestion}
           disabled={nextQuestion}>
             Next question
+          </Button>
+        <Button
+          variant="contained" 
+          style={{ width: '100%', fontWeight: 'bold' }}
+          onClick={showRecord}
+          disabled={nextQuestion}>
+            View Record
+          </Button>
+        <Button
+          variant="contained" 
+          style={{ width: '100%', fontWeight: 'bold' }}
+          onClick={showHome}
+          disabled={nextQuestion}>
+            Home
           </Button>
     </div>      
     )}

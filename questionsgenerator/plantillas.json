@@ -8,10 +8,6 @@
         "query": "SELECT ?entity ?entityLabel ?answerLabel WHERE { ?entity wdt:P31 wd:Q3624078; wdt:P1082 ?answerLabel. SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\". } }"
     },
     {
-        "title": "¿Quién es el presidente de ? ?",
-        "query": "SELECT ?entity ?entityLabel ?answer ?answerLabel WHERE { ?entity wdt:P31 wd:Q3624078; wdt:P35 ?answer. SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\". } }"
-    },
-    {
         "title": "¿Cuál es la moneda de ? ?",
         "query": "SELECT ?entity ?entityLabel ?answer ?answerLabel WHERE { ?entity wdt:P31 wd:Q3624078; wdt:P38 ?answer. SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\". } }"
     }

@@ -13,6 +13,8 @@ describe('Record component', () => {
   });
 
   it('should render succesfully', async () => {
+    mockAxios.onPost('http://localhost:8000/getHistorial').reply(200, {games: []});
+    
     render(
     <Router>
       <Record />
