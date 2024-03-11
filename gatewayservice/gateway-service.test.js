@@ -15,14 +15,6 @@ describe('Gateway Service', () => {
       return Promise.resolve({ data: { token: 'mockedToken' } });
     } else if (url.endsWith('/adduser')) {
       return Promise.resolve({ data: { userId: 'mockedUserId' } });
-    } else if (url.endsWith('/getQuestion')) {
-      return Promise.resolve({
-        data: {
-          question: "¿Cuál es la capital de España?",
-          correctAnswerLabel: "Madrid",
-          answerLabelSet: ["Estocolmo", "Madrid", "Oslo", "Copenhague"]
-        }
-      });
     } else if(url.endsWith('/saveHistorial')){
       return Promise.resolve({ data: { message: 'Historial saved' } });
     } else if(url.endsWith('/getHistorial')){
@@ -41,8 +33,17 @@ describe('Gateway Service', () => {
           }
         ],
       });
+    } else if (url.endsWith('/getQuestion')) {
+      return Promise.resolve({
+        data: {
+          question: "¿Cuál es la capital de España?",
+          correctAnswerLabel: "Madrid",
+          answerLabelSet: ["Estocolmo", "Madrid", "Oslo", "Copenhague"]
+        }
+      });
     }
   });
+
 
   // Test /login endpoint
   it('should forward login request to auth service', async () => {
@@ -67,7 +68,7 @@ describe('Gateway Service', () => {
   // Test /getQuestion endpoint
   it('should forward get question reques to question service', async () => {
     const response = await request(app)
-      .get('/getQuestion');
+      .post('/getQuestion');
 
     expect(response.statusCode).toBe(200);
     expect(response.body.question).toBe("¿Cuál es la capital de España?");
@@ -77,7 +78,7 @@ describe('Gateway Service', () => {
   // Test /getQuestion endpoint
   it('should forward save historial request to historial service', async () => {
     const response = await request(app)
-      .get('/saveHistorial')
+      .post('/saveHistorial')
       .send({ question: '¿Cuál es la capital de España?', answersArray: ['Madrid', 'Barcelona', 'Valencia', 'Sevilla'],correctAnswer: 'Madrid', selectedAnswer: 'Madrid', correct: true, username2: 'testuser'});
 
     expect(response.statusCode).toBe(200);
@@ -86,7 +87,7 @@ describe('Gateway Service', () => {
 
   it('should forward get historial request to historial service', async () => {
     const response = await request(app)
-      .get('/getHistorial')
+      .post('/getHistorial')
       .send({ username2: 'testuser'});
 
     expect(response.statusCode).toBe(200);
