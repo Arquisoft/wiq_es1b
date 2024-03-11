@@ -155,6 +155,7 @@ const GetQuestion = () => {
               {index + 1}. 
             </Typography>
             <Button 
+                data-testid={`answer${index}Button`}
                 variant="contained" 
                 sx={{ backgroundColor: 'dimgrey', fontWeight: 'bold', '&:hover': { backgroundColor: 'black' }}}
                 key={index} 
@@ -181,6 +182,7 @@ const GetQuestion = () => {
     <div>
         {/* Button to request a new question It will be disabled when the question is not answered */}
         <Button
+          data-testid="nextQuestionButton"
           variant="contained" 
           style={{ width: '100%', fontWeight: 'bold' }}
           onClick={getQuestion}

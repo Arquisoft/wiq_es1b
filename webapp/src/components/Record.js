@@ -33,10 +33,6 @@ const Record = () => {
     navigate("/home", {state: {username}});
   };
 
-  /*const llamaHistorial = () => {
-    getHistorialForLoggedUser();
-  }*/
-
   useEffect(() => {
     getHistorialForLoggedUser();
   }, []);
