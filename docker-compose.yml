@@ -77,6 +77,7 @@ services:
       - userservice
       - authservice
       - questionsservice
+      - historialservice
     ports:
       - "8000:8000"
     networks:
