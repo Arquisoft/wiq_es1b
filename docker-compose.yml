@@ -1,4 +1,4 @@
-version: '3'
+version: '4'
 services:
   mongodb:
     container_name: mongodb-${teamname:-defaultASW}
