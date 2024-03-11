@@ -38,6 +38,8 @@ jobs:
     - run: npm --prefix users/authservice install
     - run: npm --prefix users/userservice install
     - run: npm --prefix gatewayservice install
+    - run: npm --prefix questionsgenerator install
+    - run: npm --prefix historial install
     - run: npm --prefix webapp install
     - run: npm --prefix webapp run build
     - run: npm --prefix webapp run test:e2e
