@@ -20,6 +20,8 @@ describe('Record component', () => {
       <Record />
     </Router>);
 
+    await waitFor(() => screen.getByText(/Here you can see your record! All about your past games and all!/i));
+
     const linkElement = screen.getByText(/Here you can see your record! All about your past games and all!/i);
     expect(linkElement).toBeInTheDocument();
 

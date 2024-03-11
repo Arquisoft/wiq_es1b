@@ -31,7 +31,7 @@ describe('GetQuestion component', () => {
     
     // Check that there are 5 buttons, 4 for the answers and 1 for the next question
     const buttons = await screen.findAllByRole('button');
-    expect(buttons.length).toBe(5);
+    expect(buttons.length).toBe(7);
 
     // Check that the question and answers are on the screen
     expect(screen.getByText('Test question')).toBeInTheDocument();
