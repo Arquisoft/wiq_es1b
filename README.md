@@ -4,6 +4,8 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Arquisoft_wiq_es1b&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Arquisoft_wiq_es1b)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Arquisoft_wiq_es1b&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Arquisoft_wiq_es1b)
 
+http://20.26.114.153:3000/
+
 This is a base repo for the [Software Architecture course](http://arquisoft.github.io/) in [2023/2024 edition](https://arquisoft.github.io/course2324.html). 
 
 This repo is a basic application composed of several components.
