@@ -3,8 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Typography, Box, Button } from '@mui/material';
 import './stylesheets/GetQuestionCss.css';
-import { useLocation } from "react-router-dom";
-import {useNavigate} from "react-router-dom";
+import { useLocation,useNavigate } from "react-router-dom";
 
 const GetQuestion = () => {
   //all the information about the question
