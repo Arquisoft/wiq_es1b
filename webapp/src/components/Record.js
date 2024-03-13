@@ -36,6 +36,7 @@ const Record = () => {
 
   useEffect(() => {
     getHistorialForLoggedUser();
+    // eslint-disable-next-line
   }, []);
 
   return (

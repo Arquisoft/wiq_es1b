@@ -11,9 +11,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   const location = useLocation();
-  const { username, createdAt } = location.state || {};
-
-  const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
+  const { username } = location.state || {};
   
   function handleStartGame(){
     // Lógica para iniciar la partida
@@ -48,9 +46,9 @@ const Home = () => {
       <Typography component="p" variant="body1" sx={{ textAlign: 'center', marginTop: 2 }}>
         Here you can start a new game or check your record.
       </Typography>
-      <Typography component="p" variant="body1" sx={{ textAlign: 'center', marginTop: 2 }}>
+      {/*<Typography component="p" variant="body1" sx={{ textAlign: 'center', marginTop: 2 }}>
         Your account was created on {new Date(createdAt).toLocaleDateString()}.
-      </Typography>
+  </Typography>*/}
       <Stack spacing={2} sx={{ marginTop: 4 }}>
         
       <Button variant="contained" color="primary" size="large" onClick={handleStartGame}>

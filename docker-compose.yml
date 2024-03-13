@@ -39,9 +39,9 @@ services:
     environment:
       MONGODB_URI: mongodb://mongodb:27017/userdb
     
-  questionsservice:
-    container_name: questionsservice-${teamname:-defaultASW}
-    image: ghcr.io/arquisoft/wiq_es1b/questionsservice:latest
+  questionsgenerator:
+    container_name: questionsgenerator-${teamname:-defaultASW}
+    image: ghcr.io/arquisoft/wiq_es1b/questionsgenerator:latest
     profiles: ["dev", "prod"]
     build: ./questionsgenerator
     depends_on:
@@ -53,9 +53,9 @@ services:
     environment:
       MONGODB_URI: mongodb://mongodb:27017/questiondb
 
-  historialservice:
-    container_name: historialservice-${teamname:-defaultASW}
-    image: ghcr.io/arquisoft/wiq_es1b/historialservice:latest
+  historial:
+    container_name: historial-${teamname:-defaultASW}
+    image: ghcr.io/arquisoft/wiq_es1b/historial:latest
     profiles: ["dev", "prod"]
     build: ./historial
     depends_on:
@@ -76,8 +76,8 @@ services:
       - mongodb
       - userservice
       - authservice
-      - questionsservice
-      - historialservice
+      - questionsgenerator
+      - historial
     ports:
       - "8000:8000"
     networks:
@@ -85,8 +85,8 @@ services:
     environment:
       AUTH_SERVICE_URL: http://authservice:8002
       USER_SERVICE_URL: http://userservice:8001
-      QUESTION_SERVICE_URL: http://questionsservice:8003
-      HISTORIAL_SERVICE_URL: http://historialservice:8004
+      QUESTION_SERVICE_URL: http://questionsgenerator:8003
+      HISTORIAL_SERVICE_URL: http://historial:8004
 
   webapp:
     container_name: webapp-${teamname:-defaultASW}
@@ -97,6 +97,8 @@ services:
       - gatewayservice
     ports:
       - "3000:3000" 
+    environment:
+      - REACT_APP_API_ENDPOINT=http://gatewayservice:8000
 
   prometheus:
     image: prom/prometheus
