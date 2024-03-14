@@ -2,8 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Typography, List, ListItem, ListItemText, Button } from '@mui/material';
-import { useLocation } from "react-router-dom";
-import {useNavigate} from "react-router-dom";
+import { useLocation,useNavigate } from "react-router-dom";
 import './stylesheets/record.css';
 
 

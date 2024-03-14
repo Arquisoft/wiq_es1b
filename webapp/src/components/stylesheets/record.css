@@ -1,4 +1,5 @@
 body{
-    overflow: auto;
+  /*to show the scrollbar*/
+  overflow: auto;
   height: 100%;
 }
