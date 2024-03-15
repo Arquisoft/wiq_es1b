@@ -9,7 +9,6 @@ const AddUser = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [openSnackbar, setOpenSnackbar] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
 
   const addUser = async () => {
@@ -22,9 +21,6 @@ const AddUser = () => {
     }
   };
 
-  const handleCloseSnackbar = () => {
-    setOpenSnackbar(false);
-  };
   const handleCloseDialog = () => {
     setOpenDialog(false);
   };
@@ -57,15 +53,12 @@ const AddUser = () => {
       <Button variant="contained" color="primary" onClick={addUser}>
         Add User
       </Button>
-      {/*<Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar} message="User added successfully" />
-      {error && (
-        <Snackbar open={!!error} autoHideDuration={6000} onClose={() => setError('')} message={`Error: ${error}`} />
-      )}*/}
+      {/* dialogs to show sucess or error during adding a user */}
       <Dialog open={openDialog} onClose={handleCloseDialog}>
-        <DialogTitle>{"User added successfully"}</DialogTitle>
+        <DialogTitle>{"Success"}</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            You can now log in with your new account.
+            User added successfully.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -79,7 +72,7 @@ const AddUser = () => {
           <DialogTitle>{"Error"}</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              {`Error: ${error}`}
+              {`${error}`}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
