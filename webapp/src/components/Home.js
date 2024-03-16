@@ -2,8 +2,7 @@
 import React, { useState } from 'react';
 import { Container, Typography, Button, Stack } from '@mui/material';
 import logo from '../logo.svg';
-import {useNavigate} from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import './stylesheets/home.css';
 
 const Home = () => {
