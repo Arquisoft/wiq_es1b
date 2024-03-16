@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import GetQuestion from "./components/GetQuestion.js";
 import Home from "./components/Home.js";
 import Record from './components/Record.js';
+import Login from './components/Login.js';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -15,13 +16,11 @@ root.render(
   </React.StrictMode>*/
   <BrowserRouter>
     <Routes>
-      {/** Rutas públicas */}
       <Route path='/' element={<App />} />
-      
-        <Route path='/home' element={<Home />} />
-        <Route path='/getQuestion' element={<GetQuestion />} />
-        <Route path='/record' element={<Record />} />
-      
+      <Route path='/home' element={<Home />} />
+      <Route path='/getQuestion' element={<GetQuestion />} />
+      <Route path='/record' element={<Record />} />
+      <Route path='/login' element={<Login />} />
     </Routes>
   </BrowserRouter>
 );
