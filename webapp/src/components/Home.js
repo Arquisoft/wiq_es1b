@@ -8,24 +8,29 @@ import './stylesheets/home.css';
 
 const Home = () => {
   const [record, setRecord] = useState([]);
-  const [userCreatedAt, setUserCreatedAt] = useState(null);
+  //const [userCreatedAt, setUserCreatedAt] = useState(null);
   const navigate = useNavigate();
 
   const location = useLocation();
   const { username } = location.state || {};
   const { createdAt } = location.state || {};
 
-  setUserCreatedAt(new Date(createdAt));
+  //setUserCreatedAt(new Date(createdAt));
 
-  const formattedDate = `${userCreatedAt.getDate().toString().padStart(2, '0')}/${(userCreatedAt.getMonth() + 1).toString().padStart(2, '0')}/${userCreatedAt.getFullYear()}`;
+  //const formattedDate = `${createdAt.getDate().toString().padStart(2, '0')}/${(createdAt.getMonth() + 1).toString().padStart(2, '0')}/${createdAt.getFullYear()}`;
   
   function handleStartGame(){
     // Lógica para iniciar la partida
-    navigate("/getQuestion", {state: {username}});
+    navigate("/getQuestion", {state: {username, createdAt }});
   };
 
   const handleShowRecord = () => {
-    navigate("/record", {state: {username}});
+    navigate("/record", {state: {username, createdAt }});
+  };
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`;
   };
 
   return (
@@ -37,7 +42,7 @@ const Home = () => {
         Hello {username}!
       </Typography>
       <Typography component="h2" variant="h5" sx={{ textAlign: 'center' }}>
-        Your account was created on {formattedDate}!
+        Your account was created on {formatDate(createdAt)}!
       </Typography>
       <Typography component="p" variant="body1" sx={{ textAlign: 'center', marginTop: 2 }}>
         Here you can start a new game or check your record.
