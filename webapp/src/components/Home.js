@@ -41,10 +41,10 @@ const Home = () => {
       <Stack spacing={2} sx={{ marginTop: 4 }}>
         
       <Button variant="contained" color="primary" size="large" onClick={handleStartGame}>
-          Nuevo Juego
+          New Game
         </Button>
         <Button variant="contained" color="secondary" size="large" onClick={handleShowRecord}>
-          Historial
+          Record
         </Button>
 
 
