@@ -4,9 +4,9 @@ const gameSchema = new mongoose.Schema({
   correctAnswer: {
     type: String,
   },
-  incorrectAnswers: {
+  answers: {
     type: [String], // Array of strings
-    validate: [arrayLimit, '{PATH} exceeds the limit of 3'],
+    validate: [arrayLimit, '{PATH} exceeds the limit of 4'],
   },
   title: {
     type: String,
@@ -20,13 +20,14 @@ const gameSchema = new mongoose.Schema({
 });
 
 function arrayLimit(val) {
-  return val.length <= 3;
+  return val.length <= 4;
 }
 
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
+    unique: true,
   },
   password: {
     type: String,

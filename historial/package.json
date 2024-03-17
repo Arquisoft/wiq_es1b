@@ -4,7 +4,7 @@
   "description": "Historial, in charge of showing and saving the users data during the game",
   "main": "historial-service.js",
   "scripts": {
-    "start": "node --inspect historial-service.js",
+    "start": "node historial-service.js",
     "test": "jest"
   },
   "repository": {

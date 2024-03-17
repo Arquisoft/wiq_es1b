@@ -23,46 +23,20 @@ app.get('/health', (_req, res) => {
   res.json({ status: 'OK' });
 });
 
-app.post('/login', async (req, res) => {
+const handleRequest = async (url, req, res, method = 'post') => {
   try {
-    // Forward the login request to the authentication service
-    const authResponse = await axios.post(authServiceUrl+'/login', req.body);
-    res.json(authResponse.data);
+    const response = await axios[method](url, req.body);
+    res.json(response.data);
   } catch (error) {
     res.status(error.response.status).json({ error: error.response.data.error });
   }
-});
+};
 
-app.post('/adduser', async (req, res) => {
-  try {
-    // Forward the add user request to the user service
-    const userResponse = await axios.post(userServiceUrl+'/adduser', req.body);
-    res.json(userResponse.data);
-  } catch (error) {
-    res.status(error.response.status).json({ error: error.response.data.error });
-  }
-});
-
-app.post('/getQuestion', async (req, res) => {
-  try {
-    // Forward the getQuestion request to the question service
-    const questionResponse = await axios.post(getQuestionUrl+'/getQuestion');
-    res.json(questionResponse.data);
-  } catch (error) {
-    res.status(error.response.status).json({ error: error.response.data.error });
-  }
-});
-
-
-app.post('/getHistorial', async (req, res) => {
-  try {
-    // Forward the getQuestion request to the question service
-    const questionResponse = await axios.post(getHistorialUrl+'/getHistorial');
-    res.json(questionResponse.data);
-  } catch (error) {
-    res.status(error.response.status).json({ error: error.response.data.error });
-  }
-});
+app.post('/login', (req, res) => handleRequest(authServiceUrl+'/login', req, res));
+app.post('/adduser', (req, res) => handleRequest(userServiceUrl+'/adduser', req, res));
+app.post('/getQuestion', (req, res) => handleRequest(getQuestionUrl+'/getQuestion', req, res));
+app.post('/saveHistorial', (req, res) => handleRequest(getHistorialUrl+'/saveHistorial', req, res));
+app.post('/getHistorial', (req, res) => handleRequest(getHistorialUrl+'/getHistorial', req, res));
 
 // Start the gateway service
 const server = app.listen(port, () => {

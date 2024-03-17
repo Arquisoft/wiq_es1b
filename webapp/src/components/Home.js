@@ -11,13 +11,11 @@ const Home = () => {
   const navigate = useNavigate();
 
   const location = useLocation();
-  const { username, createdAt } = location.state || {};
-
-  const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
+  const { username } = location.state || {};
   
   function handleStartGame(){
     // Lógica para iniciar la partida
-    navigate("/getQuestion");
+    navigate("/getQuestion", {state: {username}});
   };
   
 
@@ -32,7 +30,7 @@ const Home = () => {
     const time = '10:30'; // Ejemplo de tiempo de juego
     const points = 100; // Ejemplo de puntos obtenidos
     addToRecord(correctAnswers, incorrectAnswers, time, points);
-    navigate("/record");
+    navigate("/record", {state: {username}});
   };
 
 
@@ -42,15 +40,15 @@ const Home = () => {
       <div className='logoContainer'>
         <img src={logo} alt="Logo" className="logo" style={{ width: '100px', position: 'relative', left: '50%', transform: 'translate(-50%, -50%)' }} />
       </div>
-     <Typography component="h1" variant="h5" align="center" sx={{ marginTop: 2 }}>
-        Welcome to the 2024 edition of the Software Architecture course
-      </Typography>
       <Typography component="h2" variant="h5" sx={{ textAlign: 'center' }}>
         Hello {username}!
       </Typography>
       <Typography component="p" variant="body1" sx={{ textAlign: 'center', marginTop: 2 }}>
-        Your account was created on {new Date(createdAt).toLocaleDateString()}.
+        Here you can start a new game or check your record.
       </Typography>
+      {/*<Typography component="p" variant="body1" sx={{ textAlign: 'center', marginTop: 2 }}>
+        Your account was created on {new Date(createdAt).toLocaleDateString()}.
+  </Typography>*/}
       <Stack spacing={2} sx={{ marginTop: 4 }}>
         
       <Button variant="contained" color="primary" size="large" onClick={handleStartGame}>

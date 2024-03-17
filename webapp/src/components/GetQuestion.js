@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Typography, Box, Button } from '@mui/material';
 import './stylesheets/GetQuestionCss.css';
+import { useLocation,useNavigate } from "react-router-dom";
+
 
 const GetQuestion = () => {
   //all the information about the question
@@ -10,10 +12,14 @@ const GetQuestion = () => {
   const [correctAnswer, setCorrectAnswer] = useState('');
   const [answersArray, setAnswersArray] = useState([]);
   const [isReady, setIsReady] = useState(false); 
-  const [error, setError] = useState('');
   const [answerFeedback, setAnswerFeedback] = useState('');
   const [nextQuestion, setNextQuestion] = useState(true);
   const [timer, setTimer] = useState(15); 
+  const navigate = useNavigate();
+
+  //accedo al usuario logeado
+  const location = useLocation();
+  const { username } = location.state || {};
 
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
@@ -44,17 +50,33 @@ const GetQuestion = () => {
       setIsReady(true);
 
     } catch (error) {
-      setError(error.response.data.error);
+      if (error.response) {
+        console.error(error.response.data.error);
+      } else {
+        console.error(error.message);
+      }
     }
   };
 
-  const saveHistorial = async (selectedAnswer) => {
-    const correct = true;
-    const response = await axios.post(`${apiEndpoint}/saveHistorial`, {question, answersArray, correctAnswer, selectedAnswer, correct});
+  const showRecord = () => {
+    getQuestion();
+    navigate("/record", {state: {username}});
+  };
+
+  const showHome = () => {
+    getQuestion();
+    navigate("/home", {state: {username}});
+  };
+
+  const saveHistorial = async (selectedAnswer, correct) => {
+    
+    const username2 = username;
+    await axios.post(`${apiEndpoint}/saveHistorial`, {question, answersArray, correctAnswer, selectedAnswer, correct, username2});
   }
 
   useEffect(() => {
     getQuestion();
+    // eslint-disable-next-line
   }, []);
 
   /**
@@ -65,15 +87,18 @@ const GetQuestion = () => {
    */
   const checkAnswer = (selectedAnswer) => {
     //only executes the first time a button is clicked
-    if(answerFeedback == ''){
-      if(selectedAnswer == correctAnswer){
+    var correct = false;
+    if(answerFeedback === ''){
+      if(selectedAnswer === correctAnswer){
+        correct = true;
         setAnswerFeedback("You have won! Congratulations!");
-        saveHistorial(selectedAnswer);
-      }else if(timer == 0){
+      }else if(timer === 0){
+        selectedAnswer = "Time out";
         setAnswerFeedback("You lost! You didn't answer in time :(");
       } else {
         setAnswerFeedback("You lost! Try again :(");
       }
+      saveHistorial(selectedAnswer, correct);
       showAnswerColors();
       setNextQuestion(false);
     }
@@ -111,6 +136,7 @@ const GetQuestion = () => {
     } else if (timer === 0 && nextQuestion) {
       checkAnswer(null);
     }
+    // eslint-disable-next-line
   }, [isReady, timer, nextQuestion]);
 
 
@@ -129,6 +155,7 @@ const GetQuestion = () => {
               {index + 1}. 
             </Typography>
             <Button 
+                data-testid={`answer${index}Button`}
                 variant="contained" 
                 sx={{ backgroundColor: 'dimgrey', fontWeight: 'bold', '&:hover': { backgroundColor: 'black' }}}
                 key={index} 
@@ -155,11 +182,26 @@ const GetQuestion = () => {
     <div>
         {/* Button to request a new question It will be disabled when the question is not answered */}
         <Button
+          data-testid="nextQuestionButton"
           variant="contained" 
           style={{ width: '100%', fontWeight: 'bold' }}
           onClick={getQuestion}
           disabled={nextQuestion}>
             Next question
+          </Button>
+        <Button
+          variant="contained" 
+          style={{ width: '100%', fontWeight: 'bold' }}
+          onClick={showRecord}
+          disabled={nextQuestion}>
+            View Record
+          </Button>
+        <Button
+          variant="contained" 
+          style={{ width: '100%', fontWeight: 'bold' }}
+          onClick={showHome}
+          disabled={nextQuestion}>
+            Home
           </Button>
     </div>      
     )}

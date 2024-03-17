@@ -1,27 +1,70 @@
 // src/components/Record.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container, Typography, List, ListItem, ListItemAvatar, Avatar, ListItemText } from '@mui/material';
+import { Container, Typography, List, ListItem, ListItemText, Button } from '@mui/material';
+import { useLocation,useNavigate } from "react-router-dom";
+import './stylesheets/record.css';
+
 
 const Record = () => {
 
+  const navigate = useNavigate();
+
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
+  
+  //accedo al usuario logeado
+  const location = useLocation();
+  const { username } = location.state || {};
+
+  const [record, setRecord] = useState([]);
+
+  const getHistorialForLoggedUser = async () => {
+
+    const username2 = username;
+
+    const response = await axios.post(`${apiEndpoint}/getHistorial`, { username2 });
+    // Extract data from the response
+    const { games: userGames } = response.data;
+    setRecord(userGames);
+
+  }
+
+  const showHome = () => {
+    navigate("/home", {state: {username}});
+  };
+
+  useEffect(() => {
+    getHistorialForLoggedUser();
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
       <Typography component="h1" variant="h5">
-        Record
+        Here you can see your record! All about your past games and all!
       </Typography>
+     
       <List>
-        {/*{record.map((entrada, index) => (
-            <ListItem key={index}>
-                <ListItemAvatar>
-                    <Avatar sx={{ bgcolor: 'primary.main' }}>{index + 1}</Avatar>
-                </ListItemAvatar>
-                <ListItemText primary={`Partida ${index + 1}`} secondary={`Preguntas acertadas: ${entrada.nCorrect}`} />
-            </ListItem>
-        ))}*/}
+        {record.map((game, index) => (
+          <ListItem key={index}>
+            <ListItemText
+              primary={game.title}
+              secondary={
+                <React.Fragment>
+                  <Typography variant="body1">{`Correct answer: ${game.correctAnswer}`}</Typography>
+                  <Typography variant="body2">{`Selected: ${game.selectedAnswer}`}</Typography>
+                </React.Fragment>
+              }
+            />
+          </ListItem>
+        ))}
       </List>
+      <Button
+          variant="contained" 
+          style={{ width: '100%', fontWeight: 'bold' }}
+          onClick={showHome}>
+            Home
+          </Button>
     </Container>
   );
 };

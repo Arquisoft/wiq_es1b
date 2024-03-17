@@ -6,6 +6,6 @@ test('renders learn react link', () => {
   render(<Router>
           <App />
         </Router>);
-  const linkElement = screen.getByText(/Welcome to the 2024 edition of the Software Architecture course/i);
+  const linkElement = screen.getByText(/Welcome to WIQ! Log in to start playing!/i);
   expect(linkElement).toBeInTheDocument();
 });
