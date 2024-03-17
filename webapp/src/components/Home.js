@@ -8,10 +8,16 @@ import './stylesheets/home.css';
 
 const Home = () => {
   const [record, setRecord] = useState([]);
+  const [userCreatedAt, setUserCreatedAt] = useState(null);
   const navigate = useNavigate();
 
   const location = useLocation();
   const { username } = location.state || {};
+  const { createdAt } = location.state || {};
+
+  setUserCreatedAt(new Date(createdAt));
+
+  const formattedDate = `${userCreatedAt.getDate().toString().padStart(2, '0')}/${(userCreatedAt.getMonth() + 1).toString().padStart(2, '0')}/${userCreatedAt.getFullYear()}`;
   
   function handleStartGame(){
     // Lógica para iniciar la partida
@@ -22,8 +28,6 @@ const Home = () => {
     navigate("/record", {state: {username}});
   };
 
-
-
   return (
     <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
       <div className='logoContainer'>
@@ -31,6 +35,9 @@ const Home = () => {
       </div>
       <Typography component="h2" variant="h5" sx={{ textAlign: 'center' }}>
         Hello {username}!
+      </Typography>
+      <Typography component="h2" variant="h5" sx={{ textAlign: 'center' }}>
+        Your account was created on {formattedDate}!
       </Typography>
       <Typography component="p" variant="body1" sx={{ textAlign: 'center', marginTop: 2 }}>
         Here you can start a new game or check your record.
