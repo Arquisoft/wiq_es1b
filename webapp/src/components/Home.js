@@ -17,19 +17,8 @@ const Home = () => {
     // Lógica para iniciar la partida
     navigate("/getQuestion", {state: {username}});
   };
-  
-
-  const addToRecord = (nCorrect, nIncorrect, time, points) => {
-    const newEntrada = { nCorrect, nIncorrect, time, points};
-    setRecord([...record, newEntrada]);
-  }
 
   const handleShowRecord = () => {
-    const correctAnswers = 5; // Ejemplo de número de respuestas correctas
-    const incorrectAnswers = 2; // Ejemplo de número de respuestas incorrectas
-    const time = '10:30'; // Ejemplo de tiempo de juego
-    const points = 100; // Ejemplo de puntos obtenidos
-    addToRecord(correctAnswers, incorrectAnswers, time, points);
     navigate("/record", {state: {username}});
   };
 
