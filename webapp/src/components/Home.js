@@ -1,23 +1,23 @@
 // src/components/Home.js
 import React, { useState } from 'react';
-import { Container, Typography, Button, Stack } from '@mui/material';
-import logo from '../logo.svg';
 import { useNavigate, useLocation } from "react-router-dom";
-import './stylesheets/home.css';
+import { Container, Typography, Button, Stack } from '@mui/material';
 import NavigationBar from './NavigationBar';
+import './stylesheets/home.css';
+import logo from '../logo.svg';
 
 const Home = () => {
+
   const [record, setRecord] = useState([]);
   const navigate = useNavigate();
 
   const location = useLocation();
   const { username } = location.state || {};
   
-  function handleStartGame(){
+  function handleStartGame() {
     // Lógica para iniciar la partida
     navigate("/getQuestion", {state: {username}});
-  };
-  
+  };  
 
   const addToRecord = (nCorrect, nIncorrect, time, points) => {
     const newEntrada = { nCorrect, nIncorrect, time, points};
@@ -33,8 +33,6 @@ const Home = () => {
     navigate("/record", {state: {username}});
   };
 
-
-
   return (
     <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
       <NavigationBar />
@@ -49,17 +47,14 @@ const Home = () => {
       </Typography>
       {/*<Typography component="p" variant="body1" sx={{ textAlign: 'center', marginTop: 2 }}>
         Your account was created on {new Date(createdAt).toLocaleDateString()}.
-  </Typography>*/}
-      <Stack spacing={2} sx={{ marginTop: 4 }}>
-        
-      <Button variant="contained" color="primary" size="large" onClick={handleStartGame}>
+      </Typography>*/}
+      <Stack spacing={2} sx={{ marginTop: 4 }}>        
+        <Button variant="contained" color="primary" size="large" onClick={handleStartGame}>
           Nuevo Juego
         </Button>
         <Button variant="contained" color="secondary" size="large" onClick={handleShowRecord}>
           Historial
         </Button>
-
-
       </Stack>
     </Container>
   );
