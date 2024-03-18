@@ -1,10 +1,10 @@
 // src/components/Record.js
 import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { Container, Typography, List, ListItem, ListItemText, Button } from '@mui/material';
-import { useLocation, useNavigate } from "react-router-dom";
+import NavigationBar from './NavigationBar';
 import './stylesheets/record.css';
-
 
 const Record = () => {
 
@@ -19,14 +19,13 @@ const Record = () => {
   const [record, setRecord] = useState([]);
 
   const getHistorialForLoggedUser = async () => {
-
     const username2 = username;
 
     const response = await axios.post(`${apiEndpoint}/getHistorial`, { username2 });
+
     // Extract data from the response
     const { games: userGames } = response.data;
     setRecord(userGames);
-
   }
 
   const showHome = () => {
@@ -40,10 +39,10 @@ const Record = () => {
 
   return (
     <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
+      <NavigationBar />
       <Typography component="h1" variant="h5">
         Here you can see your record! All about your past games and all!
-      </Typography>
-     
+      </Typography>     
       <List>
         {record.map((game, index) => (
           <ListItem key={index}>
