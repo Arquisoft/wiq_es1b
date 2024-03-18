@@ -8,32 +8,30 @@ import './stylesheets/home.css';
 
 const Home = () => {
   const [record, setRecord] = useState([]);
+  //const [userCreatedAt, setUserCreatedAt] = useState(null);
   const navigate = useNavigate();
 
   const location = useLocation();
   const { username } = location.state || {};
+  const { createdAt } = location.state || {};
+
+  //setUserCreatedAt(new Date(createdAt));
+
+  //const formattedDate = `${createdAt.getDate().toString().padStart(2, '0')}/${(createdAt.getMonth() + 1).toString().padStart(2, '0')}/${createdAt.getFullYear()}`;
   
   function handleStartGame(){
     // Lógica para iniciar la partida
-    navigate("/getQuestion", {state: {username}});
+    navigate("/getQuestion", {state: {username, createdAt }});
   };
-  
-
-  const addToRecord = (nCorrect, nIncorrect, time, points) => {
-    const newEntrada = { nCorrect, nIncorrect, time, points};
-    setRecord([...record, newEntrada]);
-  }
 
   const handleShowRecord = () => {
-    const correctAnswers = 5; // Ejemplo de número de respuestas correctas
-    const incorrectAnswers = 2; // Ejemplo de número de respuestas incorrectas
-    const time = '10:30'; // Ejemplo de tiempo de juego
-    const points = 100; // Ejemplo de puntos obtenidos
-    addToRecord(correctAnswers, incorrectAnswers, time, points);
-    navigate("/record", {state: {username}});
+    navigate("/record", {state: {username, createdAt }});
   };
 
-
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`;
+  };
 
   return (
     <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
@@ -42,6 +40,9 @@ const Home = () => {
       </div>
       <Typography component="h2" variant="h5" sx={{ textAlign: 'center' }}>
         Hello {username}!
+      </Typography>
+      <Typography component="h2" variant="h5" sx={{ textAlign: 'center' }}>
+        Your account was created on {formatDate(createdAt)}!
       </Typography>
       <Typography component="p" variant="body1" sx={{ textAlign: 'center', marginTop: 2 }}>
         Here you can start a new game or check your record.
@@ -52,10 +53,10 @@ const Home = () => {
       <Stack spacing={2} sx={{ marginTop: 4 }}>
         
       <Button variant="contained" color="primary" size="large" onClick={handleStartGame}>
-          Nuevo Juego
+          New Game
         </Button>
         <Button variant="contained" color="secondary" size="large" onClick={handleShowRecord}>
-          Historial
+          Record
         </Button>
 
 

@@ -20,6 +20,7 @@ const GetQuestion = () => {
   //accedo al usuario logeado
   const location = useLocation();
   const { username } = location.state || {};
+  const { createdAt } = location.state || {};
 
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
@@ -60,12 +61,12 @@ const GetQuestion = () => {
 
   const showRecord = () => {
     getQuestion();
-    navigate("/record", {state: {username}});
+    navigate("/record", {state: {username, createdAt }});
   };
 
   const showHome = () => {
     getQuestion();
-    navigate("/home", {state: {username}});
+    navigate("/home", {state: {username, createdAt }});
   };
 
   const saveHistorial = async (selectedAnswer, correct) => {

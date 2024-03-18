@@ -15,6 +15,7 @@ const Record = () => {
   //accedo al usuario logeado
   const location = useLocation();
   const { username } = location.state || {};
+  const { createdAt } = location.state || {};
 
   const [record, setRecord] = useState([]);
 
@@ -30,7 +31,7 @@ const Record = () => {
   }
 
   const showHome = () => {
-    navigate("/home", {state: {username}});
+    navigate("/home", {state: {username, createdAt }});
   };
 
   useEffect(() => {
