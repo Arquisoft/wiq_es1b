@@ -1,4 +1,4 @@
-// src/components/Home.js
+// src/components/AboutUs.js
 import { Container, Typography, List, ListItem, ListItemText } from '@mui/material';
 
 const AboutUs = () => {
