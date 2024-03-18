@@ -1,6 +1,7 @@
 // src/components/AboutUs.js
-import { Container, Typography, List, ListItem, ListItemText, Button } from '@mui/material';
+import React from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
+import { Container, Typography, List, ListItem, ListItemText, Button } from '@mui/material';
 import NavigationBar from './NavigationBar';
 
 const AboutUs = () => {

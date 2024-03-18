@@ -1,7 +1,7 @@
 // src/components/AboutUs.js
 import React from 'react';
-import { AppBar, Tabs, Tab } from '@mui/material';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { AppBar, Tabs, Tab } from '@mui/material';
 
 const NavigationBar = () => {
 
