@@ -1,10 +1,12 @@
 // src/components/AboutUs.js
 import { Container, Typography, List, ListItem, ListItemText } from '@mui/material';
+import NavigationBar from './NavigationBar';
 
 const AboutUs = () => {
 
   return(
     <Container component="main" maxWidth="sm">
+      <NavigationBar />
       <Typography component="h1" variant="h1" marginBottom={2}>
         About us
       </Typography>
