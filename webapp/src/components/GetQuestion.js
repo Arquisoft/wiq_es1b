@@ -1,10 +1,10 @@
 // src/components/AddUser.js
 import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { Container, Typography, Box, Button } from '@mui/material';
+import NavigationBar from './NavigationBar';
 import './stylesheets/GetQuestionCss.css';
-import { useLocation, useNavigate } from "react-router-dom";
-
 
 const GetQuestion = () => {
   //all the information about the question
@@ -69,7 +69,6 @@ const GetQuestion = () => {
   };
 
   const saveHistorial = async (selectedAnswer, correct) => {
-    
     const username2 = username;
     await axios.post(`${apiEndpoint}/saveHistorial`, {question, answersArray, correctAnswer, selectedAnswer, correct, username2});
   }
@@ -89,10 +88,10 @@ const GetQuestion = () => {
     //only executes the first time a button is clicked
     var correct = false;
     if(answerFeedback === ''){
-      if(selectedAnswer === correctAnswer){
+      if(selectedAnswer === correctAnswer) {
         correct = true;
         setAnswerFeedback("You have won! Congratulations!");
-      }else if(timer === 0){
+      } else if(timer === 0){
         selectedAnswer = "Time out";
         setAnswerFeedback("You lost! You didn't answer in time :(");
       } else {
@@ -139,15 +138,14 @@ const GetQuestion = () => {
     // eslint-disable-next-line
   }, [isReady, timer, nextQuestion]);
 
-
   return (
     <Container >
       {isReady && (
-        <div className='answers'>
+      <div className='answers'>
+        <NavigationBar />
         <Typography component="h2" variant="h5" className='question-text' style={{ fontWeight: 'bold' }}>
           {question}
         </Typography>
-
         {/* Generate buttons for the answers */}
         {answersArray.map((answer, index) => (
           <Box key={answer} sx={{ display: 'flex', alignItems: 'center', marginY: '0.6em'}}>
@@ -164,48 +162,44 @@ const GetQuestion = () => {
                   {answer}
               </Button>
           </Box>
-        ))}                
-
+        ))}               
         {/* To show the time left */}          
         <Typography component="h2" variant="h6" className='question-text'>
           <p>Time left: {timer} seconds</p>
         </Typography>
-
         {/* To show the feedback after answering */}
         <Typography component="h2" variant="h6" className='question-text'>
           <p>{answerFeedback}</p>
         </Typography>    
       </div>
-    )}     
-
-    {isReady && (
-    <div>
-        {/* Button to request a new question It will be disabled when the question is not answered */}
-        <Button
-          data-testid="nextQuestionButton"
-          variant="contained" 
-          style={{ width: '100%', fontWeight: 'bold' }}
-          onClick={getQuestion}
-          disabled={nextQuestion}>
-            Next question
-          </Button>
-        <Button
-          variant="contained" 
-          style={{ width: '100%', fontWeight: 'bold' }}
-          onClick={showRecord}
-          disabled={nextQuestion}>
-            View Record
-          </Button>
-        <Button
-          variant="contained" 
-          style={{ width: '100%', fontWeight: 'bold' }}
-          onClick={showHome}
-          disabled={nextQuestion}>
-            Home
-          </Button>
-    </div>      
-    )}
-
+      )}     
+      {isReady && (
+      <div>
+          {/* Button to request a new question It will be disabled when the question is not answered */}
+          <Button
+            data-testid="nextQuestionButton"
+            variant="contained" 
+            style={{ width: '100%', fontWeight: 'bold' }}
+            onClick={getQuestion}
+            disabled={nextQuestion}>
+              Next question
+            </Button>
+          <Button
+            variant="contained" 
+            style={{ width: '100%', fontWeight: 'bold' }}
+            onClick={showRecord}
+            disabled={nextQuestion}>
+              View Record
+            </Button>
+          <Button
+            variant="contained" 
+            style={{ width: '100%', fontWeight: 'bold' }}
+            onClick={showHome}
+            disabled={nextQuestion}>
+              Home
+            </Button>
+      </div>      
+      )}
     {/* if the question is charging shows two circles to show it is charging */}  
     {!isReady && (
       <div className='charging'>
