@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const QuestionGenerator = require('./question-generator.js');
 const Question = require('./question-model')
-const questionsData = require('./plantillas.json')
 
 const app = express();
 const port = 8003;
@@ -20,6 +19,14 @@ mongoose.connect(mongoUri)
         //inserting the templates into the clear bd
         .then(()=>{return Question.insertMany(questionsData);});
 
+app.post('/generateQuestions', async (req, res) => {
+  try{
+    const generator = new QuestionGenerator();
+    generator.generate10Questions();
+  }catch(error){
+    res.status(500).json({ error: 'Internal Server Error generating new questions' });
+  }
+});
 
 //to respond to the /getQuestion request 
 app.post('/getQuestion', async (req,res) => {
