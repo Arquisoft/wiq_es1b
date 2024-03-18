@@ -1,5 +1,5 @@
 // src/components/Home.js
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
 import { Container, Typography, Button, Stack } from '@mui/material';
 import NavigationBar from './NavigationBar';
@@ -8,7 +8,7 @@ import logo from '../logo.svg';
 
 const Home = () => {
 
-  const [record, setRecord] = useState([]);
+  //const [record, setRecord] = useState([]);
   const navigate = useNavigate();
 
   const location = useLocation();
@@ -18,7 +18,7 @@ const Home = () => {
     // Lógica para iniciar la partida
     navigate("/getQuestion", {state: {username}});
   };  
-
+/*
   const addToRecord = (nCorrect, nIncorrect, time, points) => {
     const newEntrada = { nCorrect, nIncorrect, time, points};
     setRecord([...record, newEntrada]);
@@ -32,7 +32,7 @@ const Home = () => {
     addToRecord(correctAnswers, incorrectAnswers, time, points);
     navigate("/record", {state: {username}});
   };
-
+*/
   return (
     <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
       <NavigationBar />
@@ -50,10 +50,7 @@ const Home = () => {
       </Typography>*/}
       <Stack spacing={2} sx={{ marginTop: 4 }}>        
         <Button variant="contained" color="primary" size="large" onClick={handleStartGame}>
-          Nuevo Juego
-        </Button>
-        <Button variant="contained" color="secondary" size="large" onClick={handleShowRecord}>
-          Historial
+          New Game
         </Button>
       </Stack>
     </Container>
