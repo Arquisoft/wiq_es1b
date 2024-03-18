@@ -130,8 +130,12 @@ const GetQuestion = () => {
   return (
     <Container >
       {isReady && (
-      <div className='answers'>
+      <div>
         <NavigationBar />
+      </div>
+      )}
+      {isReady && (
+      <div className='answers'>
         <Typography component="h2" variant="h5" className='question-text' style={{ fontWeight: 'bold' }}>
           {question}
         </Typography>
@@ -175,7 +179,7 @@ const GetQuestion = () => {
             </Button>
       </div>      
       )}
-    {/* if the question is charging shows two circles to show it is charging */}  
+    {/* If the question is charging shows two circles to show it is charging */}  
     {!isReady && (
       <div className='charging'>
           <div className='ball one'></div>
