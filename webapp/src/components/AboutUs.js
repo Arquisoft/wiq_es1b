@@ -1,8 +1,19 @@
 // src/components/AboutUs.js
-import { Container, Typography, List, ListItem, ListItemText } from '@mui/material';
+import { Container, Typography, List, ListItem, ListItemText, Button } from '@mui/material';
+import { useNavigate, useLocation } from "react-router-dom";
 import NavigationBar from './NavigationBar';
 
 const AboutUs = () => {
+
+  const navigate = useNavigate();
+
+  const location = useLocation();
+  const { username } = location.state || {};
+
+  const handleRecordClick = () => {
+    console.log("About us: " + username)
+    navigate("/record", {state: {username}});
+  };
 
   return(
     <Container component="main" maxWidth="sm">
@@ -33,6 +44,9 @@ const AboutUs = () => {
           <ListItemText primary="● Lucas Castro Antuña"/>
         </ListItem>
       </List>
+      <Button variant="contained" color="secondary" size="large" onClick={handleRecordClick}>
+          Historial
+        </Button>
     </Container>
   );
 };

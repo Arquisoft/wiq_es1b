@@ -1,32 +1,51 @@
 // src/components/AboutUs.js
 import React from 'react';
 import { AppBar, Tabs, Tab } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const NavigationBar = () => {
+
+  const navigate = useNavigate();
+
+  const location = useLocation();
+  const { username } = location.state || {};
+
+  const showHome = () => {
+    navigate("/home", {state: {username}});
+  };
+
+  const startGame = () => {
+    navigate("/getQuestion", {state: {username}});
+  };
+
+  const showRecord = () => {
+    console.log("Navigation Bar: " + username)
+    navigate("/record", {state: {username}});
+  };
+
+  const showAboutUs = () => {
+    navigate("/aboutUs", {state: {username}});
+  };
+
   return (
     <AppBar position="static">
       <Tabs
-        value={false} // Puedes utilizar esta propiedad para controlar la selección de la pestaña activa
+        value={false}
         aria-label="navigation tabs"
         variant="fullWidth"
       >
         <Tab label="Home" 
           sx={{ color: 'white', fontWeight: 'bold' }} 
-          component={Link} 
-          to="/home" />
+          onClick={showHome} />
         <Tab label="Game" 
           sx={{ color: 'white', fontWeight: 'bold' }} 
-          component={Link} 
-          to="/getQuestion" />
+          onClick={startGame} />
         <Tab label="Record" 
           sx={{ color: 'white', fontWeight: 'bold' }} 
-          component={Link} 
-          to="/record" />
+          onClick={showRecord} />
         <Tab label="About Us" 
           sx={{ color: 'white', fontWeight: 'bold' }} 
-          component={Link} 
-          to="/aboutUs" />
+          onClick={showAboutUs} />
       </Tabs>
     </AppBar>
   );

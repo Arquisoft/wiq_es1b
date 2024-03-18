@@ -4,6 +4,7 @@ import { Container, Typography, Button, Stack } from '@mui/material';
 import logo from '../logo.svg';
 import { useNavigate, useLocation } from "react-router-dom";
 import './stylesheets/home.css';
+import NavigationBar from './NavigationBar';
 
 const Home = () => {
   const [record, setRecord] = useState([]);
@@ -36,6 +37,7 @@ const Home = () => {
 
   return (
     <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
+      <NavigationBar />
       <div className='logoContainer'>
         <img src={logo} alt="Logo" className="logo" style={{ width: '100px', position: 'relative', left: '50%', transform: 'translate(-50%, -50%)' }} />
       </div>
