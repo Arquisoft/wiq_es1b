@@ -14,12 +14,14 @@ const GetQuestion = () => {
   const [isReady, setIsReady] = useState(false); 
   const [answerFeedback, setAnswerFeedback] = useState('');
   const [nextQuestion, setNextQuestion] = useState(true);
+  //timer of the game
   const [timer, setTimer] = useState(15); 
+  //count of questions in the game
+  const [questionCount, setQuestionCount] = useState(0);
 
   //accedo al usuario logeado
   const location = useLocation();
   const { username } = location.state || {};
-  const { createdAt } = location.state || {};
 
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
@@ -40,6 +42,9 @@ const GetQuestion = () => {
 
       // Extract data from the response, the question, the correct and the incorrect answers
       const { question: q, correctAnswerLabel:correctAnswer, answerLabelSet:answers } = response.data;
+
+      //increment the count of questions
+      setQuestionCount(prevCount => prevCount + 1);
 
       //save the data 
       setQuestion(q);
@@ -76,7 +81,7 @@ const GetQuestion = () => {
    */
   const checkAnswer = (selectedAnswer) => {
     //only executes the first time a button is clicked
-    var correct = false;
+    let correct = false;
     if(answerFeedback === ''){
       if(selectedAnswer === correctAnswer) {
         correct = true;
@@ -129,7 +134,9 @@ const GetQuestion = () => {
   }, [isReady, timer, nextQuestion]);
 
   return (
-    <Container >
+    (questionCount < 10 ? (
+
+      <Container >
       {isReady && (
       <div>
         <NavigationBar />
@@ -188,6 +195,21 @@ const GetQuestion = () => {
       </div>
     )}
   </Container>
+
+    ) : (
+      <div>
+        <div>
+        <NavigationBar />
+        </div>
+        <Typography component="h2" variant="h5" className='question-text' style={{ fontWeight: 'bold' }}>
+          {question}
+        </Typography>
+      </div>
+      
+      
+    )) 
+
+    
   );
 };
 
