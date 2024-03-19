@@ -1,7 +1,8 @@
 // src/components/AddUser.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Container, Typography, TextField, Button, Snackbar } from '@mui/material';
+import { Container, Typography, TextField, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';
+import {useNavigate} from "react-router-dom";
 
 const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
@@ -9,19 +10,23 @@ const AddUser = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
+  const navigate = useNavigate();
 
   const addUser = async () => {
     try {
       await axios.post(`${apiEndpoint}/adduser`, { username, password });
-      setOpenSnackbar(true);
+      
+      setOpenDialog(true);
+      
     } catch (error) {
       setError(error.response.data.error);
     }
   };
 
-  const handleCloseSnackbar = () => {
-    setOpenSnackbar(false);
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+    navigate('/login');
   };
 
   return (
@@ -52,9 +57,34 @@ const AddUser = () => {
       <Button variant="contained" color="primary" onClick={addUser}>
         Add User
       </Button>
-      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar} message="User added successfully" />
+      {/* dialogs to show sucess or error during adding a user */}
+      <Dialog open={openDialog} onClose={handleCloseDialog}>
+        <DialogTitle>{"Success"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            User added successfully.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialog} color="primary">
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
       {error && (
-        <Snackbar open={!!error} autoHideDuration={6000} onClose={() => setError('')} message={`Error: ${error}`} />
+        <Dialog open={!!error} onClose={() => setError('')}>
+          <DialogTitle>{"Error"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              {`${error}`}
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setError('')} color="primary">
+              Close
+            </Button>
+          </DialogActions>
+        </Dialog>
       )}
     </Container>
   );
