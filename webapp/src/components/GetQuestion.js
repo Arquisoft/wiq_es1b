@@ -58,16 +58,6 @@ const GetQuestion = () => {
     }
   };
 
-  const showRecord = () => {
-    getQuestion();
-    navigate("/record", {state: {username, createdAt }});
-  };
-
-  const showHome = () => {
-    getQuestion();
-    navigate("/home", {state: {username, createdAt }});
-  };
-
   const saveHistorial = async (selectedAnswer, correct) => {
     const username2 = username;
     await axios.post(`${apiEndpoint}/saveHistorial`, {question, answersArray, correctAnswer, selectedAnswer, correct, username2});

@@ -27,9 +27,6 @@ const Record = () => {
     setRecord(userGames);
   }
 
-  const showHome = () => {
-    navigate("/home", {state: {username, createdAt }});
-  };
 
   useEffect(() => {
     getHistorialForLoggedUser();

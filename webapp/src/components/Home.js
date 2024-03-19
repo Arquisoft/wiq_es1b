@@ -7,24 +7,15 @@ import './stylesheets/home.css';
 import logo from '../logo.svg';
 
 const Home = () => {
-  const [record, setRecord] = useState([]);
   const navigate = useNavigate();
 
   const location = useLocation();
   const { username } = location.state || {};
   const { createdAt } = location.state || {};
 
-  //setUserCreatedAt(new Date(createdAt));
-
-  //const formattedDate = `${createdAt.getDate().toString().padStart(2, '0')}/${(createdAt.getMonth() + 1).toString().padStart(2, '0')}/${createdAt.getFullYear()}`;
-  
   function handleStartGame() {
     // Lógica para iniciar la partida
     navigate("/getQuestion", {state: {username, createdAt }});
-  };
-
-  const handleShowRecord = () => {
-    navigate("/record", {state: {username, createdAt }});
   };
 
   const formatDate = (dateString) => {
