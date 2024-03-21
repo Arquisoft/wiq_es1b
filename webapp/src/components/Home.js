@@ -35,7 +35,7 @@ const Home = () => {
         Hello {username}!
       </Typography>
       <Typography component="h2" variant="h5" sx={{ textAlign: 'center' }}>
-        Your account was created on {formatDate(createdAt)}!
+        Your account was created on {formatDate(createdAt)}
       </Typography>
       <Typography component="p" variant="body1" sx={{ textAlign: 'center', marginTop: 2 }}>
         Here you can start a new game or check your record.
