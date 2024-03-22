@@ -19,7 +19,6 @@ const NavigationBar = () => {
   };
 
   const showRecord = () => {
-    console.log("Navigation Bar: " + username)
     navigate("/record", {state: {username}});
   };
 

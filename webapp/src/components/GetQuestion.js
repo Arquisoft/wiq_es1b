@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from "react-router-dom";
 import axios from 'axios';
 import { Container, Typography, Box, Button } from '@mui/material';
-import NavigationBar from './NavigationBar';
 import './stylesheets/GetQuestionCss.css';
 
 const GetQuestion = () => {
@@ -130,11 +129,6 @@ const GetQuestion = () => {
 
   return (
     <Container >
-      {isReady && (
-      <div>
-        <NavigationBar />
-      </div>
-      )}
       {isReady && (
       <div className='answers'>
         <Typography component="h2" variant="h5" className='question-text' style={{ fontWeight: 'bold' }}>

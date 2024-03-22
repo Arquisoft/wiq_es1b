@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from "react-router-dom";
 import axios from 'axios';
 import { Container, Typography, List, ListItem, ListItemText } from '@mui/material';
-import NavigationBar from './NavigationBar';
 import './stylesheets/record.css';
 
 const Record = () => {
@@ -35,7 +34,6 @@ const Record = () => {
 
   return (
     <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
-      <NavigationBar />
       <Typography component="h1" variant="h5">
         Here you can see your record! All about your past games and all!
       </Typography>     

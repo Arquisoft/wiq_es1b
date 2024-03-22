@@ -9,6 +9,7 @@ import Home from "./components/Home.js";
 import Record from './components/Record.js';
 import Login from './components/Login.js';
 import AboutUs from './components/AboutUs.js';
+import NavigationBar from './components/NavigationBar';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,6 +17,7 @@ root.render(
     <App />
   </React.StrictMode>*/
   <BrowserRouter>
+    <NavigationBar /> 
     <Routes>
       <Route path='/' element={<App />} />
       <Route path='/home' element={<Home />} />
