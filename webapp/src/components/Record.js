@@ -33,7 +33,7 @@ const Record = () => {
   }, []);
 
   return (
-    <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
+    <Container component="main" maxWidth="sm" sx={{ marginTop: 10 }}>
       <Typography component="h1" variant="h5">
         Here you can see your record! All about your past games and all!
       </Typography>     
