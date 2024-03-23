@@ -25,7 +25,7 @@ const Home = () => {
 
 
   return (
-    <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
+    <Container component="main" maxWidth="md" sx={{ marginTop: 10 }}>
       <div className='logoContainer'>
         <img src={logo} alt="Logo" className="logo" style={{ width: '100px', position: 'relative', left: '50%', transform: 'translate(-50%, -50%)' }} />
       </div>

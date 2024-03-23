@@ -5,7 +5,7 @@ import { Container, Typography, List, ListItem, ListItemText } from '@mui/materi
 const AboutUs = () => {
 
   return(
-    <Container component="main" maxWidth="sm">
+    <Container component="main" maxWidth="md" sx={{ marginTop: 10 }}>
       <Typography component="h1" variant="h1" marginBottom={2}>
         About us
       </Typography>
