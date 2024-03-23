@@ -9,21 +9,22 @@ const NavigationBar = () => {
 
   const location = useLocation();
   const { username } = location.state || {};
+  const { createdAt } = location.state || {};
 
   const showHome = () => {
-    navigate("/home", {state: {username}});
+    navigate("/home", {state: {username, createdAt }});
   };
 
   const startGame = () => {
-    navigate("/getQuestion", {state: {username}});
+    navigate("/getQuestion", {state: {username, createdAt }});
   };
 
   const showRecord = () => {
-    navigate("/record", {state: {username}});
+    navigate("/record", {state: {username, createdAt }});
   };
 
   const showAboutUs = () => {
-    navigate("/aboutUs", {state: {username}});
+    navigate("/aboutUs", {state: {username, createdAt }});
   };
 
   return (
