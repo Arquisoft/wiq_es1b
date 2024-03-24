@@ -1,4 +1,4 @@
-// src/components/AddUser.js
+// src/components/GetQuestion.js
 import React, { useState, useEffect } from 'react';
 import { useLocation } from "react-router-dom";
 import axios from 'axios';

@@ -1,4 +1,4 @@
-// src/components/AboutUs.js
+// src/components/NavigationBar.js
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { AppBar, Tabs, Tab } from '@mui/material';
@@ -12,15 +12,21 @@ const NavigationBar = () => {
   const { createdAt } = location.state || {};
 
   const showHome = () => {
-    navigate("/home", {state: {username, createdAt }});
+    if (username != undefined) {
+      navigate("/home", {state: {username, createdAt }});
+    }
   };
 
   const startGame = () => {
-    navigate("/getQuestion", {state: {username, createdAt }});
+    if (username != undefined) {
+      navigate("/getQuestion", {state: {username, createdAt }});
+    }
   };
 
   const showRecord = () => {
-    navigate("/record", {state: {username, createdAt }});
+    if (username != undefined) {
+      navigate("/record", {state: {username, createdAt }});
+    }
   };
 
   const showAboutUs = () => {
