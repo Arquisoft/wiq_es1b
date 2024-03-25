@@ -25,10 +25,28 @@ function validateRequiredFields(req, requiredFields) {
     }
 }
 
+//Function to validate that the password is strong
+function validateStrongPassword(password) {
+    if (password.length < 8) {
+        throw new Error('Password must be at least 8 characters long');
+    }
+    if (!password.match(/[a-z]/) || !password.match(/[A-Z]/) || !password.match(/\d/) || !password.match(/[!@#$%^&*]/)) {
+      throw new Error('Password must contain at least one lowercase letter, one uppercase letter, one digit, and one symbol');
+    }
+}
+
 app.post('/adduser', async (req, res) => {
     try {
         // Check if required fields are present in the request body
         validateRequiredFields(req, ['username', 'password']);
+
+        validateStrongPassword(req.body.password);
+
+        //check if the username is already taken by other user in the database
+        const existingUser = await User.findOne({ username: req.body.username });
+        if (existingUser) {
+            return res.status(400).json({ error: 'Username already exists' });
+        }
 
         // Encrypt the password before saving it
         const hashedPassword = await bcrypt.hash(req.body.password, 10);

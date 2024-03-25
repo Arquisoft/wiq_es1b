@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import {BrowserRouter, Routes, Route} from "react-router-dom";
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import GetQuestion from "./components/GetQuestion.js";
 import Home from "./components/Home.js";
 import Record from './components/Record.js';
-import {BrowserRouter, Routes, Route} from "react-router-dom";
+import Login from './components/Login.js';
+import AboutUs from './components/AboutUs.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -15,13 +17,12 @@ root.render(
   </React.StrictMode>*/
   <BrowserRouter>
     <Routes>
-      {/** Rutas públicas */}
       <Route path='/' element={<App />} />
-      
-        <Route path='/home' element={<Home />} />
-        <Route path='/getQuestion' element={<GetQuestion />} />
-        <Route path='/record' element={<Record />} />
-      
+      <Route path='/home' element={<Home />} />
+      <Route path='/getQuestion' element={<GetQuestion />} />
+      <Route path='/record' element={<Record />} />
+      <Route path='/login' element={<Login />} />
+      <Route path='/aboutUs' element={<AboutUs />} />
     </Routes>
   </BrowserRouter>
 );
