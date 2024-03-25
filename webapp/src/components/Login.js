@@ -5,6 +5,7 @@ import { Container, Typography, TextField, Button, Snackbar } from '@mui/materia
 import { useNavigate } from "react-router-dom";
 import './stylesheets/login.css';
 import '../index.css';
+import './Background';
 
 const Login = (onLoginSuccess) => {
   const [username, setUsername] = useState('');
@@ -50,7 +51,7 @@ const Login = (onLoginSuccess) => {
 
   return (
     <div>
-      <Container component="main" className='wrapper' maxWidth="sm" sx={{ marginTop: 4 }}>
+      <Container component="main" className='tsparticles' maxWidth="sm" sx={{ marginTop: 4 }}>
       
         <div>
           <Typography component="h1" variant="h5" align="center" sx={{ marginTop: 2 }}>
