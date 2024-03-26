@@ -1,13 +1,11 @@
 // src/components/AboutUs.js
 import React from 'react';
 import { Container, Typography, List, ListItem, ListItemText } from '@mui/material';
-import NavigationBar from './NavigationBar';
 
 const AboutUs = () => {
 
   return(
-    <Container component="main" maxWidth="sm">
-      <NavigationBar />
+    <Container component="main" maxWidth="md" sx={{ margin: 8 }}>
       <Typography component="h1" variant="h1" marginBottom={2}>
         About us
       </Typography>

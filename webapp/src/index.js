@@ -1,3 +1,4 @@
+// src/index.js
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
@@ -9,6 +10,9 @@ import Home from "./components/Home.js";
 import Record from './components/Record.js';
 import Login from './components/Login.js';
 import AboutUs from './components/AboutUs.js';
+import NavigationBar from './components/NavigationBar';
+import Footer from './components/Footer';
+import Help from './components/Help.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,6 +20,7 @@ root.render(
     <App />
   </React.StrictMode>*/
   <BrowserRouter>
+    <NavigationBar /> 
     <Routes>
       <Route path='/' element={<App />} />
       <Route path='/home' element={<Home />} />
@@ -23,7 +28,9 @@ root.render(
       <Route path='/record' element={<Record />} />
       <Route path='/login' element={<Login />} />
       <Route path='/aboutUs' element={<AboutUs />} />
+      <Route path='/help' element={<Help />} />
     </Routes>
+    <Footer />
   </BrowserRouter>
 );
 
