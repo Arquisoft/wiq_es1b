@@ -17,12 +17,6 @@ const NavigationBar = () => {
     }
   };
 
-  const startGame = () => {
-    if (username !== undefined) {
-      navigate("/getQuestion", {state: {username, createdAt }});
-    }
-  };
-
   const showRecord = () => {
     if (username !== undefined) {
       navigate("/record", {state: {username, createdAt }});
@@ -43,9 +37,6 @@ const NavigationBar = () => {
         <Tab label="Home" 
           sx={{ color: 'white', fontWeight: 'bold' }} 
           onClick={showHome} />
-        <Tab label="Game" 
-          sx={{ color: 'white', fontWeight: 'bold' }} 
-          onClick={startGame} />
         <Tab label="Record" 
           sx={{ color: 'white', fontWeight: 'bold' }} 
           onClick={showRecord} />
