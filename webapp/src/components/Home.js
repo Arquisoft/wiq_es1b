@@ -5,7 +5,6 @@ import { Container, Typography, Button, Stack } from '@mui/material';
 import NavigationBar from './NavigationBar';
 import './stylesheets/home.css';
 import logo from '../logo.svg';
-import Background from './Background';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -29,7 +28,6 @@ const Home = () => {
   return (
     <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
       <NavigationBar />
-      <Background />
       <div className='logoContainer'>
         <img src={logo} alt="Logo" className="logo" style={{ width: '100px', position: 'relative', left: '50%', transform: 'translate(-50%, -50%)' }} />
       </div>
