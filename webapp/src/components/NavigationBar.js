@@ -23,6 +23,10 @@ const NavigationBar = () => {
     }
   };
 
+  const showHelp = () => {
+    navigate("/help", {state: {username, createdAt }});
+  };
+
   const showAboutUs = () => {
     navigate("/aboutUs", {state: {username, createdAt }});
   };
@@ -40,6 +44,9 @@ const NavigationBar = () => {
         <Tab label="Record" 
           sx={{ color: 'white', fontWeight: 'bold' }} 
           onClick={showRecord} />
+          <Tab label="Help" 
+          sx={{ color: 'white', fontWeight: 'bold' }} 
+          onClick={showHelp} />
         <Tab label="About Us" 
           sx={{ color: 'white', fontWeight: 'bold' }} 
           onClick={showAboutUs} />
