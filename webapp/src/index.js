@@ -9,7 +9,6 @@ import Home from "./components/Home.js";
 import Record from './components/Record.js';
 import Login from './components/Login.js';
 import AboutUs from './components/AboutUs.js';
-import Background from './components/Background.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
