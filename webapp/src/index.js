@@ -12,6 +12,7 @@ import Login from './components/Login.js';
 import AboutUs from './components/AboutUs.js';
 import NavigationBar from './components/NavigationBar';
 import Footer from './components/Footer';
+import Help from './components/Help.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -27,6 +28,7 @@ root.render(
       <Route path='/record' element={<Record />} />
       <Route path='/login' element={<Login />} />
       <Route path='/aboutUs' element={<AboutUs />} />
+      <Route path='/help' element={<Help />} />
     </Routes>
     <Footer />
   </BrowserRouter>
