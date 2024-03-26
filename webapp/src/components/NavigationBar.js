@@ -12,19 +12,19 @@ const NavigationBar = () => {
   const { createdAt } = location.state || {};
 
   const showHome = () => {
-    if (username != undefined) {
+    if (username !== undefined) {
       navigate("/home", {state: {username, createdAt }});
     }
   };
 
   const startGame = () => {
-    if (username != undefined) {
+    if (username !== undefined) {
       navigate("/getQuestion", {state: {username, createdAt }});
     }
   };
 
   const showRecord = () => {
-    if (username != undefined) {
+    if (username !== undefined) {
       navigate("/record", {state: {username, createdAt }});
     }
   };

@@ -11,6 +11,7 @@ import Record from './components/Record.js';
 import Login from './components/Login.js';
 import AboutUs from './components/AboutUs.js';
 import NavigationBar from './components/NavigationBar';
+import Footer from './components/Footer';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -27,6 +28,7 @@ root.render(
       <Route path='/login' element={<Login />} />
       <Route path='/aboutUs' element={<AboutUs />} />
     </Routes>
+    <Footer />
   </BrowserRouter>
 );
 
