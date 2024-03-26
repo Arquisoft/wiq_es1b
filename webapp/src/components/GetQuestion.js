@@ -127,7 +127,7 @@ const GetQuestion = () => {
   }, [isReady, timer, nextQuestion]);
 
   return (
-    <Container component="main" maxWidth="md" sx={{ marginTop: 10 }}>
+    <Container component="main" maxWidth="md" sx={{ margin: 8 }}>
       {isReady && (
       <div className='answers'>
         <Typography component="h2" variant="h5" className='question-text' style={{ fontWeight: 'bold' }}>

@@ -34,7 +34,7 @@ const NavigationBar = () => {
   };
 
   return (
-    <AppBar position="absolute">
+    <AppBar position="fixed">
       <Tabs
         value={false}
         aria-label="navigation tabs"
