@@ -31,7 +31,7 @@ describe('GetQuestion component', () => {
     
     // Check that there are 5 buttons, 4 for the answers and 1 for the next question
     const buttons = await screen.findAllByRole('button');
-    expect(buttons.length).toBe(7);
+    expect(buttons.length).toBe(5);
 
     // Check that the question and answers are on the screen
     expect(screen.getByText('Test question')).toBeInTheDocument();
@@ -51,7 +51,7 @@ describe('GetQuestion component', () => {
     await waitFor(() => screen.getByText('Test question'));
 
     // Click the correct answer
-    fireEvent.click(screen.getByText('Test correct answer')); 
+    fireEvent.click(screen.getByText('Test correct answer'));  
 
     // Wait for feedback to be rendered
     await waitFor(() => expect(screen.getByText('You have won! Congratulations!')).toBeInTheDocument()); 
@@ -73,18 +73,25 @@ describe('GetQuestion component', () => {
     await waitFor(() => expect(screen.getByText('You lost! Try again :(')).toBeInTheDocument()); 
   });
 
-});
-/*
-jest.mock('axios');
+  it('Should play and let the time end without answering the question', async () => {    
+    //fake timers to run out the real timer of the game
+    jest.useFakeTimers();
 
-  beforeEach(() => {
-      axios.post.mockResolvedValue({
-        data: {
-          question: 'What is the capital of France?',
-          correctAnswerLabel: 'Paris',
-          answerLabelSet: ['Paris', 'London', 'Madrid', 'Lisbon']
-        }
-      });
+    render(
+    <Router>
+      <Question />
+    </Router>);
+  
+    // Wait for the question to appear in the document
+    await waitFor(() => screen.getByText('Test question'));
+
+    // we advance the timer 15 seconds
+    act(() => {
+      jest.advanceTimersByTime(15000);
     });
-    expect(screen.getByTestId('answer0Button')).toBeInTheDocument();
-*/
+
+    // Wait for feedback to be rendered
+    await waitFor(() => expect(screen.getByText("You lost! You didn't answer in time :(")).toBeInTheDocument()); 
+});
+
+});
