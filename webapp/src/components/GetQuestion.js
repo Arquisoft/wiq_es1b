@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Container, Typography, Box, Button } from '@mui/material';
 import NavigationBar from './NavigationBar';
 import './stylesheets/GetQuestionCss.css';
+const TOTAL_QUESTIONS = 10;
 
 const GetQuestion = () => {
   //all the information about the question
@@ -134,7 +135,7 @@ const GetQuestion = () => {
   }, [isReady, timer, nextQuestion]);
 
   return (
-    (questionCount < 10 ? (
+    (questionCount <= TOTAL_QUESTIONS ? (
 
       <Container >
       {isReady && (
@@ -202,7 +203,7 @@ const GetQuestion = () => {
         <NavigationBar />
         </div>
         <Typography component="h2" variant="h5" className='question-text' style={{ fontWeight: 'bold' }}>
-          {question}
+          Finished the game! You have answered all 10 questions, you can see them in the record or go home to start a new game.
         </Typography>
       </div>
       
