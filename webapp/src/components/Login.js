@@ -50,7 +50,9 @@ const Login = (onLoginSuccess) => {
 
   return (
     <Container component="main" className='wrapper' maxWidth="sm" sx={{ marginTop: 4 }}>
-      
+        <div className='video-background'>
+          <video src='/video-background.mp4' autoPlay loop muted data-testid="login-video"/>
+        </div>
         <div>
           <Typography component="h1" variant="h5" align="center" sx={{ marginTop: 2 }}>
             Welcome to WIQ! Log in to start playing!
