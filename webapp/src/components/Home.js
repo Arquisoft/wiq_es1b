@@ -28,6 +28,9 @@ const Home = () => {
   return (
     <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
       <NavigationBar />
+      <div className='video-background'>
+        <video src='/video-background.mp4' autoPlay loop muted data-testid="home-video"/>
+      </div>
       <div className='logoContainer'>
         <img src={logo} alt="Logo" className="logo" style={{ width: '100px', position: 'relative', left: '50%', transform: 'translate(-50%, -50%)' }} />
       </div>
