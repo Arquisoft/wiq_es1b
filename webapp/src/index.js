@@ -13,20 +13,23 @@ import AboutUs from './components/AboutUs.js';
 import NavigationBar from './components/NavigationBar';
 import Footer from './components/Footer';
 import Help from './components/Help.js';
+import { Box } from '@mui/material';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <NavigationBar /> 
-    <Routes>
-      <Route path='/' element={<App />} />
-      <Route path='/home' element={<Home />} />
-      <Route path='/getQuestion' element={<GetQuestion />} />
-      <Route path='/record' element={<Record />} />
-      <Route path='/login' element={<Login />} />
-      <Route path='/aboutUs' element={<AboutUs />} />
-      <Route path='/help' element={<Help />} />
-    </Routes>
+    <Box sx={{ paddingTop: '64px' }}>
+      <NavigationBar /> 
+      <Routes>
+        <Route path='/' element={<App />} />
+        <Route path='/home' element={<Home />} />
+        <Route path='/getQuestion' element={<GetQuestion />} />
+        <Route path='/record' element={<Record />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/aboutUs' element={<AboutUs />} />
+        <Route path='/help' element={<Help />} />
+      </Routes>
+    </Box>
     <Footer />
   </BrowserRouter>
 );

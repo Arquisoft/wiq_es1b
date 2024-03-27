@@ -31,7 +31,15 @@ defineFeature(feature, test => {
     given('An unregistered user', async () => {
       username = "pablo"
       password = "pa"
-      await expect(page).toClick("button", { text: "Don't have an account? Register here." });
+      await page.waitForSelector("button[name=\"gotoregister\"]");
+
+      // Scroll to the button
+      await page.evaluate(() => {
+        const button = document.querySelector("button[name=\"gotoregister\"]");
+        button.scrollIntoView();
+      });
+    
+      await page.click("button[name=\"gotoregister\"]");
     });
 
     when('I fill the data in the form with an invalid password length and press submit', async () => {

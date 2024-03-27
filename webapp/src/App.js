@@ -13,7 +13,7 @@ function App() {
   };
 
   return (
-    <Container component="main" maxWidth="xs">  
+    <Container component="main" className='mainCont' maxWidth="xs">  
       <CssBaseline />
       {showLogin ? <Login /> : <AddUser />}
       <Typography component="div" align="center" sx={{ marginTop: 2 }}>        
