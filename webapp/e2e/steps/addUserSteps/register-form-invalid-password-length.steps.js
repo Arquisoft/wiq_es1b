@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 const { defineFeature, loadFeature }=require('jest-cucumber');
 const setDefaultOptions = require('expect-puppeteer').setDefaultOptions
-const feature = loadFeature('./features/register-form-invalid-password-signs-capitalletter.feature');
+const feature = loadFeature('./features/addUserFeatures/register-form-invalid-password-length.feature');
 
 let page;
 let browser;
@@ -23,25 +23,25 @@ defineFeature(feature, test => {
       .catch(() => {});
   });
 
-  test('The user is not registered in the site ant tries to register with invalid password letters', ({given,when,then}) => {
+  test('The user is not registered in the site ant tries to register with invalid password length', ({given,when,then}) => {
     
     let username;
     let password;
 
     given('An unregistered user', async () => {
       username = "pablo"
-      password = "paaaaaaablowsss"
+      password = "pa"
       await expect(page).toClick("button", { text: "Don't have an account? Register here." });
     });
 
-    when('I fill the data in the form with an invalid password letters and press submit', async () => {
+    when('I fill the data in the form with an invalid password length and press submit', async () => {
       await expect(page).toFill('input[name="username"]', username);
       await expect(page).toFill('input[name="password"]', password);
       await expect(page).toClick('button', { text: 'Add User' })
     });
 
     then('A error message should be shown in the screen', async () => {
-        await expect(page).toMatchElement("div", { text: "Password must contain at least one lowercase letter, one uppercase letter, one digit, and one symbol" });
+        await expect(page).toMatchElement("div", { text: "Password must be at least 8 characters long" });
     });
   })
 
