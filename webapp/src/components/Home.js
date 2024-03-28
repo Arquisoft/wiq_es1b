@@ -28,7 +28,6 @@ const Home = () => {
       <div className='video-background'>
         <video src='/clouds-background.mp4' autoPlay loop muted data-testid="home-video"/>
       </div>
-      <NavigationBar />
       <div className='logoContainer'>
         <img src={logo} alt="Logo" className="logo" style={{ width: '100px', position: 'relative', left: '50%', transform: 'translate(-50%, -50%)' }} />
       </div>
