@@ -49,6 +49,9 @@ app.post('/getQuestion', async (req,res) => {
 
     //randomly choose the correct answer
     numberOfCorrectAnswer = Math.floor(Math.random() * numOptions);
+    while (/^Q\d+$/.test(questionData[numberOfCorrectAnswer].answerLabel.value)) {
+      numberOfCorrectAnswer = Math.floor(Math.random() * numOptions);
+    }
     //get the label for the question and que right answer
     correctLabel = questionData[numberOfCorrectAnswer].entityLabel.value;
     correctAnswerLabel = questionData[numberOfCorrectAnswer].answerLabel.value;
@@ -61,7 +64,7 @@ app.post('/getQuestion', async (req,res) => {
 
       //check que number selected is not the same as the correct answer
       //or has already been chose for other wrong answer
-      while (questionData[numberChosen].answerLabel.value === correctAnswerLabel || incorrectAnswersLabels.has(questionData[numberChosen].answerLabel.value)) {
+      while (/^Q\d+$/.test(questionData[numberChosen].answerLabel.value)  ||questionData[numberChosen].answerLabel.value === correctAnswerLabel || incorrectAnswersLabels.has(questionData[numberChosen].answerLabel.value)) {
             numberChosen = Math.floor(Math.random() * numOptions);
       }
       //get the wrong answer
