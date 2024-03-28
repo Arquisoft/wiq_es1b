@@ -130,6 +130,9 @@ const GetQuestion = () => {
 
   return (
     <Container >
+      <div className='video-background'>
+        <video src='/clouds-background.mp4' autoPlay loop muted data-testid="home-video"/>
+      </div>
       {isReady && (
       <div>
         <NavigationBar />
