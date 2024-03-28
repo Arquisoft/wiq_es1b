@@ -28,7 +28,15 @@
         "query": "SELECT ?entity ?entityLabel ?answer ?answerLabel WHERE {?entity wdt:P31 wd:Q476028; wdt:P115 ?answer. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}"
     },
     {
-        "title": "What is the flag of??",
+        "title": "What is the flag of ??",
         "query": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q6256;wdt:P41 ?answerLabel.SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}"
+    },
+    {
+        "title": "What is the logo of ??",
+        "query": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q4830453; wdt:P154 ?answerLabel; wdt:P571 ?foundingDate.FILTER(YEAR(?foundingDate) >= 1990)SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}"
+    },
+    {
+        "title": "What is the logo of ??",
+        "query": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q3231690;wdt:P154 ?answerLabel.SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}"
     }
 ]
