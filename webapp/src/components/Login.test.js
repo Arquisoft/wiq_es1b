@@ -59,9 +59,9 @@ describe('Login component', () => {
     // Trigger the login button click
     fireEvent.click(loginButton);
 
-    // Wait for the error Snackbar to be open
+    // Wait for the error Dialog to be open
     await waitFor(() => {
-      expect(screen.getByText(/Error: Unauthorized/i)).toBeInTheDocument();
+      expect(screen.getByText(/Unauthorized/i)).toBeInTheDocument();
     });
 
     // Verify that the user information is not displayed
