@@ -136,9 +136,7 @@ const GetQuestion = () => {
   return (
     (questionCount <= TOTAL_QUESTIONS ? (
         <Container component="main" maxWidth="md" sx={{ margin: 8 }}>
-          <div className='video-background'>
-            <video src='/clouds-background.mp4' autoPlay loop muted data-testid="home-video"/>
-          </div>
+          
           {isReady && (
           <div className='answers'>
             <Typography component="h2" variant="h5" className='question-text' style={{ fontWeight: 'bold' }}>

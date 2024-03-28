@@ -6,9 +6,6 @@ const AboutUs = () => {
 
   return(
     <Container component="main" maxWidth="md" sx={{ margin: 8 }}>
-      <div className='video-background'>
-        <video src='/clouds-background.mp4' autoPlay loop muted data-testid="login-video"/>
-      </div>
       <Typography component="h1" variant="h1" marginBottom={2}>
         About us
       </Typography>

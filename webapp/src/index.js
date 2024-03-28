@@ -19,6 +19,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Box sx={{ paddingTop: '64px' }}>
+      <div className='video-background'>
+        <video src='/clouds-background.mp4' autoPlay loop muted data-testid="home-video"/>
+      </div>
       <NavigationBar /> 
       <Routes>
         <Route path='/' element={<App />} />

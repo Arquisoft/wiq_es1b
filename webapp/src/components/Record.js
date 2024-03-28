@@ -32,9 +32,7 @@ const Record = () => {
 
   return (
     <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
-      <div className='video-background'>
-        <video src='/clouds-background.mp4' autoPlay loop muted data-testid="home-video"/>
-      </div>
+      
       <Typography component="h1" variant="h5">
         Here you can see your record! All about your past games and all!
       </Typography>     
