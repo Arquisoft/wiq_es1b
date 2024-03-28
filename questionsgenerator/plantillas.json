@@ -1,16 +1,42 @@
 [
     {
-        "title": "¿Cuánta es la población de ??",
+        "title": "What is the population of ??",
         "query": "SELECT ?entity ?entityLabel ?answerLabel WHERE { ?entity wdt:P31 wd:Q3624078; wdt:P1082 ?answerLabel. SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\". } }"
     },
     {
-        "title": "¿Cuál es la moneda de ??",
+        "title": "What is the currency of ??",
         "query": "SELECT ?entity ?entityLabel ?answer ?answerLabel WHERE { ?entity wdt:P31 wd:Q3624078; wdt:P38 ?answer. SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\". } }"
-    },{
-        "title": "¿Cuál es la capital de ??",
-        "query": "SELECT ?entity ?entityLabel ?answer ?answerLabel WHERE { ?entity wdt:P31 wd:Q3624078; wdt:P36 ?answer. SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\". }}"
-    },{
-        "title": "¿Cuál es el área de ??",
+    },
+    {
+        "title": "What is the capital of ??",
+        "query": "SELECT ?entity ?entityLabel ?answer ?answerLabel WHERE { ?entity wdt:P31 wd:Q3624078; wdt:P36 ?answer. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}"
+    },
+    {
+        "title": "Which continent does ? belong to?",
+        "query": "SELECT ?entity ?entityLabel ?answer ?answerLabel WHERE {?entity wdt:P31 wd:Q6256;wdt:P30 ?answer.SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}"
+    },
+    {
+        "title": "What is the area (kms) of ??",
         "query": "SELECT ?entity ?entityLabel ?answer ?answerLabel WHERE { ?entity wdt:P31 wd:Q3624078; wdt:P2046 ?answer. SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\". }}"
+    },
+    {
+        "title": "What is the official language of ??",
+        "query": "SELECT ?entity ?entityLabel ?answer ?answerLabel WHERE { ?entity wdt:P31 wd:Q3624078; wdt:P37 ?answer. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". } }"
+    },
+    {
+        "title": "What is ?'s home stadium?",
+        "query": "SELECT ?entity ?entityLabel ?answer ?answerLabel WHERE {?entity wdt:P31 wd:Q476028; wdt:P115 ?answer. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}"
+    },
+    {
+        "title": "What is the flag of ??",
+        "query": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q6256;wdt:P41 ?answerLabel.SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}"
+    },
+    {
+        "title": "What is the logo of ??",
+        "query": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q4830453; wdt:P154 ?answerLabel; wdt:P571 ?foundingDate.FILTER(YEAR(?foundingDate) >= 1990)SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}"
+    },
+    {
+        "title": "What is the logo of ??",
+        "query": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q3231690;wdt:P154 ?answerLabel.SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}"
     }
 ]

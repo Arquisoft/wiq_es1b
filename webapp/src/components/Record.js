@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from "react-router-dom";
 import axios from 'axios';
 import { Container, Typography, List, ListItem, ListItemText } from '@mui/material';
-import NavigationBar from './NavigationBar';
 import './stylesheets/record.css';
 
 const Record = () => {
@@ -13,7 +12,6 @@ const Record = () => {
   //accedo al usuario logeado
   const location = useLocation();
   const { username } = location.state || {};
-  const { createdAt } = location.state || {};
 
   const [record, setRecord] = useState([]);
 
@@ -25,8 +23,7 @@ const Record = () => {
     // Extract data from the response
     const { games: userGames } = response.data;
     setRecord(userGames);
-  }
-
+  };
 
   useEffect(() => {
     getHistorialForLoggedUser();

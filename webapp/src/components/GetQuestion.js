@@ -1,10 +1,10 @@
-// src/components/AddUser.js
+// src/components/GetQuestion.js
 import React, { useState, useEffect } from 'react';
 import { useLocation } from "react-router-dom";
 import axios from 'axios';
 import { Container, Typography, Box, Button } from '@mui/material';
-import NavigationBar from './NavigationBar';
 import './stylesheets/GetQuestionCss.css';
+const TOTAL_QUESTIONS = 10;
 
 const GetQuestion = () => {
   //all the information about the question
@@ -14,12 +14,14 @@ const GetQuestion = () => {
   const [isReady, setIsReady] = useState(false); 
   const [answerFeedback, setAnswerFeedback] = useState('');
   const [nextQuestion, setNextQuestion] = useState(true);
+  //timer of the game
   const [timer, setTimer] = useState(15); 
+  //count of questions in the game
+  const [questionCount, setQuestionCount] = useState(0);
 
   //accedo al usuario logeado
   const location = useLocation();
   const { username } = location.state || {};
-  const { createdAt } = location.state || {};
 
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
@@ -40,6 +42,9 @@ const GetQuestion = () => {
 
       // Extract data from the response, the question, the correct and the incorrect answers
       const { question: q, correctAnswerLabel:correctAnswer, answerLabelSet:answers } = response.data;
+
+      //increment the count of questions
+      setQuestionCount(prevCount => prevCount + 1);
 
       //save the data 
       setQuestion(q);
@@ -76,7 +81,7 @@ const GetQuestion = () => {
    */
   const checkAnswer = (selectedAnswer) => {
     //only executes the first time a button is clicked
-    var correct = false;
+    let correct = false;
     if(answerFeedback === ''){
       if(selectedAnswer === correctAnswer) {
         correct = true;
@@ -129,68 +134,78 @@ const GetQuestion = () => {
   }, [isReady, timer, nextQuestion]);
 
   return (
-    <Container >
-      <div className='video-background'>
-        <video src='/clouds-background.mp4' autoPlay loop muted data-testid="home-video"/>
-      </div>
-      {isReady && (
-      <div>
-        <NavigationBar />
-      </div>
-      )}
-      {isReady && (
-      <div className='answers'>
-        <Typography component="h2" variant="h5" className='question-text' style={{ fontWeight: 'bold' }}>
-          {question}
-        </Typography>
-        {/* Generate buttons for the answers */}
-        {answersArray.map((answer, index) => (
-          <Box key={answer} sx={{ display: 'flex', alignItems: 'center', marginY: '0.6em'}}>
-            <Typography component="span" variant="h5" sx={{ marginRight: '0.35em' }}>
-              {index + 1}. 
+    (questionCount <= TOTAL_QUESTIONS ? (
+        <Container component="main" maxWidth="md" sx={{ margin: 8 }}>
+          <div className='video-background'>
+            <video src='/clouds-background.mp4' autoPlay loop muted data-testid="home-video"/>
+          </div>
+          {isReady && (
+          <div className='answers'>
+            <Typography component="h2" variant="h5" className='question-text' style={{ fontWeight: 'bold' }}>
+              {question}
             </Typography>
-            <Button 
-                data-testid={`answer${index}Button`}
+            {/* Generate buttons for the answers */}
+            {answersArray.map((answer, index) => (
+              <Box key={answer} sx={{ display: 'flex', alignItems: 'center', marginY: '0.6em'}}>
+                <Typography component="span" variant="h5" sx={{ marginRight: '0.35em' }}>
+                  {index + 1}. 
+                </Typography>
+                <Button 
+                    data-testid={`answer${index}Button`}
+                    variant="contained" 
+                    sx={{ backgroundColor: 'dimgrey', fontWeight: 'bold', '&:hover': { backgroundColor: 'black' }}}
+                    key={index} 
+                    onClick={() => checkAnswer(answer)}
+                    disabled={!nextQuestion}>
+                      {answer}
+                  </Button>
+              </Box>
+            ))}               
+            {/* To show the time left */}          
+            <Typography component="h2" variant="h6" className='question-text'>
+              <p>Time left: {timer} seconds</p>
+            </Typography>
+            {/* To show the feedback after answering */}
+            <Typography component="h2" variant="h6" className='question-text'>
+              <p>{answerFeedback}</p>
+            </Typography>    
+          </div>
+          )}     
+          {isReady && (
+          <div>
+              {/* Button to request a new question It will be disabled when the question is not answered */}
+              <Button
+                data-testid="nextQuestionButton"
                 variant="contained" 
-                sx={{ backgroundColor: 'dimgrey', fontWeight: 'bold', '&:hover': { backgroundColor: 'black' }}}
-                key={index} 
-                onClick={() => checkAnswer(answer)}
-                disabled={!nextQuestion}>
-                  {answer}
-              </Button>
-          </Box>
-        ))}               
-        {/* To show the time left */}          
-        <Typography component="h2" variant="h6" className='question-text'>
-          <p>Time left: {timer} seconds</p>
-        </Typography>
-        {/* To show the feedback after answering */}
-        <Typography component="h2" variant="h6" className='question-text'>
-          <p>{answerFeedback}</p>
-        </Typography>    
-      </div>
-      )}     
-      {isReady && (
+                style={{ width: '100%', fontWeight: 'bold' }}
+                onClick={getQuestion}
+                disabled={nextQuestion}>
+                  Next question
+                </Button>
+          </div>      
+          )}
+        {/* If the question is charging shows two circles to show it is charging */}  
+        {!isReady && (
+          <div className='charging'>
+              <div className='ball one'></div>
+              <div className='ball two'></div>
+          </div>
+        )}
+      </Container>
+
+    ) : (
       <div>
-          {/* Button to request a new question It will be disabled when the question is not answered */}
-          <Button
-            data-testid="nextQuestionButton"
-            variant="contained" 
-            style={{ width: '100%', fontWeight: 'bold' }}
-            onClick={getQuestion}
-            disabled={nextQuestion}>
-              Next question
-            </Button>
-      </div>      
-      )}
-    {/* If the question is charging shows two circles to show it is charging */}  
-    {!isReady && (
-      <div className='charging'>
-          <div className='ball one'></div>
-          <div className='ball two'></div>
+        <div className='video-background'>
+          <video src='/clouds-background.mp4' autoPlay loop muted data-testid="home-video"/>
+        </div>
+        {/* for when the game ends */}
+        <Typography component="h2" variant="h5" className='question-text' style={{ fontWeight: 'bold' }}>
+          Finished the game! You have answered all 10 questions, you can see them in the record or go home to start a new game.
+        </Typography>
       </div>
-    )}
-  </Container>
+    )) 
+
+    
   );
 };
 

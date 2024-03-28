@@ -1,12 +1,11 @@
 // src/components/AboutUs.js
 import React from 'react';
 import { Container, Typography, List, ListItem, ListItemText } from '@mui/material';
-import NavigationBar from './NavigationBar';
 
 const AboutUs = () => {
 
   return(
-    <Container component="main" maxWidth="sm">
+    <Container component="main" maxWidth="md" sx={{ margin: 8 }}>
       <div className='video-background'>
         <video src='/clouds-background.mp4' autoPlay loop muted data-testid="login-video"/>
       </div>
