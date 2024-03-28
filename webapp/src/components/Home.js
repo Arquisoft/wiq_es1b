@@ -28,7 +28,7 @@ const Home = () => {
   return (
     <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
       <div className='video-background'>
-        <video src='/video-background.mp4' autoPlay loop muted data-testid="home-video"/>
+        <video src='/clouds-background.mp4' autoPlay loop muted data-testid="home-video"/>
       </div>
       <NavigationBar />
       <div className='logoContainer'>
