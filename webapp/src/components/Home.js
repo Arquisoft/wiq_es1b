@@ -40,10 +40,13 @@ const Home = () => {
       </Typography>
       <Stack spacing={2} sx={{ marginTop: 4 }}>        
         <Button variant="contained" color="primary" size="large" onClick={() => handleStartGame("todo")}>
-          New Classic Game
+          New Full Random Game
         </Button>
         <Button variant="contained" color="primary" size="large" onClick={() => handleStartGame("image")}>
           New Images Game
+        </Button>
+        <Button variant="contained" color="primary" size="large" onClick={() => handleStartGame("geography")}>
+          New Geography Game
         </Button>
       </Stack>
     </Container>

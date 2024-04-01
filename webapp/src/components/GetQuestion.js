@@ -145,7 +145,7 @@ const GetQuestion = () => {
               {question}
             </Typography>
             {/* Generate buttons for the answers */}
-            <Box sx={{ display: 'grid', gridTemplateColumns: 'auto 1fr', alignItems: 'center', marginY: '0.6em'}}>
+            <Box sx={{ display: 'grid', gridTemplateColumns: 'auto 1fr', alignItems: 'center', marginY: '0.6em', gridRowGap: '0.5em', gridColumnGap: '1em'}}>
                {answersArray.map((answer, index) => (
                   <Box key={answer} sx={{ display: 'flex', alignItems: 'center', marginY: '0.6em'}}>
                     <Button 
