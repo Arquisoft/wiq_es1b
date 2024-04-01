@@ -11,10 +11,11 @@ class WikiUtils {
 
     async getData(SPARQL_query){
 
-        var url = this.wikiURL + `/sparql?query=${encodeURIComponent(SPARQL_query)}&format=json`;
+        var url = this.wikiURL + `?query=${encodeURIComponent(SPARQL_query)}&format=json`;
 
         const response = await axios.get(url);
         const data = response.data;
+
         return data.results.bindings;
     }
 }

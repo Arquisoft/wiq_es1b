@@ -1,16 +1,16 @@
 [
     {
-        "title": "¿Cuánta es la población de ??",
-        "query": "SELECT ?entity ?entityLabel ?answerLabel WHERE { ?entity wdt:P31 wd:Q3624078; wdt:P1082 ?answerLabel. SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\". } }"
+        "tittle": "¿Cuánta es la población de ??",
+        "queryOf": "SELECT ?entity ?entityLabel ?answerLabel WHERE { ?entity wdt:P31 wd:Q3624078; wdt:P1082 ?answerLabel. SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\". } }"
     },
     {
-        "title": "¿Cuál es la moneda de ??",
-        "query": "SELECT ?entity ?entityLabel ?answer ?answerLabel WHERE { ?entity wdt:P31 wd:Q3624078; wdt:P38 ?answer. SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\". } }"
+        "tittle": "¿Cuál es la moneda de ??",
+        "queryOf": "SELECT ?entity ?entityLabel ?answer ?answerLabel WHERE { ?entity wdt:P31 wd:Q3624078; wdt:P38 ?answer. SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\". } }"
     },{
-        "title": "¿Cuál es la capital de ??",
-        "query": "SELECT ?entity ?entityLabel ?answer ?answerLabel WHERE { ?entity wdt:P31 wd:Q3624078; wdt:P36 ?answer. SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\". }}"
+        "tittle": "¿Cuál es la capital de ??",
+        "queryOf": "SELECT ?entity ?entityLabel ?answer ?answerLabel WHERE { ?entity wdt:P31 wd:Q3624078; wdt:P36 ?answer. SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\". }}"
     },{
-        "title": "¿Cuál es el área de ??",
-        "query": "SELECT ?entity ?entityLabel ?answer ?answerLabel WHERE { ?entity wdt:P31 wd:Q3624078; wdt:P2046 ?answer. SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\". }}"
+        "tittle": "¿Cuál es el área de ??",
+        "queryOf": "SELECT ?entity ?entityLabel ?answer ?answerLabel WHERE { ?entity wdt:P31 wd:Q3624078; wdt:P2046 ?answer. SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\". }}"
     }
 ]

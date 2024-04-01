@@ -23,7 +23,7 @@ services:
     networks:
       - mynetwork
     environment:
-      MONGODB_URI: mongodb://mongodb:27017/userdb
+      MONGODB_URI: mongodb://mongodb:27017/WIQ
 
   userservice:
     container_name: userservice-${teamname:-defaultASW}
@@ -51,7 +51,8 @@ services:
     networks:
       - mynetwork
     environment:
-      MONGODB_URI: mongodb://mongodb:27017/questiondb
+      MONGODB_URI: mongodb://mongodb:27017/WIQ
+      
 
   record:
     container_name: record-${teamname:-defaultASW}
@@ -65,7 +66,7 @@ services:
     networks:
       - mynetwork
     environment:
-      MONGODB_URI: mongodb://mongodb:27017/userdb
+      MONGODB_URI: mongodb://mongodb:27017/WIQ
 
   gatewayservice:
     container_name: gatewayservice-${teamname:-defaultASW}

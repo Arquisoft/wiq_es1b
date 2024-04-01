@@ -11,6 +11,6 @@ const questionTempSchema = mongoose.Schema({
     }
 })
 
-const questionTemp = mongoose.model('questionTemp', questionTempSchema);
+const Template = mongoose.model('Template', questionTempSchema);
 
-module.exports = questionTemp
+module.exports = Template

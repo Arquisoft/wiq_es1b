@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const User = require('./auth-model')
+const User = require('./auth-model');
 
 const app = express();
 const port = 8002; 
@@ -11,8 +11,9 @@ const port = 8002;
 app.use(express.json());
 
 // Connect to MongoDB
-const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/userdb';
+const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/WIQ';
 mongoose.connect(mongoUri);
+const userCollection = mongoose.connection.useDb("WIQ").collection("users");
 
 // Function to validate required fields in the request body
 function validateRequiredFields(req, requiredFields) {
@@ -32,7 +33,7 @@ app.post('/login', async (req, res) => {
     const { username, password } = req.body;
 
     // Find the user by username in the database
-    const user = await User.findOne({ username });
+    const user = await userCollection.findOne({ username });
 
     // Check if the user exists and verify the password
     if (user && await bcrypt.compare(password, user.password)) {
@@ -40,6 +41,7 @@ app.post('/login', async (req, res) => {
       const token = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '1h' });
       // Respond with the token and user information
       res.json({ token: token, username: username, createdAt: user.createdAt });
+      
     } else {
       res.status(401).json({ error: 'Invalid credentials' });
     }
