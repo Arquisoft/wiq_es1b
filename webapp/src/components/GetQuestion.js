@@ -4,6 +4,8 @@ import { useLocation } from "react-router-dom";
 import axios from 'axios';
 import { Container, Typography, Box, Button } from '@mui/material';
 import './stylesheets/GetQuestionCss.css';
+import GameFinale from './GameFinale';
+
 const TOTAL_QUESTIONS = 10;
 
 const GetQuestion = () => {
@@ -137,8 +139,7 @@ const GetQuestion = () => {
 
   return (
     (questionCount <= TOTAL_QUESTIONS ? (
-        <Container component="main" maxWidth="md" sx={{ margin: 8 }}>
-          
+        <Container component="main" maxWidth="md" sx={{ margin: 8 }}>          
           {isReady && (
           <div className='answers'>
             <Typography component="h2" variant="h5" className='question-text' style={{ fontWeight: 'bold' }}>
@@ -192,17 +193,9 @@ const GetQuestion = () => {
           </div>
         )}
       </Container>
-
     ) : (
-      <div>
-        {/* for when the game ends */}
-        <Typography component="h2" variant="h5" className='question-text' style={{ fontWeight: 'bold' }}>
-          Finished the game! You have answered all 10 questions, you can see them in the record or go home to start a new game.
-        </Typography>
-      </div>
-    )) 
-
-    
+      <GameFinale />
+    ))     
   );
 };
 
