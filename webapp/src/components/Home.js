@@ -13,9 +13,9 @@ const Home = () => {
   const { username } = location.state || {};
   const { createdAt } = location.state || {};
 
-  function handleStartGame() {
+  function handleStartGame(category) {
     // Lógica para iniciar la partida
-    navigate("/getQuestion", {state: {username, createdAt }});
+    navigate("/getQuestion", {state: {username, createdAt, category}});
   };
 
   const formatDate = (dateString) => {
@@ -39,8 +39,11 @@ const Home = () => {
         Your account was created on {formatDate(createdAt)}.
       </Typography>
       <Stack spacing={2} sx={{ marginTop: 4 }}>        
-        <Button variant="contained" color="primary" size="large" onClick={handleStartGame}>
-          New Game
+        <Button variant="contained" color="primary" size="large" onClick={() => handleStartGame("todo")}>
+          New Classic Game
+        </Button>
+        <Button variant="contained" color="primary" size="large" onClick={() => handleStartGame("image")}>
+          New Images Game
         </Button>
       </Stack>
     </Container>

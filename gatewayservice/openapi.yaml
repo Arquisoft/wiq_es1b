@@ -146,6 +146,17 @@ paths:
     post:
       summary: Gets a question for the game.
       operationId: getQuestion
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                category:
+                  type: string
+                  description: category of the game.
+                  example: sports
       responses:
         '200':
           description: Gets a question for the game successfully. Returns que title of the question, the correct answer and an array with the correct and incorrect answer randomly ordered.

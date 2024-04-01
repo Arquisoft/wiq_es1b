@@ -45,7 +45,7 @@ app.post('/getHistorial', (req, res) => handleRequest(getHistorialUrl+'/getHisto
 //para ver el api-doc, entrar en: http://localhost:8000/api-doc/
 
 // Read the OpenAPI YAML file synchronously
-openapiPath='./openapi.yaml'
+const openapiPath='./openapi.yaml'
 if (fs.existsSync(openapiPath)) {
   const file = fs.readFileSync(openapiPath, 'utf8');
 

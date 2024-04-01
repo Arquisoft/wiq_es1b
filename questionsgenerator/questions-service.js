@@ -24,12 +24,24 @@ mongoose.connect(mongoUri)
 //to respond to the /getQuestion request 
 app.post('/getQuestion', async (req,res) => {
   try {
-
+    //category of the game chosen
+    const category = req.body.category;
     //An instance of the question generator
     const generator = new QuestionGenerator();
 
     // Find a question in the database randomly
-    const randomQuestion = await Question.aggregate([{ $sample: { size: 1 } }]);
+    //if the category is all, it will choose a random question from all the categories
+    let randomQuestion = null;
+    if (category !== "todo") {
+      randomQuestion = await Question.aggregate([
+        { $match: { category: category } },
+        { $sample: { size: 1 } }
+      ]);
+    } else {
+      randomQuestion = await Question.aggregate([
+        { $sample: { size: 1 } }
+      ]);
+    }
 
     //get the title and the query
     const title = randomQuestion[0].title;

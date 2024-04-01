@@ -22,6 +22,8 @@ const GetQuestion = () => {
   //accedo al usuario logeado
   const location = useLocation();
   const { username } = location.state || {};
+  //category of the game
+  const { category } = location.state || {};
 
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
@@ -38,7 +40,7 @@ const GetQuestion = () => {
       setAnswerFeedback('');
 
       //call to get a question
-      const response = await axios.post(`${apiEndpoint}/getQuestion`);
+      const response = await axios.post(`${apiEndpoint}/getQuestion`, {category: category});
 
       // Extract data from the response, the question, the correct and the incorrect answers
       const { question: q, correctAnswerLabel:correctAnswer, answerLabelSet:answers } = response.data;
@@ -193,9 +195,6 @@ const GetQuestion = () => {
 
     ) : (
       <div>
-        <div className='video-background'>
-          <video src='/clouds-background.mp4' autoPlay loop muted data-testid="home-video"/>
-        </div>
         {/* for when the game ends */}
         <Typography component="h2" variant="h5" className='question-text' style={{ fontWeight: 'bold' }}>
           Finished the game! You have answered all 10 questions, you can see them in the record or go home to start a new game.
