@@ -15,11 +15,10 @@ const gameSchema = mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    }
-})
+    },
+    questions: [ Question ]
+});
 
-module.exports = {
-    Question,
-    Game,
-    Record
-  };
+const Game = mongoose.model('Game', gameSchema);
+
+module.exports = { Question, Game};

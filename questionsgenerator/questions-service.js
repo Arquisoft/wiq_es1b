@@ -33,14 +33,13 @@ app.post('/getQuestion', async (req, res) => {
     if(result.length > 0){
       var question = result[0];
 
-      console.log(question);
       var tittle = question.tittle;
       
       var correctAnswer = question.answers[question.correctAnswer];
-      
+
       var answerSet = question.answers;
 
-      res.json({question: tittle, correactAnswerLabel: correctAnswer, answerLabelSet: answerSet});
+      res.json({question: tittle, correctAnswerLabel: correctAnswer, answerLabelSet: answerSet});
     }
     
   } catch (error) {

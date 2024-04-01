@@ -97,8 +97,6 @@ class questionGenerator {
         console.error("No templates.");
       }
     }
-
-    console.log("ALL QUESTIONS GENERATED");
   }
 
   //method to shuffle the array of the answers

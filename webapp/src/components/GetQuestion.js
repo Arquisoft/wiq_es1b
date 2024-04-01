@@ -39,6 +39,7 @@ const GetQuestion = () => {
       //call to get a question
       const response = await axios.post(`${apiEndpoint}/getQuestion`);
 
+
       // Extract data from the response, the question, the correct and the incorrect answers
       const { question: q, correctAnswerLabel:correctAnswer, answerLabelSet:answers } = response.data;
 
@@ -88,6 +89,7 @@ const GetQuestion = () => {
    */
   const checkAnswer = (selectedAnswer) => {
     //only executes the first time a button is clicked
+    console.log("SELECTED: " + selectedAnswer);
     var correct = false;
     if(answerFeedback === ''){
       if(selectedAnswer === correctAnswer){
