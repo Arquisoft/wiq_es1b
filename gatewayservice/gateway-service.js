@@ -35,8 +35,9 @@ const handleRequest = async (url, req, res, method = 'post') => {
 app.post('/login', (req, res) => handleRequest(authServiceUrl+'/login', req, res));
 app.post('/adduser', (req, res) => handleRequest(userServiceUrl+'/adduser', req, res));
 app.post('/getQuestion', (req, res) => handleRequest(getQuestionUrl+'/getQuestion', req, res));
-app.post('/saveHistorial', (req, res) => handleRequest(getHistorialUrl+'/saveHistorial', req, res));
-app.post('/getHistorial', (req, res) => handleRequest(getHistorialUrl+'/getHistorial', req, res));
+app.post('/saveGameRecord', (req, res) => handleRequest(getHistorialUrl+'/saveGameRecord', req, res));
+app.post('/getGameRecord', (req, res) => handleRequest(getHistorialUrl+'/getGameRecord', req, res));
+app.post('/saveQuestion', (req, res) => handleRequest(getHistorialUrl+'/saveQuestion', req, res));
 
 // Start the gateway service
 const server = app.listen(port, () => {

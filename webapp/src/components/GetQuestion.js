@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Typography, Box, Button } from '@mui/material';
 import './stylesheets/GetQuestionCss.css';
-import { useLocation,useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 const GetQuestion = () => {
@@ -11,10 +11,10 @@ const GetQuestion = () => {
   const [question, setQuestion] = useState('');
   const [correctAnswer, setCorrectAnswer] = useState('');
   const [answersArray, setAnswersArray] = useState([]);
-  const [isReady, setIsReady] = useState(false); 
+  const [isReady, setIsReady] = useState(false);
   const [answerFeedback, setAnswerFeedback] = useState('');
   const [nextQuestion, setNextQuestion] = useState(true);
-  const [timer, setTimer] = useState(15); 
+  const [timer, setTimer] = useState(15);
   const navigate = useNavigate();
 
   //accedo al usuario logeado
@@ -41,7 +41,7 @@ const GetQuestion = () => {
 
 
       // Extract data from the response, the question, the correct and the incorrect answers
-      const { question: q, correctAnswerLabel:correctAnswer, answerLabelSet:answers } = response.data;
+      const { question: q, correctAnswerLabel: correctAnswer, answerLabelSet: answers } = response.data;
 
       //save the data 
       setQuestion(q);
@@ -62,18 +62,22 @@ const GetQuestion = () => {
 
   const showRecord = () => {
     getQuestion();
-    navigate("/record", {state: {username, createdAt }});
+    navigate("/record", { state: { username, createdAt } });
   };
 
   const showHome = () => {
     getQuestion();
-    navigate("/home", {state: {username, createdAt }});
+    navigate("/home", { state: { username, createdAt } });
   };
 
-  const saveHistorial = async (selectedAnswer, correct) => {
-    
+  const saveQuestion = async (selectedAnswer, correct) => {
     const username2 = username;
-    await axios.post(`${apiEndpoint}/saveHistorial`, {question, answersArray, correctAnswer, selectedAnswer, correct, username2});
+    await axios.post(`${apiEndpoint}/saveQuestion`, { question, answersArray, correctAnswer, selectedAnswer, correct, username2 });
+  }
+
+  const saveHistorial = async (selectedAnswer, correct) => {
+    const username2 = username;
+    await axios.post(`${apiEndpoint}/saveGameRecord`, { question, answersArray, correctAnswer, selectedAnswer, correct, username2 });
   }
 
   useEffect(() => {
@@ -89,19 +93,18 @@ const GetQuestion = () => {
    */
   const checkAnswer = (selectedAnswer) => {
     //only executes the first time a button is clicked
-    console.log("SELECTED: " + selectedAnswer);
     var correct = false;
-    if(answerFeedback === ''){
-      if(selectedAnswer === correctAnswer){
+    if (answerFeedback === '') {
+      if (selectedAnswer === correctAnswer) {
         correct = true;
         setAnswerFeedback("You have won! Congratulations!");
-      }else if(timer === 0){
+      } else if (timer === 0) {
         selectedAnswer = "Time out";
         setAnswerFeedback("You lost! You didn't answer in time :(");
       } else {
         setAnswerFeedback("You lost! Try again :(");
       }
-      saveHistorial(selectedAnswer, correct);
+      saveQuestion(selectedAnswer, correct);
       showAnswerColors();
       setNextQuestion(false);
     }
@@ -122,7 +125,7 @@ const GetQuestion = () => {
           button.style.backgroundColor = 'red';
         }
         //disable the buttons so the user cannot choose another option
-        button.disabled = true; 
+        button.disabled = true;
       });
     }
   };
@@ -147,76 +150,76 @@ const GetQuestion = () => {
     <Container >
       {isReady && (
         <div className='answers'>
-        <Typography component="h2" variant="h5" className='question-text' style={{ fontWeight: 'bold' }}>
-          {question}
-        </Typography>
+          <Typography component="h2" variant="h5" className='question-text' style={{ fontWeight: 'bold' }}>
+            {question}
+          </Typography>
 
-        {/* Generate buttons for the answers */}
-        {answersArray.map((answer, index) => (
-          <Box key={answer} sx={{ display: 'flex', alignItems: 'center', marginY: '0.6em'}}>
-            <Typography component="span" variant="h5" sx={{ marginRight: '0.35em' }}>
-              {index + 1}. 
-            </Typography>
-            <Button 
+          {/* Generate buttons for the answers */}
+          {answersArray.map((answer, index) => (
+            <Box key={answer} sx={{ display: 'flex', alignItems: 'center', marginY: '0.6em' }}>
+              <Typography component="span" variant="h5" sx={{ marginRight: '0.35em' }}>
+                {index + 1}.
+              </Typography>
+              <Button
                 data-testid={`answer${index}Button`}
-                variant="contained" 
-                sx={{ backgroundColor: 'dimgrey', fontWeight: 'bold', '&:hover': { backgroundColor: 'black' }}}
-                key={index} 
+                variant="contained"
+                sx={{ backgroundColor: 'dimgrey', fontWeight: 'bold', '&:hover': { backgroundColor: 'black' } }}
+                key={index}
                 onClick={() => checkAnswer(answer)}
                 disabled={!nextQuestion}>
-                  {answer}
+                {answer}
               </Button>
-          </Box>
-        ))}                
+            </Box>
+          ))}
 
-        {/* To show the time left */}          
-        <Typography component="h2" variant="h6" className='question-text'>
-          <p>Time left: {timer} seconds</p>
-        </Typography>
+          {/* To show the time left */}
+          <Typography component="h2" variant="h6" className='question-text'>
+            <p>Time left: {timer} seconds</p>
+          </Typography>
 
-        {/* To show the feedback after answering */}
-        <Typography component="h2" variant="h6" className='question-text'>
-          <p>{answerFeedback}</p>
-        </Typography>    
-      </div>
-    )}     
+          {/* To show the feedback after answering */}
+          <Typography component="h2" variant="h6" className='question-text'>
+            <p>{answerFeedback}</p>
+          </Typography>
+        </div>
+      )}
 
-    {isReady && (
-    <div>
-        {/* Button to request a new question It will be disabled when the question is not answered */}
-        <Button
-          data-testid="nextQuestionButton"
-          variant="contained" 
-          style={{ width: '100%', fontWeight: 'bold' }}
-          onClick={getQuestion}
-          disabled={nextQuestion}>
+      {isReady && (
+        <div>
+          {/* Button to request a new question It will be disabled when the question is not answered */}
+          <Button
+            data-testid="nextQuestionButton"
+            variant="contained"
+            style={{ width: '100%', fontWeight: 'bold' }}
+            onClick={getQuestion}
+            disabled={nextQuestion}>
             Next question
           </Button>
-        <Button
-          variant="contained" 
-          style={{ width: '100%', fontWeight: 'bold' }}
-          onClick={showRecord}
-          disabled={nextQuestion}>
+          <Button
+            variant="contained"
+            style={{ width: '100%', fontWeight: 'bold' }}
+            onClick={showRecord}
+            disabled={nextQuestion}>
             View Record
           </Button>
-        <Button
-          variant="contained" 
-          style={{ width: '100%', fontWeight: 'bold' }}
-          onClick={showHome}
-          disabled={nextQuestion}>
+          <Button
+            variant="contained"
+            style={{ width: '100%', fontWeight: 'bold' }}
+            onClick={showHome}
+            disabled={nextQuestion}>
             Home
           </Button>
-    </div>      
-    )}
+        </div>
+      )}
 
-    {/* if the question is charging shows two circles to show it is charging */}  
-    {!isReady && (
-      <div className='charging'>
+      {/* if the question is charging shows two circles to show it is charging */}
+      {!isReady && (
+        <div className='charging'>
           <div className='ball one'></div>
           <div className='ball two'></div>
-      </div>
-    )}
-  </Container>
+        </div>
+      )}
+    </Container>
   );
 };
 
