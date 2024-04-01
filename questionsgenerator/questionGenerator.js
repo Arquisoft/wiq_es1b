@@ -38,6 +38,7 @@ class questionGenerator {
         const template = result[0];
 
         const query = template.queryOf;
+        const category = template.category;
 
         const questionData = await this.wiki.getData(query);
 
@@ -88,7 +89,8 @@ class questionGenerator {
         const question = {
           tittle: tittle,
           answers: answers,
-          correctAnswer: correctAnswer
+          correctAnswer: correctAnswer,
+          category: category
         }
 
         await questionCollection.insertOne(question);

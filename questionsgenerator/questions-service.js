@@ -26,7 +26,7 @@ app.post('/getQuestion', async (req, res) => {
       await generator.loadTemplates();
       await generator.generate10Questions();
     }
-    
+
     //category of the game chosen
     const category = req.body.category;
     //if the category is all, it will choose a random question from all the categories
@@ -42,21 +42,25 @@ app.post('/getQuestion', async (req, res) => {
       ]);
     }
 
-    const result = await questionCollection.aggregate([{ $sample: { size: 1 } }]).toArray();
+    const result = null;
+    if (category !== "todo")
+      result = await questionCollection.aggregate([{ $match: { category: category } }, { $sample: { size: 1 } }]).toArray();
+    else
+      result = await questionCollection.aggregate([{ $sample: { size: 1 } }]).toArray();
 
 
-    if(result.length > 0){
-      var question = result[0];
+      if (result.length > 0) {
+        var question = result[0];
 
-      var tittle = question.tittle;
-      
-      var correctAnswer = question.answers[question.correctAnswer];
+        var tittle = question.tittle;
 
-      var answerSet = question.answers;
+        var correctAnswer = question.answers[question.correctAnswer];
 
-      res.json({question: tittle, correctAnswerLabel: correctAnswer, answerLabelSet: answerSet});
-    }
-    
+        var answerSet = question.answers;
+
+        res.json({ question: tittle, correctAnswerLabel: correctAnswer, answerLabelSet: answerSet });
+      }
+
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error inside service' });
   }

@@ -8,6 +8,10 @@ const questionTempSchema = mongoose.Schema({
     queryOf: {
         type: String,
         required: true
+    },
+    category: {
+        type: String,
+        required: true
     }
 })
 
