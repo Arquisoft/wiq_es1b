@@ -12,7 +12,7 @@ const port = 8001;
 app.use(bodyParser.json());
 
 // Connect to MongoDB
-const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/userdb';
+const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/WIQ';
 mongoose.connect(mongoUri);
 const userCollection = mongoose.connection.useDb("WIQ").collection("users");
 
@@ -25,6 +25,26 @@ function validateRequiredFields(req, requiredFields) {
   }
 }
 
+//Function to validate that the password is strong
+function validateStrongPassword(password) {
+    if (password.length < 8) {
+        throw new Error('Password must be at least 8 characters long');
+    }
+    if (!password.match(/[a-z]/) || !password.match(/[A-Z]/) || !password.match(/\d/) || !password.match(/[!@#$%^&*]/)) {
+      throw new Error('Password must contain at least one lowercase letter, one uppercase letter, one digit, and one symbol');
+    }
+}
+
+//Function to validate that the password is strong
+function validateStrongPassword(password) {
+    if (password.length < 8) {
+        throw new Error('Password must be at least 8 characters long');
+    }
+    if (!password.match(/[a-z]/) || !password.match(/[A-Z]/) || !password.match(/\d/) || !password.match(/[!@#$%^&*]/)) {
+      throw new Error('Password must contain at least one lowercase letter, one uppercase letter, one digit, and one symbol');
+    }
+}
+
 app.post('/adduser', async (req, res) => {
   try {
     // Check if required fields are present in the request body
@@ -33,7 +53,9 @@ app.post('/adduser', async (req, res) => {
     const newUsername = req.body.username;
     const newPassword = req.body.password;
 
-    // Verificar si el usuario ya existe en la base de datos
+    validateStrongPassword(newPassword);
+
+    // Check if the username is already taken by other user in the db
     const existingUser = await userCollection.findOne({ newUsername });
     if (existingUser) {
       return res.status(400).json({ error: 'El usuario ya existe' });

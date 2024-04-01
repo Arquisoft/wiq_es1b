@@ -1,28 +1,39 @@
+// src/index.js
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import {BrowserRouter, Routes, Route} from "react-router-dom";
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import GetQuestion from "./components/GetQuestion.js";
 import Home from "./components/Home.js";
 import Record from './components/Record.js';
-import {BrowserRouter, Routes, Route} from "react-router-dom";
+import Login from './components/Login.js';
+import AboutUs from './components/AboutUs.js';
+import NavigationBar from './components/NavigationBar';
+import Footer from './components/Footer';
+import Help from './components/Help.js';
+import { Box } from '@mui/material';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  /*<React.StrictMode>
-    <App />
-  </React.StrictMode>*/
   <BrowserRouter>
-    <Routes>
-      {/** Rutas públicas */}
-      <Route path='/' element={<App />} />
-      
+    <Box sx={{ paddingTop: '64px' }}>
+      <div className='video-background'>
+        <video src='/clouds-background.mp4' autoPlay loop muted data-testid="home-video"/>
+      </div>
+      <NavigationBar /> 
+      <Routes>
+        <Route path='/' element={<App />} />
         <Route path='/home' element={<Home />} />
         <Route path='/getQuestion' element={<GetQuestion />} />
         <Route path='/record' element={<Record />} />
-      
-    </Routes>
+        <Route path='/login' element={<Login />} />
+        <Route path='/aboutUs' element={<AboutUs />} />
+        <Route path='/help' element={<Help />} />
+      </Routes>
+    </Box>
+    <Footer />
   </BrowserRouter>
 );
 

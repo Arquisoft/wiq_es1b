@@ -1,14 +1,13 @@
 // src/components/Record.js
 import React, { useState, useEffect } from 'react';
+import { useLocation } from "react-router-dom";
 import axios from 'axios';
+import { Container, Typography, List, ListItem, ListItemText } from '@mui/material';
 import { Container, Typography, List, ListItem, ListItemText, Button } from '@mui/material';
 import { useLocation, useNavigate } from "react-router-dom";
 import './stylesheets/record.css';
 
-
 const Record = () => {
-
-  const navigate = useNavigate();
 
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
@@ -20,7 +19,6 @@ const Record = () => {
   const [record, setRecord] = useState([]);
 
   const getHistorialForLoggedUser = async () => {
-
     const username2 = username;
 
     const response = await axios.post(`${apiEndpoint}/getGameRecord`, { username2 });
@@ -41,6 +39,7 @@ const Record = () => {
 
   return (
     <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
+      
       <Typography component="h1" variant="h5">
         Here you can see your record! All about your past games and all!
       </Typography>

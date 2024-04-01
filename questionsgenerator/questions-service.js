@@ -27,6 +27,21 @@ app.post('/getQuestion', async (req, res) => {
       await generator.generate10Questions();
     }
     
+    //category of the game chosen
+    const category = req.body.category;
+    //if the category is all, it will choose a random question from all the categories
+    let randomQuestion = null;
+    if (category !== "todo") {
+      randomQuestion = await Question.aggregate([
+        { $match: { category: category } },
+        { $sample: { size: 1 } }
+      ]);
+    } else {
+      randomQuestion = await Question.aggregate([
+        { $sample: { size: 1 } }
+      ]);
+    }
+
     const result = await questionCollection.aggregate([{ $sample: { size: 1 } }]).toArray();
 
 
