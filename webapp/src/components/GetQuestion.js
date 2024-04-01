@@ -109,7 +109,7 @@ const GetQuestion = () => {
       const buttons = answersDiv.querySelectorAll('button');
       buttons.forEach(button => {
         button.style.color = 'black';
-        if (button.textContent === correctAnswer) {
+        if (button.value === correctAnswer) {
           button.style.backgroundColor = 'green';
         } else {
           button.style.backgroundColor = 'red';
@@ -145,22 +145,22 @@ const GetQuestion = () => {
               {question}
             </Typography>
             {/* Generate buttons for the answers */}
-            {answersArray.map((answer, index) => (
-              <Box key={answer} sx={{ display: 'flex', alignItems: 'center', marginY: '0.6em'}}>
-                <Typography component="span" variant="h5" sx={{ marginRight: '0.35em' }}>
-                  {index + 1}. 
-                </Typography>
-                <Button 
-                    data-testid={`answer${index}Button`}
-                    variant="contained" 
-                    sx={{ backgroundColor: 'dimgrey', fontWeight: 'bold', '&:hover': { backgroundColor: 'black' }}}
-                    key={index} 
-                    onClick={() => checkAnswer(answer)}
-                    disabled={!nextQuestion}>
-                      {answer}
-                  </Button>
-              </Box>
-            ))}               
+            <Box sx={{ display: 'grid', gridTemplateColumns: 'auto 1fr', alignItems: 'center', marginY: '0.6em'}}>
+               {answersArray.map((answer, index) => (
+                  <Box key={answer} sx={{ display: 'flex', alignItems: 'center', marginY: '0.6em'}}>
+                    <Button 
+                        value={answer}
+                        data-testid={`answer${index}Button`}
+                        variant="contained" 
+                        sx={{ backgroundColor: 'dimgrey', fontWeight: 'bold', '&:hover': { backgroundColor: 'black' }}}
+                        key={index} 
+                        onClick={() => checkAnswer(answer)}
+                        disabled={!nextQuestion}>
+                        {answer.startsWith('http') ? <img src={answer} alt="answer" style={{ width: '200px' }} /> : answer}
+                    </Button>
+                  </Box>
+                ))}  
+            </Box>             
             {/* To show the time left */}          
             <Typography component="h2" variant="h6" className='question-text'>
               <p>Time left: {timer} seconds</p>

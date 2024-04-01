@@ -80,7 +80,8 @@ app.post('/getQuestion', async (req,res) => {
             numberChosen = Math.floor(Math.random() * numOptions);
       }
       //get the wrong answer
-      incorrectAnswersLabels.add(questionData[numberChosen].answerLabel.value);
+      let incorrectAnswer = questionData[numberChosen].answerLabel.value;
+      incorrectAnswersLabels.add(incorrectAnswer);
     }
 
     //replace the ? in the questions with the information about the question
