@@ -1,8 +1,6 @@
 // src/components/Record.js
 import React, { useState, useEffect } from 'react';
-import { useLocation } from "react-router-dom";
 import axios from 'axios';
-import { Container, Typography, List, ListItem, ListItemText } from '@mui/material';
 import { Container, Typography, List, ListItem, ListItemText, Button } from '@mui/material';
 import { useLocation, useNavigate } from "react-router-dom";
 import './stylesheets/record.css';
@@ -15,6 +13,8 @@ const Record = () => {
   const location = useLocation();
   const { username } = location.state || {};
   const { createdAt } = location.state || {};
+
+  const navigate = useNavigate();
 
   const [record, setRecord] = useState([]);
 
@@ -39,7 +39,7 @@ const Record = () => {
 
   return (
     <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
-      
+
       <Typography component="h1" variant="h5">
         Here you can see your record! All about your past games and all!
       </Typography>
@@ -54,7 +54,7 @@ const Record = () => {
                   secondary={
                     <React.Fragment>
                       <Typography variant="body1">{`Correct answer: ${question.correctAnswer}`}</Typography>
-                      <Typography variant="body2">{`Selected: ${quesiton.selectedAnswer}`}</Typography>
+                      <Typography variant="body2">{`Selected: ${question.selectedAnswer}`}</Typography>
                     </React.Fragment>
                   }
                 />

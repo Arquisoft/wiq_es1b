@@ -61,6 +61,7 @@ services:
     build: ./record
     depends_on:
       - mongodb
+      - authservice
     ports:
       - "8004:8004"
     networks:
