@@ -2,6 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
+import { Box } from '@mui/material';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -13,7 +14,7 @@ import AboutUs from './components/AboutUs.js';
 import NavigationBar from './components/NavigationBar';
 import Footer from './components/Footer';
 import Help from './components/Help.js';
-import { Box } from '@mui/material';
+import GameFinale from './components/GameFinale.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -31,6 +32,7 @@ root.render(
         <Route path='/login' element={<Login />} />
         <Route path='/aboutUs' element={<AboutUs />} />
         <Route path='/help' element={<Help />} />
+        <Route path='/finale' element={<GameFinale />} />
       </Routes>
     </Box>
     <Footer />
