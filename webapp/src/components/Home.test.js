@@ -29,7 +29,7 @@ describe('Home component', () => {
 
     //compruebo que hay dos botones, jugar y record
     const buttons = await screen.findAllByRole('button');
-    expect(buttons.length).toBe(1);
+    expect(buttons.length).toBe(4);
 
     expect(screen.getByText(/Here you can start a new game!/i)).toBeInTheDocument();
     expect(screen.getByText(`Hello ${usernamePrueba}!`)).toBeInTheDocument();
@@ -46,7 +46,7 @@ describe('Home component', () => {
     );
 
     //click the new game button
-    const newGameButton = await screen.findByText('New Game');
+    const newGameButton = await screen.findByText('New Full Random Game');
     fireEvent.click(newGameButton);
 
     //checks it navigates out of the home page
