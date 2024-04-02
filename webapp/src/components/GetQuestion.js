@@ -6,9 +6,10 @@ import { Container, Typography, Box, Button } from '@mui/material';
 import './stylesheets/GetQuestionCss.css';
 import GameFinale from './GameFinale';
 
-const TOTAL_QUESTIONS = 10;
-
 const GetQuestion = () => {
+  const location = useLocation();
+  const { selectedNumQuestions } = location.state || {};
+  const { selectedTimer } = location.state || {};
   //all the information about the question
   const [question, setQuestion] = useState('');
   const [correctAnswer, setCorrectAnswer] = useState('');
@@ -17,12 +18,11 @@ const GetQuestion = () => {
   const [answerFeedback, setAnswerFeedback] = useState('');
   const [nextQuestion, setNextQuestion] = useState(true);
   //timer of the game
-  const [timer, setTimer] = useState(15); 
+  const [timer, setTimer] = useState(selectedTimer); 
   //count of questions in the game
   const [questionCount, setQuestionCount] = useState(0);
 
   //accedo al usuario logeado
-  const location = useLocation();
   const { username } = location.state || {};
   //category of the game
   const { category } = location.state || {};
@@ -32,7 +32,7 @@ const GetQuestion = () => {
   //method to get que information of the question
   const getQuestion = async () => {
     try {
-      setTimer(15);
+      setTimer(selectedTimer);
 
       //to wait for the question, show the charging dots
       setIsReady(false);
@@ -138,7 +138,7 @@ const GetQuestion = () => {
   }, [isReady, timer, nextQuestion]);
 
   return (
-    (questionCount <= TOTAL_QUESTIONS ? (
+    (questionCount <= selectedNumQuestions ? (
         <Container component="main" maxWidth="md" sx={{ margin: 8 }}>          
           {isReady && (
           <div className='answers'>

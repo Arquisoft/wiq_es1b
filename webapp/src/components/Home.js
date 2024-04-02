@@ -48,7 +48,7 @@ const Home = () => {
 
   function handleStartGame(category) {
     // Lógica para iniciar la partida
-    navigate("/getQuestion", {state: {username, createdAt, category}});
+    navigate("/getQuestion", {state: {username, createdAt, category, selectedNumQuestions, selectedTimer}});
   };
 
   const formatDate = (dateString) => {
