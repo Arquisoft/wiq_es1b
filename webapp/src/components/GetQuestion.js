@@ -153,7 +153,7 @@ const GetQuestion = () => {
                         value={answer}
                         data-testid={`answer${index}Button`}
                         variant="contained" 
-                        sx={{ backgroundColor: 'dimgrey', fontWeight: 'bold', '&:hover': { backgroundColor: 'black' }}}
+                        sx={{ backgroundColor: 'white', color: 'black', fontWeight: 'bold', '&:hover': { backgroundColor: 'black' }}}
                         key={index} 
                         onClick={() => checkAnswer(answer)}
                         disabled={!nextQuestion}>

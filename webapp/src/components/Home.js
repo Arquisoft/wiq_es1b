@@ -71,7 +71,7 @@ const Home = () => {
       <Typography component="p" variant="body1" sx={{ textAlign: 'center', marginTop: 2 }}>
         Your account was created on {formatDate(createdAt)}.
       </Typography>
-      <Button variant="contained" color="primary" size="large" onClick={() => setShowConfig(!showConfig)}>
+      <Button style={{ marginTop: '0.5em'}} variant="contained" color="primary" size="large" onClick={() => setShowConfig(!showConfig)}>
         Configuration of the game
       </Button>
       {showConfig && (
