@@ -8,6 +8,7 @@ import GameFinale from './GameFinale';
 
 const GetQuestion = () => {
   const location = useLocation();
+  //get the max number of questions and the timer from the location gotten from the home component
   const { selectedNumQuestions } = location.state || {};
   const { selectedTimer } = location.state || {};
   //all the information about the question
@@ -19,7 +20,7 @@ const GetQuestion = () => {
   const [nextQuestion, setNextQuestion] = useState(true);
   //timer of the game
   const [timer, setTimer] = useState(selectedTimer); 
-  //count of questions in the game
+  //count of questions in the game, starting from 0
   const [questionCount, setQuestionCount] = useState(0);
 
   //accedo al usuario logeado
@@ -138,64 +139,72 @@ const GetQuestion = () => {
   }, [isReady, timer, nextQuestion]);
 
   return (
-    (questionCount <= selectedNumQuestions ? (
-        <Container component="main" maxWidth="md" sx={{ margin: 8 }}>          
-          {isReady && (
-          <div className='answers'>
-            <Typography component="h2" variant="h5" className='question-text' style={{ fontWeight: 'bold' }}>
-              {question}
-            </Typography>
-            {/* Generate buttons for the answers */}
-            <Box sx={{ display: 'grid', gridTemplateColumns: 'auto 1fr', alignItems: 'center', marginY: '0.6em', gridRowGap: '0.5em', gridColumnGap: '1em'}}>
-               {answersArray.map((answer, index) => (
-                  <Box key={answer} sx={{ display: 'flex', alignItems: 'center', marginY: '0.6em'}}>
-                    <Button 
-                        value={answer}
-                        data-testid={`answer${index}Button`}
-                        variant="contained" 
-                        sx={{ backgroundColor: 'white', color: 'black', fontWeight: 'bold', '&:hover': { backgroundColor: 'black' }}}
-                        key={index} 
-                        onClick={() => checkAnswer(answer)}
-                        disabled={!nextQuestion}>
-                        {answer.startsWith('http') ? <img src={answer} alt="answer" style={{ width: '200px' }} /> : answer}
-                    </Button>
-                  </Box>
-                ))}  
-            </Box>             
-            {/* To show the time left */}          
-            <Typography component="h2" variant="h6" className='question-text'>
-              <p>Time left: {timer} seconds</p>
-            </Typography>
-            {/* To show the feedback after answering */}
-            <Typography component="h2" variant="h6" className='question-text'>
-              <p>{answerFeedback}</p>
-            </Typography>    
-          </div>
-          )}     
-          {isReady && (
-          <div>
-              {/* Button to request a new question It will be disabled when the question is not answered */}
-              <Button
-                data-testid="nextQuestionButton"
-                variant="contained" 
-                style={{ width: '100%', fontWeight: 'bold' }}
-                onClick={getQuestion}
-                disabled={nextQuestion}>
-                  Next question
-                </Button>
-          </div>      
+    <div style={{ 
+      display: 'flex', 
+      justifyContent: 'center', 
+      alignItems: 'center', 
+      height: '90vh', 
+      width: '80vw'
+    }}>
+      {(questionCount <= selectedNumQuestions ? (
+          <Container component="main" maxWidth="md" sx={{ margin: 8, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>          
+            {isReady && (
+            <div className='answers'>
+              <Typography component="h2" variant="h5" className='question-text' style={{ fontWeight: 'bold' }}>
+                {questionCount}/{selectedNumQuestions} {question}
+              </Typography>
+              {/* Generate buttons for the answers */}
+              <Box sx={{ display: 'grid', gridTemplateColumns: 'auto 1fr', alignItems: 'center', marginY: '0.6em', gridRowGap: '0.5em', gridColumnGap: '1em'}}>
+                {answersArray.map((answer, index) => (
+                    <Box key={answer} sx={{ display: 'flex', alignItems: 'center', marginY: '0.6em'}}>
+                      <Button 
+                          value={answer}
+                          data-testid={`answer${index}Button`}
+                          variant="contained" 
+                          sx={{ backgroundColor: 'white', color: 'black', fontWeight: 'bold', '&:hover': { backgroundColor: 'black', color: 'white' }}}
+                          key={index} 
+                          onClick={() => checkAnswer(answer)}
+                          disabled={!nextQuestion}>
+                          {answer.startsWith('http') ? <img src={answer} alt="answer" style={{ width: '200px' }} /> : answer}
+                      </Button>
+                    </Box>
+                  ))}  
+              </Box>             
+              {/* To show the time left */}          
+              <Typography component="h2" variant="h6" className='question-text'>
+                <p>Time left: {timer} seconds</p>
+              </Typography>
+              {/* To show the feedback after answering */}
+              <Typography component="h2" variant="h6" className='question-text'>
+                <p>{answerFeedback}</p>
+              </Typography>    
+            </div>
+            )}     
+            {isReady && (
+            <div>
+                {/* Button to request a new question It will be disabled when the question is not answered */}
+                <Button
+                  data-testid="nextQuestionButton"
+                  variant="contained" 
+                  style={{ width: '35em', fontWeight: 'bold' }}
+                  onClick={getQuestion}
+                  disabled={nextQuestion}>
+                    Next question
+                  </Button>
+            </div>      
+            )}
+          {/* If the question is charging shows two circles to show it is charging */}  
+          {!isReady && (
+            <div className='charging'>
+                <div className='ball one'></div>
+                <div className='ball two'></div>
+            </div>
           )}
-        {/* If the question is charging shows two circles to show it is charging */}  
-        {!isReady && (
-          <div className='charging'>
-              <div className='ball one'></div>
-              <div className='ball two'></div>
-          </div>
-        )}
-      </Container>
-    ) : (
-      <GameFinale />
-    ))     
+        </Container>
+      ) : (
+        <GameFinale />
+      ))}
+    </div>
   );
 };
 
