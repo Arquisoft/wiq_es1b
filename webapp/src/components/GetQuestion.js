@@ -149,7 +149,12 @@ const GetQuestion = () => {
       {(questionCount <= selectedNumQuestions ? (
           <Container component="main" maxWidth="md" sx={{ margin: 8, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>          
             {isReady && (
-            <div className='answers'>
+            <div className='answers' style={{ 
+              display: 'flex', 
+              flexDirection: 'column',
+              justifyContent: 'center', 
+              alignItems: 'center'
+            }}>
               <Typography component="h2" variant="h5" className='question-text' style={{ fontWeight: 'bold' }}>
                 {questionCount}/{selectedNumQuestions} {question}
               </Typography>

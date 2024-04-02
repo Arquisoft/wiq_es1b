@@ -160,6 +160,9 @@ const Home = () => {
         <Button variant="contained" color="primary" size="large" onClick={() => handleStartGame("geography")}>
           New Geography Game
         </Button>
+        <Button variant="contained" color="primary" size="large" onClick={() => handleStartGame("science")}>
+          New Science Game
+        </Button>
       </Stack>
     </Container>
   );

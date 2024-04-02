@@ -48,5 +48,40 @@
         "title": "What is the logo of ??",
         "query": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q3231690;wdt:P154 ?answerLabel.SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
         "category": "image"
+    },
+    {
+        "title": "What is the chemical symbol of ??",
+        "query": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q11344; wdt:P246 ?answerLabel. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
+        "category": "science"
+    },
+    {
+        "title": "What is the melting point of ??",
+        "query": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q11344; wdt:P2101 ?answerLabel. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
+        "category": "science"
+    },
+    {
+        "title": "What is the boiling point of ??",
+        "query": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q11344; wdt:P2102 ?answerLabel. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
+        "category": "science"
+    },
+    {
+        "title": "What is the atomic number of ??",
+        "query": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q11344; wdt:P1086 ?answerLabel. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
+        "category": "science"
+    },
+    {
+        "title": "What is the atomic mass of ??",
+        "query": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q11344; wdt:P2067 ?answerLabel. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
+        "category": "science"
+    },
+    {
+        "title": "What is the density of ??",
+        "query": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q11344; wdt:P2054 ?answerLabel. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
+        "category": "science"
+    },
+    {
+        "title": "What is the heat of fusion of ??",
+        "query": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q11344; wdt:P2062 ?answerLabel. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
+        "category": "science"
     }
 ]
