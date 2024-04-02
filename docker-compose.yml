@@ -23,7 +23,7 @@ services:
     networks:
       - mynetwork
     environment:
-      MONGODB_URI: mongodb://mongodb:27017/WIQ
+      MONGODB_URI: mongodb+srv://wiq_es01b_admin:admin@wiq.eckuzci.mongodb.net/wiq?retryWrites=true&w=majority&appName=WIQ
 
   userservice:
     container_name: userservice-${teamname:-defaultASW}
@@ -37,7 +37,7 @@ services:
     networks:
       - mynetwork
     environment:
-      MONGODB_URI: mongodb://mongodb:27017/userdb
+      MONGODB_URI: mongodb+srv://wiq_es01b_admin:admin@wiq.eckuzci.mongodb.net/wiq?retryWrites=true&w=majority&appName=WIQ
     
   questionsgenerator:
     container_name: questionsgenerator-${teamname:-defaultASW}
@@ -51,9 +51,8 @@ services:
     networks:
       - mynetwork
     environment:
-      MONGODB_URI: mongodb://mongodb:27017/WIQ
+      MONGODB_URI: mongodb+srv://wiq_es01b_admin:admin@wiq.eckuzci.mongodb.net/wiq?retryWrites=true&w=majority&appName=WIQ
       
-
   record:
     container_name: record-${teamname:-defaultASW}
     image: ghcr.io/arquisoft/wiq_es1b/record:latest
@@ -67,7 +66,7 @@ services:
     networks:
       - mynetwork
     environment:
-      MONGODB_URI: mongodb://mongodb:27017/WIQ
+      MONGODB_URI: mongodb+srv://wiq_es01b_admin:admin@wiq.eckuzci.mongodb.net/wiq?retryWrites=true&w=majority&appName=WIQ
 
   gatewayservice:
     container_name: gatewayservice-${teamname:-defaultASW}

@@ -11,9 +11,10 @@ const port = 8002;
 app.use(express.json());
 
 // Connect to MongoDB
-const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/WIQ';
-mongoose.connect(mongoUri);
-const userCollection = mongoose.connection.useDb("WIQ").collection("users");
+const mongoURI = process.env.MONGODB_URI || 'wiq_es01b_admin:admin@wiq.eckuzci.mongodb.net/wiq?retryWrites=true&w=majority&appName=WIQ';
+
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true});
+//const userCollection = mongoose.connection.useDb("WIQ").collection("users");
 
 // Function to validate required fields in the request body
 function validateRequiredFields(req, requiredFields) {
@@ -33,7 +34,7 @@ app.post('/login', async (req, res) => {
     const { username, password } = req.body;
 
     // Find the user by username in the database
-    const user = await userCollection.findOne({ username });
+    const user = await User.findOne({ username });
 
     // Check if the user exists and verify the password
     if (user && await bcrypt.compare(password, user.password)) {

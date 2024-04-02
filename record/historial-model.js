@@ -16,9 +16,17 @@ const gameSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-    questions: [ Question ]
+    questions: {
+        type: [Question],
+        validate: [arrayLimit, '{PATH} exceeds the limit of 10'],
+    }
 });
+
+function arrayLimit(val) {
+    return val.length <= 10;
+}
+
 
 const Game = mongoose.model('Game', gameSchema);
 
-module.exports = { Question, Game};
+module.exports = { Question, Game };

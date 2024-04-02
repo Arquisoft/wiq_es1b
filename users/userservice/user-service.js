@@ -3,7 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
-const User = require('./user-model')
+const User = require('./user-model');
 
 const app = express();
 const port = 8001;
@@ -12,9 +12,9 @@ const port = 8001;
 app.use(bodyParser.json());
 
 // Connect to MongoDB
-const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/WIQ';
-mongoose.connect(mongoUri);
-const userCollection = mongoose.connection.useDb("WIQ").collection("users");
+const mongoURI = process.env.MONGODB_URI || 'wiq_es01b_admin:admin@wiq.eckuzci.mongodb.net/wiq?retryWrites=true&w=majority&appName=WIQ';
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true});
+//const userCollection = mongoose.connection.useDb("WIQ").collection("users");
 
 // Function to validate required fields in the request body
 function validateRequiredFields(req, requiredFields) {
@@ -23,16 +23,6 @@ function validateRequiredFields(req, requiredFields) {
       throw new Error(`Missing required field: ${field}`);
     }
   }
-}
-
-//Function to validate that the password is strong
-function validateStrongPassword(password) {
-    if (password.length < 8) {
-        throw new Error('Password must be at least 8 characters long');
-    }
-    if (!password.match(/[a-z]/) || !password.match(/[A-Z]/) || !password.match(/\d/) || !password.match(/[!@#$%^&*]/)) {
-      throw new Error('Password must contain at least one lowercase letter, one uppercase letter, one digit, and one symbol');
-    }
 }
 
 //Function to validate that the password is strong
@@ -56,7 +46,7 @@ app.post('/adduser', async (req, res) => {
     validateStrongPassword(newPassword);
 
     // Check if the username is already taken by other user in the db
-    const existingUser = await userCollection.findOne({ newUsername });
+    const existingUser = await User.findOne({ newUsername });
     if (existingUser) {
       return res.status(400).json({ error: 'El usuario ya existe' });
     }
@@ -69,7 +59,7 @@ app.post('/adduser', async (req, res) => {
       password: hashedPassword,
     });
 
-    await userCollection.insertOne(newUser);
+    await User.create(newUser);
     res.json(newUser);
   } catch (error) {
     res.status(400).json({ error: error.message });
