@@ -1,15 +1,4 @@
 const mongoose = require('mongoose');
-const User = require('../users/authservice/auth-model')
-
-const questionGameSchema = new mongoose.Schema({
-    tittle: String,
-    answers: [String],
-    selectedAnswer: Number,
-    correctAnswe: Number,
-    isCorrect: Boolean
-});
-
-const Question = mongoose.model('Question', questionGameSchema);
 
 const gameSchema = mongoose.Schema({
     user: {
@@ -17,7 +6,13 @@ const gameSchema = mongoose.Schema({
         ref: 'User'
     },
     questions: {
-        type: [Question],
+        type: [{
+            question: String,
+            answersArray: [String],
+            correctAnswer: String,
+            selectedAnswer: String,
+            isCorrect: Boolean
+        }],
         validate: [arrayLimit, '{PATH} exceeds the limit of 10'],
     }
 });
@@ -29,4 +24,4 @@ function arrayLimit(val) {
 
 const Game = mongoose.model('Game', gameSchema);
 
-module.exports = { Question, Game };
+module.exports = Game;

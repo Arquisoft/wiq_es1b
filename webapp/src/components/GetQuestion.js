@@ -80,14 +80,13 @@ const GetQuestion = () => {
     navigate("/home", { state: { username, createdAt } });
   };
 
-  const saveQuestion = async (selectedAnswer, correct) => {
-    const username2 = username;
-    await axios.post(`${apiEndpoint}/saveQuestion`, { question, answersArray, correctAnswer, selectedAnswer, correct, username2 });
+  const saveQuestion = async (selectedAnswer, isCorrect) => {
+    await axios.post(`${apiEndpoint}/saveQuestion`, { question, answersArray, correctAnswer, selectedAnswer, isCorrect, username });
   }
 
-  const saveHistorial = async (selectedAnswer, correct) => {
-    const username2 = username;
-    await axios.post(`${apiEndpoint}/saveGameRecord`, { question, answersArray, correctAnswer, selectedAnswer, correct, username2 });
+  const saveHistorial = async () => {
+    setIsReady(false);
+    await axios.post(`${apiEndpoint}/saveGameRecord`, { username });
   }
 
   useEffect(() => {
@@ -238,6 +237,12 @@ const GetQuestion = () => {
           style={{ width: '100%', fontWeight: 'bold' }}
           onClick={saveHistorial}>
           Save historial
+        </Button>
+        <Button
+          variant="contained"
+          style={{ width: '100%', fontWeight: 'bold' }}
+          onClick={showHome}>
+          Home
         </Button>
       </div>
     ))

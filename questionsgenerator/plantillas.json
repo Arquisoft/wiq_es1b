@@ -46,7 +46,7 @@
     },
     {
         "tittle": "What is the logo of ??",
-        "queryOfOf": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q3231690;wdt:P154 ?answerLabel.SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
+        "queryOf": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q3231690;wdt:P154 ?answerLabel.SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
         "category": "image"
     }
 ]
