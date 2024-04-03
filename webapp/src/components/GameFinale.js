@@ -6,8 +6,14 @@ const GameFinale = () => {
 
   return(
     <Container component="main" maxWidth="md" sx={{ margin: 8 }}>
-      <Typography component="h2" variant="h5" className='question-text' style={{ fontWeight: 'bold' }}>
-        Finished the game! You have answered all 10 questions, you can see them in the record or go home to start a new game.
+      <Typography component="h1" variant="h1" marginBottom={2}>
+        Game finished!
+      </Typography>
+      <Typography component="h2" variant="h5">
+        You've successfully tackled all 10 questions! 
+      </Typography>
+      <Typography component="h2" variant="h5">
+        Feel free to review them in the record or head back home to start a new game.
       </Typography>
     </Container>
   );
