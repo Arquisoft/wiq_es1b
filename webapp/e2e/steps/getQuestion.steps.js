@@ -41,11 +41,13 @@ defineFeature(feature, test => {
     when('I log in, start a new game and answer all questions right', async () => {
       await expect(page).toFill('input[name="username"]', username);
       await expect(page).toFill('input[name="password"]', password);
-      await expect(page).toClick('button', { text: 'Login' })
+      await expect(page).toClick('button', { text: 'Login' });
+      await expect(page).toMatchElement("div", { text: "Hello "+username+"!" });
+      await expect(page).toClick('button', { text: 'New Full Random Game' });
     });
 
     then('The congratulation message is shown in each question and the end message is shown', async () => {
-        await expect(page).toMatchElement("div", { text: "Hello "+username+"!" });
+        
     });
   })
 

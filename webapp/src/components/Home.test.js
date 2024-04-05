@@ -11,6 +11,7 @@ const mockAxios = new MockAdapter(axios);
 
 describe('Home component', () => {
   beforeEach(() => {
+    localStorage.setItem('username', 'testUser');
     mockAxios.reset();
   });
 
