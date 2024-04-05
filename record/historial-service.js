@@ -69,10 +69,12 @@ app.post('/saveGameRecord', async (req, res) => {
 
 app.post('/getGameRecord', async (req, res) => {
   try {
-    const { username } = req.body;
-    const user = await User.findOne(username);
+    const { username2 } = req.body;
+    const user = await User.findOne(username2);
 
     const games = await Game.find(user._id);
+
+    console.log(games);
 
     res.json({ games: games });
   } catch (error) {
