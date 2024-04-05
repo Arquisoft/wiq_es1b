@@ -3,11 +3,12 @@ const mongoose = require('mongoose');
 const User = require('./user-model');
 const bcrypt = require('bcrypt');
 
-
 let mongoserver;
 let userservice;
 let authservice;
 let gatewayservice;
+let questionservice;
+let historialservice;
 
 async function startServer() {
     console.log('Starting MongoDB memory server...');
@@ -17,6 +18,8 @@ async function startServer() {
     userservice = await require("../../users/userservice/user-service");
     authservice = await require("../../users/authservice/auth-service");
     gatewayservice = await require("../../gatewayservice/gateway-service");
+    questionservice = await require("../../questionsgenerator/questions-service");
+    historialservice = await require("../../historial/historial-service");
 
     // Add the user for the tests, if the user already exists, it will not be added
     await mongoose.connect(mongoUri);
@@ -29,6 +32,7 @@ async function startServer() {
       });
       await newUser.save();
     }
+
   }
 
   startServer();
