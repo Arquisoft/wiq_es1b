@@ -16,6 +16,12 @@ import Footer from './components/Footer';
 import Help from './components/Help.js';
 import GameFinale from './components/GameFinale.js';
 
+function logout() {
+  localStorage.removeItem('username');
+}
+//before the window is closed, the username is removed from the local storage so that the user is logged out
+window.addEventListener('beforeunload', logout);
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>

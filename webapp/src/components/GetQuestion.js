@@ -1,6 +1,6 @@
 // src/components/GetQuestion.js
 import React, { useState, useEffect } from 'react';
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { Container, Typography, Box, Button } from '@mui/material';
 import './stylesheets/GetQuestionCss.css';
@@ -8,6 +8,7 @@ import GameFinale from './GameFinale';
 
 const GetQuestion = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   //get the max number of questions and the timer from the location gotten from the home component
   const { selectedNumQuestions } = location.state || {};
   const { selectedTimer } = location.state || {};
@@ -75,6 +76,14 @@ const GetQuestion = () => {
 
   useEffect(() => {
     getQuestion();
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    const user = localStorage.getItem('username');
+    if (user === null) {
+      navigate('/');
+    }
     // eslint-disable-next-line
   }, []);
 
