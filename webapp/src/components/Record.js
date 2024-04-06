@@ -48,7 +48,7 @@ const Record = () => {
         {record.map((game, index) => (
           <TreeItem itemId={`Game ${index + 1}`} label={`Game ${index + 1}`}>
             {game.questions.map((question, qIndex) => (
-              <TreeItem itemId={`Game ${index + 1}-question ${qIndex + 1}`} label='question.tittle'>
+              <TreeItem itemId={`Game ${index + 1}-question ${qIndex + 1}`} label={question.question}>
                 <List>
                   <ListItem key={`game-${index}-question-${qIndex}`}>
                     <ListItemText primary={`Correct Answer: ${question.correctAnswer}, Selected: ${question.selectedAnswer}`} />
