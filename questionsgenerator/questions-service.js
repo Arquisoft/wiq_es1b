@@ -4,12 +4,10 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const QuestionGenerator = require('./questionGenerator.js');
 const Question = require('./question-model')
-const mongoURI = process.env.MONGODB_URI || 'wiq_es01b_admin:admin@wiq.eckuzci.mongodb.net/wiq?retryWrites=true&w=majority&appName=WIQ';
+const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://wiq_es01b_admin:admin@wiq.eckuzci.mongodb.net/wiq?retryWrites=true&w=majority&appName=WIQ';
 
 const app = express();
 const port = 8003;
-
-generatedQuestions = true;
 
 // Middleware to parse JSON in request body
 app.use(bodyParser.json());
@@ -22,19 +20,15 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 //to respond to the /getQuestion request 
 app.post('/getQuestion', async (req, res) => {
   try {
-    if (!generatedQuestions) {
-      generatedQuestions = true;
-
-      const generator = new QuestionGenerator();
-      await generator.loadTemplates();
-      await generator.generate10Questions();
-    }
-
     //category of the game chosen
     const category = req.body.category;
 
     //if the category is all, it will choose a random question from all the categories
     const question = await getRandomQuestionByCategory(category);
+
+    console.log("ID: ", question._id);
+
+
 
     if (question) {
       var tittle = question.tittle;
@@ -43,7 +37,8 @@ app.post('/getQuestion', async (req, res) => {
 
       var answerSet = question.answers;
 
-      console.log({ tittle, correctAnswer, answerSet });
+      // Delete the question so as not to have repeated questions.
+      await Question.deleteOne({ _id: question._id });
 
       res.json({ question: tittle, correctAnswerLabel: correctAnswer, answerLabelSet: answerSet });
     }
@@ -53,7 +48,14 @@ app.post('/getQuestion', async (req, res) => {
   }
 });
 
+app.post('/generateQuestions', async (req, res) => {
+  const generator = new QuestionGenerator();
+  await generator.loadTemplates();
+  await generator.generate10Questions();
+})
+
 async function getRandomQuestionByCategory(category) {
+
   try {
     let query = {}; // Inicializar consulta vacía por defecto
 
@@ -62,7 +64,7 @@ async function getRandomQuestionByCategory(category) {
       // Si no es "todo", construir la consulta para la categoría especificada
       query = { category: category };
     } else {
-      query = { category: { $ne: 'image' } };
+      query = {};
     }
 
     const randomQuestion = await Question.aggregate([

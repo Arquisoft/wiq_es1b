@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const User = require('./auth-model');
 const Game = require('./historial-model');
-const mongoURI = process.env.MONGODB_URI || 'wiq_es01b_admin:admin@wiq.eckuzci.mongodb.net/wiq?retryWrites=true&w=majority&appName=WIQ';
+const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://wiq_es01b_admin:admin@wiq.eckuzci.mongodb.net/wiq?retryWrites=true&w=majority&appName=WIQ';
 
 const app = express();
 const port = 8004;
@@ -44,7 +44,6 @@ app.post('/saveGameRecord', async (req, res) => {
   try {
     const { username } = req.body;
 
-    console.log("Username:", username);
 
     if (!gameQuestions[username]) {
       return res.status(400).json({ error: "No game questions found for this user" });
@@ -68,19 +67,14 @@ app.post('/saveGameRecord', async (req, res) => {
 });
 
 app.post('/getGameRecord', async (req, res) => {
-  console.log("ESTOY ACCEDIENDO AL HISTORAL");
   try {
     const { username } = req.body;
 
-    console.log("Username: ", username);
 
     const user = await User.findOne({ username: username });
 
-    console.log("User: ", user);
-
     const games = await Game.find({ user: user._id });
 
-    console.log("Question: ", games[0].questions[0]);
 
     res.json({ games: games });
   } catch (error) {

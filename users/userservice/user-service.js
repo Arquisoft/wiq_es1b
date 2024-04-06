@@ -12,7 +12,8 @@ const port = 8001;
 app.use(bodyParser.json());
 
 // Connect to MongoDB
-const mongoURI = process.env.MONGODB_URI || 'wiq_es01b_admin:admin@wiq.eckuzci.mongodb.net/wiq?retryWrites=true&w=majority&appName=WIQ';
+const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://wiq_es01b_admin:admin@wiq.eckuzci.mongodb.net/wiq?retryWrites=true&w=majority&appName=WIQ';
+
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true});
 //const userCollection = mongoose.connection.useDb("WIQ").collection("users");
 

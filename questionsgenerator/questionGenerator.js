@@ -28,9 +28,9 @@ class questionGenerator {
       console.error("Error loading templates: ", error);
     }
   }
+  
   //This method will generate 10 questions, and save them into the db.
   async generate10Questions() {
-
     try {
       for (var i = 0; i < 10; i++) {
 
