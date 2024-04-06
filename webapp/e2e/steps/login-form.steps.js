@@ -16,6 +16,32 @@ defineFeature(feature, test => {
       ? await puppeteer.launch()
       : await puppeteer.launch({ headless: false, slowMo: 100 });
     page = await browser.newPage();
+
+    await page.setRequestInterception(true);
+    //intercepts the requests to the getQuestion endpoint and other request of options
+    page.on('request', (req) => {
+      if (req.method() === 'OPTIONS'){
+        // Respond to preflight request
+        req.respond({
+          status: 200,
+          headers: {
+              'Access-Control-Allow-Origin': '*',
+              'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+              'Access-Control-Allow-Headers': '*'
+          }
+        });
+      } else if (req.url().endsWith('/generateQuestions')) {
+            req.respond({
+                status: 200,
+                headers: {
+                    'Access-Control-Allow-Origin': '*'
+                }
+            });
+        } else {
+            req.continue();
+        }
+    });
+
     //Way of setting up the timeout
     setDefaultOptions({ timeout: 10000 })
 

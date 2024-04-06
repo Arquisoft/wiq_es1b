@@ -31,71 +31,24 @@ app.post('/getQuestion', async (req,res) => {
 
     // Find a question in the database randomly
     //if the category is all, it will choose a random question from all the categories
-    let randomQuestion = null;
-    if (category !== "todo") {
-      randomQuestion = await Question.aggregate([
-        { $match: { category: category } },
-        { $sample: { size: 1 } }
-      ]);
-    } else {
-      randomQuestion = await Question.aggregate([
-        { $sample: { size: 1 } }
-      ]);
+    const question = await getRandomQuestionByCategory(category);
+
+    console.log("ID: ", question._id);
+
+    if (question) {
+      var tittle = question.tittle;
+
+      var correctAnswer = question.answers[question.correctAnswer];
+
+      var answerSet = question.answers;
+
+      // Delete the question so as not to have repeated questions.
+      await Question.deleteOne({ _id: question._id });
+
+      res.json({ question: tittle, correctAnswerLabel: correctAnswer, answerLabelSet: answerSet });
     }
 
-    //get the title and the query
-    const title = randomQuestion[0].title;
-    const query = randomQuestion[0].query;
-
-    //get data from wikidata
-    const questionData = await generator.makeSPARQLQuery(query);
-
-    //data of the answers
-    let numberOfCorrectAnswer;
-    let correctLabel;
-    let correctAnswerLabel;
-    let incorrectAnswersLabels = new Set();
-    
-    //number of options of responses, the length of the array from wikidata
-    let numOptions = questionData.length
-
-    //randomly choose the correct answer
-    numberOfCorrectAnswer = Math.floor(Math.random() * numOptions);
-    while (/^Q\d+$/.test(questionData[numberOfCorrectAnswer].answerLabel.value)) {
-      numberOfCorrectAnswer = Math.floor(Math.random() * numOptions);
-    }
-    //get the label for the question and que right answer
-    correctLabel = questionData[numberOfCorrectAnswer].entityLabel.value;
-    correctAnswerLabel = questionData[numberOfCorrectAnswer].answerLabel.value;
-
-    //choose the 3 incorrect answers randomly
-    for (let i = 0; i < 3; i++) {
-      
-      //choose a random number
-      let numberChosen = Math.floor(Math.random() * numOptions);  
-
-      //check que number selected is not the same as the correct answer
-      //or has already been chose for other wrong answer
-      while (/^Q\d+$/.test(questionData[numberChosen].answerLabel.value)  ||questionData[numberChosen].answerLabel.value === correctAnswerLabel || incorrectAnswersLabels.has(questionData[numberChosen].answerLabel.value)) {
-            numberChosen = Math.floor(Math.random() * numOptions);
-      }
-      //get the wrong answer
-      let incorrectAnswer = questionData[numberChosen].answerLabel.value;
-      incorrectAnswersLabels.add(incorrectAnswer);
-    }
-
-    //replace the ? in the questions with the information about the question
-    const replacedTitle = title.replace('?', correctLabel);
-    
-    //add the correct answer to the set to shuffle it later
-    incorrectAnswersLabels.add(correctAnswerLabel);
-
-    //transform the set into an array
-    const incorrectAnswersArray = shuffleArray(Array.from(incorrectAnswersLabels));
-
-    //in the response goes the title of the question, the correct answer and a set of the three incorrect answers
-    res.json({question: replacedTitle, correctAnswerLabel: correctAnswerLabel, answerLabelSet: incorrectAnswersArray});
-  } catch(error){
+  } catch (error) {
     res.status(500).json({ error: 'Internal Server Error inside service' });
   }
 });

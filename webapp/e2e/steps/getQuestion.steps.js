@@ -17,34 +17,38 @@ defineFeature(feature, test => {
     page = await browser.newPage();
 
     await page.setRequestInterception(true);
-    //intercepts the requests to the getQuestion endpoint and other request of options
+    //intercepts the requests to the getQuestion, savequestion endpoints and other request of options
     page.on('request', (req) => {
-        if (req.url().endsWith('/getQuestion')) {
-            if (req.method() === 'OPTIONS') {
-                // Respond to preflight request
-                req.respond({
-                    status: 200,
-                    headers: {
-                        'Access-Control-Allow-Origin': '*',
-                        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-                        'Access-Control-Allow-Headers': '*'
-                    }
-                });
-            } else {
-                // Respond to actual request
-                req.respond({
-                    status: 200,
-                    headers: {
-                        'Access-Control-Allow-Origin': '*'
-                    },
-                    contentType: 'application/json',
-                    body: JSON.stringify({
-                        question: 'Test question',
-                        correctAnswerLabel: 'Test correct answer',
-                        answerLabelSet: ['Test answer 1', 'Test answer 2', 'Test answer 3', 'Test correct answer']
-                    })
-                });
+      if (req.method() === 'OPTIONS'){
+        // Respond to preflight request
+        req.respond({
+          status: 200,
+          headers: {
+              'Access-Control-Allow-Origin': '*',
+              'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+              'Access-Control-Allow-Headers': '*'
+          }
+        });
+      } else if (req.url().endsWith('/getQuestion')) {
+            req.respond({
+                status: 200,
+                headers: {
+                    'Access-Control-Allow-Origin': '*'
+                },
+                contentType: 'application/json',
+                body: JSON.stringify({
+                    question: 'Test question',
+                    correctAnswerLabel: 'Test correct answer',
+                    answerLabelSet: ['Test answer 1', 'Test answer 2', 'Test answer 3', 'Test correct answer']
+                })
+            });
+        } else if(req.url().endsWith('/saveQuestion')){
+          req.respond({
+            status: 200,
+            headers: {
+                'Access-Control-Allow-Origin': '*'
             }
+          });
         } else {
             req.continue();
         }

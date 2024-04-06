@@ -96,8 +96,8 @@ const GetQuestion = () => {
   const checkAnswer = (selectedAnswer) => {
     //only executes the first time a button is clicked
     let correct = false;
-    if(answerFeedback === ''){
-      if(selectedAnswer === correctAnswer) {
+    if (answerFeedback === '') {
+      if (selectedAnswer === correctAnswer) {
         correct = true;
         setAnswerFeedback("You have won! Congratulations!");
       } else if(timer === 0){
