@@ -1,7 +1,6 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { render, fireEvent, waitFor, screen } from '@testing-library/react';
+import { BrowserRouter as Router, MemoryRouter } from 'react-router-dom';
+import { render, fireEvent, screen } from '@testing-library/react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import Home from './Home';
@@ -11,6 +10,7 @@ const mockAxios = new MockAdapter(axios);
 
 describe('Home component', () => {
   beforeEach(() => {
+    localStorage.setItem('username', 'testUser');
     mockAxios.reset();
   });
 
@@ -29,7 +29,7 @@ describe('Home component', () => {
 
     //compruebo que hay dos botones, jugar y record
     const buttons = await screen.findAllByRole('button');
-    expect(buttons.length).toBe(1);
+    expect(buttons.length).toBe(5);
 
     expect(screen.getByText(/Here you can start a new game!/i)).toBeInTheDocument();
     expect(screen.getByText(`Hello ${usernamePrueba}!`)).toBeInTheDocument();
@@ -46,7 +46,7 @@ describe('Home component', () => {
     );
 
     //click the new game button
-    const newGameButton = await screen.findByText('New Game');
+    const newGameButton = await screen.findByText('New Full Random Game');
     fireEvent.click(newGameButton);
 
     //checks it navigates out of the home page
