@@ -7,6 +7,7 @@ const Question = require('./question-model')
 const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://wiq_es01b_admin:admin@wiq.eckuzci.mongodb.net/wiq?retryWrites=true&w=majority&appName=WIQ';
 
 const app = express();
+app.disable('x-powered-by');
 const port = 8003;
 
 // Middleware to parse JSON in request body
