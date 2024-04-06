@@ -18,7 +18,7 @@ beforeAll(async () => {
   sinon.stub(User, 'findOne').resolves({
     _id: 'testUserId',
     username: 'Example username',
-    password: 'Example password',
+    password: 'Example password',//NOSONAR
     createdAt: new Date(),
   });
 
