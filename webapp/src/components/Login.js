@@ -28,8 +28,6 @@ const Login = (onLoginSuccess) => {
 
       localStorage.setItem("username", username);
 
-      await axios.post(`${apiEndpoint}/generateQuestions`, {});
-
     } catch (error) {
       setError(error.response.data.error);
     }

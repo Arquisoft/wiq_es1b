@@ -12,8 +12,6 @@ This repo is a basic application composed of several components.
 - **Gateway service**. Express service that is exposed to the public and serves as a proxy to the two previous ones.
 - **User service**. Express service that handles the insertion of new users in the system.
 - **Auth service**. Express service that handles the authentication of users.
-- **Question service**. Express service that handles the questions of the game. It is divided into two modules: one generates the questions and updates the templates, and the other manages the questions from the database.
-- **Record service**. Express service that handles the recrods of the game.
 - **Webapp**. React web application that uses the gateway service to allow basic login and new user features.
 
 Both the user and auth service share a Mongo database that is accessed with mongoose.
