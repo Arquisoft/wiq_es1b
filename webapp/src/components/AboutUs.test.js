@@ -27,7 +27,7 @@ describe('AboutUs component', () => {
       <AboutUs />
     </Router>);
 
-    await waitFor(() => screen.getByText('About us'));
+    await waitFor(() => screen.getByText(title));
 
     expect(screen.getByText(title)).toBeInTheDocument();
     expect(screen.getByText(paragraph1)).toBeInTheDocument();
