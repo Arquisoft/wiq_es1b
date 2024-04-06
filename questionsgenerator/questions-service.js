@@ -28,8 +28,6 @@ app.post('/getQuestion', async (req, res) => {
 
     console.log("ID: ", question._id);
 
-
-
     if (question) {
       var tittle = question.tittle;
 
