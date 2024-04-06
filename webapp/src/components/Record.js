@@ -31,7 +31,7 @@ const Record = () => {
   const getHistorialForLoggedUser = async () => {
     const response = await axios.post(`${apiEndpoint}/getGameRecord`, { username });
     // Extract data from the response
-    const { games: games } = response.data;
+    const { games } = response.data;
     setRecord(games);
 
   }
@@ -54,12 +54,25 @@ const Record = () => {
 
       <SimpleTreeView>
         {record.map((game, index) => (
-          <TreeItem itemId={`Game ${index + 1}`} label={`Game ${index + 1}`}>
+          <TreeItem key={`game-${index}`} itemId={`Game ${index + 1}`} label={`Game ${index + 1}`}>
             {game.questions.map((question, qIndex) => (
-              <TreeItem itemId={`Game ${index + 1}-question ${qIndex + 1}`} label={question.question}>
+              <TreeItem key={`game-${index}-question-${qIndex}`} itemId={`Game ${index + 1}-question ${qIndex + 1}`} label={question.question}>
                 <List>
                   <ListItem key={`game-${index}-question-${qIndex}`}>
-                    <ListItemText primary={`Correct Answer: ${question.correctAnswer}, Selected: ${question.selectedAnswer}`} />
+                    <ListItemText primary={
+                        <>
+                          Correct Answer: 
+                          {question.correctAnswer.startsWith('http') ? 
+                            <img src={question.correctAnswer} alt="Correct Answer" style={{maxWidth: '5em', maxHeight: '5em'}} /> : 
+                            question.correctAnswer
+                          }
+                          , Selected: 
+                          {question.selectedAnswer.startsWith('http') ? 
+                            <img src={question.selectedAnswer} alt="Selected Answer" style={{maxWidth: '5em', maxHeight: '5em'}}/> : 
+                            question.selectedAnswer
+                          }
+                        </>
+                      } />  
                   </ListItem>
                 </List>
               </TreeItem>
@@ -67,21 +80,6 @@ const Record = () => {
           </TreeItem>
         ))}
       </SimpleTreeView>
-
-      {/* <List>
-        {record.map((game, index) => (
-          <ListItem key={game._id}>
-            <ListItemText primary={`Game ${index + 1}`} secondary={`User: ${game.user}`} />
-            <List>
-              {game.questions.map((question, qIndex) => (
-                <ListItem key={`game-${index}-question-${qIndex}`}>
-                  <ListItemText primary={`Question ${qIndex + 1}`} secondary={`Correct Answer: ${question.correctAnswer}, Selected: ${question.selectedAnswer}`} />
-                </ListItem>
-              ))}
-            </List>
-          </ListItem>
-        ))}
-      </List> */}
 
       <Button
         variant="contained"
