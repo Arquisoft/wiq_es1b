@@ -11,12 +11,6 @@ const paragraph1 = "Game finished!";
 const paragraph2 = "You've successfully tackled all 10 questions!";
 const paragraph3 = "Feel free to review them in the record or head back home to start a new game.";
 
-const subtitle = "Our Team:";
-const member1 = "● María López García-Consuegra";
-const member2 = "● Álex Fernández Salé";
-const member3 = "● Mauro Varea Fernández";
-const member4 = "● Lucas Castro Antuña";
-
 describe('GameFinale component', () => {
   beforeEach(() => {
     mockAxios.reset();
