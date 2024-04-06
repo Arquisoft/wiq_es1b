@@ -98,6 +98,15 @@ describe('Historial Service', () => {
 
     expect(response.status).toBe(200);
     expect(response.body).toHaveProperty('games');
+
+    const game = response.body.games[0];
+    expect(game).toHaveProperty('_id', 'testGameId');
+    expect(game).toHaveProperty('user');
+    expect(game.user).toHaveProperty('_id', 'testUserId');
+    expect(game.user).toHaveProperty('username', 'Example username');
+    expect(game.user).toHaveProperty('password', 'Example password');
+    expect(game.user).toHaveProperty('createdAt');
+    expect(game).toHaveProperty('questions');
   });
 
   it('should get a new question on POST /deleteTempQuestions', async () => {
