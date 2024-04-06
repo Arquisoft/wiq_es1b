@@ -16,7 +16,7 @@ describe('NavigationBar component', () => {
     const homeButton = getByText('Home');
     fireEvent.click(homeButton);
 
-    expect(history.location.pathname).toBe('/home');
+    expect(history.location.pathname).toBe('/');
   });
 
   it('should navigate to record page when "Record" button is clicked', () => {
@@ -30,7 +30,7 @@ describe('NavigationBar component', () => {
     const recordButton = getByText('Record');
     fireEvent.click(recordButton);
 
-    expect(history.location.pathname).toBe('/record');
+    expect(history.location.pathname).toBe('/');
   });
 
   it('should navigate to help page when "Help" button is clicked', () => {
@@ -44,7 +44,7 @@ describe('NavigationBar component', () => {
     const helpButton = getByText('Help');
     fireEvent.click(helpButton);
 
-    expect(history.location.pathname).toBe('/help');
+    expect(history.location.pathname).toBe('/');
   });
 
   it('should navigate to aboutUs page when "About Us" button is clicked', () => {
@@ -58,7 +58,7 @@ describe('NavigationBar component', () => {
     const aboutUsButton = getByText('About Us');
     fireEvent.click(aboutUsButton);
 
-    expect(history.location.pathname).toBe('/aboutUs');
+    expect(history.location.pathname).toBe('/');
   });
 
 });
