@@ -1,87 +1,87 @@
 [
     {
-        "title": "What is the population of ??",
-        "query": "SELECT ?entity ?entityLabel ?answerLabel WHERE { ?entity wdt:P31 wd:Q3624078; wdt:P1082 ?answerLabel. SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\". } }",
+        "tittle": "What is the population of ??",
+        "queryOf": "SELECT ?entity ?entityLabel ?answerLabel WHERE { ?entity wdt:P31 wd:Q3624078; wdt:P1082 ?answerLabel. SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\". } }",
         "category": "geography"
     },
     {
-        "title": "What is the currency of ??",
-        "query": "SELECT ?entity ?entityLabel ?answer ?answerLabel WHERE { ?entity wdt:P31 wd:Q3624078; wdt:P38 ?answer. SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\". } }",
+        "tittle": "What is the currency of ??",
+        "queryOf": "SELECT ?entity ?entityLabel ?answer ?answerLabel WHERE { ?entity wdt:P31 wd:Q3624078; wdt:P38 ?answer. SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\". } }",
         "category": "geography"
     },
     {
-        "title": "What is the capital of ??",
-        "query": "SELECT ?entity ?entityLabel ?answer ?answerLabel WHERE { ?entity wdt:P31 wd:Q3624078; wdt:P36 ?answer. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
+        "tittle": "What is the capital of ??",
+        "queryOf": "SELECT ?entity ?entityLabel ?answer ?answerLabel WHERE { ?entity wdt:P31 wd:Q3624078; wdt:P36 ?answer. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
         "category": "geography"
     },
     {
-        "title": "Which continent does ? belong to?",
-        "query": "SELECT ?entity ?entityLabel ?answer ?answerLabel WHERE {?entity wdt:P31 wd:Q6256;wdt:P30 ?answer.SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
+        "tittle": "Which continent does ? belong to?",
+        "queryOf": "SELECT ?entity ?entityLabel ?answer ?answerLabel WHERE {?entity wdt:P31 wd:Q6256;wdt:P30 ?answer.SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
         "category": "geography"
     },
     {
-        "title": "What is the area (kms) of ??",
-        "query": "SELECT ?entity ?entityLabel ?answer ?answerLabel WHERE { ?entity wdt:P31 wd:Q3624078; wdt:P2046 ?answer. SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\". }}",
+        "tittle": "What is the area (kms) of ??",
+        "queryOf": "SELECT ?entity ?entityLabel ?answer ?answerLabel WHERE { ?entity wdt:P31 wd:Q3624078; wdt:P2046 ?answer. SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\". }}",
         "category": "geography"
     },
     {
-        "title": "What is the official language of ??",
-        "query": "SELECT ?entity ?entityLabel ?answer ?answerLabel WHERE { ?entity wdt:P31 wd:Q3624078; wdt:P37 ?answer. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". } }",
+        "tittle": "What is the official language of ??",
+        "queryOf": "SELECT ?entity ?entityLabel ?answer ?answerLabel WHERE { ?entity wdt:P31 wd:Q3624078; wdt:P37 ?answer. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". } }",
         "category": "geography"
     },
     {
-        "title": "What is ?'s home stadium?",
-        "query": "SELECT ?entity ?entityLabel ?answer ?answerLabel WHERE {?entity wdt:P31 wd:Q476028; wdt:P115 ?answer. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
+        "tittle": "What is ?'s home stadium?",
+        "queryOf": "SELECT ?entity ?entityLabel ?answer ?answerLabel WHERE {?entity wdt:P31 wd:Q476028; wdt:P115 ?answer. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
         "category": "sport"
     },
     {
-        "title": "What is the flag of ??",
-        "query": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q6256;wdt:P41 ?answerLabel.SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
+        "tittle": "What is the flag of ??",
+        "queryOf": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q6256;wdt:P41 ?answerLabel.SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
         "category": "image"
     },
     {
-        "title": "What is the logo of ??",
-        "query": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q4830453; wdt:P154 ?answerLabel; wdt:P571 ?foundingDate.FILTER(YEAR(?foundingDate) >= 1990)SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
+        "tittle": "What is the logo of ??",
+        "queryOf": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q4830453; wdt:P154 ?answerLabel; wdt:P571 ?foundingDate.FILTER(YEAR(?foundingDate) >= 1990)SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
         "category": "image"
     },
     {
-        "title": "What is the logo of ??",
-        "query": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q3231690;wdt:P154 ?answerLabel.SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
+        "tittle": "What is the logo of ??",
+        "queryOf": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q3231690;wdt:P154 ?answerLabel.SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
         "category": "image"
     },
     {
-        "title": "What is the chemical symbol of ??",
-        "query": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q11344; wdt:P246 ?answerLabel. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
+        "tittle": "What is the chemical symbol of ??",
+        "queryOf": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q11344; wdt:P246 ?answerLabel. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
         "category": "science"
     },
     {
-        "title": "What is the melting point of ??",
-        "query": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q11344; wdt:P2101 ?answerLabel. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
+        "tittle": "What is the melting point of ??",
+        "queryOf": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q11344; wdt:P2101 ?answerLabel. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
         "category": "science"
     },
     {
-        "title": "What is the boiling point of ??",
-        "query": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q11344; wdt:P2102 ?answerLabel. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
+        "tittle": "What is the boiling point of ??",
+        "queryOf": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q11344; wdt:P2102 ?answerLabel. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
         "category": "science"
     },
     {
-        "title": "What is the atomic number of ??",
-        "query": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q11344; wdt:P1086 ?answerLabel. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
+        "tittle": "What is the atomic number of ??",
+        "queryOf": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q11344; wdt:P1086 ?answerLabel. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
         "category": "science"
     },
     {
-        "title": "What is the atomic mass of ??",
-        "query": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q11344; wdt:P2067 ?answerLabel. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
+        "tittle": "What is the atomic mass of ??",
+        "queryOf": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q11344; wdt:P2067 ?answerLabel. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
         "category": "science"
     },
     {
-        "title": "What is the density of ??",
-        "query": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q11344; wdt:P2054 ?answerLabel. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
+        "tittle": "What is the density of ??",
+        "queryOf": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q11344; wdt:P2054 ?answerLabel. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
         "category": "science"
     },
     {
-        "title": "What is the heat of fusion of ??",
-        "query": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q11344; wdt:P2062 ?answerLabel. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
+        "tittle": "What is the heat of fusion of ??",
+        "queryOf": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q11344; wdt:P2062 ?answerLabel. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
         "category": "science"
     }
 ]
