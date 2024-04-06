@@ -16,7 +16,7 @@ const Help = () => {
 
   return(
     <Container component="main" maxWidth="md" sx={{ margin: 8 }}>
-      <Typography component="h1" variant="h1" marginBottom={2}>
+      <Typography component="h1" variant="h1" marginBottom={2} data-testid='title'>
         Help
       </Typography>
       <Typography variant="body1" align="justify" paragraph>
