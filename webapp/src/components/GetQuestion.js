@@ -29,7 +29,6 @@ const GetQuestion = () => {
 
   //accedo al usuario logeado
   const { username } = location.state || {};
-  const { createdAt } = location.state || {};
   //category of the game
   const { category } = location.state || {};
 
@@ -98,7 +97,7 @@ const GetQuestion = () => {
    */
   const checkAnswer = (selectedAnswer) => {
     //only executes the first time a button is clicked
-    var correct = false;
+    let correct = false;
     if (answerFeedback === '') {
       if (selectedAnswer === correctAnswer) {
         correct = true;

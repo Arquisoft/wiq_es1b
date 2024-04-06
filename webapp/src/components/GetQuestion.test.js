@@ -19,7 +19,7 @@ describe('GetQuestion component', () => {
       answerLabelSet: ['Test answer 1', 'Test answer 2', 'Test answer 3', 'Test correct answer']
     });
 
-    mockAxios.onPost('http://localhost:8000/saveHistorial').reply(200, {   
+    mockAxios.onPost('http://localhost:8000/saveQuestion').reply(200, {   
     });
   });
 
