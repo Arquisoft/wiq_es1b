@@ -1,6 +1,6 @@
 // src/components/Record.js
 import React, { useState, useEffect } from 'react';
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { Container, Typography, List, ListItem, ListItemText } from '@mui/material';
 import './stylesheets/record.css';
@@ -9,6 +9,16 @@ const Record = () => {
 
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
   
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = localStorage.getItem('username');
+    if (user === null) {
+      navigate('/');
+    }
+    // eslint-disable-next-line 
+  }, []);
+
   //accedo al usuario logeado
   const location = useLocation();
   const { username } = location.state || {};

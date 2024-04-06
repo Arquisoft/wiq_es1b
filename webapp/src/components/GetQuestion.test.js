@@ -9,6 +9,9 @@ const mockAxios = new MockAdapter(axios);
 
 describe('GetQuestion component', () => {
   beforeEach(() => {
+    //set a username in the localstorage so the component can render
+    localStorage.setItem('username', 'testUser');
+
     mockAxios.reset();
     mockAxios.onPost('http://localhost:8000/getQuestion').reply(200, {
       question: 'Test question',
@@ -121,7 +124,7 @@ describe('GetQuestion component', () => {
     act(() => {
       jest.advanceTimersByTime(15000);
     });
-
+ 
     // Wait for feedback to be rendered
     await waitFor(() => expect(screen.getByText("You lost! You didn't answer in time :(")).toBeInTheDocument()); 
 });

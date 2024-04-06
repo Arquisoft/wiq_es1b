@@ -1,5 +1,5 @@
 // src/components/Home.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
 import { Container, Typography, Button, Stack, Menu, MenuItem, Fade, Tooltip} from '@mui/material';
 import './stylesheets/home.css';
@@ -27,6 +27,14 @@ const Home = () => {
     setSelectedNumQuestions(numQuestions);
     handleClose();
   };
+
+  useEffect(() => {
+    const user = localStorage.getItem('username');
+    if (user === null) {
+      navigate('/');
+    }
+    // eslint-disable-next-line
+  }, []);
 
   //to manage the timer
   const [anchorElT, setAnchorElT] = useState(null);

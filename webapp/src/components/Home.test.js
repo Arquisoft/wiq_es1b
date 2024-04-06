@@ -1,7 +1,6 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { render, fireEvent, waitFor, screen } from '@testing-library/react';
+import { BrowserRouter as Router, MemoryRouter } from 'react-router-dom';
+import { render, fireEvent, screen } from '@testing-library/react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import Home from './Home';
@@ -11,6 +10,7 @@ const mockAxios = new MockAdapter(axios);
 
 describe('Home component', () => {
   beforeEach(() => {
+    localStorage.setItem('username', 'testUser');
     mockAxios.reset();
   });
 
