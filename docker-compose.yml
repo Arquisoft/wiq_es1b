@@ -23,7 +23,7 @@ services:
     networks:
       - mynetwork
     environment:
-      MONGODB_URI: mongodb://mongodb:27017/userdb
+      MONGODB_URI: mongodb+srv://wiq_es01b_admin:admin@wiq.eckuzci.mongodb.net/wiq?retryWrites=true&w=majority&appName=WIQ
 
   userservice:
     container_name: userservice-${teamname:-defaultASW}
@@ -37,7 +37,7 @@ services:
     networks:
       - mynetwork
     environment:
-      MONGODB_URI: mongodb://mongodb:27017/userdb
+      MONGODB_URI: mongodb+srv://wiq_es01b_admin:admin@wiq.eckuzci.mongodb.net/wiq?retryWrites=true&w=majority&appName=WIQ
     
   questionsgenerator:
     container_name: questionsgenerator-${teamname:-defaultASW}
@@ -51,21 +51,22 @@ services:
     networks:
       - mynetwork
     environment:
-      MONGODB_URI: mongodb://mongodb:27017/questiondb
-
-  historial:
-    container_name: historial-${teamname:-defaultASW}
-    image: ghcr.io/arquisoft/wiq_es1b/historial:latest
+      MONGODB_URI: mongodb+srv://wiq_es01b_admin:admin@wiq.eckuzci.mongodb.net/wiq?retryWrites=true&w=majority&appName=WIQ
+      
+  record:
+    container_name: record-${teamname:-defaultASW}
+    image: ghcr.io/arquisoft/wiq_es1b/record:latest
     profiles: ["dev", "prod"]
-    build: ./historial
+    build: ./record
     depends_on:
       - mongodb
+      - authservice
     ports:
       - "8004:8004"
     networks:
       - mynetwork
     environment:
-      MONGODB_URI: mongodb://mongodb:27017/userdb
+      MONGODB_URI: mongodb+srv://wiq_es01b_admin:admin@wiq.eckuzci.mongodb.net/wiq?retryWrites=true&w=majority&appName=WIQ
 
   gatewayservice:
     container_name: gatewayservice-${teamname:-defaultASW}
@@ -77,7 +78,7 @@ services:
       - userservice
       - authservice
       - questionsgenerator
-      - historial
+      - record
     ports:
       - "8000:8000"
     networks:
@@ -86,7 +87,7 @@ services:
       AUTH_SERVICE_URL: http://authservice:8002
       USER_SERVICE_URL: http://userservice:8001
       QUESTION_SERVICE_URL: http://questionsgenerator:8003
-      HISTORIAL_SERVICE_URL: http://historial:8004
+      HISTORIAL_SERVICE_URL: http://record:8004
 
   webapp:
     container_name: webapp-${teamname:-defaultASW}

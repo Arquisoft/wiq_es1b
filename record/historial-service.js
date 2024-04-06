@@ -1,8 +1,10 @@
-// questions-service.js
+// historial-service.js
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const User = require('./auth-model');
+const Game = require('./historial-model');
+const mongoURI = process.env.MONGODB_URI || 'wiq_es01b_admin:admin@wiq.eckuzci.mongodb.net/wiq?retryWrites=true&w=majority&appName=WIQ';
 
 const app = express();
 const port = 8004;
@@ -11,67 +13,92 @@ const port = 8004;
 app.use(express.json());
 
 //Connect to MongoDB
-const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/userdb';
-mongoose.connect(mongoUri);
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
+// Temporary storage for game questions
+const gameQuestions = {};
 
-//to respond to the /saveHistorial request 
-app.post('/saveHistorial', async (req,res) => {
+app.post('/saveQuestion', async (req, res) => {
   try {
 
-    //extract the infrmation from the request to save it in the user
-    const { question, answersArray, correctAnswer, selectedAnswer, correct, username2  } = req.body;
+    const { question, answersArray, correctAnswer, selectedAnswer, isCorrect, username } = req.body;
 
-    const username = username2;
+    if (!gameQuestions[username] || gameQuestions[username] === undefined) {
+      gameQuestions[username] = [];
+    }
+    gameQuestions[username].push({
+      question,
+      answersArray,
+      correctAnswer,
+      selectedAnswer,
+      isCorrect
+    });
 
-    //search for the user with username=user in the bd
-    const user = await User.findOne({ username });
-    
-    //creamos la pregunta para guardarla en el historial
-    const partida = {
-      correctAnswer: correctAnswer,
-      answers: answersArray,
-      title: question,
-      answeredRight: correct,
-      selectedAnswer: selectedAnswer
+    res.json({ msg: "Question saved successfully" });
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+app.post('/saveGameRecord', async (req, res) => {
+  try {
+    const { username } = req.body;
+
+    console.log("Username:", username);
+
+    if (!gameQuestions[username]) {
+      return res.status(400).json({ error: "No game questions found for this user" });
     }
 
-    //guardamos la partida en el array de preguntas del usuario 
-    user.games.push(partida);
-
-    //guardamos los cambios realizados en el usuario
-    await user.save();
-
-    res.json({ msg: "Saves the data correctly" });
-
-  } catch(error){
-    res.status(500).json({ error: 'Internal Server Error inside service' });
-  }
-});
-
-//to respond to the /saveHistorial request 
-app.post('/getHistorial', async (req,res) => {
-  try {
-
-    //extract the infrmation from the request to save it in the user
-    const { username2 } = req.body;
-
-    const username = username2;
-
-    //search for the user with username=user in the bd
     const user = await User.findOne({ username });
 
-    const gamesUser = user.games;
+    const game = {
+      user: user,
+      questions: gameQuestions[username]
+    };
 
-    //respond with the user's games
-    res.json({ games: gamesUser });
+    await Game.create(game);
 
-  } catch(error){
-    res.status(500).json({ error: 'Internal Server Error inside service' });
+    delete gameQuestions[username];
+
+    res.json("Game record saved succesfully");
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
+app.post('/getGameRecord', async (req, res) => {
+  console.log("ESTOY ACCEDIENDO AL HISTORAL");
+  try {
+    const { username } = req.body;
 
+    console.log("Username: ", username);
+
+    const user = await User.findOne({ username: username });
+
+    console.log("User: ", user);
+
+    const games = await Game.find({ user: user._id });
+
+    console.log("Question: ", games[0].questions[0]);
+
+    res.json({ games: games });
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.post('/deleteTempQuestions', async (req, res) => {
+  try {
+    const { username } = req.body;
+
+    if (gameQuestions[username]) {
+      delete gameQuestions[username]
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 const server = app.listen(port, () => {
   console.log(`Historial Service listening at http://localhost:${port}`);

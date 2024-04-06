@@ -3,7 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
-const User = require('./user-model')
+const User = require('./user-model');
 
 const app = express();
 const port = 8001;
@@ -12,17 +12,17 @@ const port = 8001;
 app.use(bodyParser.json());
 
 // Connect to MongoDB
-const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/userdb';
-mongoose.connect(mongoUri);
-
+const mongoURI = process.env.MONGODB_URI || 'wiq_es01b_admin:admin@wiq.eckuzci.mongodb.net/wiq?retryWrites=true&w=majority&appName=WIQ';
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true});
+//const userCollection = mongoose.connection.useDb("WIQ").collection("users");
 
 // Function to validate required fields in the request body
 function validateRequiredFields(req, requiredFields) {
-    for (const field of requiredFields) {
-      if (!(field in req.body)) {
-        throw new Error(`Missing required field: ${field}`);
-      }
+  for (const field of requiredFields) {
+    if (!(field in req.body)) {
+      throw new Error(`Missing required field: ${field}`);
     }
+  }
 }
 
 //Function to validate that the password is strong
@@ -36,31 +36,35 @@ function validateStrongPassword(password) {
 }
 
 app.post('/adduser', async (req, res) => {
-    try {
-        // Check if required fields are present in the request body
-        validateRequiredFields(req, ['username', 'password']);
+  try {
+    // Check if required fields are present in the request body
+    validateRequiredFields(req, ['username', 'password']);
 
-        validateStrongPassword(req.body.password);
+    const newUsername = req.body.username;
+    const newPassword = req.body.password;
 
-        //check if the username is already taken by other user in the database
-        const existingUser = await User.findOne({ username: req.body.username });
-        if (existingUser) {
-            return res.status(400).json({ error: 'Username already exists' });
-        }
+    validateStrongPassword(newPassword);
 
-        // Encrypt the password before saving it
-        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    // Check if the username is already taken by other user in the db
+    const existingUser = await User.findOne({ newUsername });
+    if (existingUser) {
+      return res.status(400).json({ error: 'El usuario ya existe' });
+    }
 
-        const newUser = new User({
-            username: req.body.username,
-            password: hashedPassword,
-        });
+    // Encrypt the password before saving it
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
 
-        await newUser.save();
-        res.json(newUser);
-    } catch (error) {
-        res.status(400).json({ error: error.message }); 
-    }});
+    const newUser = new User({
+      username: newUsername,
+      password: hashedPassword,
+    });
+
+    await User.create(newUser);
+    res.json(newUser);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
 
 const server = app.listen(port, () => {
   console.log(`User Service listening at http://localhost:${port}`);
@@ -68,8 +72,8 @@ const server = app.listen(port, () => {
 
 // Listen for the 'close' event on the Express.js server
 server.on('close', () => {
-    // Close the Mongoose connection
-    mongoose.connection.close();
-  });
+  // Close the Mongoose connection
+  mongoose.connection.close();
+});
 
 module.exports = server
