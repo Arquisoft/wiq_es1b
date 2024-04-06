@@ -32,7 +32,7 @@ class questionGenerator {
   //This method will generate 10 questions, and save them into the db.
   async generate10Questions() {
     try {
-      for (var i = 0; i < 10; i++) {
+      for (let i = 0; i < 10; i++) {
 
         const result = await Template.aggregate([{ $sample: { size: 1 } }]);
 

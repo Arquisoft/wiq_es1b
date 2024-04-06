@@ -4,6 +4,8 @@ const axios = require('axios');
 const sinon = require('sinon');
 const sinonMongoose = require('sinon-mongoose');
 const Question = require('./question-model');
+const Template = require('./templates/template-model');
+const QuestionGenerator = require('./questionGenerator.js');
 
 let mongoServer;
 let app;
@@ -18,39 +20,16 @@ beforeAll(async () => {
   const aggregateStub = sinon.stub(Question, 'aggregate');
   aggregateStub.resolves([
     {
-      title: 'Test title ??',
-      query: 'Test query'
+      tittle: 'Test title ??',
+      correctAnswer: 1,
+      answers: ['Test answer 1', 'Test correct answer', 'Test answer 3', 'Test answer 4'],
+      category: 'todo'
     }
   ]); 
-  //mock the axios call to wikidata
-  axios.get.mockResolvedValue({
-    data: {
-      results: {
-        bindings: [
-          {
-            answerLabel: { value: 'Test answer 1' },
-            entityLabel: { value: 'Test entity 1' }
-          },
-          {
-            answerLabel: { value: 'Test answer 2' },
-            entityLabel: { value: 'Test entity 2' }
-          },
-          {
-            answerLabel: { value: 'Test answer 3' },
-            entityLabel: { value: 'Test entity 3' }
-          },
-          {
-            answerLabel: { value: 'Test answer 4' },
-            entityLabel: { value: 'Test entity 4' }
-          },
-          {
-            answerLabel: { value: 'Test answer 5' },
-            entityLabel: { value: 'Test entity 5' }
-          }
-        ]
-      }
-    }
-  });
+  //mock the deleteOne from the service
+  const deleteOneStub = sinon.stub(Question, 'deleteOne');
+  deleteOneStub.resolves({ n: 1 });
+
 });
 
 afterAll(async () => {
@@ -63,7 +42,6 @@ describe('Questions Service', () => {
     const category = "todo";
 
     const response = await request(app).post('/getQuestion').send({ category });
-    console.log(response.body);
     expect(response.status).toBe(200);
     expect(response.body).toHaveProperty('question');
     expect(response.body).toHaveProperty('correctAnswerLabel');
