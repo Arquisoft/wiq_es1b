@@ -19,7 +19,7 @@ async function startServer() {
     authservice = await require("../../users/authservice/auth-service");
     gatewayservice = await require("../../gatewayservice/gateway-service");
     questionservice = await require("../../questionsgenerator/questions-service");
-    historialservice = await require("../../historial/historial-service");
+    historialservice = await require("../../record/historial-service");
 
     // Add the user for the tests, if the user already exists, it will not be added
     await mongoose.connect(mongoUri);
