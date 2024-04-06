@@ -23,7 +23,7 @@ app.post('/saveQuestion', async (req, res) => {
 
     const { question, answersArray, correctAnswer, selectedAnswer, isCorrect, username } = req.body;
 
-    if (!gameQuestions[username]) {
+    if (!gameQuestions[username] || gameQuestions[username] === undefined) {
       gameQuestions[username] = [];
     }
     gameQuestions[username].push({
@@ -68,13 +68,19 @@ app.post('/saveGameRecord', async (req, res) => {
 });
 
 app.post('/getGameRecord', async (req, res) => {
+  console.log("ESTOY ACCEDIENDO AL HISTORAL");
   try {
-    const { username2 } = req.body;
-    const user = await User.findOne(username2);
+    const { username } = req.body;
 
-    const games = await Game.find(user._id);
+    console.log("Username: ", username);
 
-    console.log(games);
+    const user = await User.findOne({ username: username });
+
+    console.log("User: ", user);
+
+    const games = await Game.find({ user: user._id });
+
+    console.log("Question: ", games[0].questions[0]);
 
     res.json({ games: games });
   } catch (error) {
@@ -82,6 +88,17 @@ app.post('/getGameRecord', async (req, res) => {
   }
 });
 
+app.post('/deleteTempQuestions', async (req, res) => {
+  try {
+    const { username } = req.body;
+
+    if (gameQuestions[username]) {
+      delete gameQuestions[username]
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 const server = app.listen(port, () => {
   console.log(`Historial Service listening at http://localhost:${port}`);

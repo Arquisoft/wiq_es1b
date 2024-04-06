@@ -42,6 +42,7 @@ app.post('/getQuestion', (req, res) => handleRequest(getQuestionUrl+'/getQuestio
 app.post('/saveGameRecord', (req, res) => handleRequest(getHistorialUrl+'/saveGameRecord', req, res));
 app.post('/getGameRecord', (req, res) => handleRequest(getHistorialUrl+'/getGameRecord', req, res));
 app.post('/saveQuestion', (req, res) => handleRequest(getHistorialUrl+'/saveQuestion', req, res));
+app.post('/deleteTempQuestions', (req, res) => handleRequest(getHistorialUrl+'/deleteTempQuestions', req, res));
 
 //para ver el api-doc, entrar en: http://localhost:8000/api-doc/
 

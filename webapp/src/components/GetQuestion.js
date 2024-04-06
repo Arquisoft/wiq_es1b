@@ -77,8 +77,14 @@ const GetQuestion = () => {
 
   const showHome = () => {
     getQuestion();
+    deleteTempQuestions()
     navigate("/home", { state: { username, createdAt } });
   };
+
+  const deleteTempQuestions = async () => {
+    await axios.post(`${apiEndpoint}/deleteTempQuestions`, { username });
+
+  }
 
   const saveQuestion = async (selectedAnswer, isCorrect) => {
     await axios.post(`${apiEndpoint}/saveQuestion`, { question, answersArray, correctAnswer, selectedAnswer, isCorrect, username });

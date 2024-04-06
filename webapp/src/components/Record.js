@@ -1,10 +1,9 @@
 // src/components/Record.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container, Typography, Button } from '@mui/material';
-import { TreeView, TreeItem } from '@mui/lab';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { Container, Typography, Button, List, ListItem, ListItemText } from '@mui/material';
+import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
+import { TreeItem } from '@mui/x-tree-view/TreeItem';
 import { useLocation, useNavigate } from "react-router-dom";
 import './stylesheets/record.css';
 
@@ -22,9 +21,7 @@ const Record = () => {
   const [record, setRecord] = useState([]);
 
   const getHistorialForLoggedUser = async () => {
-    const username2 = username;
-
-    const response = await axios.post(`${apiEndpoint}/getGameRecord`, { username2 });
+    const response = await axios.post(`${apiEndpoint}/getGameRecord`, { username });
     // Extract data from the response
     const { games: games } = response.data;
     setRecord(games);
@@ -47,23 +44,36 @@ const Record = () => {
         Here you can see your record! All about your past games and all!
       </Typography>
 
-      {/* Renderizar el árbol */}
-      <TreeView
-        defaultCollapseIcon={<ExpandMoreIcon />}
-        defaultExpandIcon={<ChevronRightIcon />}
-      >
+      <SimpleTreeView>
         {record.map((game, index) => (
-          <TreeItem key={index} nodeId={`game-${index}`} label={`Game ${index + 1} - Aciertos Totales: ${game.correctAnswers}`}>
+          <TreeItem itemId={`Game ${index + 1}`} label={`Game ${index + 1}`}>
             {game.questions.map((question, qIndex) => (
-              <TreeItem key={`game-${index}-question-${qIndex}`} nodeId={`game-${index}-question-${qIndex}`} label={question.title}>
-                <TreeItem key={`game-${index}-question-${qIndex}-correct-answer`} nodeId={`game-${index}-question-${qIndex}-correct-answer`} label={`Correct answer: ${question.correctAnswer}`} />
-                <TreeItem key={`game-${index}-question-${qIndex}-selected-answer`} nodeId={`game-${index}-question-${qIndex}-selected-answer`} label={`Selected: ${question.selectedAnswer}`} />
+              <TreeItem itemId={`Game ${index + 1}-question ${qIndex + 1}`} label='question.tittle'>
+                <List>
+                  <ListItem key={`game-${index}-question-${qIndex}`}>
+                    <ListItemText primary={`Correct Answer: ${question.correctAnswer}, Selected: ${question.selectedAnswer}`} />
+                  </ListItem>
+                </List>
               </TreeItem>
             ))}
           </TreeItem>
         ))}
-      </TreeView>
+      </SimpleTreeView>
 
+      {/* <List>
+        {record.map((game, index) => (
+          <ListItem key={game._id}>
+            <ListItemText primary={`Game ${index + 1}`} secondary={`User: ${game.user}`} />
+            <List>
+              {game.questions.map((question, qIndex) => (
+                <ListItem key={`game-${index}-question-${qIndex}`}>
+                  <ListItemText primary={`Question ${qIndex + 1}`} secondary={`Correct Answer: ${question.correctAnswer}, Selected: ${question.selectedAnswer}`} />
+                </ListItem>
+              ))}
+            </List>
+          </ListItem>
+        ))}
+      </List> */}
 
       <Button
         variant="contained"
