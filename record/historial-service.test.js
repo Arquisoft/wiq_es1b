@@ -28,7 +28,7 @@ beforeAll(async () => {
     user: {
       _id: 'testUserId',
       username: 'Example username',
-      password: 'Example password',
+      password: '', //NOSONAR
       createdAt: new Date(),
     },
     questions: [{
@@ -45,7 +45,7 @@ beforeAll(async () => {
     user: {
       _id: 'testUserId',
       username: 'Example username',
-      password: 'Example password',
+      password: '',//NOSONAR
       createdAt: new Date(),
     },
     questions: [{
@@ -104,7 +104,7 @@ describe('Historial Service', () => {
     expect(game).toHaveProperty('user');
     expect(game.user).toHaveProperty('_id', 'testUserId');
     expect(game.user).toHaveProperty('username', 'Example username');
-    expect(game.user).toHaveProperty('password', 'Example password');
+    expect(game.user).toHaveProperty('password', '');
     expect(game.user).toHaveProperty('createdAt');
     expect(game).toHaveProperty('questions');
   });

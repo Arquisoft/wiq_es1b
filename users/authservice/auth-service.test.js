@@ -9,7 +9,7 @@ let app;
 //test user
 const user = {
   username: 'testuser',
-  password: 'testpassword',
+  password: 'testpassword',//NOSONAR
 };
 
 async function addUser(user){
