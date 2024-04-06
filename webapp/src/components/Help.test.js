@@ -7,25 +7,25 @@ import Help from './Help';
 
 const mockAxios = new MockAdapter(axios);
 
-const titleId = 'title';
-const paragraph1 = 'WIQ is a game that tests your knowledge with questions featuring multiple possible answers, only one of which is correct, based on information extracted directly from WikiData.';
+const titleId = "title";
+const paragraph1 = "WIQ is a game that tests your knowledge with questions featuring multiple possible answers, only one of which is correct, based on information extracted directly from WikiData.";
 
-const subtitle1 = 'How to play';
-const ol1 = '1. Start a game from the Home section.';
-const ol2 = '2. Select the answer that you believe is the correct.';
-const ol3 = '3. Verify whether your answer was correct or not.';
+const subtitle1 = "How to play";
+const ol1 = "1. Start a game from the Home section.";
+const ol2 = "2. Select the answer that you believe is the correct.";
+const ol3 = "3. Verify whether your answer was correct or not.";
 const ol4 = "4. Proceed to the next question when you're ready.";
-const ol5 = '5. Repeat until reaching the end.';
+const ol5 = "5. Repeat until reaching the end.";
 
-const subtitle2 = 'Website sections';
-const ul1title = 'Home';
-const ul1text = 'The Home section is where you are welcomed and can start a game.';
-const ul2title = 'Record';
-const ul2text = 'The Record section is where you can view your played games and their results.';
-const ul3title = 'Help';
-const ul3text = 'The Help section is where you can learn how to navigate through our website and play the WIQ game. You are here!';
-const ul4title = 'About us';
-const ul4text = 'The About us section is where you can discover information about the development team behind the WIQ game.';
+const subtitle2 = "Website sections";
+const ul1title = "Home";
+const ul1text = "The Home section is where you are welcomed and can start a game.";
+const ul2title = "Record";
+const ul2text = "The Record section is where you can view your played games and their results.";
+const ul3title = "Help";
+const ul3text = "The Help section is where you can learn how to navigate through our website and play the WIQ game. You are here!";
+const ul4title = "About us";
+const ul4text = "The About us section is where you can discover information about the development team behind the WIQ game.";
 
 describe('AboutUs component', () => {
   beforeEach(() => {
