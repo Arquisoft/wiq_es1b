@@ -6,6 +6,9 @@ import { Container, Typography, Box, Button } from '@mui/material';
 import './stylesheets/GetQuestionCss.css';
 import GameFinale from './GameFinale';
 
+const TOTAL_QUESTIONS = 10;
+
+
 const GetQuestion = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -16,11 +19,11 @@ const GetQuestion = () => {
   const [question, setQuestion] = useState('');
   const [correctAnswer, setCorrectAnswer] = useState('');
   const [answersArray, setAnswersArray] = useState([]);
-  const [isReady, setIsReady] = useState(false); 
+  const [isReady, setIsReady] = useState(false);
   const [answerFeedback, setAnswerFeedback] = useState('');
   const [nextQuestion, setNextQuestion] = useState(true);
   //timer of the game
-  const [timer, setTimer] = useState(selectedTimer); 
+  const [timer, setTimer] = useState(selectedTimer);
   //count of questions in the game, starting from 0
   const [questionCount, setQuestionCount] = useState(0);
 
@@ -44,10 +47,10 @@ const GetQuestion = () => {
       setAnswerFeedback('');
 
       //call to get a question
-      const response = await axios.post(`${apiEndpoint}/getQuestion`, {category: category});
+      const response = await axios.post(`${apiEndpoint}/getQuestion`, { category: category });
 
       // Extract data from the response, the question, the correct and the incorrect answers
-      const { question: q, correctAnswerLabel:correctAnswer, answerLabelSet:answers } = response.data;
+      const { question: q, correctAnswerLabel: correctAnswer, answerLabelSet: answers } = response.data;
 
       //increment the count of questions
       setQuestionCount(prevCount => prevCount + 1);
@@ -69,9 +72,8 @@ const GetQuestion = () => {
     }
   };
 
-  const saveHistorial = async (selectedAnswer, correct) => {
-    const username2 = username;
-    await axios.post(`${apiEndpoint}/saveHistorial`, {question, answersArray, correctAnswer, selectedAnswer, correct, username2});
+  const saveQuestion = async (selectedAnswer, isCorrect) => {
+    await axios.post(`${apiEndpoint}/saveQuestion`, { question, answersArray, correctAnswer, selectedAnswer, isCorrect, username });
   }
 
   useEffect(() => {
@@ -100,13 +102,13 @@ const GetQuestion = () => {
       if (selectedAnswer === correctAnswer) {
         correct = true;
         setAnswerFeedback("You have won! Congratulations!");
-      } else if(timer === 0){
+      } else if (timer === 0) {
         selectedAnswer = "Time out";
         setAnswerFeedback("You lost! You didn't answer in time :(");
       } else {
         setAnswerFeedback("You lost! Try again :(");
       }
-      saveHistorial(selectedAnswer, correct);
+      saveQuestion(selectedAnswer, correct);
       showAnswerColors();
       setNextQuestion(false);
     }
@@ -127,7 +129,7 @@ const GetQuestion = () => {
           button.style.backgroundColor = 'red';
         }
         //disable the buttons so the user cannot choose another option
-        button.disabled = true; 
+        button.disabled = true;
       });
     }
   };
@@ -148,70 +150,70 @@ const GetQuestion = () => {
   }, [isReady, timer, nextQuestion]);
 
   return (
-    <div style={{ 
-      display: 'flex', 
-      justifyContent: 'center', 
-      alignItems: 'center', 
-      height: '90vh', 
+    <div style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: '90vh',
       width: '80vw'
     }}>
       {(questionCount <= selectedNumQuestions ? (
-          <Container component="main" maxWidth="md" sx={{ margin: 8, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>          
-            {isReady && (
-            <div className='answers' style={{ 
-              display: 'flex', 
+        <Container component="main" maxWidth="md" sx={{ margin: 8, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+          {isReady && (
+            <div className='answers' style={{
+              display: 'flex',
               flexDirection: 'column',
-              justifyContent: 'center', 
+              justifyContent: 'center',
               alignItems: 'center'
             }}>
               <Typography component="h2" variant="h5" className='question-text' style={{ fontWeight: 'bold' }}>
                 {questionCount}/{selectedNumQuestions} {question}
               </Typography>
               {/* Generate buttons for the answers */}
-              <Box sx={{ display: 'grid', gridTemplateColumns: 'auto 1fr', alignItems: 'center', marginY: '0.6em', gridRowGap: '0.5em', gridColumnGap: '1em'}}>
+              <Box sx={{ display: 'grid', gridTemplateColumns: 'auto 1fr', alignItems: 'center', marginY: '0.6em', gridRowGap: '0.5em', gridColumnGap: '1em' }}>
                 {answersArray.map((answer, index) => (
-                    <Box key={answer} sx={{ display: 'flex', alignItems: 'center', marginY: '0.6em'}}>
-                      <Button 
-                          value={answer}
-                          data-testid={`answer${index}Button`}
-                          variant="contained" 
-                          sx={{ backgroundColor: 'white', color: 'black', fontWeight: 'bold', '&:hover': { backgroundColor: 'black', color: 'white' }}}
-                          key={index} 
-                          onClick={() => checkAnswer(answer)}
-                          disabled={!nextQuestion}>
-                          {answer.startsWith('http') ? <img src={answer} alt="answer" style={{ width: '200px' }} /> : answer}
-                      </Button>
-                    </Box>
-                  ))}  
-              </Box>             
-              {/* To show the time left */}          
+                  <Box key={answer} sx={{ display: 'flex', alignItems: 'center', marginY: '0.6em' }}>
+                    <Button
+                      value={answer}
+                      data-testid={`answer${index}Button`}
+                      variant="contained"
+                      sx={{ backgroundColor: 'white', color: 'black', fontWeight: 'bold', '&:hover': { backgroundColor: 'black', color: 'white' } }}
+                      key={index}
+                      onClick={() => checkAnswer(answer)}
+                      disabled={!nextQuestion}>
+                      {answer.startsWith('http') ? <img src={answer} alt="answer" style={{ width: '200px' }} /> : answer}
+                    </Button>
+                  </Box>
+                ))}
+              </Box>
+              {/* To show the time left */}
               <Typography component="h2" variant="h6" className='question-text'>
                 <p>Time left: {timer} seconds</p>
               </Typography>
               {/* To show the feedback after answering */}
               <Typography component="h2" variant="h6" className='question-text'>
                 <p>{answerFeedback}</p>
-              </Typography>    
+              </Typography>
             </div>
-            )}     
-            {isReady && (
+          )}
+          {isReady && (
             <div>
-                {/* Button to request a new question It will be disabled when the question is not answered */}
-                <Button
-                  data-testid="nextQuestionButton"
-                  variant="contained" 
-                  style={{ width: '35em', fontWeight: 'bold' }}
-                  onClick={getQuestion}
-                  disabled={nextQuestion}>
-                    Next question
-                  </Button>
-            </div>      
-            )}
-          {/* If the question is charging shows two circles to show it is charging */}  
+              {/* Button to request a new question It will be disabled when the question is not answered */}
+              <Button
+                data-testid="nextQuestionButton"
+                variant="contained"
+                style={{ width: '35em', fontWeight: 'bold' }}
+                onClick={getQuestion}
+                disabled={nextQuestion}>
+                Next question
+              </Button>
+            </div>
+          )}
+          {/* If the question is charging shows two circles to show it is charging */}
           {!isReady && (
             <div className='charging'>
-                <div className='ball one'></div>
-                <div className='ball two'></div>
+              <div className='ball one'></div>
+              <div className='ball two'></div>
             </div>
           )}
         </Container>
