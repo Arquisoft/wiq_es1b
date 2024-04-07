@@ -28,4 +28,20 @@ describe('Record component', () => {
 
   });
 
+  it('should render the home button succesfully', async () => {
+
+    mockAxios.onPost('http://localhost:8000/getGameRecord').reply(200, {games: []});
+    
+    render(
+    <Router>
+      <Record />
+    </Router>);
+
+    await waitFor(() => screen.getByText(/Here you can see your record! All about your past games and all!/i));
+
+    const homeButton = screen.getByText('Home');
+    expect(homeButton).toBeInTheDocument();
+
+  });
+
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import GameFinale from './GameFinale';
@@ -37,6 +37,21 @@ describe('GameFinale component', () => {
 
     const buttons = await screen.findAllByRole('button');
     expect(buttons.length).toBe(1);
+  });
+
+  it('should render button succesfully', async () => {    
+
+    mockAxios.onPost('http://localhost:8000/saveGameRecord').reply(200);
+
+    render(
+    <Router>
+      <GameFinale />
+    </Router>);
+
+    const saveRecordButton = screen.getByTestId('saveRecordButton');
+    expect(saveRecordButton).toBeInTheDocument();
+    fireEvent.click(saveRecordButton);
+    expect(await screen.findByText('Record saved successfully!')).toBeInTheDocument();
   });
 
 });

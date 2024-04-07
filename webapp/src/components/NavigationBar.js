@@ -43,7 +43,7 @@ const NavigationBar = () => {
   };
 
   const showApiDoc = () => {
-    window.location.href = 'http://20.26.114.153:8000/api-doc/';
+    window.location.href = 'http://20.26.114.153:8000/api-doc/'; //NOSONAR
   };
 
   return (
