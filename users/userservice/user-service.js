@@ -41,7 +41,7 @@ app.post('/adduser', async (req, res) => {
     // Check if required fields are present in the request body
     validateRequiredFields(req, ['username', 'password']);
 
-    const newUsername = req.body.username;
+    const newUsername = req.body.username.toString();
     const newPassword = req.body.password;
 
     validateStrongPassword(newPassword);

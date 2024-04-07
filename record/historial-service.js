@@ -51,12 +51,19 @@ app.post('/saveGameRecord', async (req, res) => {
 
     const user = await User.findOne({ username });
 
-    const game = {
+    const game = new Game({
       user: user,
       questions: gameQuestions[username]
-    };
-
-    await Game.create(game);
+    });
+    
+    // Valida el juego antes de guardarlo
+    const validationError = game.validateSync();
+    if (validationError) {
+      return res.status(400).json({ error: validationError.message });
+    }
+    
+    // Guarda el juego en la base de datos
+    await game.save();
 
     delete gameQuestions[username];
 
