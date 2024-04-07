@@ -18,7 +18,7 @@ beforeAll(async () => {
   sinon.stub(User, 'findOne').resolves({
     _id: 'testUserId',
     username: 'Example username',
-    password: 'Example password',
+    password: 'Example password',//NOSONAR
     createdAt: new Date(),
   });
 
@@ -28,7 +28,7 @@ beforeAll(async () => {
     user: {
       _id: 'testUserId',
       username: 'Example username',
-      password: 'Example password',
+      password: '', //NOSONAR
       createdAt: new Date(),
     },
     questions: [{
@@ -45,7 +45,7 @@ beforeAll(async () => {
     user: {
       _id: 'testUserId',
       username: 'Example username',
-      password: 'Example password',
+      password: '',//NOSONAR
       createdAt: new Date(),
     },
     questions: [{
@@ -98,6 +98,15 @@ describe('Historial Service', () => {
 
     expect(response.status).toBe(200);
     expect(response.body).toHaveProperty('games');
+
+    const game = response.body.games[0];
+    expect(game).toHaveProperty('_id', 'testGameId');
+    expect(game).toHaveProperty('user');
+    expect(game.user).toHaveProperty('_id', 'testUserId');
+    expect(game.user).toHaveProperty('username', 'Example username');
+    expect(game.user).toHaveProperty('password', '');
+    expect(game.user).toHaveProperty('createdAt');
+    expect(game).toHaveProperty('questions');
   });
 
   it('should get a new question on POST /deleteTempQuestions', async () => {

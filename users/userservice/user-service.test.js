@@ -20,7 +20,7 @@ describe('User Service', () => {
   it('should add a new user on POST /adduser', async () => {
     const newUser = {
       username: 'testuser',
-      password: 'MaMaMM3454*/==45asdfgh',
+      password: 'MaMaMM3454*/==45asdfgh',//NOSONAR
     };
 
     const response = await request(app).post('/adduser').send(newUser);

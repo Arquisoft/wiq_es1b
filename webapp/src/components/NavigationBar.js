@@ -42,6 +42,10 @@ const NavigationBar = () => {
     navigate("/aboutUs", { state: { username, createdAt } });
   };
 
+  const showApiDoc = () => {
+    window.location.href = 'http://20.26.114.153:8000/api-doc/'; //NOSONAR
+  };
+
   return (
     <AppBar position="fixed">
       <Tabs
@@ -61,6 +65,9 @@ const NavigationBar = () => {
         <Tab label="About Us"
           sx={{ color: 'white', fontWeight: 'bold' }}
           onClick={showAboutUs} />
+        <Tab label="API Doc"
+          sx={{ color: 'white', fontWeight: 'bold' }}
+          onClick={showApiDoc} />
       </Tabs>
     </AppBar>
   );

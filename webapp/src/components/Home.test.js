@@ -53,5 +53,43 @@ describe('Home component', () => {
     expect(history.location.pathname).toBe('/');
     
   });
+
+  it('should render all buttons successfully', async () => {
+    const history = createMemoryHistory();
+    render(
+      <Router history={history}>
+        <Home />
+      </Router>
+    );
+
+    // Make sure all the buttons are rendered
+    expect(screen.getByText('New Full Random Game')).toBeInTheDocument();
+    expect(screen.getByText('New Images Game')).toBeInTheDocument();
+    expect(screen.getByText('New Geography Game')).toBeInTheDocument();
+    expect(screen.getByText('New Science Game')).toBeInTheDocument();
+  });
+
+  it('should render all configuration buttons successfully', async () => {
+    const history = createMemoryHistory();
+    render(
+      <Router history={history}>
+        <Home />
+      </Router>
+    );
+
+    const configButton = screen.getByText('Configuration of the game');
+    fireEvent.click(configButton);
+
+    const questionsButton = screen.getByText(/Press to change nº of questions:/);
+    fireEvent.click(questionsButton);
+    expect(await screen.findByText('5')).toBeInTheDocument();
+    expect(await screen.findByText('10')).toBeInTheDocument();
+    expect(await screen.findByText('15')).toBeInTheDocument();
+
+    const timeLimitButton = screen.getByText(/Press to change the time limit:/);
+    fireEvent.click(timeLimitButton);
+    expect(await screen.findByText('20')).toBeInTheDocument();
+    
+  });
     
 });

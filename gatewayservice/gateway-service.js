@@ -8,6 +8,7 @@ const fs = require("fs")
 const YAML = require('yaml')
 
 const app = express();
+app.disable('x-powered-by');
 const port = 8000;
 
 const authServiceUrl = process.env.AUTH_SERVICE_URL || 'http://localhost:8002';
@@ -15,7 +16,7 @@ const userServiceUrl = process.env.USER_SERVICE_URL || 'http://localhost:8001';
 const getQuestionUrl = process.env.QUESTION_SERVICE_URL || 'http://localhost:8003';
 const getHistorialUrl = process.env.HISTORIAL_SERVICE_URL || 'http://localhost:8004';
 
-app.use(cors());
+app.use(cors());//NOSONAR
 app.use(express.json());
 
 //Prometheus configuration

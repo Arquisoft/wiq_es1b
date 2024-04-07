@@ -6,16 +6,16 @@ const bodyParser = require('body-parser');
 const User = require('./user-model');
 
 const app = express();
+app.disable('x-powered-by');
 const port = 8001;
 
 // Middleware to parse JSON in request body
 app.use(bodyParser.json());
 
 // Connect to MongoDB
-const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://wiq_es01b_admin:admin@wiq.eckuzci.mongodb.net/wiq?retryWrites=true&w=majority&appName=WIQ';
+const mongoURI = process.env.MONGODB_URI;
 
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true});
-//const userCollection = mongoose.connection.useDb("WIQ").collection("users");
 
 // Function to validate required fields in the request body
 function validateRequiredFields(req, requiredFields) {

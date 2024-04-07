@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Container, Typography, Button, List, ListItem, ListItemText } from '@mui/material';
 import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
 import { TreeItem } from '@mui/x-tree-view/TreeItem';
+import { BarChart } from '@mui/x-charts/BarChart';
 import './stylesheets/record.css';
 
 const Record = () => {
@@ -12,7 +13,7 @@ const Record = () => {
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
   
   const navigate = useNavigate();
-
+ 
   useEffect(() => {
     const user = localStorage.getItem('username');
     if (user === null) {
@@ -28,12 +29,40 @@ const Record = () => {
 
   const [record, setRecord] = useState([]);
 
+  //data for the chart
+  const [loading, setLoading] = useState(true);
+  const [correct, setCorrect] = useState([]);
+  const [incorrect, setIncorrect] = useState([]);
+  const [labels, setLabels] = useState([]);
+
   const getHistorialForLoggedUser = async () => {
     const response = await axios.post(`${apiEndpoint}/getGameRecord`, { username });
     // Extract data from the response
     const { games } = response.data;
     setRecord(games);
 
+    // Calculate correct and incorrect answers for the chartbar
+    const correct = [];
+    const incorrect = [];
+    const labels = [];
+    games.forEach(game => {
+      let correctCount = 0;
+      let incorrectCount = 0;
+      game.questions.forEach(question => {
+        if (question.correctAnswer === question.selectedAnswer) {
+          correctCount++;
+        } else {
+          incorrectCount++;
+        }
+      });
+      correct.push(correctCount);
+      incorrect.push(incorrectCount);
+      labels.push(`Game ${correct.length}`);
+      setLoading(false);
+    });
+    setCorrect(correct);
+    setIncorrect(incorrect);
+    setLabels(labels);
   }
 
   const showHome = () => {
@@ -52,7 +81,29 @@ const Record = () => {
         Here you can see your record! All about your past games and all!
       </Typography>
 
-      <SimpleTreeView>
+      {!loading && (
+        <div style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: 'rgba(255, 255, 255, 0.7)',
+          padding: '10px',
+          width: '460px',
+          height: '460px', 
+        }}>
+          <BarChart
+            width={450}
+            height={450}
+            series={[
+              { data: correct, label: 'Correct answers', id: 'correctId' },
+              { data: incorrect, label: 'Incorrect answers', id: 'incorrectId' },
+            ]}
+            xAxis={[{ data: labels, scaleType: 'band' }]}
+          />
+        </div>
+      )}
+
+      <SimpleTreeView style={{ paddingTop: '20px' }}>
         {record.map((game, index) => (
           <TreeItem key={`game-${index}`} itemId={`Game ${index + 1}`} label={`Game ${index + 1}`}>
             {game.questions.map((question, qIndex) => (
@@ -84,7 +135,7 @@ const Record = () => {
       <Button
         variant="contained"
         style={{ width: '100%', fontWeight: 'bold' }}
-        onClick={showHome}>
+        onClick={() => showHome}>
         Home
       </Button>
     </Container>
