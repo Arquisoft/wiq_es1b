@@ -14,8 +14,6 @@ app.use(express.json());
 // Connect to MongoDB
 const mongoURI = process.env.MONGODB_URI;
 
-console.log("URL: ", mongoURI);
-
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true});
 //const userCollection = mongoose.connection.useDb("WIQ").collection("users");
 
