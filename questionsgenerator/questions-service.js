@@ -50,6 +50,7 @@ app.post('/generateQuestions', async (req, res) => {
   const generator = new QuestionGenerator();
   await generator.loadTemplates();
   await generator.generate10Questions();
+  res.status(200).json({ msg: "Questions generated successfully" });
 })
 
 async function getRandomQuestionByCategory(category) {

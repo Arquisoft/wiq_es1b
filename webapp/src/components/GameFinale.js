@@ -1,6 +1,6 @@
 // src/components/GameFinale.js
-import React, { useEffect } from 'react';
-import { Container, Typography, Button } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Container, Typography, Button, Dialog, DialogTitle, DialogActions} from '@mui/material';
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from 'axios';
 const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
@@ -11,9 +11,18 @@ const GameFinale = () => {
   const location = useLocation();
   const { username } = location.state || {};
 
+  const [isSaved, setIsSaved] = useState(false);
+  const [open, setOpen] = useState(false);
+
   const saveGameRecord = async () => {
     await axios.post(`${apiEndpoint}/saveGameRecord`, { username });
+    setIsSaved(true);
+    setOpen(true);
   }
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     const user = localStorage.getItem('username');
@@ -38,9 +47,21 @@ const GameFinale = () => {
         data-testid="saveRecordButton"
         variant="contained"
         style={{ width: '35em', fontWeight: 'bold' }}
-        onClick={saveGameRecord}>
+        onClick={saveGameRecord}
+        disabled={isSaved}>
         Save record
       </Button>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+      >
+        <DialogTitle>Record saved successfully!</DialogTitle>
+        <DialogActions>
+          <Button onClick={handleClose}>
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 };
