@@ -34,7 +34,7 @@ app.post('/saveQuestion', async (req, res) => {
       isCorrect
     });
 
-    res.json({ msg: "Question saved successfully" });
+    res.status(200).json({ msg: "Question saved successfully" });
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
   }
@@ -59,7 +59,7 @@ app.post('/saveGameRecord', async (req, res) => {
 
     delete gameQuestions[username];
 
-    res.json("Game record saved succesfully");
+    res.status(200).json("Game record saved succesfully");
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }
@@ -75,7 +75,7 @@ app.post('/getGameRecord', async (req, res) => {
     const games = await Game.find({ user: user._id });
 
 
-    res.json({ games: games });
+    res.status(200).json({ games: games });
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }

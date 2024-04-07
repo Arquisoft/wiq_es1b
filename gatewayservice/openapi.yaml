@@ -194,10 +194,26 @@ paths:
                     type: string
                     description: Error information.
                     example: Internal Server Error
-  /saveHistorial:
+  /generateQuestions:
     post:
-      summary: Saves the data of a question the user answered in the database.
-      operationId: saveHistorial
+      summary: Generates questions from wikidata to the database.
+      operationId: generateQuestions
+      responses:
+        '200':
+          description: Generates questions successfully. Returns a message of success.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    description: Success message.
+                    example: Questions generated successfully
+  /saveQuestion:
+    post:
+      summary: Saves the data of a question the user answered locally.
+      operationId: saveQuestion
       requestBody:
         required: true
         content:
@@ -227,7 +243,7 @@ paths:
                   type: string
                   description: selected answer
                   example: Madrid
-                correct:
+                isCorrect:
                   type: boolean
                   description: true if the answer is correct, false if it is incorrect
                   example: false
@@ -237,7 +253,7 @@ paths:
                   example: user1234
       responses:
         '200':
-          description: Saves the data into the database. Returns a message to confirm it was a success.
+          description: Saves the data successfully. Returns a message to confirm it was a success.
           content:
             application/json:
               schema:
@@ -246,7 +262,7 @@ paths:
                   msg:
                     type: string
                     description: message of success.
-                    example: Saves the data correctly
+                    example: Question saved successfully
         '500':
           description: Internal server error.
           content:
@@ -258,10 +274,48 @@ paths:
                     type: string
                     description: Error information.
                     example: Internal Server Error
-  /getHistorial:
+  /saveGameRecord:
+    post:
+      summary: Saves the data of a game the user finished.
+      operationId: saveGameRecord
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  description: username of the user logged in
+                  example: user1234
+      responses:
+        '200':
+          description: Saves the game successfully. Returns a message to confirm it was a success.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    description: message of success.
+                    example: Game record saved succesfully
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error information.
+                    example: Internal Server Error
+  /getGameRecord:
     post:
       summary: gets the data of all games and questions of the user logged in.
-      operationId: getHistorial
+      operationId: getGameRecord
       requestBody:
         required: true
         content:
@@ -281,16 +335,19 @@ paths:
               schema:
                 type: object
                 properties:
-                  games:
+                  user:
+                    type: string
+                    description: ID of the user
+                  questions:
                     type: array
                     items:
                       type: object
                       properties:
-                        title:
+                        question:
                           type: string
                           description: question title 
                           example: What is the capital of France?
-                        answers:
+                        answersArray:
                           type: array
                           items:
                             type: string
@@ -308,11 +365,48 @@ paths:
                           type: string
                           description: selected answer
                           example: Madrid
-                        answeredRight:
+                        isCorrect:
                           type: boolean
                           description: true if the answer is correct, false if it is incorrect
                           example: false
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error information.
+                    example: Internal Server Error
+  /deleteTempQuestions:
+    post:
+      summary: Deletes the locally saved answers of the games.
+      operationId: deleteTempQuestions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  description: username of the user logged in
+                  example: user1234
+      responses:
+        '200':
+          description: Deletes succesfully the data. Returns a message to confirm it was a success.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
                     description: message of success.
+                    example: Temp questions deleted successfully
         '500':
           description: Internal server error.
           content:

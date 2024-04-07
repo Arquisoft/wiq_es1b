@@ -6,8 +6,6 @@ import { Container, Typography, Box, Button } from '@mui/material';
 import './stylesheets/GetQuestionCss.css';
 import GameFinale from './GameFinale';
 
-const TOTAL_QUESTIONS = 10;
-
 
 const GetQuestion = () => {
   const location = useLocation();
