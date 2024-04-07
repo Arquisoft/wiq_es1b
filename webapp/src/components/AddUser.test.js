@@ -54,4 +54,15 @@ describe('AddUser component', () => {
       expect(screen.getByText(/Password must contain at least one lowercase letter, one uppercase letter, one digit, and one symbol/i)).toBeInTheDocument();
     });
   });
+
+  it('should handle error when adding user with a password without a sign of capital letter', async () => {
+    render(
+      <Router>
+        <AddUser />
+      </Router>
+    );
+    await waitFor(() => {
+      expect(screen.getByText(/Welcome to WIQ! Create an account to start playing!/i)).toBeInTheDocument();
+    });
+  });
 });

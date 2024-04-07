@@ -135,7 +135,7 @@ const Record = () => {
       <Button
         variant="contained"
         style={{ width: '100%', fontWeight: 'bold' }}
-        onClick={showHome}>
+        onClick={() => showHome}>
         Home
       </Button>
     </Container>
