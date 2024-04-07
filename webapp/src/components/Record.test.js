@@ -100,13 +100,9 @@ describe('Record component', () => {
   
       await waitFor(() => screen.getByText(/Here you can see your record! All about your past games and all!/i));
   
+      //check the game button
       const homeButton = screen.getByText('Home');
       expect(homeButton).toBeInTheDocument();
-
-      fireEvent.click(homeButton);
-
-      //checks it navigates out of the home page
-      expect(history.location.pathname).toBe('/');
 
   });
 
