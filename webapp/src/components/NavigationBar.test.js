@@ -61,4 +61,18 @@ describe('NavigationBar component', () => {
     expect(history.location.pathname).toBe('/');
   });
 
+  it('should navigate to API Doc page when "API Doc" button is clicked', () => {
+    const history = createMemoryHistory();
+    const { getByText } = render(
+      <MemoryRouter>
+        <NavigationBar />
+      </MemoryRouter>
+    );
+
+    const apiButton = getByText('API Doc');
+    fireEvent.click(apiButton);
+
+    expect(history.location.pathname).toBe('/');
+  });
+
 });
