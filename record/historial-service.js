@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const User = require('./auth-model');
 const Game = require('./historial-model');
-const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://wiq_es01b_admin:admin@wiq.eckuzci.mongodb.net/wiq?retryWrites=true&w=majority&appName=WIQ';
+const mongoURI = process.env.MONGODB_URI;
 
 const app = express();
 app.disable('x-powered-by');
@@ -35,7 +35,7 @@ app.post('/saveQuestion', async (req, res) => {
       isCorrect
     });
 
-    res.json({ msg: "Question saved successfully" });
+    res.status(200).json({ msg: "Question saved successfully" });
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
   }
@@ -60,7 +60,7 @@ app.post('/saveGameRecord', async (req, res) => {
 
     delete gameQuestions[username];
 
-    res.json("Game record saved succesfully");
+    res.status(200).json("Game record saved succesfully");
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }
@@ -76,7 +76,7 @@ app.post('/getGameRecord', async (req, res) => {
     const games = await Game.find({ user: user._id });
 
 
-    res.json({ games: games });
+    res.status(200).json({ games: games });
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }
