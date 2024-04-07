@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const QuestionGenerator = require('./questionGenerator.js');
 const Question = require('./question-model')
-const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://wiq_es01b_admin:admin@wiq.eckuzci.mongodb.net/wiq?retryWrites=true&w=majority&appName=WIQ';
+const mongoURI = process.env.MONGODB_URI;
+//|| 'mongodb+srv://wiq_es01b_admin:admin@wiq.eckuzci.mongodb.net/wiq?retryWrites=true&w=majority&appName=WIQ';
 
 const app = express();
 const port = 8003;
@@ -50,6 +51,7 @@ app.post('/generateQuestions', async (req, res) => {
   const generator = new QuestionGenerator();
   await generator.loadTemplates();
   await generator.generate10Questions();
+  res.status(200).json({ msg: "Questions generated successfully" });
 })
 
 async function getRandomQuestionByCategory(category) {
