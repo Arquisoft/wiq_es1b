@@ -934,25 +934,24 @@ aspects of the webapp. It will help by giving a clear image of the overall syste
 with two external box which is Wikidata, as it is a requirement of the game to generate the qestions, and Mongodb, the database used to keep our data stored.
 In other levels, the webApp will decompose in more detail.</p>
 </dd>
-<dt class="hdlist1">Contained Building Blocks</dt>
-<dd>
-<p>==== WebApp</p>
-</dd>
 </dl>
 </div>
+<div class="sect3">
+<h4 id="_webapp">5.1.1. WebApp</h4>
 <div class="paragraph">
 <p>The WebApp box consists of the entire game with all the different responsibilities the game might have all together.
 The interface of the WebApp will be the frontend of a web that will be seen better in other diagrams.</p>
 </div>
+</div>
 <div class="sect3">
-<h4 id="_wikdata">5.1.1. Wikdata</h4>
+<h4 id="_wikdata">5.1.2. Wikdata</h4>
 <div class="paragraph">
 <p>The purpose of the Wikidata box is to get the necessary information to generate all the questions of all the games.
 The game will interact with Wikidata by sparql querys which will be stored in the database.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_mongodb">5.1.2. MongoDb</h4>
+<h4 id="_mongodb">5.1.3. MongoDb</h4>
 <div class="paragraph">
 <p>MongoDb is the service we will use to store our data. We will keep it in a cluster in which there are
 different collections to separate the data. Templates of the entities we save are seen in the project and
