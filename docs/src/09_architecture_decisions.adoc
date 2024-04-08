@@ -27,9 +27,9 @@ such as the one from Wikidata.
 [options="header",cols="1,2"]
 |===
 | Package | Description
-| *GatewayService* | 
-| *QuestionsGenerator* | 
-| *Record* | 
-| *Users* | 
-| *Webapp* | 
+| _GatewayService_ | 
+| _QuestionsGenerator_ | 
+| _Record_ | 
+| _Users_ | 
+| _Webapp_ | 
 |===
