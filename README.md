@@ -25,7 +25,6 @@ Both the user and auth service share a Mongo database that is accessed with mong
 - Mauro Varea Fernández
 - Lucas Castro Antuña
 
-Probando release
 
 ## Quick start guide
 
