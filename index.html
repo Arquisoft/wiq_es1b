@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.20">
+<meta name="generator" content="Asciidoctor 2.0.21">
 <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 <title></title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
@@ -141,7 +141,7 @@ p a>code:hover{color:rgba(0,0,0,.9)}
 #content::before{content:none}
 #header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
 #header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
-#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header>h1:only-child{border-bottom:1px solid #dddddf;padding-bottom:8px}
 #header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
 #header .details span:first-child{margin-left:-.125em}
 #header .details span.email a{color:rgba(0,0,0,.85)}
@@ -163,6 +163,7 @@ p a>code:hover{color:rgba(0,0,0,.9)}
 #toctitle{color:#7a2518;font-size:1.2em}
 @media screen and (min-width:768px){#toctitle{font-size:1.375em}
 body.toc2{padding-left:15em;padding-right:0}
+body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
 #toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
 #toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
 #toc.toc2>ul{font-size:.9em;margin-bottom:0}
@@ -328,7 +329,7 @@ a.image{text-decoration:none;display:inline-block}
 a.image object{pointer-events:none}
 sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
 sup.footnote a,sup.footnoteref a{text-decoration:none}
-sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+sup.footnote a:active,sup.footnoteref a:active,#footnotes .footnote a:first-of-type:active{text-decoration:underline}
 #footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
 #footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
 #footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
@@ -482,7 +483,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_login_scenario">6.3. Login Scenario</a></li>
 </ul>
 </li>
-<li><a href="#section-deployment-view">7. Deployment View</a></li>
+<li><a href="#section-deployment-view">7. Deployment View</a>
+<ul class="sectlevel2">
+<li><a href="#_infrastructure_level_1">7.1. Infrastructure Level 1</a></li>
+<li><a href="#_infrastructure_level_2">7.2. Infrastructure Level 2</a></li>
+</ul>
+</li>
 <li><a href="#section-concepts">8. Cross-cutting Concepts</a>
 <ul class="sectlevel2">
 <li><a href="#_ethics">8.1. <em>Ethics</em></a></li>
@@ -1097,12 +1103,92 @@ the application will notify him that an error on the authentication has ocurred.
 <div class="sect1">
 <h2 id="section-deployment-view">7. Deployment View</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>The deployment view describes the deployment architecture of the web application.
+It illustrates how the software elements are deployed onto the hardware infrastructure.
+This view provides insights into the physical deployment structure, including servers, databases, and network configurations.</p>
+</div>
+<div class="sect2">
+<h3 id="_infrastructure_level_1">7.1. Infrastructure Level 1</h3>
 <div class="imageblock">
 <div class="content">
-<img src="./images/07_Deployment_View.png" alt="Deployment view">
+<img src="./images/07_Deployment_View_Level1.png" alt="Deployment view - Infrastructure level 1">
 </div>
 </div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Element</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Device</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The device used by end-users to access the web application, such as desktop computers, laptops, tablets, or smartphones.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Azure server</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The virtual machine, hosted on the Microsoft Azure platform, responsible for hosting and running the web application.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Docker</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Thre containerization platform utilized to encapsulate and deploy microservices, providing lightweight, portable environments for running specific components of the web application stack.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Database</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB is utilized as the database management system, serving as the backend storage for the application&#8217;s functionality. It stores user data, generated questions, and game-related information.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_infrastructure_level_2">7.2. Infrastructure Level 2</h3>
+<div class="imageblock">
+<div class="content">
+<img src="./images/07_Deployment_View_Level2.png" alt="Deployment view - Infrastructure level 2">
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Element</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>User service</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Utilized by logged-in users, retrieves their data from the MongoDB database and displays it within the web application.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Auth service</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Authenticates the users when they register for the first time in the game. All the data gets collected and saved in the database MongoDb for when they login later.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Gateway service</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Acts as a central entry point for client requests, routing them to appropriate backend microservices.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Question generator</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Generate the questions and  the answers, then transmit them to the interface for display to the user. Utilizes SPARQL to interact with the Wikidata external service.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Record</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Manages and stores records of user played games, stats and other relevant data in the database MongoDb.</p></td>
+</tr>
+</tbody>
+</table>
 <div style="page-break-after: always;"></div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1439,7 +1525,7 @@ graphical elements, and other visual elements, as well as the logic that control
 <div id="footer">
 <div id="footer-text">
 Version 8.2 EN<br>
-Last updated 2024-04-06 20:00:22 +0200
+Last updated 2024-04-06 19:46:30 +0200
 </div>
 </div>
 </body>
