@@ -6,7 +6,7 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 We must take into account all risks and problems, as they are very useful to prevent and be able to manage them correctly.
 
-[options="header",cols="1,2"]
+[options="header",cols="1,1,1,1"]
 |===
 | Type | Name | Description | Priority
 | Risk | _Time_ | The time for this project is limited, since we must follow certain delivery guidelines and, in addition, the other subjects force us to distribute the available time in the best possible way | Medium

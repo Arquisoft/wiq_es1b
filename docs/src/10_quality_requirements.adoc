@@ -20,7 +20,7 @@ We will categorize the quality scenarios into three main types: usage, change, a
 
 ==== Usage scenarios
 
-[options="header",cols="1,2"]
+[options="header",cols="1,1,1,1,1,1"]
 |===
 | Source | Stimulus | Attribute | Artifact/Environment | Reply | Response measure
 | Players | A player wants to start a game | Performance | Game Interface | The system creates the game | Game creation time less than 0.5s
@@ -30,7 +30,7 @@ We will categorize the quality scenarios into three main types: usage, change, a
 
 ==== Change scenarios
 
-[options="header",cols="1,2"]
+[options="header",cols="1,1,1,1,1,1"]
 |===
 | Source | Stimulus | Attribute | Artifact/Environment | Reply | Response measure
 | Developers | The game must have more modes to play | Maintainability | Game Interface |A new game mode must be implemented | The implementation of these new mode should be independent of the other game modes
@@ -39,7 +39,7 @@ We will categorize the quality scenarios into three main types: usage, change, a
 
 ==== Failure scenarios
 
-[options="header",cols="1,2"]
+[options="header",cols="1,1,1,1,1,1"]
 |===
 | Source | Stimulus | Attribute | Artifact/Environment | Reply | Response measure
 | Game error | An error occurs during the creation of a game | Failure | Game Interface | The system doesn't create the game | The system will alert the user of the error in the creation
