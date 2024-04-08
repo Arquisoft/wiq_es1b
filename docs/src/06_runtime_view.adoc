@@ -32,6 +32,16 @@ image::loginScenarioDiagram.png["Diagram of a user logging into the application"
 
 This diagram explains the sequence that every user follows in order to sign into the application.
 
+
+
+
+This flowchart is very similar to the previous one because the actions are basically the same:
+insert the user data in the fields. However, the system reacts in a different way than before, that´s 
+because the user has already signed up previously and the database has registered that information on 
+the system. This time, the action sent by the auth service to the database is to search if there´s
+any user whose data corresponds to those obtained previously. If the user has not signed up yet 
+the application will notify him that an error on the authentication has ocurred.
+
 === Save record Scenario
 image::saveRecordScenario.png["Diagram of a record save"]
 
@@ -42,11 +52,10 @@ who, after creating the connection to the database, will search for the current 
 object is created, with the obtained user and the game questions (which have been stored at game time). Finally, the game is saved
 in the database.
 
+=== Get record Scenario
+image::getRecordScenario.png["Diagram of a logged user getting his records"]
 
-This flowchart is very similar to the previous one because the actions are basically the same:
-insert the user data in the fields. However, the system reacts in a different way than before, that´s 
-because the user has already signed up previously and the database has registered that information on 
-the system. This time, the action sent by the auth service to the database is to search if there´s
-any user whose data corresponds to those obtained previously. If the user has not signed up yet 
-the application will notify him that an error on the authentication has ocurred.
-
+This diagram shows the process by which a user, previously logged in, accesses the history of his games.
+First, the user will click on the navBar button to access his game record. This will make a call to the /getGameRecord endpoint,
+which the gateway service will redirect to the history service. This will first check that the user exists and, if so, will return all of the user's 
+games saved up to the date of the logged in user.
