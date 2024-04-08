@@ -1,7 +1,9 @@
 ifndef::imagesdir[:imagesdir: ../images]
 
 [[section-glossary]]
+
 == Glossary
+
 Definition on some of the most important terms of this documentation.
 
 [options="header",cols="1,2"]
