@@ -934,24 +934,25 @@ aspects of the webapp. It will help by giving a clear image of the overall syste
 with two external box which is Wikidata, as it is a requirement of the game to generate the qestions, and Mongodb, the database used to keep our data stored.
 In other levels, the webApp will decompose in more detail.</p>
 </dd>
+<dt class="hdlist1">Building blocks</dt>
+<dd>
+<p>==== WebApp</p>
+</dd>
 </dl>
 </div>
-<div class="sect3">
-<h4 id="_webapp">5.1.1. WebApp</h4>
 <div class="paragraph">
 <p>The WebApp box consists of the entire game with all the different responsibilities the game might have all together.
 The interface of the WebApp will be the frontend of a web that will be seen better in other diagrams.</p>
 </div>
-</div>
 <div class="sect3">
-<h4 id="_wikdata">5.1.2. Wikdata</h4>
+<h4 id="_wikdata">5.1.1. Wikdata</h4>
 <div class="paragraph">
 <p>The purpose of the Wikidata box is to get the necessary information to generate all the questions of all the games.
 The game will interact with Wikidata by sparql querys which will be stored in the database.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_mongodb">5.1.3. MongoDb</h4>
+<h4 id="_mongodb">5.1.2. MongoDb</h4>
 <div class="paragraph">
 <p>MongoDb is the service we will use to store our data. We will keep it in a cluster in which there are
 different collections to separate the data. Templates of the entities we save are seen in the project and
@@ -966,23 +967,28 @@ there are some for the users and their record and others for the questions.</p>
 <img src="./images/buildingblock2.png" alt="More detailed webApp diagram">
 </div>
 </div>
-<div class="sect3">
-<h4 id="_interfaces">5.2.1. Interfaces</h4>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Building blocks</dt>
+<dd>
+<p>==== Interfaces</p>
+</dd>
+</dl>
+</div>
 <div class="paragraph">
 <p>It consists of the interfaces with which the user will interact to play the game and use all of the different services it provides.
 There will be different interfaces for the different parts of the webapp, all of them will be connected with eachother.
 These interfaces will be atractive to the user and easy to use, as well as fast-charging not to make the users wait much.
 These interfaces are the ones that calls for something to be done, so they interact with the gateway.</p>
 </div>
-</div>
 <div class="sect3">
-<h4 id="_gateway">5.2.2. Gateway</h4>
+<h4 id="_gateway">5.2.1. Gateway</h4>
 <div class="paragraph">
 <p>The gateway is the place where every request is redirected to the service where it belongs to as that information is not visible for the user.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_services">5.2.3. Services</h4>
+<h4 id="_services">5.2.2. Services</h4>
 <div class="paragraph">
 <p>The different services are the ones that internally take care of all the data in the server. They also deal with
 the requests sent by the gateway and generate a response to it, a good one or the error related to it. To generate the response,
@@ -997,16 +1003,21 @@ the services need data from the database or Wikidata, so they interact with them
 <img src="./images/buildingBlock3.png" alt="More detailed microservices diagram">
 </div>
 </div>
-<div class="sect3">
-<h4 id="_question_generator">5.3.1. Question Generator</h4>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Building blocks</dt>
+<dd>
+<p>==== Question Generator</p>
+</dd>
+</dl>
+</div>
 <div class="paragraph">
 <p>The Question Generator is the service that interacts with the Wikidata external service through SPARQL querys.
 It is dedicated to generate the questions and the answers and send them to the database to store there to later show
 in the game.</p>
 </div>
-</div>
 <div class="sect3">
-<h4 id="_record">5.3.2. Record</h4>
+<h4 id="_record">5.3.1. Record</h4>
 <div class="paragraph">
 <p>The record service is the one that answers the requests related to save or get the games and statistics of the player.
 It interacts with the user collection in the MongoDb database and stores there the data. It also sends the data for the
@@ -1014,7 +1025,7 @@ user to see.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_users">5.3.3. Users</h4>
+<h4 id="_users">5.3.2. Users</h4>
 <div class="sect4">
 <h5 id="_auth_service">Auth service</h5>
 <div class="paragraph">
