@@ -19,8 +19,6 @@ The user interacts with the webapp interface to be able to play the game. In the
 with two external box which is Wikidata, as it is a requirement of the game to generate the qestions, and Mongodb, the database used to keep our data stored.
 In other levels, the webApp will decompose in more detail.
 
-Contained Building Blocks::
-
 ==== WebApp
 
 The WebApp box consists of the entire game with all the different responsibilities the game might have all together.
