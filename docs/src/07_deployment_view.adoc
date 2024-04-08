@@ -2,7 +2,23 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 [[section-deployment-view]]
 
-
 == Deployment View
 
+The deployment view describes the deployment architecture of the web application.  
+It illustrates how the software elements are deployed onto the hardware infrastructure. 
+This view provides insights into the physical deployment structure, including servers, databases, and network configurations.
+
+=== Infrastructure Level 1
+
 image::07_Deployment_View.png["Deployment view"]
+
+[options="header",cols="1,2"]
+|===
+|Element |Description
+| _Device_ | The device used by end-users to access the web application, such as desktop computers, laptops, tablets, or smartphones.
+| _Azure server_ | The virtual machine, hosted on the Microsoft Azure platform, responsible for hosting and running the web application.
+| _Docker_ | Thre containerization platform utilized to encapsulate and deploy microservices, providing lightweight, portable environments for running specific components of the web application stack.
+| _Database_ | MongoDB is utilized as the database management system, serving as the backend storage for the application's functionality. It stores user data, generated questions, and game-related information.
+|===
+
+=== Infrastructure Level 2
