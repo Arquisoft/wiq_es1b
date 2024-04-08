@@ -32,6 +32,16 @@ image::loginScenarioDiagram.png["Diagram of a user logging into the application"
 
 This diagram explains the sequence that every user follows in order to sign into the application.
 
+=== Save record Scenario
+image::saveRecordScenario.png["Diagram of a record save"]
+
+In this diagram we can see the sequence for saving a game. When the game is over, the user is redirected to the Game Final screen,
+where he/she will click on the "Save record" button to save that game in the history.
+First, the gateway service will recognize the action of saving a game, and redirect the request to the history service,
+who, after creating the connection to the database, will search for the current user. Once the current user has been obtained from the database, the object
+object is created, with the obtained user and the game questions (which have been stored at game time). Finally, the game is saved
+in the database.
+
 
 This flowchart is very similar to the previous one because the actions are basically the same:
 insert the user data in the fields. However, the system reacts in a different way than before, that´s 
