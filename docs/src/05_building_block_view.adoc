@@ -7,7 +7,6 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 The Building Block view shows the decomposition of the WIQ system into different building blocks that will represent different
 aspects of the webapp. It will help by giving a clear image of the overall system and also the inside of it.
-It is a preliminary decomposition of the webApp as it might change, not drastically, throughout the development of the game.
 
 
 === Whitebox Overall System
@@ -17,18 +16,10 @@ image::buildingBlock1.png["Overall System"]
 Motivation::
 
 The user interacts with the webapp interface to be able to play the game. In the diagram it is clear to see that the webbApp interacts
-with an external box which is Wikidata as it is a requirement of the game to generate the qestions. In other levels, the webApp will decompose
-in more detail.
+with two external box which is Wikidata, as it is a requirement of the game to generate the qestions, and Mongodb, the database used to keep our data stored.
+In other levels, the webApp will decompose in more detail.
 
 Contained Building Blocks::
-
-[options="header",cols="1,2"]
-|===
-|User | The users who interact with the webApp and play the game.
-|WebApp | The WebApp called WIQ which consists in a game of questions and answers.
-|Wikidata | The external source of information that the webApp uses to generate que questions.
-|===
-
 
 ==== WebApp
 
@@ -38,51 +29,60 @@ The interface of the WebApp will be the frontend of a web that will be seen bett
 ==== Wikdata
 
 The purpose of the Wikidata box is to get the necessary information to generate all the questions of all the games.
-The game will interact with Wikidata by sparql querys. 
+The game will interact with Wikidata by sparql querys which will be stored in the database. 
 
+==== MongoDb
+
+MongoDb is the service we will use to store our data. We will keep it in a cluster in which there are 
+different collections to separate the data. Templates of the entities we save are seen in the project and
+there are some for the users and their record and others for the questions.
 
 
 === Level 2
 
 image::buildingblock2.png["More detailed webApp diagram"]
 
-==== White Box Interfaces
+==== Interfaces
 
 It consists of the interfaces with which the user will interact to play the game and use all of the different services it provides.
-There will be differente interfaces for all different services of the game and the users will be able to go through all of them.
+There will be different interfaces for the different parts of the webapp, all of them will be connected with eachother.
 These interfaces will be atractive to the user and easy to use, as well as fast-charging not to make the users wait much.
+These interfaces are the ones that calls for something to be done, so they interact with the gateway.
 
-==== White Box Microservices
+==== Gateway
 
-The components of the webApp are the microservices, apart from the interfaces, which will have all the logic of the game and are the ones
-who will interact with the external services (Wikidata, mongodb). There will be one microservice for each one of the responsibilities of the game.
-These microservices will need to be fast in getting all the data they need and they need to communicate with the interfaces to be able to show 
-the user all they need to know to play the game.
+The gateway is the place where every request is redirected to the service where it belongs to as that information is not visible for the user.
+
+==== Services
+
+The different services are the ones that internally take care of all the data in the server. They also deal with
+the requests sent by the gateway and generate a response to it, a good one or the error related to it. To generate the response,
+the services need data from the database or Wikidata, so they interact with them and sends the data as the response to show the user, for example.
 
 
 === Level 3
 
 image::buildingBlock3.png["More detailed microservices diagram"]
 
-==== White Box Question Generator
+==== Question Generator
 
-The Question Generator is the microservice that interacts with the Wikidata external service through SPARQL.
-It is the microservice dedicated to generate the questions and the answers and pass them to the interface to show them to the user. 
+The Question Generator is the service that interacts with the Wikidata external service through SPARQL querys.
+It is dedicated to generate the questions and the answers and send them to the database to store there to later show 
+in the game. 
 
-==== White Box Users service
+==== Record
 
-The users service is another microservice. It is the one in charge of collecting all the data from the users when they register and
-to retrieve all their data when they login.
-They also interact with the interface of the game.
+The record service is the one that answers the requests related to save or get the games and statistics of the player.
+It interacts with the user collection in the MongoDb database and stores there the data. It also sends the data for the 
+user to see.
 
-=== Level 4
+====  Users
+===== Auth service
+This is one service inside the users part of the webapp. It is in charge of authenticating the users when they register for the 
+first time in the game. All the data gets collected and saved in the collection users in MongoDb for when they login later. It uses the same 
+database that the record service uses.
 
-image::buildingBlock4.png["More detailed users service diagram"]
-
-==== White Box Auth service
-This is one microservice inside of the microservice Users service. It is in charge of authenticate the users when they register for the 
-first time in the game. All the data gets collected and saved in the database MongoDb for when they login later.
-
-==== White Box Login service
-This is another microservice inside the Users service. This one is the one users use everytime when they log in. It retrieves
-all their data from the database MongoDb and shows them in the webApp as the users will have an option to view all their past data.
+===== Users service
+This is one service inside the users part of the webapp. This one is the one users use everytime when they log in. It retrieves
+all their data from the database and shows them in the webApp as the users will have an option to view all their past data. It gets 
+the data from the same collection as the auth service and the record.
