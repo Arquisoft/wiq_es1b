@@ -8,7 +8,7 @@ Definition on some of the most important terms of this documentation.
 
 [options="header",cols="1,2"]
 |===
-|Term | Definition
+| Term | Definition
 
 | _API (Application Programming Interface)_ | A set of rules and protocols that allows different software applications to communicate and interact with each other.
 

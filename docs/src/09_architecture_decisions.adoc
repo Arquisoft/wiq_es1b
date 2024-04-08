@@ -1,17 +1,17 @@
 ifndef::imagesdir[:imagesdir: ../images]
 
 [[section-design-decisions]]
+
 == Architecture Decisions
 
 [options="header",cols="1,2"]
 |===
-|Decision |Reason
-|React.js |We decided to use React.js because it is one of the most popular Javascript libraries used nowadays.
+| Decision | Reason
+| _React.js_ | We decided to use React.js because it is one of the most popular Javascript libraries used nowadays.
 Although none of us were familiar with it, we thought it would make programming the front-end part of the app better
 and easier for us.
-|Javascript |We chose to stick with Javascript for the development of this web app because we already had knowledge of this language
+| _Javascript_ | We chose to stick with Javascript for the development of this web app because we already had knowledge of this language
 from other subjects. We found it to be an accessible language capable of fulfilling all the app's requirements, including using APIs 
 such as the one from Wikidata.
-|Mongodb |For the database aspect of the app, we opted for Mongodb as we believe it is a well-suited option for storing the data necessary for the design and development of the app.
+| _Mongodb_ | For the database aspect of the app, we opted for Mongodb as we believe it is a well-suited option for storing the data necessary for the design and development of the app.
 |===
-
