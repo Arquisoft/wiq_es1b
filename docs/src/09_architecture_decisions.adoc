@@ -30,7 +30,8 @@ such as the one from Wikidata.
 | _GatewayService_ | This is a crucial part of the project because it connects different services and provides a unified interface to interact
 with them. It gives an abstraction layer so that clients can communicate with the underlying services without needing to know the implementation
 details of each. It also provides a documentation interface for developers to understand how to interact with services through defined routes.
-| _QuestionsGenerator_ | 
+| _QuestionsGenerator_ | It is responsible for generating questions from Wikidata. It handles loading question templates, generating questions 
+and providing random questions based on selected categories.
 | _Record_ | 
 | _Users_ | 
 | _Webapp_ | 
