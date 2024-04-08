@@ -37,10 +37,12 @@ game-related data. When a user plays the game, their questions are temporarily s
 in the database.
 | _Users_ | It is divided into two packages both of them having different functionalities:
 
-- AuthService: handles user authentication and authorization. 
+- AuthService: Handles user authentication and authorization. 
 
 
-- UserService: manages user-related operations like password hashing, and password and username validation. It also contains the model 
+- UserService: Manages user-related operations like password hashing, and password and username validation. It also contains the model 
 of the information that the application stores for each user.
-| _Webapp_ | 
+| _Webapp_ | It is responsible for creating the web application´s user interface and involves various functionalities such as rendering views, 
+handling user interactions and communicating with backend services. It uses React as the base framework, and html and css to manage the 
+visual appearance of the application.
 |===
