@@ -27,22 +27,22 @@ such as the one from Wikidata.
 [options="header",cols="1,2"]
 |===
 | Package | Description
-| _GatewayService_ | This is a crucial part of the project because it connects different services and provides a unified interface to interact
+| *GatewayService* | This is a crucial part of the project because it connects different services and provides a unified interface to interact
 with them. It gives an abstraction layer so that clients can communicate with the underlying services without needing to know the implementation
 details of each. It also provides a documentation interface for developers to understand how to interact with services through defined routes.
-| _QuestionsGenerator_ | It is responsible for generating questions from Wikidata. It handles loading question templates, generating questions 
+| *QuestionsGenerator* | It is responsible for generating questions from Wikidata. It handles loading question templates, generating questions 
 and providing random questions based on selected categories.
-| _Record_ | The record package manages and stores game records. It contains the model of each game played, which handles saving and retrieving
+| *Record* | The record package manages and stores game records. It contains the model of each game played, which handles saving and retrieving
 game-related data. When a user plays the game, their questions are temporarily stored in memory until the game session is completed and saved
 in the database.
-| _Users_ | It is divided into two packages both of them having different functionalities:
+| *Users* | It is divided into two packages both of them having different functionalities:
 
-- AuthService: Handles user authentication and authorization. 
+- _AuthService_: Handles user authentication and authorization. 
 
 
-- UserService: Manages user-related operations like password hashing, and password and username validation. It also contains the model 
+- _UserService_: Manages user-related operations like password hashing, and password and username validation. It also contains the model 
 of the information that the application stores for each user.
-| _Webapp_ | It is responsible for creating the web application´s user interface and involves various functionalities such as rendering views, 
+| *Webapp* | It is responsible for creating the web application´s user interface and involves various functionalities such as rendering views, 
 handling user interactions and communicating with backend services. It uses React as the base framework, and html and css to manage the 
 visual appearance of the application.
 |===
