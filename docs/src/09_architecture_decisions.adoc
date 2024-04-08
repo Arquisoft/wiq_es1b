@@ -32,7 +32,9 @@ with them. It gives an abstraction layer so that clients can communicate with th
 details of each. It also provides a documentation interface for developers to understand how to interact with services through defined routes.
 | _QuestionsGenerator_ | It is responsible for generating questions from Wikidata. It handles loading question templates, generating questions 
 and providing random questions based on selected categories.
-| _Record_ | 
+| _Record_ | The record package manages and stores game records. It contains the model of each game played, which handles saving and retrieving
+game-related data. When a user plays the game, their questions are temporarily stored in memory until the game session is completed and saved
+in the database.
 | _Users_ | 
 | _Webapp_ | 
 |===
