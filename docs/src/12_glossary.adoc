@@ -6,38 +6,36 @@ Definition on some of the most important terms of this documentation.
 
 [options="header",cols="1,2"]
 |===
-|Term |Definition
+|Term | Definition
 
-|API (Application Programming Interface) | A set of rules and protocols that allows different software applications to communicate and interact with each other.
+| _API (Application Programming Interface)_ | A set of rules and protocols that allows different software applications to communicate and interact with each other.
 
-|Arc42 | A widely-used template for documenting software architectures, emphasizing a pragmatic, lightweight approach to capturing and communicating architectural
+| _Arc42_ | A widely-used template for documenting software architectures, emphasizing a pragmatic, lightweight approach to capturing and communicating architectural
  decisions and design rationale. It provides a structured format for describing system components, interfaces, and their relationships, aiding in the understanding 
  and maintenance of software systems.
 
-|ASCIIDoc | A lightweight markup language used for writing documentation, particularly favored for its simplicity and readability. 
+| _ASCIIDoc_ | A lightweight markup language used for writing documentation, particularly favored for its simplicity and readability. 
 It allows for the creation of structured documents using plain text, which can then be easily converted into various formats such as HTML, PDF, or EPUB.
 
-|Deploy | The process of releasing and installing a software application or system onto a target environment, such as a server or cloud platform,
+| _Deploy_ | The process of releasing and installing a software application or system onto a target environment, such as a server or cloud platform,
  making it available for use by end-users. This typically involves transferring code, configurations, and other necessary resources to the production
  environment and ensuring that the application runs smoothly and as intended.
 
-|Docker |  A platform for developing, shipping, and running applications using containerization technology. 
+| _Docker_ | A platform for developing, shipping, and running applications using containerization technology. 
 It allows developers to package their applications and all dependencies into lightweight, portable containers that can run consistently across different environments,
 streamlining the deployment process and enhancing scalability and efficiency.
 
-|Frontend | The part of a software application or system that users interact with directly. It typically includes the user interface components, such as web pages, 
+| _Frontend_ | The part of a software application or system that users interact with directly. It typically includes the user interface components, such as web pages, 
 graphical elements, and other visual elements, as well as the logic that controls user interactions. The frontend is responsible for presenting data and functionality
  to users in an intuitive and accessible manner.
 
-|Microservices |A software architectural style where an application is composed of loosely coupled, independently deployable services that are organized around specific
+| _Microservices_ | A software architectural style where an application is composed of loosely coupled, independently deployable services that are organized around specific
  business capabilities. Each microservice is responsible for a single function or feature and communicates with other services through well-defined APIs.
 
-|Wikidata | A collaborative, open database that stores structured data to support Wikimedia and other knowledge-related projects.
+| _Wikidata_ | A collaborative, open database that stores structured data to support Wikimedia and other knowledge-related projects.
 
-|WIQ | Online version (web app) of the famous spanish program "Saber y Ganar", a question and answer contest.
+| _WIQ_ | Online version (web app) of the famous spanish program "Saber y Ganar", a question and answer contest.
 
-| Quality attribute | Measurable property of a system, which indicates how well the system meets the needs of stakeholders.
+| _Quality attribute_ | Measurable property of a system, which indicates how well the system meets the needs of stakeholders.
+
 |===
-
-
-
