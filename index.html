@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.21">
+<meta name="generator" content="Asciidoctor 2.0.22">
 <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 <title></title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
@@ -481,6 +481,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_question_scenario">6.1. Question Scenario</a></li>
 <li><a href="#_register_scenario">6.2. Register Scenario</a></li>
 <li><a href="#_login_scenario">6.3. Login Scenario</a></li>
+<li><a href="#_save_record_scenario">6.4. Save record Scenario</a></li>
+<li><a href="#_get_record_scenario">6.5. Get record Scenario</a></li>
 </ul>
 </li>
 <li><a href="#section-deployment-view">7. Deployment View</a>
@@ -496,7 +498,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_user_experience">8.3. <em>User experience</em></a></li>
 </ul>
 </li>
-<li><a href="#section-design-decisions">9. Architecture Decisions</a></li>
+<li><a href="#section-design-decisions">9. Architecture Decisions</a>
+<ul class="sectlevel2">
+<li><a href="#_decisions">9.1. Decisions</a></li>
+<li><a href="#_package_division">9.2. Package division</a></li>
+</ul>
+</li>
 <li><a href="#section-quality-scenarios">10. Quality Requirements</a>
 <ul class="sectlevel2">
 <li><a href="#_quality_tree">10.1. Quality Tree</a></li>
@@ -1097,6 +1104,36 @@ the system. This time, the action sent by the auth service to the database is to
 any user whose data corresponds to those obtained previously. If the user has not signed up yet
 the application will notify him that an error on the authentication has ocurred.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_save_record_scenario">6.4. Save record Scenario</h3>
+<div class="imageblock">
+<div class="content">
+<img src="./images/saveRecordScenario.png" alt="Diagram of a record save">
+</div>
+</div>
+<div class="paragraph">
+<p>In this diagram we can see the sequence for saving a game. When the game is over, the user is redirected to the Game Final screen,
+where he/she will click on the "Save record" button to save that game in the history.
+First, the gateway service will recognize the action of saving a game, and redirect the request to the history service,
+who, after creating the connection to the database, will search for the current user. Once the current user has been obtained from the database, the object
+object is created, with the obtained user and the game questions (which have been stored at game time). Finally, the game is saved
+in the database.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_get_record_scenario">6.5. Get record Scenario</h3>
+<div class="imageblock">
+<div class="content">
+<img src="./images/getRecordScenario.png" alt="Diagram of a logged user getting his records">
+</div>
+</div>
+<div class="paragraph">
+<p>This diagram shows the process by which a user, previously logged in, accesses the history of his games.
+First, the user will click on the navBar button to access his game record. This will make a call to the /getGameRecord endpoint,
+which the gateway service will redirect to the history service. This will first check that the user exists and, if so, will return all of the user&#8217;s
+games saved up to the date of the logged in user.</p>
+</div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -1224,6 +1261,8 @@ Crafting intuitive interfaces that facilitate effortless interaction with the sy
 <div class="sect1">
 <h2 id="section-design-decisions">9. Architecture Decisions</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_decisions">9.1. Decisions</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -1254,7 +1293,55 @@ such as the one from Wikidata.</p></td>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="sect2">
+<h3 id="_package_division">9.2. Package division</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Package</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>GatewayService</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This is a crucial part of the project because it connects different services and provides a unified interface to interact
+with them. It gives an abstraction layer so that clients can communicate with the underlying services without needing to know the implementation
+details of each. It also provides a documentation interface for developers to understand how to interact with services through defined routes.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>QuestionsGenerator</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">It is responsible for generating questions from Wikidata. It handles loading question templates, generating questions
+and providing random questions based on selected categories.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Record</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The record package manages and stores game records. It contains the model of each game played, which handles saving and retrieving
+game-related data. When a user plays the game, their questions are temporarily stored in memory until the game session is completed and saved
+in the database.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Users</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">It is divided into two packages both of them having different functionalities:</p>
+<p class="tableblock">- <em>AuthService</em>: Handles user authentication and authorization.</p>
+<p class="tableblock">- <em>UserService</em>: Manages user-related operations like password hashing, and password and username validation. It also contains the model
+of the information that the application stores for each user.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Webapp</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">It is responsible for creating the web application´s user interface and involves various functionalities such as rendering views,
+handling user interactions and communicating with backend services. It uses React as the base framework, and html and css to manage the
+visual appearance of the application.</p></td>
+</tr>
+</tbody>
+</table>
 <div style="page-break-after: always;"></div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1534,7 +1621,7 @@ graphical elements, and other visual elements, as well as the logic that control
 <div id="footer">
 <div id="footer-text">
 Version 8.2 EN<br>
-Last updated 2024-04-06 19:46:30 +0200
+Last updated 2024-03-09 19:22:52 +0100
 </div>
 </div>
 </body>
