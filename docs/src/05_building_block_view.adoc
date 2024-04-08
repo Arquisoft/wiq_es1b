@@ -19,6 +19,8 @@ The user interacts with the webapp interface to be able to play the game. In the
 with two external box which is Wikidata, as it is a requirement of the game to generate the qestions, and Mongodb, the database used to keep our data stored.
 In other levels, the webApp will decompose in more detail.
 
+Building blocks::
+
 ==== WebApp
 
 The WebApp box consists of the entire game with all the different responsibilities the game might have all together.
@@ -39,6 +41,8 @@ there are some for the users and their record and others for the questions.
 === Level 2
 
 image::buildingblock2.png["More detailed webApp diagram"]
+
+Building blocks::
 
 ==== Interfaces
 
@@ -61,6 +65,8 @@ the services need data from the database or Wikidata, so they interact with them
 === Level 3
 
 image::buildingBlock3.png["More detailed microservices diagram"]
+
+Building blocks::
 
 ==== Question Generator
 
