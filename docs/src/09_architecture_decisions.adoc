@@ -35,6 +35,12 @@ and providing random questions based on selected categories.
 | _Record_ | The record package manages and stores game records. It contains the model of each game played, which handles saving and retrieving
 game-related data. When a user plays the game, their questions are temporarily stored in memory until the game session is completed and saved
 in the database.
-| _Users_ | 
+| _Users_ | It is divided into two packages both of them having different functionalities:
+
+- AuthService: handles user authentication and authorization. 
+
+
+- UserService: manages user-related operations like password hashing, and password and username validation. It also contains the model 
+of the information that the application stores for each user.
 | _Webapp_ | 
 |===
