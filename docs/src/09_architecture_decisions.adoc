@@ -27,7 +27,9 @@ such as the one from Wikidata.
 [options="header",cols="1,2"]
 |===
 | Package | Description
-| _GatewayService_ | 
+| _GatewayService_ | This is a crucial part of the project because it connects different services and provides a unified interface to interact
+with them. It gives an abstraction layer so that clients can communicate with the underlying services without needing to know the implementation
+details of each. It also provides a documentation interface for developers to understand how to interact with services through defined routes.
 | _QuestionsGenerator_ | 
 | _Record_ | 
 | _Users_ | 
