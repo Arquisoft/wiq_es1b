@@ -707,31 +707,32 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Web app</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Web app</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The application we are developing is a web game called WIQ consisting of automatically generated questions and answers. Users, once logged in, must answer within a certain time to win prizes.
 Additionally, users will also have access to the history of their games.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Documentation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Documentation</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Diagrams and ASCIIDoc will be used along with the Arc42 template to keep the documentation updated throughout the development of the web app.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">SPARQL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>SPARQL</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">To generate the questions and answers for the game, we will use SPARQL in Wikidata as it is a great source of information to provide
 different types of questions to the users, making the game versatile and non-repetitive.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Question generator</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Question generator</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Using the Sparql querys, questions will be automatically generated along with the correct and three incorrect answers. This questions will be
 answered by the user and saved in their history. By using this generator, we ensure that the likelihood of getting the same question in another game is almost none.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Users Login</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The login of the users must be the first thing that shows up when you open the web of the game. Users will be able to register and to log in. After registering, it will be necessary to log in to access the website and start the game.
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Users login</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The login of the users must be the first thing that shows up when you open the web of the game. Users will be able to register and to log in. After registering,
+it will be necessary to log in to access the website and start the game.
 Users who already have an account will have the option to start the game or view their data from previus games (number of games, correct and incorrect answers, time played, etc).</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Deployment</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Deployment</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The web app must have a frontend to interact with the game through a web interface, which will be deployed in a virtual machine. To deploy locally
 for testing before releasing, we will use Docker and npm.</p></td>
 </tr>
@@ -750,12 +751,12 @@ for testing before releasing, we will use Docker and npm.</p></td>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Github</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Github</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Github will be used to keep the web app in a repository with Git version control. Projects will also be used to track who and when someome takes up
 a task and completes it. Issues will be opened for every task involving the web app.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Class meetings</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Class meetings</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">We will use the time during classes to discuss new tasks that need to be done, as well as to address any common problems we might face in order to solve them as soon as possible.
 Other forms of communication, like a Whatsapp group, can be used to communicate between developers.</p></td>
 </tr>
@@ -1236,19 +1237,19 @@ Crafting intuitive interfaces that facilitate effortless interaction with the sy
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">React.js</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>React.js</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">We decided to use React.js because it is one of the most popular Javascript libraries used nowadays.
 Although none of us were familiar with it, we thought it would make programming the front-end part of the app better
 and easier for us.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Javascript</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Javascript</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">We chose to stick with Javascript for the development of this web app because we already had knowledge of this language
 from other subjects. We found it to be an accessible language capable of fulfilling all the app&#8217;s requirements, including using APIs
 such as the one from Wikidata.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Mongodb</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Mongodb</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">For the database aspect of the app, we opted for Mongodb as we believe it is a well-suited option for storing the data necessary for the design and development of the app.</p></td>
 </tr>
 </tbody>
@@ -1277,49 +1278,63 @@ such as the one from Wikidata.</p></td>
 <div class="sect2">
 <h3 id="_quality_scenarios">10.2. Quality Scenarios</h3>
 <div class="paragraph">
-<p>Dividiremos los escenarios de calidad en escenarios de uso, cambio y fallo.</p>
+<p>We will categorize the quality scenarios into three main types: usage, change, and failure scenarios.</p>
 </div>
 <div class="sect3">
 <h4 id="_usage_scenarios">10.2.1. Usage scenarios</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 16.6666%;">
-<col style="width: 16.6666%;">
-<col style="width: 16.6666%;">
-<col style="width: 16.6666%;">
-<col style="width: 16.6666%;">
-<col style="width: 16.667%;">
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
 </colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Source</th>
+<th class="tableblock halign-left valign-top">Stimulus</th>
+</tr>
+</thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Source</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Stimulus</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Attribute</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Artifact/Environment</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Reply</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Response measure</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Attribute</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Artifact/Environment</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reply</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Response measure</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Players</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A player wants to start a game</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Performance</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Game Interface</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The system creates the game</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Game creation time less than 0.5s</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Players</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A player wants to answer a question</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Performance</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Game Interface</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The system updates the question interface</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Question update time less than 0.5s</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Players</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A player wants to login with username and password</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Security</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">User Interface</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The system stores these credentials</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">These credentials will be encrypted to maintain their security.</p></td>
 </tr>
@@ -1330,35 +1345,45 @@ such as the one from Wikidata.</p></td>
 <h4 id="_change_scenarios">10.2.2. Change scenarios</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 16.6666%;">
-<col style="width: 16.6666%;">
-<col style="width: 16.6666%;">
-<col style="width: 16.6666%;">
-<col style="width: 16.6666%;">
-<col style="width: 16.667%;">
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
 </colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Source</th>
+<th class="tableblock halign-left valign-top">Stimulus</th>
+</tr>
+</thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Source</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Stimulus</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Attribute</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Artifact/Environment</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Reply</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Response measure</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Attribute</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Artifact/Environment</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reply</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Response measure</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Developers</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The game must have more modes to play</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Maintainability</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Game Interface</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A new game mode must be implemented</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The implementation of these new mode should be independent of the other game modes</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Developers</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">We want to migrate the database to another database system</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Maintainability</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Database</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The system do the migration</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Encrypted data will be migrated in encrypted form</p></td>
 </tr>
@@ -1369,27 +1394,33 @@ such as the one from Wikidata.</p></td>
 <h4 id="_failure_scenarios">10.2.3. Failure scenarios</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 16.6666%;">
-<col style="width: 16.6666%;">
-<col style="width: 16.6666%;">
-<col style="width: 16.6666%;">
-<col style="width: 16.6666%;">
-<col style="width: 16.667%;">
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
 </colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Source</th>
+<th class="tableblock halign-left valign-top">Stimulus</th>
+</tr>
+</thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Source</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Stimulus</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Attribute</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Artifact/Environment</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Reply</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Response measure</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Attribute</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Artifact/Environment</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reply</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Response measure</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Game error</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">An error occurs during the creation of a game</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Failure</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Game Interface</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The system doesn&#8217;t create the game</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The system will alert the user of the error in the creation</p></td>
 </tr>
@@ -1408,40 +1439,50 @@ such as the one from Wikidata.</p></td>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
 </colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Name</th>
+</tr>
+</thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Type</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Name</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Description</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Priority</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Priority</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Risk</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Time</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Time</em></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The time for this project is limited, since we must follow certain delivery guidelines and, in addition, the other subjects force us to distribute the available time in the best possible way</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Medium</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Technical Debt</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">React</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>React</em></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">React is a new technology for all the members of the group. Although we agree that it is the best option to carry out the project, we must inform ourselves about it, take courses and learn independently the potentials of this technology</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Risk</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Github</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Github</em></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">GitHub is a very powerful tool when it comes to working in a coordinated and parallel way, but without a good organization and communication in the conflicts generated, functionalities can be lost</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Low</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Risk</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Autonomy</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">En general, los proyectos realizados durante la carrera son muy guiados, con revisiones y entregas parciales muy frecuentes, y documentos para guiar al equipo en el proyecto. Trabajar de forma totalmente autónoma puede llegar a ser un proglema para organizarnos</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Autonomy</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Typically, projects undertaken during the course are heavily guided, with frequent reviews, partial deliveries and documentation to steer the team throughout the project. Working entirely autonomously may pose challenges in terms of organization.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Medium</p></td>
 </tr>
 </tbody>
@@ -1468,53 +1509,53 @@ such as the one from Wikidata.</p></td>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">API (Application Programming Interface)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>API (Application Programming Interface)</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A set of rules and protocols that allows different software applications to communicate and interact with each other.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Arc42</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Arc42</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A widely-used template for documenting software architectures, emphasizing a pragmatic, lightweight approach to capturing and communicating architectural
  decisions and design rationale. It provides a structured format for describing system components, interfaces, and their relationships, aiding in the understanding
  and maintenance of software systems.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ASCIIDoc</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>ASCIIDoc</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A lightweight markup language used for writing documentation, particularly favored for its simplicity and readability.
 It allows for the creation of structured documents using plain text, which can then be easily converted into various formats such as HTML, PDF, or EPUB.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Deploy</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Deploy</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The process of releasing and installing a software application or system onto a target environment, such as a server or cloud platform,
  making it available for use by end-users. This typically involves transferring code, configurations, and other necessary resources to the production
  environment and ensuring that the application runs smoothly and as intended.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Docker</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Docker</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A platform for developing, shipping, and running applications using containerization technology.
 It allows developers to package their applications and all dependencies into lightweight, portable containers that can run consistently across different environments,
 streamlining the deployment process and enhancing scalability and efficiency.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Frontend</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Frontend</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The part of a software application or system that users interact with directly. It typically includes the user interface components, such as web pages,
 graphical elements, and other visual elements, as well as the logic that controls user interactions. The frontend is responsible for presenting data and functionality
  to users in an intuitive and accessible manner.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Microservices</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Microservices</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A software architectural style where an application is composed of loosely coupled, independently deployable services that are organized around specific
  business capabilities. Each microservice is responsible for a single function or feature and communicates with other services through well-defined APIs.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Wikidata</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Wikidata</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A collaborative, open database that stores structured data to support Wikimedia and other knowledge-related projects.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">WIQ</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>WIQ</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Online version (web app) of the famous spanish program "Saber y Ganar", a question and answer contest.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Quality attribute</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Quality attribute</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Measurable property of a system, which indicates how well the system meets the needs of stakeholders.</p></td>
 </tr>
 </tbody>
