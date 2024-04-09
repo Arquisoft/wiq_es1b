@@ -179,7 +179,7 @@ const GetQuestion = () => {
                       key={index}
                       onClick={() => checkAnswer(answer)}
                       disabled={!nextQuestion}>
-                      {answer.startsWith('http') ? <img src={answer} alt="answer" style={{ width: '200px' }} /> : answer}
+                      {answer.startsWith('http') ? <img src={answer} alt="answer" style={{ width: '15vw', height: '10vw' }} /> : answer}
                     </Button>
                   </Box>
                 ))}
@@ -195,7 +195,7 @@ const GetQuestion = () => {
             </div>
           )}
           {isReady && (
-            <div>
+            <div style={{ paddingBottom: '5em' }}>
               {/* Button to request a new question It will be disabled when the question is not answered */}
               <Button
                 data-testid="nextQuestionButton"
