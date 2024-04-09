@@ -1,30 +1,31 @@
 ifndef::imagesdir[:imagesdir: ../images]
 
 [[section-architecture-constraints]]
+
 == Architecture Constraints
 
 [options="header",cols="1,2"]
 |===
-|Technical Constraint |Reason
-|Web app | The application we are developing is a web game called WIQ consisting of automatically generated questions and answers. Users, once logged in, must answer within a certain time to win prizes. 
+| Technical Constraint | Reason
+| _Web app_ | The application we are developing is a web game called WIQ consisting of automatically generated questions and answers. Users, once logged in, must answer within a certain time to win prizes. 
 Additionally, users will also have access to the history of their games. 
-|Documentation | Diagrams and ASCIIDoc will be used along with the Arc42 template to keep the documentation updated throughout the development of the web app.
-|SPARQL | To generate the questions and answers for the game, we will use SPARQL in Wikidata as it is a great source of information to provide
+| _Documentation_ | Diagrams and ASCIIDoc will be used along with the Arc42 template to keep the documentation updated throughout the development of the web app.
+| _SPARQL_ | To generate the questions and answers for the game, we will use SPARQL in Wikidata as it is a great source of information to provide
 different types of questions to the users, making the game versatile and non-repetitive.
-|Question generator | Using the Sparql querys, questions will be automatically generated along with the correct and three incorrect answers. This questions will be 
+| _Question generator_ | Using the Sparql querys, questions will be automatically generated along with the correct and three incorrect answers. This questions will be 
 answered by the user and saved in their history. By using this generator, we ensure that the likelihood of getting the same question in another game is almost none.
-|Users Login| The login of the users must be the first thing that shows up when you open the web of the game. Users will be able to register and to log in. After registering, it will be necessary to log in to access the website and start the game.
+| _Users login_ | The login of the users must be the first thing that shows up when you open the web of the game. Users will be able to register and to log in. After registering, 
+it will be necessary to log in to access the website and start the game.
 Users who already have an account will have the option to start the game or view their data from previus games (number of games, correct and incorrect answers, time played, etc).
-|Deployment | The web app must have a frontend to interact with the game through a web interface, which will be deployed in a virtual machine. To deploy locally 
+| _Deployment_ | The web app must have a frontend to interact with the game through a web interface, which will be deployed in a virtual machine. To deploy locally 
 for testing before releasing, we will use Docker and npm.
 |===
 
 [options="header",cols="1,2"]
 |===
-|Organizational Constraint |Reason
-|Github | Github will be used to keep the web app in a repository with Git version control. Projects will also be used to track who and when someome takes up 
+| Organizational Constraint | Reason
+| _Github_ | Github will be used to keep the web app in a repository with Git version control. Projects will also be used to track who and when someome takes up 
 a task and completes it. Issues will be opened for every task involving the web app.
-|Class meetings | We will use the time during classes to discuss new tasks that need to be done, as well as to address any common problems we might face in order to solve them as soon as possible.
+| _Class meetings_ | We will use the time during classes to discuss new tasks that need to be done, as well as to address any common problems we might face in order to solve them as soon as possible.
 Other forms of communication, like a Whatsapp group, can be used to communicate between developers.
 |===
-

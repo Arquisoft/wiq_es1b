@@ -1,7 +1,9 @@
 ifndef::imagesdir[:imagesdir: ../images]
 
 [[section-quality-scenarios]]
+
 == Quality Requirements
+
 The main quality objectives of the project will be:
 - Performance: The system will provide fast and effective responses to the user.
 - Usability: The system will be intuitive, through a simple and clear interface.
@@ -9,29 +11,36 @@ The main quality objectives of the project will be:
 - Maintainability: The system will be easy to maintain, upgrade or extend, without putting the whole project at risk.
 
 === Quality Tree
+
 image::quality_tree.png["Quality tree"]
 
 === Quality Scenarios
-Dividiremos los escenarios de calidad en escenarios de uso, cambio y fallo.
+
+We will categorize the quality scenarios into three main types: usage, change, and failure scenarios.
 
 ==== Usage scenarios
 
+[options="header",cols="1,1,1,1,1,1"]
 |===
-| _Source_ | _Stimulus_ | _Attribute_ |_Artifact/Environment_ | _Reply_ | _Response measure_
+| Source | Stimulus | Attribute | Artifact/Environment | Reply | Response measure
 | Players | A player wants to start a game | Performance | Game Interface | The system creates the game | Game creation time less than 0.5s
 | Players | A player wants to answer a question | Performance | Game Interface | The system updates the question interface | Question update time less than 0.5s
 | Players | A player wants to login with username and password | Security | User Interface | The system stores these credentials | These credentials will be encrypted to maintain their security.
-
 |===
 
 ==== Change scenarios
+
+[options="header",cols="1,1,1,1,1,1"]
 |===
-| _Source_ | _Stimulus_ | _Attribute_| _Artifact/Environment_ | _Reply_ | _Response measure_
+| Source | Stimulus | Attribute | Artifact/Environment | Reply | Response measure
 | Developers | The game must have more modes to play | Maintainability | Game Interface |A new game mode must be implemented | The implementation of these new mode should be independent of the other game modes
 | Developers | We want to migrate the database to another database system | Maintainability | Database | The system do the migration | Encrypted data will be migrated in encrypted form
 |===
+
 ==== Failure scenarios
+
+[options="header",cols="1,1,1,1,1,1"]
 |===
-| _Source_ | _Stimulus_ | _Attribute_| _Artifact/Environment_ | _Reply_ | _Response measure_
+| Source | Stimulus | Attribute | Artifact/Environment | Reply | Response measure
 | Game error | An error occurs during the creation of a game | Failure | Game Interface | The system doesn't create the game | The system will alert the user of the error in the creation
 |===
