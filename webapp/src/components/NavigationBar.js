@@ -80,7 +80,7 @@ const NavigationBar = () => {
           sx={{ color: 'white', fontWeight: 'bold' }}
           onClick={showSettings}
         >
-          <Tooltip title="Configuration">
+          <Tooltip title="Settings">
             <SettingsIcon />
           </Tooltip>
         </IconButton>

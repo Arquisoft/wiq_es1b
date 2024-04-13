@@ -29,7 +29,7 @@ describe('Home component', () => {
 
     //compruebo que hay dos botones, jugar y record
     const buttons = await screen.findAllByRole('button');
-    expect(buttons.length).toBe(5);
+    expect(buttons.length).toBe(2);
 
     expect(screen.getByText(/Here you can start a new game!/i)).toBeInTheDocument();
     expect(screen.getByText(`Hello ${usernamePrueba}!`)).toBeInTheDocument();
@@ -63,33 +63,24 @@ describe('Home component', () => {
     );
 
     // Make sure all the buttons are rendered
-    expect(screen.getByText('New Full Random Game')).toBeInTheDocument();
-    expect(screen.getByText('New Images Game')).toBeInTheDocument();
-    expect(screen.getByText('New Geography Game')).toBeInTheDocument();
-    expect(screen.getByText('New Science Game')).toBeInTheDocument();
+    expect(screen.getByText('Play by Category')).toBeInTheDocument();
   });
 
-  it('should render all configuration buttons successfully', async () => {
+  it('should render the category buttons when clicking the play by category', async () => {
     const history = createMemoryHistory();
     render(
       <Router history={history}>
         <Home />
       </Router>
     );
-
-    const configButton = screen.getByText('Configuration of the game');
-    fireEvent.click(configButton);
-
-    const questionsButton = screen.getByText(/Press to change nº of questions:/);
-    fireEvent.click(questionsButton);
-    expect(await screen.findByText('5')).toBeInTheDocument();
-    expect(await screen.findByText('10')).toBeInTheDocument();
-    expect(await screen.findByText('15')).toBeInTheDocument();
-
-    const timeLimitButton = screen.getByText(/Press to change the time limit:/);
-    fireEvent.click(timeLimitButton);
-    expect(await screen.findByText('20')).toBeInTheDocument();
-    
+  
+    // Click the 'Play by Category' button
+    fireEvent.click(screen.getByText('Play by Category'));
+  
+    // Make sure all the category options are rendered
+    expect(await screen.findByText('New Images Game')).toBeInTheDocument();
+    expect(await screen.findByText('New Geography Game')).toBeInTheDocument();
+    expect(await screen.findByText('New Science Game')).toBeInTheDocument();
   });
     
 });
