@@ -1,7 +1,7 @@
 // src/components/Home.js
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
-import { Container, Typography, Button, Stack} from '@mui/material';
+import { Container, Typography, Button, Stack, Menu, MenuItem} from '@mui/material';
 import './stylesheets/home.css';
 import logo from '../logo.svg';
 
@@ -23,7 +23,17 @@ const Home = () => {
     // eslint-disable-next-line
   }, []);
 
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   function handleStartGame(category) {
+    handleClose();
     // Lógica para iniciar la partida
     navigate("/getQuestion", {state: {username, createdAt, category, selectedNumQuestions, selectedTimer}});
   };
@@ -48,19 +58,26 @@ const Home = () => {
       <Typography component="p" variant="body1" sx={{ textAlign: 'center', marginTop: 2 }}>
         Your account was created on {formatDate(createdAt)}.
       </Typography>
-      <Stack spacing={2} sx={{ marginTop: 4 }}>        
+      <Stack spacing={2} sx={{ marginTop: 4 }}>
         <Button variant="contained" color="primary" size="large" onClick={() => handleStartGame("todo")}>
           New Full Random Game
         </Button>
-        <Button variant="contained" color="primary" size="large" onClick={() => handleStartGame("image")}>
-          New Images Game
+        <Button variant="contained" color="primary" size="large" onClick={handleClick}>
+          Play by Category
         </Button>
-        <Button variant="contained" color="primary" size="large" onClick={() => handleStartGame("geography")}>
-          New Geography Game
-        </Button>
-        <Button variant="contained" color="primary" size="large" onClick={() => handleStartGame("science")}>
-          New Science Game
-        </Button>
+        <Menu
+          id="fade-menu"
+          MenuListProps={{
+            'aria-labelledby': 'fade-button',
+          }}
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+        >
+          <MenuItem onClick={() => handleStartGame("image")}>New Images Game</MenuItem>
+          <MenuItem onClick={() => handleStartGame("geography")}>New Geography Game</MenuItem>
+          <MenuItem onClick={() => handleStartGame("science")}>New Science Game</MenuItem>
+        </Menu>
       </Stack>
     </Container>
   );
