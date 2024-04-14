@@ -1,9 +1,11 @@
 // src/components/NavigationBar.js
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import axios from 'axios';
 import { AppBar, Tabs, Tab, Tooltip, IconButton } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
-import axios from 'axios';
+import LogoutIcon from '@mui/icons-material/Logout';
+
 const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
 const NavigationBar = () => {
@@ -32,7 +34,6 @@ const NavigationBar = () => {
 
   const deleteTempQuestions = async () => {
     await axios.post(`${apiEndpoint}/deleteTempQuestions`, { username });
-
   }
 
   const showHelp = () => {
@@ -53,6 +54,11 @@ const NavigationBar = () => {
     deleteTempQuestions();
     navigate("/settings", { state: { username, createdAt } });
   };
+
+  const logOut = () => {
+    localStorage.removeItem('username');
+    navigate('/');
+  }
 
   return (
     <AppBar position="fixed">
@@ -82,6 +88,14 @@ const NavigationBar = () => {
         >
           <Tooltip title="Settings">
             <SettingsIcon />
+          </Tooltip>
+        </IconButton>
+        <IconButton
+          sx={{ color: 'white', fontWeight: 'bold' }}
+          onClick={logOut}
+        >
+          <Tooltip title="Log out">
+            <LogoutIcon />
           </Tooltip>
         </IconButton>
       </Tabs>
