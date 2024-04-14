@@ -71,7 +71,8 @@ class questionGenerator {
 
             //check que number selected is not the same as the correct answer
             //or has already been chose for other wrong answer
-            while (/^Q\d+$/.test(questionData[numberChosen].answerLabel.value) || questionData[numberChosen].answerLabel.value === correctAnswerLabel || answersSet.has(questionData[numberChosen].answerLabel.value)) {
+            var pattern = new RegExp("^Q\\d+$");
+            while (questionData[numberChosen].answerLabel.value.match(pattern) || questionData[numberChosen].answerLabel.value === correctAnswerLabel || answersSet.has(questionData[numberChosen].answerLabel.value)) {
               numberChosen = Math.floor(Math.random() * numOptions);
             }
             //get the wrong answer

@@ -1,7 +1,7 @@
 // src/components/Home.js
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
-import { Container, Typography, Button, Stack, Menu, MenuItem} from '@mui/material';
+import { Container, Typography, Button, Stack, Menu, MenuItem, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@mui/material';
 import './stylesheets/home.css';
 import logo from '../logo.svg';
 
@@ -43,6 +43,17 @@ const Home = () => {
     return `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`;
   };
 
+  const [openD, setOpenD] = useState(false);
+
+  const handleClickOpenD = () => {
+    setOpenD(true);
+  };
+
+  const handleCloseD = () => {
+    setOpenD(false);
+    handleStartGame("art");
+  };
+
   return (
     <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
       
@@ -62,6 +73,22 @@ const Home = () => {
         <Button variant="contained" color="primary" size="large" onClick={() => handleStartGame("todo")}>
           New Full Random Game
         </Button>
+        <Button variant="contained" color="primary" size="large" onClick={() => handleClickOpenD()}>
+          New Art Gallery Game
+        </Button>
+        <Dialog open={openD} onClose={handleCloseD} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
+          <DialogTitle id="alert-dialog-title">{"How to Play"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Guess the artwork of the artist.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseD} color="primary" autoFocus>
+              Start Game
+            </Button>
+          </DialogActions>
+        </Dialog>
         <Button variant="contained" color="primary" size="large" onClick={handleClick}>
           Play by Category
         </Button>
