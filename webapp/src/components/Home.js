@@ -38,6 +38,11 @@ const Home = () => {
     navigate("/getQuestion", {state: {username, createdAt, category, selectedNumQuestions, selectedTimer}});
   };
 
+  function handleHumanCalculator(){
+    handleClose();
+    navigate("/humanCalculator", {state: {username, createdAt, selectedNumQuestions, selectedTimer}});
+  }
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`;
@@ -52,6 +57,15 @@ const Home = () => {
   const handleCloseD = () => {
     setOpenD(false);
     handleStartGame("art");
+  };
+
+  const [openHC, setOpenHC] = useState(false);
+  const handleClickOpenHC = () => {
+    setOpenHC(true);
+  };
+  const handleCloseHC = () => {
+    setOpenHC(false);
+    handleHumanCalculator()
   };
 
   return (
@@ -85,6 +99,22 @@ const Home = () => {
           </DialogContent>
           <DialogActions>
             <Button onClick={handleCloseD} color="primary" autoFocus>
+              Start Game
+            </Button>
+          </DialogActions>
+        </Dialog>
+        <Button variant="contained" color="primary" size="large" onClick={() => handleClickOpenHC()}>
+          New Human Calculator Game
+        </Button>
+        <Dialog open={openHC} onClose={handleCloseHC} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
+          <DialogTitle id="alert-dialog-title">{"How to Play"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Solve the math problems as fast as you can.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseHC} color="primary" autoFocus>
               Start Game
             </Button>
           </DialogActions>

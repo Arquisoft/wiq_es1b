@@ -16,6 +16,7 @@ import Footer from './components/Footer';
 import Help from './components/Help.js';
 import GameFinale from './components/GameFinale.js';
 import SettingsPage from './components/SettingsPage.js';
+import HumanCalculator from './components/HumanCalculator.js';
 
 function logout() {
   localStorage.removeItem('username');
@@ -41,6 +42,7 @@ root.render(
         <Route path='/help' element={<Help />} />
         <Route path='/finale' element={<GameFinale />} />
         <Route path='/settings' element={<SettingsPage />} />
+        <Route path='/humanCalculator' element={<HumanCalculator />} />
       </Routes>
     </Box>
     <Footer />
