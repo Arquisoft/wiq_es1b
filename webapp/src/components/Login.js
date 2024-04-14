@@ -14,6 +14,9 @@ const Login = (onLoginSuccess) => {
   const [createdAt, setCreatedAt] = useState('');
   const navigate = useNavigate();
 
+  const [selectedTimer, setSelectedTimer] = useState('');
+  const [selectedNumQuestions, setSelectedNumQuestions] = useState('');
+
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
   const loginUser = async () => {
@@ -28,6 +31,12 @@ const Login = (onLoginSuccess) => {
 
       localStorage.setItem("username", username);
 
+      //default configurations of the game
+      localStorage.setItem('selectedTimer', 15);
+      localStorage.setItem('selectedNumQuestions', 10);
+      setSelectedTimer(15);
+      setSelectedNumQuestions(10);
+
       await axios.post(`${apiEndpoint}/generateQuestions`, {});
 
     } catch (error) {
@@ -38,9 +47,9 @@ const Login = (onLoginSuccess) => {
   useEffect(() => {
     // Redireccionar a la página de inicio cuando loginSuccess se actualice a true con el nombre de usuario y la fecha de creacion de su cuenta
     if (loginSuccess) {
-      navigate("/home", { state: { username, createdAt } });
+      navigate("/home", { state: { username, createdAt, selectedTimer, selectedNumQuestions  } });
     }
-  }, [loginSuccess, navigate, username, createdAt]);
+  }, [loginSuccess, navigate, username, createdAt, selectedTimer, selectedNumQuestions]);
 
   return (
     <Container component="main" className='wrapper' maxWidth="sm" sx={{ marginTop: 4 }}>

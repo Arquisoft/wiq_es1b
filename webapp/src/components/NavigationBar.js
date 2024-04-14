@@ -1,7 +1,8 @@
 // src/components/NavigationBar.js
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { AppBar, Tabs, Tab } from '@mui/material';
+import { AppBar, Tabs, Tab, Tooltip, IconButton } from '@mui/material';
+import SettingsIcon from '@mui/icons-material/Settings';
 import axios from 'axios';
 const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
@@ -12,11 +13,13 @@ const NavigationBar = () => {
   const location = useLocation();
   const { username } = location.state || {};
   const { createdAt } = location.state || {};
+  const { selectedNumQuestions } = location.state || {};
+  const { selectedTimer } = location.state || {};
 
   const showHome = () => {
     if (username !== undefined) {
       deleteTempQuestions();
-      navigate("/home", { state: { username, createdAt } });
+      navigate("/home", { state: { username, createdAt, selectedNumQuestions, selectedTimer} });
     }
   };
 
@@ -46,6 +49,11 @@ const NavigationBar = () => {
     window.location.href = 'http://20.26.114.153:8000/api-doc/'; //NOSONAR
   };
 
+  const showSettings = () => {
+    deleteTempQuestions();
+    navigate("/settings", { state: { username, createdAt } });
+  };
+
   return (
     <AppBar position="fixed">
       <Tabs
@@ -68,6 +76,14 @@ const NavigationBar = () => {
         <Tab label="API Doc"
           sx={{ color: 'white', fontWeight: 'bold' }}
           onClick={showApiDoc} />
+        <IconButton
+          sx={{ color: 'white', fontWeight: 'bold' }}
+          onClick={showSettings}
+        >
+          <Tooltip title="Settings">
+            <SettingsIcon />
+          </Tooltip>
+        </IconButton>
       </Tabs>
     </AppBar>
   );
