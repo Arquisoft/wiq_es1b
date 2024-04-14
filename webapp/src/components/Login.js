@@ -1,7 +1,7 @@
 // src/components/Login.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container, Typography, TextField, Button, Snackbar } from '@mui/material';
+import { Container, Typography, TextField, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions  } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 import './stylesheets/login.css';
 import '../index.css';
@@ -12,7 +12,6 @@ const Login = (onLoginSuccess) => {
   const [error, setError] = useState('');
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [createdAt, setCreatedAt] = useState('');
-  const [openSnackbar, setOpenSnackbar] = useState(false);
   const navigate = useNavigate();
 
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
@@ -29,17 +28,12 @@ const Login = (onLoginSuccess) => {
 
       localStorage.setItem("username", username);
 
-      setOpenSnackbar(true);
+      await axios.post(`${apiEndpoint}/generateQuestions`, {});
+
     } catch (error) {
       setError(error.response.data.error);
     }
   };
-
-
-  const handleCloseSnackbar = () => {
-    setOpenSnackbar(false);
-  };
-
   
   useEffect(() => {
     // Redireccionar a la página de inicio cuando loginSuccess se actualice a true con el nombre de usuario y la fecha de creacion de su cuenta
@@ -50,9 +44,7 @@ const Login = (onLoginSuccess) => {
 
   return (
     <Container component="main" className='wrapper' maxWidth="sm" sx={{ marginTop: 4 }}>
-        <div className='video-background'>
-          <video src='/clouds-background.mp4' autoPlay loop muted data-testid="login-video"/>
-        </div>
+        
         <div>
           <Typography component="h1" variant="h5" align="center" sx={{ marginTop: 2 }}>
             Welcome to WIQ! Log in to start playing!
@@ -61,6 +53,7 @@ const Login = (onLoginSuccess) => {
             Login
           </Typography>
           <TextField
+            name="username"
             margin="normal"
             fullWidth
             label="Username"
@@ -68,6 +61,7 @@ const Login = (onLoginSuccess) => {
             onChange={(e) => setUsername(e.target.value)}
           />
           <TextField
+            name="password"
             margin="normal"
             fullWidth
             label="Password"
@@ -78,12 +72,23 @@ const Login = (onLoginSuccess) => {
           <Button data-testid="loginButton" variant="contained" color="primary" onClick={loginUser}>
             Login
           </Button>
-          <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar} message="Login successful" />
+          {/* dialog to show error during adding a user */}
           {error && (
-            <Snackbar open={!!error} autoHideDuration={6000} onClose={() => setError('')} message={`Error: ${error}`} />
+            <Dialog open={!!error} onClose={() => setError('')}>
+              <DialogTitle>{"Error"}</DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  {`${error}`}
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={() => setError('')} color="primary">
+                  Close
+                </Button>
+              </DialogActions>
+            </Dialog>
           )}
         </div>
-      
     </Container>
   );
 };

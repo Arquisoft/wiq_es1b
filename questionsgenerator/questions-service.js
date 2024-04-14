@@ -2,95 +2,90 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const QuestionGenerator = require('./question-generator.js');
+const QuestionGenerator = require('./questionGenerator.js');
 const Question = require('./question-model')
-const questionsData = require('./plantillas.json')
+const mongoURI = process.env.MONGODB_URI;
 
 const app = express();
+app.disable('x-powered-by');
 const port = 8003;
 
 // Middleware to parse JSON in request body
-app.use(express.json());
+app.use(bodyParser.json());
+
 
 // Connect to MongoDB
-const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/questiondb';
-mongoose.connect(mongoUri)
-        //delete the data existing in the bd 
-        .then(() => {return Question.deleteMany({});})
-        //inserting the templates into the clear bd
-        .then(()=>{return Question.insertMany(questionsData);});
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 
 //to respond to the /getQuestion request 
-app.post('/getQuestion', async (req,res) => {
+app.post('/getQuestion', async (req, res) => {
   try {
+    //category of the game chosen
+    const category = req.body.category;
 
-    //An instance of the question generator
-    const generator = new QuestionGenerator();
+    //if the category is all, it will choose a random question from all the categories
+    const question = await getRandomQuestionByCategory(category);
 
-    // Find a question in the database randomly
-    const randomQuestion = await Question.aggregate([{ $sample: { size: 1 } }]);
+    console.log("ID: ", question._id);
 
-    //get the title and the query
-    const title = randomQuestion[0].title;
-    const query = randomQuestion[0].query;
+    if (question) {
+      var tittle = question.tittle;
 
-    //get data from wikidata
-    const questionData = await generator.makeSPARQLQuery(query);
+      var correctAnswer = question.answers[question.correctAnswer];
 
-    //data of the answers
-    let numberOfCorrectAnswer;
-    let correctLabel;
-    let correctAnswerLabel;
-    let incorrectAnswersLabels = new Set();
-    
-    //number of options of responses, the length of the array from wikidata
-    let numOptions = questionData.length
+      var answerSet = question.answers;
 
-    //randomly choose the correct answer
-    numberOfCorrectAnswer = Math.floor(Math.random() * numOptions);
-    //get the label for the question and que right answer
-    correctLabel = questionData[numberOfCorrectAnswer].entityLabel.value;
-    correctAnswerLabel = questionData[numberOfCorrectAnswer].answerLabel.value;
+      // Delete the question so as not to have repeated questions.
+      await Question.deleteOne({ _id: question._id });
 
-    //choose the 3 incorrect answers randomly
-    for (let i = 0; i < 3; i++) {
-      
-      //choose a random number
-      let numberChosen = Math.floor(Math.random() * numOptions);  
-
-      //check que number selected is not the same as the correct answer
-      //or has already been chose for other wrong answer
-      while (questionData[numberChosen].answerLabel.value === correctAnswerLabel || incorrectAnswersLabels.has(questionData[numberChosen].answerLabel.value)) {
-            numberChosen = Math.floor(Math.random() * numOptions);
-      }
-      //get the wrong answer
-      incorrectAnswersLabels.add(questionData[numberChosen].answerLabel.value);
+      res.json({ question: tittle, correctAnswerLabel: correctAnswer, answerLabelSet: answerSet });
     }
 
-    //replace the ? in the questions with the information about the question
-    const replacedTitle = title.replace('?', correctLabel);
-    
-    //add the correct answer to the set to shuffle it later
-    incorrectAnswersLabels.add(correctAnswerLabel);
-
-    //transform the set into an array
-    const incorrectAnswersArray = shuffleArray(Array.from(incorrectAnswersLabels));
-
-    //in the response goes the title of the question, the correct answer and a set of the three incorrect answers
-    res.json({question: replacedTitle, correctAnswerLabel: correctAnswerLabel, answerLabelSet: incorrectAnswersArray});
-  } catch(error){
+  } catch (error) {
     res.status(500).json({ error: 'Internal Server Error inside service' });
   }
 });
 
-//method to shuffle the array of the answers
-function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
+app.post('/generateQuestions', async (req, res) => {
+  const generator = new QuestionGenerator();
+  await generator.loadTemplates();
+  await generator.generate10Questions();
+  res.status(200).json({ msg: "Questions generated successfully" });
+})
+
+async function getRandomQuestionByCategory(category) {
+
+  try {
+    let query = {}; // Inicializar consulta vacía por defecto
+
+    // Verificar si la categoría es "todo" o algo diferente
+    if (category !== 'todo') {
+      // Si no es "todo", construir la consulta para la categoría especificada
+      query = { category: category };
+    } else {
+      query = {};
+    }
+
+    const randomQuestion = await Question.aggregate([
+      { $match: query }, // Filtrar por categoría si no es "todo"
+      { $sample: { size: 1 } } // Obtener una muestra aleatoria
+    ]);
+
+    if (randomQuestion.length > 0) {
+      return randomQuestion[0]; // Devuelve la pregunta aleatoria encontrada
+    } else {
+      if (category === 'todo') {
+        console.log('No se encontraron preguntas en la base de datos.');
+      } else {
+        console.log(`No se encontraron preguntas en la categoría "${category}".`);
+      }
+      return null;
+    }
+  } catch (error) {
+    console.error('Error al buscar la pregunta aleatoria:', error);
+    return null;
   }
-  return array;
 }
 
 const server = app.listen(port, () => {

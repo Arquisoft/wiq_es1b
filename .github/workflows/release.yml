@@ -17,16 +17,19 @@ jobs:
     - run: npm --prefix gatewayservice ci
     - run: npm --prefix webapp ci
     - run: npm --prefix questionsgenerator ci
-    - run: npm --prefix historial ci
+    - run: npm --prefix record ci
     - run: npm --prefix users/authservice test -- --coverage
     - run: npm --prefix users/userservice test -- --coverage
     - run: npm --prefix gatewayservice test -- --coverage
+    - run: npm --prefix questionsgenerator test -- --coverage
+    - run: npm --prefix record test -- --coverage
     - run: npm --prefix webapp test -- --coverage
     - name: Analyze with SonarCloud
       uses: sonarsource/sonarcloud-github-action@master
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
   e2e-tests:
     needs: [unit-tests]
     runs-on: ubuntu-latest
@@ -39,7 +42,7 @@ jobs:
     - run: npm --prefix users/userservice install
     - run: npm --prefix gatewayservice install
     - run: npm --prefix questionsgenerator install
-    - run: npm --prefix historial install
+    - run: npm --prefix record install
     - run: npm --prefix webapp install
     - run: npm --prefix webapp run build
     - run: npm --prefix webapp run test:e2e
@@ -106,6 +109,10 @@ jobs:
     needs: [e2e-tests]
     steps:
     - uses: actions/checkout@v4
+    - name: Update OpenAPI configuration
+      run: |
+        DEPLOY_HOST=${{ secrets.DEPLOY_HOST }}
+        sed -i "s/SOMEIP/${DEPLOY_HOST}/g" gatewayservice/openapi.yaml
     - name: Publish to Registry
       uses: elgohr/Publish-Docker-Github-Action@v5
       with:
@@ -131,8 +138,8 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
         registry: ghcr.io
         workdir: questionsgenerator
-  docker-push-historial:
-    name: Push historial service Docker Image to GitHub Packages
+  docker-push-record:
+    name: Push record service Docker Image to GitHub Packages
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -143,15 +150,15 @@ jobs:
     - name: Publish to Registry
       uses: elgohr/Publish-Docker-Github-Action@v5
       with:
-        name: arquisoft/wiq_es1b/historial
+        name: arquisoft/wiq_es1b/record
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
         registry: ghcr.io
-        workdir: historial
+        workdir: record
   deploy:
     name: Deploy over SSH
     runs-on: ubuntu-latest
-    needs: [docker-push-userservice,docker-push-authservice,docker-push-gatewayservice,docker-push-questionsgenerator,docker-push-historial,docker-push-webapp]
+    needs: [docker-push-userservice,docker-push-authservice,docker-push-gatewayservice,docker-push-questionsgenerator,docker-push-record,docker-push-webapp]
     steps:
     - name: Deploy over SSH
       uses: fifsky/ssh-action@master

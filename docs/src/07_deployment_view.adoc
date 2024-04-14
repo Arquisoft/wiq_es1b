@@ -2,7 +2,35 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 [[section-deployment-view]]
 
-
 == Deployment View
 
-image::07_Deployment_View.png["Deployment view"]
+The deployment view describes the deployment architecture of the web application.  
+It illustrates how the software elements are deployed onto the hardware infrastructure. 
+This view provides insights into the physical deployment structure, including servers, databases, and network configurations.
+
+=== Infrastructure Level 1
+
+image::07_Deployment_View_Level1.png["Deployment view - Infrastructure level 1"]
+
+[options="header",cols="1,2"]
+|===
+| Element | Description
+| _Device_ | The device used by end-users to access the web application, such as desktop computers, laptops, tablets, or smartphones.
+| _Azure server_ | The virtual machine, hosted on the Microsoft Azure platform, responsible for hosting and running the web application.
+| _Docker_ | Thre containerization platform utilized to encapsulate and deploy microservices, providing lightweight, portable environments for running specific components of the web application stack.
+| _Database_ | MongoDB is utilized as the database management system, serving as the backend storage for the application's functionality. It stores user data, generated questions, and game-related information.
+|===
+
+=== Infrastructure Level 2
+
+image::07_Deployment_View_Level2.png["Deployment view - Infrastructure level 2"]
+
+[options="header",cols="1,2"]
+|===
+| Element | Description
+| _User service_ | Utilized by logged-in users, retrieves their data from the MongoDB database and displays it within the web application.
+| _Auth service_ | Authenticates the users when they register for the first time in the game. All the data gets collected and saved in the database MongoDb for when they login later.
+| _Gateway service_ | Acts as a central entry point for client requests, routing them to appropriate backend microservices.
+| _Question generator_ | Generate the questions and  the answers, then transmit them to the interface for display to the user. Utilizes SPARQL to interact with the Wikidata external service. 
+| _Record_ | Manages and stores records of user played games, stats and other relevant data in the database MongoDb.
+|===

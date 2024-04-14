@@ -3,7 +3,7 @@
 [![Deploy on release](https://github.com/Arquisoft/wiq_es1b/actions/workflows/release.yml/badge.svg)](https://github.com/Arquisoft/wiq_es1b/actions/workflows/release.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Arquisoft_wiq_es1b&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Arquisoft_wiq_es1b)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Arquisoft_wiq_es1b&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Arquisoft_wiq_es1b)
-[![WIQ GAME](https://github.com/Arquisoft/wiq_es1b/blob/master/docs/images/favicon.ico)](http://20.26.114.153:3000/)
+[![WIQ GAME](https://github.com/Arquisoft/wiq_es1b/blob/master/docs/images/favicon2.ico)](http://20.26.114.153:3000/)
 
 This is a base repo for the [Software Architecture course](http://arquisoft.github.io/) in [2023/2024 edition](https://arquisoft.github.io/course2324.html). 
 
@@ -12,6 +12,8 @@ This repo is a basic application composed of several components.
 - **Gateway service**. Express service that is exposed to the public and serves as a proxy to the two previous ones.
 - **User service**. Express service that handles the insertion of new users in the system.
 - **Auth service**. Express service that handles the authentication of users.
+- **Question service**. Express service that handles the questions of the game. It is divided into two modules: one generates the questions and updates the templates, and the other manages the questions from the database.
+- **Record service**. Express service that handles the recrods of the game.
 - **Webapp**. React web application that uses the gateway service to allow basic login and new user features.
 
 Both the user and auth service share a Mongo database that is accessed with mongoose.
@@ -23,7 +25,6 @@ Both the user and auth service share a Mongo database that is accessed with mong
 - Mauro Varea Fernández
 - Lucas Castro Antuña
 
-Probando release
 
 ## Quick start guide
 

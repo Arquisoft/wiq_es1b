@@ -15,9 +15,15 @@ describe('Gateway Service', () => {
       return Promise.resolve({ data: { token: 'mockedToken' } });
     } else if (url.endsWith('/adduser')) {
       return Promise.resolve({ data: { userId: 'mockedUserId' } });
-    } else if(url.endsWith('/saveHistorial')){
-      return Promise.resolve({ data: { message: 'Historial saved' } });
-    } else if(url.endsWith('/getHistorial')){
+    } else if(url.endsWith('/saveQuestion')){
+      return Promise.resolve({ data: { message: 'Question saved successfully' } });
+    } else if(url.endsWith('/saveGameRecord')){
+      return Promise.resolve({ data: { message: 'Game record saved succesfully' } });
+    } else if(url.endsWith('/generateQuestions')){
+      return Promise.resolve({ data: { message: 'generating questions' } });
+    } else if(url.endsWith('/deleteTempQuestions')){
+      return Promise.resolve({ data: { message: 'deleting questions' } });
+    } else if(url.endsWith('/getGameRecord')){
       return Promise.resolve({
         data: [
           {
@@ -49,7 +55,7 @@ describe('Gateway Service', () => {
   it('should forward login request to auth service', async () => {
     const response = await request(app)
       .post('/login')
-      .send({ username: 'testuser', password: 'testpassword' });
+      .send({ username: 'testuser', password: 'testpassword' });//NOSONAR
 
     expect(response.statusCode).toBe(200);
     expect(response.body.token).toBe('mockedToken');
@@ -59,7 +65,7 @@ describe('Gateway Service', () => {
   it('should forward add user request to user service', async () => {
     const response = await request(app)
       .post('/adduser')
-      .send({ username: 'newuser', password: 'newpassword' });
+      .send({ username: 'newuser', password: 'newpassword' });//NOSONAR
 
     expect(response.statusCode).toBe(200);
     expect(response.body.userId).toBe('mockedUserId');
@@ -75,19 +81,44 @@ describe('Gateway Service', () => {
     expect(response.body.correctAnswerLabel).toBe("Madrid");
   });
 
-  // Test /getQuestion endpoint
-  it('should forward save historial request to historial service', async () => {
+  // Test /saveQuestion endpoint
+  it('should forward saveQuestion reques to record service', async () => {
     const response = await request(app)
-      .post('/saveHistorial')
-      .send({ question: '¿Cuál es la capital de España?', answersArray: ['Madrid', 'Barcelona', 'Valencia', 'Sevilla'],correctAnswer: 'Madrid', selectedAnswer: 'Madrid', correct: true, username2: 'testuser'});
-
+      .post('/saveQuestion')
+      .send({ question: '¿Cuál es la capital de España?', answersArray: ['Madrid', 'Barcelona', 'Valencia', 'Sevilla'],correctAnswer: 'Madrid', selectedAnswer: 'Madrid', isCorrect: true, username: 'testuser'});
     expect(response.statusCode).toBe(200);
-    expect(response.body.message).toBe('Historial saved');
+    expect(response.body.message).toBe('Question saved successfully');
   });
 
-  it('should forward get historial request to historial service', async () => {
+  // Test /saveGameRecord endpoint
+  it('should forward saveGameRecord request to historial service', async () => {
     const response = await request(app)
-      .post('/getHistorial')
+      .post('/saveGameRecord')
+      .send({ username: 'testuser'});
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body.message).toBe('Game record saved succesfully');
+  });
+  
+  // Test /generateQuestions endpoint
+  it('should forward generateQuestions request to questions service', async () => {
+    const response = await request(app)
+      .post('/generateQuestions');
+    expect(response.statusCode).toBe(200);
+  });
+  
+  // Test /deleteTempQuestions endpoint
+  it('should forward deleteTempQuestions request to historial service', async () => {
+    const response = await request(app)
+      .post('/deleteTempQuestions')
+      .send({ username: 'testuser'});
+    expect(response.statusCode).toBe(200);
+  });
+
+  // Test /getGameRecord endpoint
+  it('should forward getGameRecord request to historial service', async () => {
+    const response = await request(app)
+      .post('/getGameRecord')
       .send({ username2: 'testuser'});
 
     expect(response.statusCode).toBe(200);

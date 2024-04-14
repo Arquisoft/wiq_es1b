@@ -1,0 +1,420 @@
+openapi: 3.0.0
+info:
+  title: Gatewayservice API
+  description: Gateway OpenAPI specification.
+  version: 0.2.0
+servers:
+  - url: http://localhost:8000
+    description: Development server
+  - url: http://20.26.114.153:8000
+    description: Production server
+paths:
+  /adduser:
+    post:
+      summary: Add a new user to the database.
+      operationId: addUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  description: User ID.
+                  example: user1234
+                password:
+                  type: string
+                  description: User password.
+                  example: Password123!=TEst
+      responses:
+        '200':
+          description: User added successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                    description: User ID
+                  password:
+                    type: string
+                    description: Hashed password
+                    example: $2b$10$ZKdNYLWFQxzt5Rei/YTc/OsZNi12YiWz30JeUFHNdAt7MyfmkTuvC
+                  _id:
+                    type: string
+                    description: Identification
+                    example: 65f756db3fa22d227a4b7c7d
+                  createdAt:
+                    type: string
+                    description: Creation date.
+                    example: '2024-03-17T20:47:23.935Z'
+                  ___v:
+                    type: integer
+                    example: '0'
+        '400':
+          description: Failed to add user. Posible errors "Password must be at least 8 characters long" and "Password must contain at least one lowercase letter, one uppercase letter, one digit, and one symbol"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error information.
+                    example: getaddrinfo EAI_AGAIN mongodb
+  /health:
+    get:
+      summary: Check the health status of the service.
+      operationId: checkHealth
+      responses:
+        '200':
+          description: Service is healthy.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Health status.
+                    example: OK
+  /login:
+    post:
+      summary: Log in to the system.
+      operationId: loginUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  description: User ID.
+                  example: user1234
+                password:
+                  type: string
+                  description: User password.
+                  example: Password123==+TEst
+      responses:
+        '200':
+          description: Login successful. Returns user token, username, and creation date and shows the home page of the webapp.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    description: User token.
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWY3NTZkYjNmYTIyZDIyN2E0YjdjN2QiLCJpYXQiOjE3MTA3MDg3NDUsImV4cCI6MTcxMDcxMjM0NX0.VMG_5DOyQ4GYlJQRcu1I6ICG1IGzuo2Xuei093ONHxw
+                  username:
+                    type: string
+                    description: Username.
+                    example: user1234
+                  createdAt:
+                    type: string
+                    description: Creation date.
+                    example: '2024-03-17T20:47:23.935Z'
+        '401':
+          description: Invalid credentials.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Shows the error info.
+                    example: Invalid credentials
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error information.
+                    example: Internal Server Error
+  /getQuestion:
+    post:
+      summary: Gets a question for the game.
+      operationId: getQuestion
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                category:
+                  type: string
+                  description: category of the game.
+                  example: sports
+      responses:
+        '200':
+          description: Gets a question for the game successfully. Returns que title of the question, the correct answer and an array with the correct and incorrect answer randomly ordered.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  question:
+                    type: string
+                    description: Title of the question.
+                    example: What is the capital of France?
+                  correctAnswerLabel:
+                    type: string
+                    description: The correct answer.
+                    example: Paris
+                  answerLabelSet:
+                    type: array
+                    items:
+                      type: string
+                    description: An array with all the answer, 1 correct and 3 incorrect.
+                    example: 
+                      - Paris
+                      - Madrid
+                      - Berlin
+                      - London
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error information.
+                    example: Internal Server Error
+  /generateQuestions:
+    post:
+      summary: Generates questions from wikidata to the database.
+      operationId: generateQuestions
+      responses:
+        '200':
+          description: Generates questions successfully. Returns a message of success.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    description: Success message.
+                    example: Questions generated successfully
+  /saveQuestion:
+    post:
+      summary: Saves the data of a question the user answered locally.
+      operationId: saveQuestion
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                  description: question title 
+                  example: What is the capital of France?
+                answersArray:
+                  type: array
+                  items:
+                    type: string
+                  description: array with all the answers
+                  example: 
+                    - Paris
+                    - Madrid
+                    - Berlin
+                    - London
+                correctAnswer:
+                  type: string
+                  description: correct answer
+                  example: Paris
+                selectedAnswer:
+                  type: string
+                  description: selected answer
+                  example: Madrid
+                isCorrect:
+                  type: boolean
+                  description: true if the answer is correct, false if it is incorrect
+                  example: false
+                username:
+                  type: string
+                  description: username of the user logged in
+                  example: user1234
+      responses:
+        '200':
+          description: Saves the data successfully. Returns a message to confirm it was a success.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    description: message of success.
+                    example: Question saved successfully
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error information.
+                    example: Internal Server Error
+  /saveGameRecord:
+    post:
+      summary: Saves the data of a game the user finished.
+      operationId: saveGameRecord
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  description: username of the user logged in
+                  example: user1234
+      responses:
+        '200':
+          description: Saves the game successfully. Returns a message to confirm it was a success.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    description: message of success.
+                    example: Game record saved succesfully
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error information.
+                    example: Internal Server Error
+  /getGameRecord:
+    post:
+      summary: gets the data of all games and questions of the user logged in.
+      operationId: getGameRecord
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  description: username of the user logged in
+                  example: user1234
+      responses:
+        '200':
+          description: gets the data from the database for the user logged in. Returns an array with all the games and questions.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    type: string
+                    description: ID of the user
+                  questions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        question:
+                          type: string
+                          description: question title 
+                          example: What is the capital of France?
+                        answersArray:
+                          type: array
+                          items:
+                            type: string
+                          description: array with all the answers
+                          example: 
+                            - Paris
+                            - Madrid
+                            - Berlin
+                            - London
+                        correctAnswer:
+                          type: string
+                          description: correct answer
+                          example: Paris
+                        selectedAnswer:
+                          type: string
+                          description: selected answer
+                          example: Madrid
+                        isCorrect:
+                          type: boolean
+                          description: true if the answer is correct, false if it is incorrect
+                          example: false
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error information.
+                    example: Internal Server Error
+  /deleteTempQuestions:
+    post:
+      summary: Deletes the locally saved answers of the games.
+      operationId: deleteTempQuestions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  description: username of the user logged in
+                  example: user1234
+      responses:
+        '200':
+          description: Deletes succesfully the data. Returns a message to confirm it was a success.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    description: message of success.
+                    example: Temp questions deleted successfully
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error information.
+                    example: Internal Server Error

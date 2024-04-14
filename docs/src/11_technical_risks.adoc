@@ -1,14 +1,16 @@
 ifndef::imagesdir[:imagesdir: ../images]
 
 [[section-technical-risks]]
+
 == Risks and Technical Debts
+
 We must take into account all risks and problems, as they are very useful to prevent and be able to manage them correctly.
 
+[options="header",cols="1,1,1,1"]
 |===
-| _Type_ | _Name_ | _Description_ | _Priority_
-| Risk | Time | The time for this project is limited, since we must follow certain delivery guidelines and, in addition, the other subjects force us to distribute the available time in the best possible way | Medium
-| Technical Debt | React | React is a new technology for all the members of the group. Although we agree that it is the best option to carry out the project, we must inform ourselves about it, take courses and learn independently the potentials of this technology | High
-| Risk | Github | GitHub is a very powerful tool when it comes to working in a coordinated and parallel way, but without a good organization and communication in the conflicts generated, functionalities can be lost | Low
-| Risk | Autonomy | En general, los proyectos realizados durante la carrera son muy guiados, con revisiones y entregas parciales muy frecuentes, y documentos para guiar al equipo en el proyecto. Trabajar de forma totalmente autónoma puede llegar a ser un proglema para organizarnos | Medium
+| Type | Name | Description | Priority
+| Risk | _Time_ | The time for this project is limited, since we must follow certain delivery guidelines and, in addition, the other subjects force us to distribute the available time in the best possible way | Medium
+| Technical Debt | _React_ | React is a new technology for all the members of the group. Although we agree that it is the best option to carry out the project, we must inform ourselves about it, take courses and learn independently the potentials of this technology | High
+| Risk | _Github_ | GitHub is a very powerful tool when it comes to working in a coordinated and parallel way, but without a good organization and communication in the conflicts generated, functionalities can be lost | Low
+| Risk | _Autonomy_ | Typically, projects undertaken during the course are heavily guided, with frequent reviews, partial deliveries and documentation to steer the team throughout the project. Working entirely autonomously may pose challenges in terms of organization. | Medium
 |===
-

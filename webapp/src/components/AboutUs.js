@@ -1,16 +1,21 @@
 // src/components/AboutUs.js
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container, Typography, List, ListItem, ListItemText } from '@mui/material';
-import NavigationBar from './NavigationBar';
+import { useNavigate } from "react-router-dom";
 
 const AboutUs = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = localStorage.getItem('username');
+    if (user === null) {
+      navigate('/');
+    }
+    // eslint-disable-next-line
+  }, []);
 
   return(
-    <Container component="main" maxWidth="sm">
-      <div className='video-background'>
-        <video src='/clouds-background.mp4' autoPlay loop muted data-testid="login-video"/>
-      </div>
-      <NavigationBar />
+    <Container component="main" maxWidth="md" sx={{ margin: 8 }}>
       <Typography component="h1" variant="h1" marginBottom={2}>
         About us
       </Typography>

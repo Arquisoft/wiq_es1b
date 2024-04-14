@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { render, fireEvent, screen, waitFor, act } from '@testing-library/react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
@@ -9,6 +9,8 @@ const mockAxios = new MockAdapter(axios);
 
 describe('GetQuestion component', () => {
   beforeEach(() => {
+    localStorage.setItem('username', 'testUser');
+
     mockAxios.reset();
     mockAxios.onPost('http://localhost:8000/getQuestion').reply(200, {
       question: 'Test question',
@@ -16,25 +18,33 @@ describe('GetQuestion component', () => {
       answerLabelSet: ['Test answer 1', 'Test answer 2', 'Test answer 3', 'Test correct answer']
     });
 
-    mockAxios.onPost('http://localhost:8000/saveHistorial').reply(200, {   
-    });
+    mockAxios.onPost('http://localhost:8000/saveQuestion').reply(200, {});
   });
 
-  it('Should render question and answer buttons', async () => {   
+  const setupTest = async () => {
     render(
-    <Router>
-      <Question />
-    </Router>);
-  
-    // Wait for the question to appear in the document
-    await waitFor(() => screen.getByText('Test question'));
-    
-    // Check that there are 5 buttons, 4 for the answers and 1 for the next question
-    const buttons = await screen.findAllByRole('button');
-    expect(buttons.length).toBe(7);
+      <MemoryRouter initialEntries={[{
+        pathname: '/question',
+        state: {
+          selectedNumQuestions: 10,
+          selectedTimer: 15, 
+          username: 'testUser', 
+          category: 'todo'
+        }
+      }]}>
+        <Question />
+      </MemoryRouter>
+    );
 
-    // Check that the question and answers are on the screen
-    expect(screen.getByText('Test question')).toBeInTheDocument();
+    await waitFor(() => screen.getByText('1/10 Test question'));
+  };
+
+  it('Should render question and answer buttons', async () => {   
+    await setupTest();
+    
+    const buttons = await screen.findAllByRole('button');
+    expect(buttons.length).toBe(5);
+
     expect(screen.getByText('Test answer 1')).toBeInTheDocument();
     expect(screen.getByText('Test answer 2')).toBeInTheDocument();
     expect(screen.getByText('Test answer 3')).toBeInTheDocument();
@@ -42,49 +52,30 @@ describe('GetQuestion component', () => {
   });
 
   it('Should play and guess the correct answer', async () => {    
-    render(
-    <Router>
-      <Question />
-    </Router>);
-  
-    // Wait for the question to appear in the document
-    await waitFor(() => screen.getByText('Test question'));
+    await setupTest();
 
-    // Click the correct answer
-    fireEvent.click(screen.getByText('Test correct answer')); 
+    fireEvent.click(screen.getByText('Test correct answer'));  
 
-    // Wait for feedback to be rendered
     await waitFor(() => expect(screen.getByText('You have won! Congratulations!')).toBeInTheDocument()); 
   });
 
   it('Should play and select an incorrect answer', async () => {    
-    render(
-    <Router>
-      <Question />
-    </Router>);
-  
-    // Wait for the question to appear in the document
-    await waitFor(() => screen.getByText('Test question'));
+    await setupTest();
 
-    // Click the correct answer
     fireEvent.click(screen.getByText('Test answer 1')); 
 
-    // Wait for feedback to be rendered
     await waitFor(() => expect(screen.getByText('You lost! Try again :(')).toBeInTheDocument()); 
   });
 
-});
-/*
-jest.mock('axios');
+  it('Should play and let the time end without answering the question', async () => {    
+    jest.useFakeTimers();
 
-  beforeEach(() => {
-      axios.post.mockResolvedValue({
-        data: {
-          question: 'What is the capital of France?',
-          correctAnswerLabel: 'Paris',
-          answerLabelSet: ['Paris', 'London', 'Madrid', 'Lisbon']
-        }
-      });
+    await setupTest();
+
+    act(() => {
+      jest.advanceTimersByTime(15000);
     });
-    expect(screen.getByTestId('answer0Button')).toBeInTheDocument();
-*/
+ 
+    await waitFor(() => expect(screen.getByText("You lost! You didn't answer in time :(")).toBeInTheDocument()); 
+  });
+});

@@ -25,6 +25,7 @@ describe('Login component', () => {
 
     // Mock the axios.post request to simulate a successful response
     mockAxios.onPost('http://localhost:8000/login').reply(200, { createdAt: '2024-01-01T12:34:56Z' });
+    mockAxios.onPost('http://localhost:8000/generateQuestions').reply(200);
 
     // Simulate user input
     await act(async () => {
@@ -51,6 +52,7 @@ describe('Login component', () => {
 
     // Mock the axios.post request to simulate an error response
     mockAxios.onPost('http://localhost:8000/login').reply(401, { error: 'Unauthorized' });
+    mockAxios.onPost('http://localhost:8000/generateQuestions').reply(200);
 
     // Simulate user input
     fireEvent.change(usernameInput, { target: { value: 'testUser' } });
@@ -59,9 +61,9 @@ describe('Login component', () => {
     // Trigger the login button click
     fireEvent.click(loginButton);
 
-    // Wait for the error Snackbar to be open
+    // Wait for the error Dialog to be open
     await waitFor(() => {
-      expect(screen.getByText(/Error: Unauthorized/i)).toBeInTheDocument();
+      expect(screen.getByText(/Unauthorized/i)).toBeInTheDocument();
     });
 
     // Verify that the user information is not displayed

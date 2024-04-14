@@ -4,11 +4,17 @@ ifndef::imagesdir[:imagesdir: ../images]
 == Runtime View
 
 === Question Scenario
-image::questionScenarioDiagram.png["Diagram of a user asking for and answering a question of the game"]
+image::getQuestionScenario.png["Diagram of a user asking for and answering a question of the game"]
+
 In the diagram we can see one user interacting with the app by getting and answering a question of the game.
-In this scenario there can be two different sub-scenarios, one where the user chooses the right answer and
-the game shows in the view that it is correct, and other where the answer choosed is wrong and the game 
-also makes it seen to the user.
+
+In this scenario, the question will first be collected from the database. To do so, the question view will call getQuestion, which will propagate to the question service 
+propagate to question service where, by means of an aggregate, a random question will be fetched. Afterwards, this question will be deleted from 
+the database to avoid repeating questions.
+Once the question has been retrieved, it is displayed in the view. When the user selects one of the 4 answers, the selected answer is checked, the user is notified of the answer. 
+the selected answer is checked, the user is notified of this check (whether it is correct or incorrect), and the process of saving the question begins.
+To do this, the /saveQuestion endpoint will be called and, once redirected to the historial service, it will save the question in a temporary array so that, when the user wants to save the complete game, the questions will be stored in a temporary array. 
+the complete game is to be saved, all the questions of that game will be there.
 
 
 === Register Scenario
@@ -27,10 +33,12 @@ the connection with the database will be made and, if everything is correct, the
 
 
 === Login Scenario
-image::loginScenarioDiagram.png["Diagram of a user logging into the application"]
+image::loginScenario.png["Diagram of a user logging into the application"]
 
 
 This diagram explains the sequence that every user follows in order to sign into the application.
+
+
 
 
 This flowchart is very similar to the previous one because the actions are basically the same:
@@ -39,4 +47,22 @@ because the user has already signed up previously and the database has registere
 the system. This time, the action sent by the auth service to the database is to search if there´s
 any user whose data corresponds to those obtained previously. If the user has not signed up yet 
 the application will notify him that an error on the authentication has ocurred.
+When the user is logged, then 10 questions will be generated with wikidata and saved to the database.
 
+=== Save record Scenario
+image::saveRecordScenario.png["Diagram of a record save"]
+
+In this diagram we can see the sequence for saving a game. When the game is over, the user is redirected to the Game Final screen,
+where he/she will click on the "Save record" button to save that game in the record.
+First, the gateway service will recognize the action of saving a game, and redirect the request to the historial service,
+who, after creating the connection to the database, will search for the current user. Once the current user has been obtained from the database, the object
+object is created, with the obtained user and the game questions (which have been stored at game time). Finally, the game is saved
+in the database.
+
+=== Get record Scenario
+image::getRecordScenario.png["Diagram of a logged user getting his records"]
+
+This diagram shows the process by which a user, previously logged in, accesses the records of his games.
+First, the user will click on the navBar button to access his game record. This will make a call to the /getGameRecord endpoint,
+which the gateway service will redirect to the historial service. This will first check that the user exists and, if so, will return all of the user's 
+games saved up to the date of the logged in user.

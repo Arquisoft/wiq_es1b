@@ -12,52 +12,57 @@ describe('AddUser component', () => {
     mockAxios.reset();
   });
 
-  it('should add user successfully', async () => {
-    render(<AddUser />);
+  const setupTest = async (username, password, response) => {
+    render(
+      <Router>
+        <AddUser />
+      </Router>
+    );
 
     const usernameInput = screen.getByLabelText(/Username/i);
     const passwordInput = screen.getByLabelText(/Password/i);
     const addUserButton = screen.getByRole('button', { name: /Add User/i });
 
-    // Mock the axios.post request to simulate a successful response
-    mockAxios.onPost('http://localhost:8000/adduser').reply(200);
+    mockAxios.onPost('http://localhost:8000/adduser').reply(...response);
 
-    // Simulate user input
-    fireEvent.change(usernameInput, { target: { value: 'testUser' } });
-    fireEvent.change(passwordInput, { target: { value: 'testPassword' } });
+    fireEvent.change(usernameInput, { target: { value: username } });
+    fireEvent.change(passwordInput, { target: { value: password } });
 
-    // Trigger the add user button click
     fireEvent.click(addUserButton);
+  };
 
-    // Wait for the Snackbar to be open
+  it('should add user successfully', async () => {
+    await setupTest('testUser', 'testPassword', [200]);
+
     await waitFor(() => {
       expect(screen.getByText(/User added successfully/i)).toBeInTheDocument();
     });
   });
 
-  it('should handle error when adding user', async () => {
+  it('should handle error when adding user with a short password', async () => {
+    await setupTest('testUser', 'pass', [500, { error: 'Password must be at least 8 characters long' }]);
+
+    await waitFor(() => {
+      expect(screen.getByText(/Password must be at least 8 characters long/i)).toBeInTheDocument();
+    });
+  });
+
+  it('should handle error when adding user with a password without a sign of capital letter', async () => {
+    await setupTest('testUser', 'shortbadpasswordnosigns', [500, { error: 'Password must contain at least one lowercase letter, one uppercase letter, one digit, and one symbol' }]);
+
+    await waitFor(() => {
+      expect(screen.getByText(/Password must contain at least one lowercase letter, one uppercase letter, one digit, and one symbol/i)).toBeInTheDocument();
+    });
+  });
+
+  it('should handle error when adding user with a password without a sign of capital letter', async () => {
     render(
       <Router>
         <AddUser />
-      </Router>);
-
-    const usernameInput = screen.getByLabelText(/Username/i);
-    const passwordInput = screen.getByLabelText(/Password/i);
-    const addUserButton = screen.getByRole('button', { name: /Add User/i });
-
-    // Mock the axios.post request to simulate an error response
-    mockAxios.onPost('http://localhost:8000/adduser').reply(500, { error: 'Internal Server Error' });
-
-    // Simulate user input
-    fireEvent.change(usernameInput, { target: { value: 'testUser' } });
-    fireEvent.change(passwordInput, { target: { value: 'testPassword' } });
-
-    // Trigger the add user button click
-    fireEvent.click(addUserButton);
-
-    // Wait for the error Snackbar to be open
+      </Router>
+    );
     await waitFor(() => {
-      expect(screen.getByText(/Error: Internal Server Error/i)).toBeInTheDocument();
+      expect(screen.getByText(/Welcome to WIQ! Create an account to start playing!/i)).toBeInTheDocument();
     });
   });
 });
