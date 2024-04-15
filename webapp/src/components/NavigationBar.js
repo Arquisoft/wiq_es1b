@@ -2,11 +2,23 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import { AppBar, Tabs, Tab, Tooltip } from '@mui/material';
+import { AppBar, Tabs, Tab, Tooltip, styled } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
+
+const StyledTab = styled(Tab)(({ theme }) => ({
+  color: 'white',
+  fontWeight: 'bold',
+  borderBottom: '3px solid transparent',
+  '&:hover': {
+    borderBottomColor: theme.palette.primary.main,
+  },
+  '&.Mui-selected': {
+    borderBottomColor: theme.palette.primary.main,
+  },
+}));
 
 const NavigationBar = () => {
 
@@ -67,36 +79,26 @@ const NavigationBar = () => {
   }
 
   return (
-    <AppBar position="fixed" color="inherit">
+    <AppBar position="fixed">
       <Tabs
         value={false}
         aria-label="navigation tabs"
         variant="fullWidth"
       >
-        <Tab label="Home"
-          sx={{ color: 'black', fontWeight: 'bold' }}
-          onClick={showHome} />
-        <Tab label="Record"
-          sx={{ color: 'black', fontWeight: 'bold' }}
-          onClick={showRecord} />
-        <Tab label="Help"
-          sx={{ color: 'black', fontWeight: 'bold' }}
-          onClick={showHelp} />
-        <Tab label="About Us"
-          sx={{ color: 'black', fontWeight: 'bold' }}
-          onClick={showAboutUs} />
-        <Tab label="API Doc"
-          sx={{ color: 'black', fontWeight: 'bold' }}
-          onClick={showApiDoc} />
-        <Tab aria-label="Settings"
+        <StyledTab label="Home" onClick={showHome} />
+        <StyledTab label="Record" onClick={showRecord} />
+        <StyledTab label="Help" onClick={showHelp} />
+        <StyledTab label="About Us" onClick={showAboutUs} />
+        <StyledTab label="API Doc" onClick={showApiDoc} />
+        <StyledTab aria-label="Settings" 
           icon={<Tooltip title="Settings">
-                  <SettingsIcon style={{ color: 'black' }} />
-                </Tooltip>}     
+              <SettingsIcon />
+            </Tooltip>} 
           onClick={showSettings} />
-        <Tab aria-label="Log out"
+        <StyledTab aria-label="Log out" 
           icon={<Tooltip title="Log out">
-                  <LogoutIcon style={{ color: 'black' }} />
-                </Tooltip>}     
+              <LogoutIcon />
+            </Tooltip>} 
           onClick={logOut} />
       </Tabs>
     </AppBar>
