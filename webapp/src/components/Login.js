@@ -55,7 +55,7 @@ const Login = (onLoginSuccess) => {
     <Container component="main" className='wrapper' maxWidth="sm" sx={{ marginTop: 4 }}>
         
         <div>
-          <Typography component="h1" variant="h5" align="center" sx={{ marginTop: 2 }}>
+          <Typography component="h1" variant="h5" align="center" sx={{ marginTop: 2 }} fontWeight='bold'>
             Welcome to WIQ! Log in to start playing!
           </Typography>
           <Typography component="h1" variant="h5">
