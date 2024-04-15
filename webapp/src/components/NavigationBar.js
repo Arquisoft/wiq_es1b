@@ -1,12 +1,10 @@
 // src/components/NavigationBar.js
 import React from 'react';
-import { useNavigate, useLocation, NavLink } from 'react-router-dom';
-import { IoClose, IoMenu } from 'react-icons/io5';
+import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { AppBar, Tabs, Tab, Tooltip } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
-import './stylesheets/navigationBar.css';
 
 const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
@@ -69,74 +67,12 @@ const NavigationBar = () => {
   }
 
   return (
-    <header className="header">
-      <nav className="nav container">
-        <NavLink to="/" className="nav__logo">
-          Navigation Bar
-        </NavLink>
- 
-        <div
-          className={"nav__menu"}
-          id="nav-menu"
-        >
-          <ul className="nav__list">
-            <li className="nav__item">
-              <NavLink className="nav__link" onClick={showHome}>
-                Home
-              </NavLink>
-            </li>
-            <li className="nav__item">
-              <NavLink className="nav__link" onClick={showRecord}>
-                Record
-              </NavLink>
-            </li>
-            <li className="nav__item">
-              <NavLink className="nav__link" onClick={showApiDoc}>
-                API Doc
-              </NavLink>
-            </li>
-            <li className="nav__item">
-              <NavLink className="nav__link" onClick={showHelp}>
-                Help
-              </NavLink>
-            </li>
-            <li className="nav__item">
-              <NavLink className="nav__link" onClick={showAboutUs}>
-                About Us
-              </NavLink>
-            </li>
-            <li className="nav__item">
-              <NavLink className="nav__link" onClick={showSettings}>
-                Settings
-              </NavLink>
-            </li>
-            <li className="nav__item">
-              <NavLink className="nav__link nav__cta" onClick={logOut}
-                  aria-label="Log out"
-                  icon={<Tooltip title="Log out">
-                    <LogoutIcon style={{ color: 'white' }} />
-                  </Tooltip>}>
-              </NavLink>
-            </li>
-          </ul>
-          <div className="nav__close" id="nav-close">
-            <IoClose />
-          </div>
-        </div>
- 
-        <div className="nav__toggle" id="nav-toggle">
-          <IoMenu />
-        </div>
-      </nav>
-    </header>
-  );
-
-  return (
     <AppBar position="fixed">
       <Tabs
         value={false}
         aria-label="navigation tabs"
         variant="fullWidth"
+        sx={{ marginLeft: 'auto' }}
       >
         <Tab label="Home"
           sx={{ color: 'white', fontWeight: 'bold' }}
