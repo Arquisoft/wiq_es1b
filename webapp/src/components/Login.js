@@ -62,9 +62,6 @@ const Login = (onLoginSuccess) => {
           <Typography component="h1" variant="h5" align="center" sx={{ marginTop: 2 }} fontWeight='bold'>
             Log in to start playing!
           </Typography>
-          <Typography component="h1" variant="h5">
-            Login
-          </Typography>
           <TextField
             name="username"
             margin="normal"
