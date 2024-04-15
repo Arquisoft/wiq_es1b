@@ -1,7 +1,7 @@
 // src/components/AboutUs.js
 import React, { useEffect } from 'react';
-import { Container, Typography, List, ListItem, ListItemText } from '@mui/material';
 import { useNavigate } from "react-router-dom";
+import { Container, Typography, List, ListItem, ListItemText } from '@mui/material';
 
 const AboutUs = () => {
   const navigate = useNavigate();
