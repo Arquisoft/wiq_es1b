@@ -32,19 +32,16 @@ const AddUser = () => {
   };
 
   return (
-    <Container component="main" maxWidth="xs" className='wrapper' sx={{ marginTop: 4 }}>
+    <Container component="main">
       <div className="welcome-container">
           <Typography variant="h4" className="welcome-text">
             Welcome to WIQ!
           </Typography>
       </div>
       <div style={{ padding: '4em', borderRadius: '15px', boxShadow: '0 0 50px #00a6bc', backgroundColor: 'rgba(255, 255, 255, 0.65)', zIndex: 1, marginTop: '2rem' }}>
-        <Typography component="h1" variant="h5" align="center" sx={{ marginTop: 2 }}>
+        <Typography component="h1" variant="h5" align="center" sx={{ marginTop: 2 }} fontWeight='bold'>
             Create an account to start playing!
           </Typography>
-        <Typography component="h1" variant="h5">
-          Add User
-        </Typography>
         <TextField
           name="username"
           margin="normal"
