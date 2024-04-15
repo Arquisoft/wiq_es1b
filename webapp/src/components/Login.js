@@ -53,8 +53,8 @@ const Login = (onLoginSuccess) => {
 
   return (
     <Container component="main" >
-        <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-          <Typography variant="h2" fontWeight="bold" color="primary">
+        <div className="welcome-container">
+          <Typography variant="h4" className="welcome-text">
             Welcome to WIQ!
           </Typography>
         </div>
