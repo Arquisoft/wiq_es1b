@@ -1,7 +1,7 @@
-// src/components/AboutUs.js
+// src/components/SettingsPage.js
 import React, { useEffect, useState } from 'react';
-import { Container, Typography, TextField} from '@mui/material';
 import { useNavigate } from "react-router-dom";
+import { Container, Typography, TextField} from '@mui/material';
 
 const SettingsPage = () => {
   const navigate = useNavigate();
@@ -19,6 +19,7 @@ const SettingsPage = () => {
     const savedNumQuestions = localStorage.getItem('selectedNumQuestions');
     return savedNumQuestions ? Number(savedNumQuestions) : 10;
   });
+
   const handleNumQuestionsChange = (event) => {
     // to limit the number that the user inputs 
     let value = event.target.value;
@@ -30,6 +31,7 @@ const SettingsPage = () => {
     setSelectedNumQuestions(value);
     localStorage.setItem('selectedNumQuestions', value);
   };
+  
   const handleTimerChange = (event) => {
     // to limit the number that the user inputs 
     let value = event.target.value;
@@ -46,8 +48,7 @@ const SettingsPage = () => {
   const [selectedTimer, setSelectedTimer] = useState(() => {
     const savedTimer = localStorage.getItem('selectedTimer');
     return savedTimer ? Number(savedTimer) : 15;
-  });
-  
+  });  
 
   return(
     <Container component="main" maxWidth="md" sx={{ margin: 8 }}>
