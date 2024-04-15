@@ -2,7 +2,7 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import { AppBar, Tabs, Tab, Tooltip, IconButton } from '@mui/material';
+import { AppBar, Tabs, Tab, Tooltip } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 
@@ -82,22 +82,16 @@ const NavigationBar = () => {
         <Tab label="API Doc"
           sx={{ color: 'white', fontWeight: 'bold' }}
           onClick={showApiDoc} />
-        <IconButton
-          sx={{ color: 'white', fontWeight: 'bold' }}
-          onClick={showSettings}
-        >
-          <Tooltip title="Settings">
-            <SettingsIcon />
-          </Tooltip>
-        </IconButton>
-        <IconButton
-          sx={{ color: 'white', fontWeight: 'bold' }}
-          onClick={logOut}
-        >
-          <Tooltip title="Log out">
-            <LogoutIcon />
-          </Tooltip>
-        </IconButton>
+        <Tab aria-label="Settings"
+          icon={<Tooltip title="Settings">
+                  <SettingsIcon style={{ color: 'white' }} />
+                </Tooltip>}     
+          onClick={showSettings} />
+        <Tab aria-label="Log out"
+          icon={<Tooltip title="Log out">
+                  <LogoutIcon style={{ color: 'white' }} />
+                </Tooltip>}     
+          onClick={logOut} />
       </Tabs>
     </AppBar>
   );
