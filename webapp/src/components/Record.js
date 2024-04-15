@@ -126,8 +126,8 @@ const Record = () => {
         {!loading && (
           <Box position="sticky" top={0} paddingTop="20px">
             <BarChart
-              width={300}
-              height={300}
+              width={500}
+              height={400}
               series={[
                 { data: correct, label: 'Correct answers', id: 'correctId' },
                 { data: incorrect, label: 'Incorrect answers', id: 'incorrectId' },
