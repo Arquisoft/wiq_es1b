@@ -37,13 +37,17 @@ const NavigationBar = () => {
   }
 
   const showHelp = () => {
-    deleteTempQuestions();
-    navigate("/help", { state: { username, createdAt } });
+    if (username !== undefined) {
+      deleteTempQuestions();
+      navigate("/help", { state: { username, createdAt } });
+    }
   };
 
   const showAboutUs = () => {
-    deleteTempQuestions();
-    navigate("/aboutUs", { state: { username, createdAt } });
+    if (username !== undefined) {
+      deleteTempQuestions();
+      navigate("/aboutUs", { state: { username, createdAt } });
+    }
   };
 
   const showApiDoc = () => {
@@ -51,8 +55,10 @@ const NavigationBar = () => {
   };
 
   const showSettings = () => {
-    deleteTempQuestions();
-    navigate("/settings", { state: { username, createdAt } });
+    if (username !== undefined) {
+      deleteTempQuestions();
+      navigate("/settings", { state: { username, createdAt } });
+    }
   };
 
   const logOut = () => {
