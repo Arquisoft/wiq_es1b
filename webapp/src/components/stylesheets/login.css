@@ -2,8 +2,9 @@
 .wrapper {
     padding: 4em;
     box-shadow: 0 0 50px #00a6bc;
-    background-color: rgba(255, 255, 255, 0.75);
-    border-radius: '10px';
+    background-color: rgba(255, 255, 255, 0.67);
+    border-radius: '20px';
+    width: '400px';
     z-index: 1;
 }
 
