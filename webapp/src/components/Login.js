@@ -53,12 +53,12 @@ const Login = (onLoginSuccess) => {
 
   return (
     <Container component="main" >
-        <div>
-          <Typography component="h1" variant="h5" align="center" sx={{ marginTop: 2 }} fontWeight='bold'>
+        <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+          <Typography variant="h2" fontWeight="bold" color="primary">
             Welcome to WIQ!
           </Typography>
         </div>
-        <div style={{ padding: '4em', borderRadius: '15px', width: '400px', boxShadow: '0 0 50px #00a6bc', backgroundColor: 'rgba(255, 255, 255, 0.65)', zIndex: 1, marginTop: '2rem' }}>
+        <div style={{ padding: '4em', borderRadius: '15px', boxShadow: '0 0 50px #00a6bc', backgroundColor: 'rgba(255, 255, 255, 0.65)', zIndex: 1, marginTop: '2rem' }}>
           <Typography component="h1" variant="h5" align="center" sx={{ marginTop: 2 }} fontWeight='bold'>
             Log in to start playing!
           </Typography>
