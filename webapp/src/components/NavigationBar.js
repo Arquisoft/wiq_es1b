@@ -1,9 +1,11 @@
 // src/components/NavigationBar.js
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { AppBar, Tabs, Tab, Tooltip, IconButton } from '@mui/material';
-import SettingsIcon from '@mui/icons-material/Settings';
 import axios from 'axios';
+import { AppBar, Tabs, Tab, Tooltip } from '@mui/material';
+import SettingsIcon from '@mui/icons-material/Settings';
+import LogoutIcon from '@mui/icons-material/Logout';
+
 const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
 const NavigationBar = () => {
@@ -32,17 +34,20 @@ const NavigationBar = () => {
 
   const deleteTempQuestions = async () => {
     await axios.post(`${apiEndpoint}/deleteTempQuestions`, { username });
-
   }
 
   const showHelp = () => {
-    deleteTempQuestions();
-    navigate("/help", { state: { username, createdAt } });
+    if (username !== undefined) {
+      deleteTempQuestions();
+      navigate("/help", { state: { username, createdAt } });
+    }
   };
 
   const showAboutUs = () => {
-    deleteTempQuestions();
-    navigate("/aboutUs", { state: { username, createdAt } });
+    if (username !== undefined) {
+      deleteTempQuestions();
+      navigate("/aboutUs", { state: { username, createdAt } });
+    }
   };
 
   const showApiDoc = () => {
@@ -50,9 +55,16 @@ const NavigationBar = () => {
   };
 
   const showSettings = () => {
-    deleteTempQuestions();
-    navigate("/settings", { state: { username, createdAt } });
+    if (username !== undefined) {
+      deleteTempQuestions();
+      navigate("/settings", { state: { username, createdAt } });
+    }
   };
+
+  const logOut = () => {
+    localStorage.removeItem('username');
+    navigate('/');
+  }
 
   return (
     <AppBar position="fixed">
@@ -76,14 +88,16 @@ const NavigationBar = () => {
         <Tab label="API Doc"
           sx={{ color: 'white', fontWeight: 'bold' }}
           onClick={showApiDoc} />
-        <IconButton
-          sx={{ color: 'white', fontWeight: 'bold' }}
-          onClick={showSettings}
-        >
-          <Tooltip title="Settings">
-            <SettingsIcon />
-          </Tooltip>
-        </IconButton>
+        <Tab aria-label="Settings"
+          icon={<Tooltip title="Settings">
+                  <SettingsIcon style={{ color: 'white' }} />
+                </Tooltip>}     
+          onClick={showSettings} />
+        <Tab aria-label="Log out"
+          icon={<Tooltip title="Log out">
+                  <LogoutIcon style={{ color: 'white' }} />
+                </Tooltip>}     
+          onClick={logOut} />
       </Tabs>
     </AppBar>
   );
