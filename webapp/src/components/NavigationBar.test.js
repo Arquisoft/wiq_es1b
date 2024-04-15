@@ -77,13 +77,13 @@ describe('NavigationBar component', () => {
 
   it('should navigate to Settings page when settings button is clicked', () => {
     const history = createMemoryHistory();
-    const { getByLabelText } = render(
+    const { getByTestId } = render(
       <MemoryRouter>
         <NavigationBar />
       </MemoryRouter>
     );
 
-    const settingsButton = getByLabelText('Settings');
+    const settingsButton = getByTestId('settings-button');
     fireEvent.click(settingsButton);
 
     expect(history.location.pathname).toBe('/');

@@ -88,7 +88,7 @@ const NavigationBar = () => {
         <Tab label="API Doc"
           sx={{ color: 'white', fontWeight: 'bold' }}
           onClick={showApiDoc} />
-        <Tab aria-label="Settings"
+        <Tab data-testid="settings-button" aria-label="Settings"
           icon={<Tooltip title="Settings">
                   <SettingsIcon style={{ color: 'white' }} />
                 </Tooltip>}     
