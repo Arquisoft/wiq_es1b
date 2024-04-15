@@ -38,14 +38,16 @@ const Record = () => {
   const getHistorialForLoggedUser = async () => {
     const response = await axios.post(`${apiEndpoint}/getGameRecord`, { username });
     // Extract data from the response
-    const { games } = response.data;
+    let { games } = response.data;
     setRecord(games);
 
+    const totalGames = games.length;
+    games = games.slice(-10);
     // Calculate correct and incorrect answers for the chartbar
     const correct = [];
     const incorrect = [];
     const labels = [];
-    games.forEach(game => {
+    games.forEach((game, index) => {
       let correctCount = 0;
       let incorrectCount = 0;
       game.questions.forEach(question => {
@@ -57,7 +59,7 @@ const Record = () => {
       });
       correct.push(correctCount);
       incorrect.push(incorrectCount);
-      labels.push(`Game ${correct.length}`);
+      labels.push(`Game ${totalGames - games.length + index + 1}`);
       setLoading(false);
     });
     setCorrect(correct);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, waitFor } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import NavigationBar from './NavigationBar';
 import { createMemoryHistory } from 'history';
@@ -71,6 +71,20 @@ describe('NavigationBar component', () => {
 
     const apiButton = getByText('API Doc');
     fireEvent.click(apiButton);
+
+    expect(history.location.pathname).toBe('/');
+  });
+
+  it('should navigate to Settings page when settings button is clicked', () => {
+    const history = createMemoryHistory();
+    const { getByLabelText } = render(
+      <MemoryRouter>
+        <NavigationBar />
+      </MemoryRouter>
+    );
+
+    const settingsButton = getByLabelText('Settings');
+    fireEvent.click(settingsButton);
 
     expect(history.location.pathname).toBe('/');
   });
