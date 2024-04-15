@@ -67,36 +67,35 @@ const NavigationBar = () => {
   }
 
   return (
-    <AppBar position="fixed">
+    <AppBar position="fixed" color="inherit">
       <Tabs
         value={false}
         aria-label="navigation tabs"
         variant="fullWidth"
-        sx={{ marginLeft: 'auto' }}
       >
         <Tab label="Home"
-          sx={{ color: 'white', fontWeight: 'bold' }}
+          sx={{ color: 'black', fontWeight: 'bold' }}
           onClick={showHome} />
         <Tab label="Record"
-          sx={{ color: 'white', fontWeight: 'bold' }}
+          sx={{ color: 'black', fontWeight: 'bold' }}
           onClick={showRecord} />
         <Tab label="Help"
-          sx={{ color: 'white', fontWeight: 'bold' }}
+          sx={{ color: 'black', fontWeight: 'bold' }}
           onClick={showHelp} />
         <Tab label="About Us"
-          sx={{ color: 'white', fontWeight: 'bold' }}
+          sx={{ color: 'black', fontWeight: 'bold' }}
           onClick={showAboutUs} />
         <Tab label="API Doc"
-          sx={{ color: 'white', fontWeight: 'bold' }}
+          sx={{ color: 'black', fontWeight: 'bold' }}
           onClick={showApiDoc} />
         <Tab aria-label="Settings"
           icon={<Tooltip title="Settings">
-                  <SettingsIcon style={{ color: 'white' }} />
+                  <SettingsIcon style={{ color: 'black' }} />
                 </Tooltip>}     
           onClick={showSettings} />
         <Tab aria-label="Log out"
           icon={<Tooltip title="Log out">
-                  <LogoutIcon style={{ color: 'white' }} />
+                  <LogoutIcon style={{ color: 'black' }} />
                 </Tooltip>}     
           onClick={logOut} />
       </Tabs>
