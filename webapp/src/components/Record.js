@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from 'axios';
-import { Container, Typography, Button, List, ListItem, ListItemText, Box, Grid } from '@mui/material';
+import { Container, Typography, List, ListItem, ListItemText, Box, Grid } from '@mui/material';
 import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
 import { TreeItem } from '@mui/x-tree-view/TreeItem';
 import { BarChart } from '@mui/x-charts/BarChart';
@@ -25,8 +25,6 @@ const Record = () => {
   //accedo al usuario logeado
   const location = useLocation();
   const { username } = location.state || {};
-  const { createdAt } = location.state || {};
-
   const [record, setRecord] = useState([]);
 
   //data for the chart
@@ -66,10 +64,6 @@ const Record = () => {
     setIncorrect(incorrect);
     setLabels(labels);
   }
-
-  const showHome = () => {
-    navigate("/home", { state: { username, createdAt } });
-  };
 
   useEffect(() => {
     getHistorialForLoggedUser();
@@ -113,13 +107,6 @@ const Record = () => {
               </TreeItem>
             ))}
           </SimpleTreeView>
-
-          <Button
-            variant="contained"
-            style={{ width: '100%', fontWeight: 'bold' }}
-            onClick={showHome}>
-            Home
-          </Button>
         </Container>
       </Grid>
       <Grid item xs={12} sm={4}>
