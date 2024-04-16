@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { Container, Typography, Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import './stylesheets/GetQuestionCss.css';
-
+import GameFinale from './GameFinale';
 
 const HumanCalculator = () => {
   const location = useLocation();
@@ -20,6 +20,9 @@ const HumanCalculator = () => {
   const [operator, setOperator] = useState('+');
   const [result, setResult] = useState('');
   const [openE, setOpenE] = useState(false);
+
+  const [questionCount, setQuestionCount] = useState(1);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   /**useEffect(() => { 
     const user = localStorage.getItem('username');
@@ -70,8 +73,10 @@ const HumanCalculator = () => {
         }
         //save question to record
 
+        setIsButtonDisabled(true);
         //wait 3s to let the user see the result
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        setQuestionCount(questionCount + 1);
         answerInput.style.backgroundColor = 'white';
         //generate new question
         let n1 = result;
@@ -81,7 +86,7 @@ const HumanCalculator = () => {
         setSecondNumber(n2);
         setOperator(op);
         setResult('');
-
+        setIsButtonDisabled(false);
         //timer things
       }
     }
@@ -106,50 +111,56 @@ const HumanCalculator = () => {
   }, []);
 
   return (
-    <Container>
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: '1fr',
-        alignItems: 'center',
-        justifyItems: 'center',
-        width: '50em',
-        height: '30em',
-        margin: '0 auto',
-        paddingBottom: '5em'
-        }}>
-        <Typography variant='h3'>
-          Human calculator
-        </Typography>
-        <Typography variant="h4">
-          {`${firstNumber} ${operator} ${secondNumber}`}
-        </Typography>
-        <Box>
-          <label htmlFor="result">Result:</label>
-          <input type="text" id="result" value={result} onChange={(e) => setResult(e.target.value)} />
-        </Box>
-        <Button variant="contained" color="primary" onClick={() => checkAnswer()} style={{ paddingTop: '10px' }}>
-          Check answer
-        </Button>
-        <Dialog
-          open={openE}
-          onClose={handleCloseE}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-          >
-          <DialogTitle id="alert-dialog-title">{"Invalid Input"}</DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              Please enter a valid number
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleCloseE} color="primary">
-              Close
+    <div>
+      {(questionCount <= selectedNumQuestions ? (
+        <Container>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr',
+            alignItems: 'center',
+            justifyItems: 'center',
+            width: '50em',
+            height: '30em',
+            margin: '0 auto',
+            paddingBottom: '5em'
+            }}>
+            <Typography variant='h3'>
+              Human calculator
+            </Typography>
+            <Typography variant="h4">
+              {`${questionCount} / ${selectedNumQuestions} ${firstNumber} ${operator} ${secondNumber}`}
+            </Typography>
+            <Box>
+              <label htmlFor="result">Result:</label>
+              <input type="text" id="result" value={result} onChange={(e) => setResult(e.target.value)} />
+            </Box>
+            <Button variant="contained" color="primary" onClick={() => checkAnswer()} disabled={isButtonDisabled} style={{ paddingTop: '10px' }}>
+              Check answer
             </Button>
-          </DialogActions>
-        </Dialog>
-      </div>
-    </Container>
+            <Dialog
+              open={openE}
+              onClose={handleCloseE}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+              >
+              <DialogTitle id="alert-dialog-title">{"Invalid Input"}</DialogTitle>
+              <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                  Please enter a valid number
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleCloseE} color="primary">
+                  Close
+                </Button>
+              </DialogActions>
+            </Dialog>
+          </div>
+        </Container>
+      ) : (
+        <GameFinale numberOfQuestions={questionCount -1} />
+      ))}
+    </div>
   );
 };
 
