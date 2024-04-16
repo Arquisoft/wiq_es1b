@@ -29,7 +29,7 @@ const Ranking = () => {
     //data for the chart
     const [loading, setLoading] = useState(true);
   
-    const getHistorialForLoggedUser = async () => {
+    const getScoreForUser = async () => {
         const response = await axios.post(`${apiEndpoint}/getGameRecord`, { username });
         // Extract data from the response
         let { games } = response.data;
@@ -50,6 +50,37 @@ const Ranking = () => {
 
         return correctCount;
     }
+
+    const getRanking = async () => {
+        const response = await axios.post(`${apiEndpoint}/getAllUsers`, {});
+        // Extract data from the response
+        let { users } = response.data;
+        setRanking(users);
+    
+        const totalGames = users.length;
+        users.forEach((user, index) => {
+            getHistorialForLoggedUser();
+            // Extract data from the response
+            let { games } = response.data;
+            setRecord(games);
+            let correctCount = 0;
+            let incorrectCount = 0;
+            game.questions.forEach(question => {
+                if (question.correctAnswer === question.selectedAnswer) {
+                    correctCount++;
+                } else {
+                    incorrectCount++;
+                }
+            });
+          correct.push(correctCount);
+          incorrect.push(incorrectCount);
+          labels.push(`Game ${totalGames - games.length + index + 1}`);
+          setLoading(false);
+        });
+        setCorrect(correct);
+        setIncorrect(incorrect);
+        setLabels(labels);
+      }
   
     return (
         <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
