@@ -15,7 +15,7 @@ app.use(express.json());
 const mongoURI = process.env.MONGODB_URI;
 console.log("debajo de la const: " + mongoURI);
 
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(mongoURI);
 
 // Function to validate required fields in the request body
 function validateRequiredFields(req, requiredFields) {
