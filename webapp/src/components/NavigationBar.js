@@ -90,7 +90,7 @@ const NavigationBar = () => {
         <StyledTab label="Help" onClick={showHelp} />
         <StyledTab label="About Us" onClick={showAboutUs} />
         <StyledTab label="API Doc" onClick={showApiDoc} />
-        <StyledTab aria-label="Settings" 
+        <StyledTab data-testid="settings-button" aria-label="Settings" 
           icon={<Tooltip title="Settings">
               <SettingsIcon />
             </Tooltip>} 

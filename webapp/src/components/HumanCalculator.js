@@ -19,7 +19,6 @@ const HumanCalculator = () => {
   const [secondNumber, setSecondNumber] = useState(-1);
   const [operator, setOperator] = useState('+');
   const [result, setResult] = useState('');
-  const [realResult, setRealResult] = useState(-1);
   const [openE, setOpenE] = useState(false);
 
   /**useEffect(() => { 
@@ -29,10 +28,6 @@ const HumanCalculator = () => {
     }
     // eslint-disable-next-line
   }, []);**/
-  
-  const saveQuestion = async (question, answersArray, correctAnswer, selectedAnswer, isCorrect) => {
-    await axios.post(`${apiEndpoint}/saveQuestion`, { question, answersArray, correctAnswer, selectedAnswer, isCorrect, username });
-  }
 
   const getRandomNumber = () => {
     const number = Math.floor(Math.random() * 51);
@@ -47,29 +42,55 @@ const HumanCalculator = () => {
   }
 
   const checkAnswer = async () => {
-
-    if(result === '' || result === '*' || result === '/' || result === '-' || result === '+' || result === '-0') {
-      setResult('');
-    } else {
-        //save question to record
-        //generate new question
-        //show the new question in the datas
-        //set the result to '' again
-        //timer things
-        const numsResponse = await axios.get(`${apiEndpoint}/getNumbers`, { });
-        const operatorResponse = await axios.get(`${apiEndpoint}/getOperator`, { });
-    }
-
-  }
-
-  const validateInput = (input) => {
-    const regex = /^-?\d*$/;
-    if (!regex.test(input)) {
+    const regex = /^-?\d*([.,]\d+)?$/;
+    if (!regex.test(result)) {
+      //invalid input
       setResult('');
       setOpenE(true);
     } else {
-      setResult(input);
+      //valid input
+      const answerInput = document.querySelector('#result');
+      if(result === '' ||  result === '-' || result === '-0') {
+        setResult('');
+        setOpenE(true);
+      } else {
+        //check question
+        let realResult = eval(`${firstNumber} ${operator} ${secondNumber}`);
+        console.log("calculao: " + realResult);
+        if(parseFloat(realResult) === parseFloat(result)) {
+          //rigth answer
+          if (answerInput) {
+            answerInput.style.backgroundColor = 'green';
+          }
+        } else {
+          //wrong answer
+          if (answerInput) {
+            answerInput.style.backgroundColor = 'red';
+          }
+        }
+        //save question to record
+
+        //wait 3s to let the user see the result
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        answerInput.style.backgroundColor = 'white';
+        //generate new question
+        let n1 = result;
+        let n2 = getRandomNumber();
+        let op = getRandomOperator();
+        setFirstNumber(n1);
+        setSecondNumber(n2);
+        setOperator(op);
+        setResult('');
+
+        //timer things
+      }
     }
+    
+
+  }
+
+  const saveQuestion = async (question, answersArray, correctAnswer, selectedAnswer, isCorrect) => {
+    await axios.post(`${apiEndpoint}/saveQuestion`, { question, answersArray, correctAnswer, selectedAnswer, isCorrect, username });
   }
 
   const handleCloseE = () => {
@@ -104,7 +125,7 @@ const HumanCalculator = () => {
         </Typography>
         <Box>
           <label htmlFor="result">Result:</label>
-          <input type="text" id="result" value={result} onChange={(e) => validateInput(e.target.value)} />
+          <input type="text" id="result" value={result} onChange={(e) => setResult(e.target.value)} />
         </Box>
         <Button variant="contained" color="primary" onClick={() => checkAnswer()} style={{ paddingTop: '10px' }}>
           Check answer
