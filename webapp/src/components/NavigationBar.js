@@ -5,6 +5,7 @@ import axios from 'axios';
 import { AppBar, Tabs, Tab, Tooltip } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
+import AccountCircle from '@mui/icons-material/AccountCircle';
 
 const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
@@ -81,9 +82,6 @@ const NavigationBar = () => {
         <Tab label="Home"
           sx={tabStyle} 
           onClick={showHome} />
-        <Tab label="Record"
-          sx={tabStyle} 
-          onClick={showRecord} />
         <Tab label="Help"
           sx={tabStyle} 
           onClick={showHelp} />
@@ -92,12 +90,17 @@ const NavigationBar = () => {
           onClick={showAboutUs} />
         <Tab label="API Doc"
           sx={tabStyle} 
-          onClick={showApiDoc} />
+          onClick={showApiDoc} />        
         <Tab aria-label="Settings"
           icon={<Tooltip title="Settings">
                   <SettingsIcon sx={tabStyle} />
                 </Tooltip>}     
           onClick={showSettings} />
+        <Tab aria-label="Record"
+          icon={<Tooltip title="Personal record">
+                  <AccountCircle sx={tabStyle} />
+                </Tooltip>}     
+          onClick={showRecord} />
         <Tab aria-label="Log out"
           icon={<Tooltip title="Log out">
                   <LogoutIcon sx={tabStyle} />
