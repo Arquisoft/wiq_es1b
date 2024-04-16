@@ -82,6 +82,16 @@ const NavigationBar = () => {
     fontWeight: 'bold'
   };
 
+  const menuStyle = {
+    padding: 0,
+  };
+
+  const menuItemStyle = {
+    color: 'white',
+    fontWeight: 'bold',
+    backgroundColor: '#1976d2',
+  };
+
   return (
     <div>
       <AppBar position="absolute">
@@ -120,9 +130,15 @@ const NavigationBar = () => {
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={closeMenu}
+        sx={menuStyle}
+        MenuListProps={{
+          sx: {
+            padding: 0,
+          },
+        }}
       >
-        <MenuItem onClick={showSettings}>Game settings</MenuItem>
-        <MenuItem onClick={showApiDoc}>API DOC</MenuItem>
+        <MenuItem onClick={showSettings} sx={menuItemStyle}>Game settings</MenuItem>
+        <MenuItem onClick={showApiDoc} sx={menuItemStyle}>API DOC</MenuItem>
       </Menu>
     </div>
   );
