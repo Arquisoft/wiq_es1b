@@ -38,14 +38,13 @@ const Ranking = () => {
         //const totalGames = games.length;
         // Calculate correct and incorrect answers for the chartbar
         let correctCount = 0;
-        games.forEach((game, index) => {
+        games.forEach((game) => {
           game.questions.forEach(question => {
             if (question.correctAnswer === question.selectedAnswer) {
               correctCount++;
             }
           });
           //labels.push(`Game ${totalGames - games.length + index + 1}`);
-          setLoading(false);
         });
 
         return correctCount;
@@ -56,8 +55,6 @@ const Ranking = () => {
         // Extract data from the response
         let { users } = response.data;
         setRanking(users);
-    
-        const totalGames = users.length;
 
         let scoreForUser = 0;
         users.forEach((userInDB, index) => {
@@ -66,11 +63,16 @@ const Ranking = () => {
 
             // Algorithm for sorting the users
             // ...
-            
+
             setRecord(games);
-            setLoading(false);
         });
-      }
+        setLoading(false);
+    }
+
+    useEffect(() => {
+        getRanking();
+        
+    }, []);
   
     return (
         <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
