@@ -19,6 +19,8 @@ const NavigationBar = () => {
   const { selectedNumQuestions } = location.state || {};
   const { selectedTimer } = location.state || {};
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
   const showHome = () => {
     if (username !== undefined) {
       deleteTempQuestions();
@@ -75,8 +77,6 @@ const NavigationBar = () => {
     setAnchorEl(null);
   };
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
   const tabStyle = {
     color: 'white',
     fontWeight: 'bold'
@@ -98,10 +98,7 @@ const NavigationBar = () => {
             onClick={showHelp} />
           <Tab label="About Us"
             sx={tabStyle} 
-            onClick={showAboutUs} />
-          <Tab label="API Doc"
-            sx={tabStyle} 
-            onClick={showApiDoc} />        
+            onClick={showAboutUs} />   
           <Tab aria-label="Settings"
             icon={<Tooltip title="Settings">
                     <SettingsIcon sx={tabStyle} />
@@ -124,8 +121,8 @@ const NavigationBar = () => {
         open={Boolean(anchorEl)}
         onClose={closeMenu}
       >
-        <MenuItem onClick={showSettings}>Opción 1</MenuItem>
-        <MenuItem onClick={closeMenu}>Opción 2</MenuItem>
+        <MenuItem onClick={showSettings}>Game settings</MenuItem>
+        <MenuItem onClick={showApiDoc}>API DOC</MenuItem>
       </Menu>
     </div>
   );
