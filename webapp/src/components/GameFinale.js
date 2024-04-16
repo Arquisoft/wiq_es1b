@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import axios from 'axios';
 const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
-const GameFinale = () => {
+const GameFinale = (props) => {
   
   const navigate = useNavigate();
   const location = useLocation();
@@ -39,7 +39,7 @@ const GameFinale = () => {
         Game finished!
       </Typography>
       <Typography component="h2" variant="h5">
-        You've successfully tackled all 10 questions!
+        You've successfully tackled all {props.numberOfQuestions} questions!
       </Typography>
       <Typography component="h2" variant="h5">
         Feel free to review them in the record or head back home to start a new game.
