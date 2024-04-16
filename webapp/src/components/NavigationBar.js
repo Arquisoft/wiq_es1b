@@ -2,7 +2,7 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import { AppBar, Tabs, Tab, Tooltip } from '@mui/material';
+import { AppBar, Tabs, Tab, Tooltip, Menu, MenuItem } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AccountCircle from '@mui/icons-material/AccountCircle';
@@ -67,47 +67,67 @@ const NavigationBar = () => {
     navigate('/');
   }
 
+  const openMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const closeMenu = () => {
+    setAnchorEl(null);
+  };
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
   const tabStyle = {
     color: 'white',
     fontWeight: 'bold'
   };
 
   return (
-    <AppBar position="absolute">
-      <Tabs
-        value={false}
-        aria-label="navigation tabs"
-        variant="fullWidth"
+    <div>
+      <AppBar position="absolute">
+        <Tabs
+          value={false}
+          aria-label="navigation tabs"
+          variant="fullWidth"
+        >
+          <Tab label="Home"
+            sx={tabStyle} 
+            onClick={showHome} />
+          <Tab label="Help"
+            sx={tabStyle} 
+            onClick={showHelp} />
+          <Tab label="About Us"
+            sx={tabStyle} 
+            onClick={showAboutUs} />
+          <Tab label="API Doc"
+            sx={tabStyle} 
+            onClick={showApiDoc} />        
+          <Tab aria-label="Settings"
+            icon={<Tooltip title="Settings">
+                    <SettingsIcon sx={tabStyle} />
+                  </Tooltip>}     
+            onClick={openMenu} />
+          <Tab aria-label="Record"
+            icon={<Tooltip title="Personal record">
+                    <AccountCircle sx={tabStyle} />
+                  </Tooltip>}     
+            onClick={showRecord} />
+          <Tab aria-label="Log out"
+            icon={<Tooltip title="Log out">
+                    <LogoutIcon sx={tabStyle} />
+                  </Tooltip>}     
+            onClick={logOut} />
+        </Tabs>
+      </AppBar>
+      <Menu
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={closeMenu}
       >
-        <Tab label="Home"
-          sx={tabStyle} 
-          onClick={showHome} />
-        <Tab label="Help"
-          sx={tabStyle} 
-          onClick={showHelp} />
-        <Tab label="About Us"
-          sx={tabStyle} 
-          onClick={showAboutUs} />
-        <Tab label="API Doc"
-          sx={tabStyle} 
-          onClick={showApiDoc} />        
-        <Tab aria-label="Settings"
-          icon={<Tooltip title="Settings">
-                  <SettingsIcon sx={tabStyle} />
-                </Tooltip>}     
-          onClick={showSettings} />
-        <Tab aria-label="Record"
-          icon={<Tooltip title="Personal record">
-                  <AccountCircle sx={tabStyle} />
-                </Tooltip>}     
-          onClick={showRecord} />
-        <Tab aria-label="Log out"
-          icon={<Tooltip title="Log out">
-                  <LogoutIcon sx={tabStyle} />
-                </Tooltip>}     
-          onClick={logOut} />
-      </Tabs>
-    </AppBar>
+        <MenuItem onClick={showSettings}>Opción 1</MenuItem>
+        <MenuItem onClick={closeMenu}>Opción 2</MenuItem>
+      </Menu>
+    </div>
   );
 };
 
