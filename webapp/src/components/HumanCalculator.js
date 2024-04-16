@@ -46,7 +46,19 @@ const HumanCalculator = () => {
     return operators[Math.floor(Math.random() * operators.length)];
   }
 
-  const checkAnswer = () => {
+  const checkAnswer = async () => {
+
+    if(result === '' || result === '*' || result === '/' || result === '-' || result === '+' || result === '-0') {
+      setResult('');
+    } else {
+        //save question to record
+        //generate new question
+        //show the new question in the datas
+        //set the result to '' again
+        //timer things
+        const numsResponse = await axios.get(`${apiEndpoint}/getNumbers`, { });
+        const operatorResponse = await axios.get(`${apiEndpoint}/getOperator`, { });
+    }
 
   }
 

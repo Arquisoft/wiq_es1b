@@ -54,6 +54,14 @@ app.post('/generateQuestions', async (req, res) => {
   res.status(200).json({ msg: "Questions generated successfully" });
 })
 
+app.get('/getNumbers', async (req, res) => {
+  console.log("getNumber");
+});
+
+app.get('/getOperator', async (req, res) => {
+  console.log("getOperator");
+});
+
 async function getRandomQuestionByCategory(category) {
 
   try {

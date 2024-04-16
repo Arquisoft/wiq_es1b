@@ -45,6 +45,8 @@ app.post('/saveGameRecord', (req, res) => handleRequest(getHistorialUrl+'/saveGa
 app.post('/getGameRecord', (req, res) => handleRequest(getHistorialUrl+'/getGameRecord', req, res));
 app.post('/saveQuestion', (req, res) => handleRequest(getHistorialUrl+'/saveQuestion', req, res));
 app.post('/deleteTempQuestions', (req, res) => handleRequest(getHistorialUrl+'/deleteTempQuestions', req, res));
+app.get('/getNumbers', (req, res) => handleRequest(getQuestionUrl+'/getNumber', req, res, 'get'));
+app.get('/getOperator', (req, res) => handleRequest(getQuestionUrl+'/getNumber', req, res, 'get'));
 
 //para ver el api-doc, entrar en: http://localhost:8000/api-doc/
 
