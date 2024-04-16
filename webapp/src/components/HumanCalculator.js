@@ -11,6 +11,7 @@ const HumanCalculator = () => {
   const { username } = location.state || {};
   const { selectedNumQuestions } = location.state || {};
   const { selectedTimer } = location.state || {};
+  const [timer, setTimer] = useState(selectedTimer);
   const navigate = useNavigate();
 
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
@@ -44,57 +45,83 @@ const HumanCalculator = () => {
     return operators[Math.floor(Math.random() * operators.length)];
   }
 
+  useEffect(() => {
+    if (timer > 0) {
+      const interval = setInterval(() => {
+        setTimer(prevTimer => prevTimer - 1);
+      }, 1000);
+      return () => clearInterval(interval);
+    } else if (timer === 0) {
+      checkAnswer();
+    }
+    // eslint-disable-next-line
+  }, [timer]);
+
   const checkAnswer = async () => {
-    const regex = /^-?\d*([.,]\d+)?$/;
-    if (!regex.test(result)) {
-      //invalid input
-      setResult('');
-      setOpenE(true);
+    let isCorrect = false;
+    const answerInput = document.querySelector('#result');
+    let realResult = eval(`${firstNumber} ${operator} ${secondNumber}`);
+    let answer = result;
+    if(timer === 0) {
+      setResult('time out');
+      answerInput.style.backgroundColor = 'red';
+      isCorrect = false;
     } else {
-      //valid input
-      const answerInput = document.querySelector('#result');
-      if(result === '' ||  result === '-' || result === '-0') {
+      const regex = /^-?\d*([.,]\d+)?$/;
+      if (!regex.test(result)) {
+        //invalid input
         setResult('');
         setOpenE(true);
       } else {
-        //check question
-        let realResult = eval(`${firstNumber} ${operator} ${secondNumber}`);
-        console.log("calculao: " + realResult);
-        if(parseFloat(realResult) === parseFloat(result)) {
-          //rigth answer
-          if (answerInput) {
-            answerInput.style.backgroundColor = 'green';
-          }
+        //valid input
+        if(result === '' ||  result === '-' || result === '-0') {
+          setResult('');
+          setOpenE(true);
         } else {
-          //wrong answer
-          if (answerInput) {
-            answerInput.style.backgroundColor = 'red';
+          //check question
+          if(parseFloat(realResult) === parseFloat(result)) {
+            //rigth answer
+            if (answerInput) {
+              answerInput.style.backgroundColor = 'green';
+              isCorrect = true;
+            }
+          } else {
+            //wrong answer
+            if (answerInput) {
+              answerInput.style.backgroundColor = 'red';
+              isCorrect = false;
+            }
           }
         }
-        //save question to record
-
-        setIsButtonDisabled(true);
-        //wait 3s to let the user see the result
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        setQuestionCount(questionCount + 1);
-        answerInput.style.backgroundColor = 'white';
-        //generate new question
-        let n1 = result;
-        let n2 = getRandomNumber();
-        let op = getRandomOperator();
-        setFirstNumber(n1);
-        setSecondNumber(n2);
-        setOperator(op);
-        setResult('');
-        setIsButtonDisabled(false);
-        //timer things
       }
     }
-    
-
+    if(timer === 0) {
+      answer = 'time out';
+    }
+    //save question to record
+    saveQuestion(`${firstNumber} ${operator} ${secondNumber}`, [result], realResult, answer, isCorrect);
+    setIsButtonDisabled(true);
+    //wait 3s to let the user see the result
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    setQuestionCount(questionCount + 1);
+    answerInput.style.backgroundColor = 'white';
+    //generate new question
+    let n1 = result;
+    if(timer === 0){
+      n1 = getRandomNumber();
+    }
+    let n2 = getRandomNumber();
+    let op = getRandomOperator();
+    setFirstNumber(n1);
+    setSecondNumber(n2);
+    setOperator(op);
+    setResult('');
+    setIsButtonDisabled(false);
+    setTimer(selectedTimer);
   }
 
   const saveQuestion = async (question, answersArray, correctAnswer, selectedAnswer, isCorrect) => {
+    console.log(selectedAnswer);
     await axios.post(`${apiEndpoint}/saveQuestion`, { question, answersArray, correctAnswer, selectedAnswer, isCorrect, username });
   }
 
@@ -155,6 +182,9 @@ const HumanCalculator = () => {
                 </Button>
               </DialogActions>
             </Dialog>
+            <Typography component="h2" variant="h6" className='question-text'>
+                <p>Time left: {timer} seconds</p>
+            </Typography>
           </div>
         </Container>
       ) : (
