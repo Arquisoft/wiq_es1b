@@ -29,8 +29,8 @@ const Ranking = () => {
     //data for the chart
     const [loading, setLoading] = useState(true);
   
-    const getScoreForUser = async () => {
-        const response = await axios.post(`${apiEndpoint}/getGameRecord`, { username });
+    const getScoreForUser = async (userInDB) => {
+        const response = await axios.post(`${apiEndpoint}/getGameRecord`, { userInDB });
         // Extract data from the response
         let { games } = response.data;
         setRecord(games);
@@ -58,28 +58,18 @@ const Ranking = () => {
         setRanking(users);
     
         const totalGames = users.length;
-        users.forEach((user, index) => {
-            getHistorialForLoggedUser();
-            // Extract data from the response
-            let { games } = response.data;
+
+        let scoreForUser = 0;
+        users.forEach((userInDB, index) => {
+            // Extract score from the user record
+            scoreForUser = getScoreForUser(userInDB);
+
+            // Algorithm for sorting the users
+            // ...
+            
             setRecord(games);
-            let correctCount = 0;
-            let incorrectCount = 0;
-            game.questions.forEach(question => {
-                if (question.correctAnswer === question.selectedAnswer) {
-                    correctCount++;
-                } else {
-                    incorrectCount++;
-                }
-            });
-          correct.push(correctCount);
-          incorrect.push(incorrectCount);
-          labels.push(`Game ${totalGames - games.length + index + 1}`);
-          setLoading(false);
+            setLoading(false);
         });
-        setCorrect(correct);
-        setIncorrect(incorrect);
-        setLabels(labels);
       }
   
     return (
