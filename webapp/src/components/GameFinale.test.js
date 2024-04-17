@@ -17,9 +17,10 @@ describe('GameFinale component', () => {
   });
 
   it('should render text succesfully', async () => {    
+    mockAxios.onPost('http://localhost:8000/saveGameRecord').reply(200);
     render(
     <Router>
-      <GameFinale />
+      <GameFinale numberOfQuestions={10} />
     </Router>);
 
     await waitFor(() => screen.getByText(paragraph1));
@@ -29,29 +30,18 @@ describe('GameFinale component', () => {
     expect(screen.getByText(paragraph3)).toBeInTheDocument();
   });
 
-  it('should render button succesfully', async () => {    
-    render(
-    <Router>
-      <GameFinale />
-    </Router>);
-
-    const buttons = await screen.findAllByRole('button');
-    expect(buttons.length).toBe(1);
-  });
-
-  it('should render button succesfully', async () => {    
-
+  it('should render the record saved message succesfully', async () => {   
     mockAxios.onPost('http://localhost:8000/saveGameRecord').reply(200);
-
     render(
     <Router>
-      <GameFinale />
+      <GameFinale numberOfQuestions={10} />
     </Router>);
 
-    const saveRecordButton = screen.getByTestId('saveRecordButton');
-    expect(saveRecordButton).toBeInTheDocument();
-    fireEvent.click(saveRecordButton);
-    expect(await screen.findByText('Record saved successfully!')).toBeInTheDocument();
+    //test the dialog is visible
+    const messageElement = await screen.findByText("Record saved successfully!");
+    expect(messageElement).toBeInTheDocument();
   });
+
+
 
 });

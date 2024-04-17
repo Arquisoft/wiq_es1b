@@ -62,7 +62,8 @@ describe('AddUser component', () => {
       </Router>
     );
     await waitFor(() => {
-      expect(screen.getByText(/Welcome to WIQ! Create an account to start playing!/i)).toBeInTheDocument();
+      expect(screen.getByText(/Welcome to WIQ!/i)).toBeInTheDocument();
+      expect(screen.getByText(/Create an account to start playing!/i)).toBeInTheDocument();
     });
   });
 });
