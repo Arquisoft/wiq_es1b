@@ -13,7 +13,6 @@ app.use(express.json());
 
 // Connect to MongoDB
 const mongoURI = process.env.MONGODB_URI;
-console.log("debajo de la const: " + mongoURI);
 
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true});
 
@@ -29,7 +28,6 @@ function validateRequiredFields(req, requiredFields) {
 // Route for user login
 app.post('/login', async (req, res) => {
   try {
-    console.log(mongoURI)
     // Check if required fields are present in the request body
     validateRequiredFields(req, ['username', 'password']);
 
