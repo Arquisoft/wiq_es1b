@@ -126,19 +126,24 @@ const NavigationBar = () => {
             onClick={logOut} />
         </Tabs>
       </AppBar>
-      <Menu
+      <Menu aria-label="Menu"
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={closeMenu}
-        sx={menuStyle}
         MenuListProps={{
-          sx: {
-            padding: 0,
-          },
+          sx: menuStyle
         }}
       >
-        <MenuItem onClick={showSettings} sx={menuItemStyle}>Game settings</MenuItem>
-        <MenuItem onClick={showApiDoc} sx={menuItemStyle}>API DOC</MenuItem>
+        <MenuItem aria-label="Game Settings"
+          sx={menuItemStyle}
+          onClick={showSettings} >
+          Game settings
+        </MenuItem>
+        <MenuItem aria-label="API DOC"
+          sx={menuItemStyle}
+          onClick={showApiDoc} >
+          API DOC
+        </MenuItem>
       </Menu>
     </div>
   );
