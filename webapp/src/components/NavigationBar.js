@@ -77,9 +77,16 @@ const NavigationBar = () => {
     setAnchorEl(null);
   };
 
+  const tabsStyle = {
+    display: 'flex',
+    justifyContent: 'space-between',
+  };
+  
   const tabStyle = {
     color: 'white',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    flex: '0 0 auto',
+    minWidth: 0,
   };
 
   const menuStyle = {
@@ -99,30 +106,35 @@ const NavigationBar = () => {
           value={false}
           aria-label="navigation tabs"
           variant="fullWidth"
+          sx={tabsStyle}
         >
           <Tab label="Home"
-            sx={tabStyle} 
+            sx={tabStyle}
             onClick={showHome} />
           <Tab label="Help"
-            sx={tabStyle} 
+            sx={tabStyle}
             onClick={showHelp} />
           <Tab label="About Us"
-            sx={tabStyle} 
-            onClick={showAboutUs} />   
+            sx={tabStyle}
+            onClick={showAboutUs} />
+          <div style={{ flex: 5 }} />
           <Tab aria-label="Settings"
+            sx={tabStyle}
             icon={<Tooltip title="Settings">
                     <SettingsIcon sx={tabStyle} />
-                  </Tooltip>}     
+                  </Tooltip>}
             onClick={openMenu} />
           <Tab aria-label="Record"
+            sx={tabStyle}
             icon={<Tooltip title="Personal record">
                     <AccountCircle sx={tabStyle} />
-                  </Tooltip>}     
+                  </Tooltip>}
             onClick={showRecord} />
           <Tab aria-label="Log out"
+            sx={tabStyle}
             icon={<Tooltip title="Log out">
                     <LogoutIcon sx={tabStyle} />
-                  </Tooltip>}     
+                  </Tooltip>}
             onClick={logOut} />
         </Tabs>
       </AppBar>
