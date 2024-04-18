@@ -6,6 +6,7 @@ import { AppBar, Tabs, Tab, Tooltip, Menu, MenuItem } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import IconWIQ from '../favicon2.ico';
 
 const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
@@ -86,6 +87,8 @@ const NavigationBar = () => {
     color: 'white',
     fontWeight: 'bold',
     flex: '0 0 auto',
+    paddingTop: 0,
+    paddingBottom: 0,
     minWidth: 0,
   };
 
@@ -108,9 +111,12 @@ const NavigationBar = () => {
           variant="fullWidth"
           sx={tabsStyle}
         >
-          <Tab label="Home"
-            sx={tabStyle}
-            onClick={showHome} />
+          <Tab aria-label="WIQ"
+              sx={tabStyle}
+              icon={<Tooltip title="Home">
+                      <img src={IconWIQ} alt="Icono" />
+                    </Tooltip>}   
+              onClick={showHome} />
           <Tab label="Help"
             sx={tabStyle}
             onClick={showHelp} />
