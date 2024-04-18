@@ -89,14 +89,14 @@ class questionGenerator {
 
           const tittle = template.tittle.replace('?', correctLabel);
 
-          const question = {
+          const question = new Question({
             tittle: tittle,
             answers: answers,
             correctAnswer: correctAnswer,
             category: category
-          }
+          });
 
-          await Question.create(question);
+          await question.save();
 
         } else {
           console.error("No templates.");

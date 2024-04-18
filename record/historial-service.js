@@ -14,7 +14,7 @@ const port = 8004;
 app.use(express.json());
 
 //Connect to MongoDB
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(mongoURI);
 
 // Temporary storage for game questions
 const gameQuestions = {};
@@ -49,10 +49,17 @@ app.post('/saveGameRecord', async (req, res) => {
       return res.status(400).json({ error: "No game questions found for this user" });
     }
 
+    var correctAnswers = 0;
+    gameQuestions[username].forEach(question => {
+      if(question.selectedAnswer === question.correctAnswer)
+        correctAnswers++;
+    });
+
     const user = await User.findOne({ username });
 
     const game = new Game({
       user: user,
+      correctAnswers: correctAnswers,
       questions: gameQuestions[username]
     });
     

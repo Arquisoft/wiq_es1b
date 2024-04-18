@@ -5,6 +5,10 @@ const gameSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
+    correctAnswers : {
+        type: Number,
+        required : true,
+    },
     questions: {
         type: [{
             question: String,
