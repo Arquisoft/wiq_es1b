@@ -147,9 +147,14 @@ const HumanCalculator = () => {
             <Typography variant='h3'>
               Human calculator
             </Typography>
-            <Typography variant="h4">
-              {`${questionCount} / ${selectedNumQuestions} ${firstNumber} ${operator} ${secondNumber}`}
-            </Typography>
+            <div>
+              <Typography variant="h4">
+                {`Question nº: ${questionCount} / ${selectedNumQuestions}`}
+              </Typography>
+              <Typography variant="h4" data-testid="question">
+                {`${firstNumber} ${operator} ${secondNumber}`}
+              </Typography>
+            </div>
             <Box>
               <label htmlFor="result">Result:</label>
               <input type="text" id="result" value={result} onChange={(e) => setResult(e.target.value)} />
