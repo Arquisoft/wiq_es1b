@@ -19,7 +19,7 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 
 //to respond to the /getQuestion request 
-app.post('/getQuestion', async (req, res) => {
+app.get('/getQuestion', async (req, res) => {
   try {
     //category of the game chosen
     const category = req.body.category;
@@ -47,7 +47,7 @@ app.post('/getQuestion', async (req, res) => {
   }
 });
 
-app.post('/generateQuestions', async (req, res) => {
+app.get('/generateQuestions', async (req, res) => {
   const generator = new QuestionGenerator();
   await generator.loadTemplates();
   await generator.generate10Questions();

@@ -43,7 +43,7 @@ app.post('/saveQuestion', async (req, res) => {
 
 app.post('/saveGameRecord', async (req, res) => {
   try {
-    const { username } = req.body;
+    const { user } = req.body;
 
     if (!gameQuestions[username]) {
       return res.status(400).json({ error: "No game questions found for this user" });
@@ -54,8 +54,6 @@ app.post('/saveGameRecord', async (req, res) => {
       if(question.selectedAnswer === question.correctAnswer)
         correctAnswers++;
     });
-
-    const user = await User.findOne({ username });
 
     const game = new Game({
       user: user,
@@ -80,15 +78,11 @@ app.post('/saveGameRecord', async (req, res) => {
   }
 });
 
-app.post('/getGameRecord', async (req, res) => {
+app.get('/getGameRecord', async (req, res) => {
   try {
-    const { username } = req.body;
-
-
-    const user = await User.findOne({ username: username });
+    const { user } = req.body;
 
     const games = await Game.find({ user: user._id });
-
 
     res.status(200).json({ games: games });
   } catch (error) {

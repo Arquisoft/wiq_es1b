@@ -26,6 +26,7 @@ const GameFinale = () => {
 
   useEffect(() => {
     const user = localStorage.getItem('username');
+    saveGameRecord();
     if (user === null) {
       navigate('/');
     }
@@ -43,14 +44,6 @@ const GameFinale = () => {
       <Typography component="h2" variant="h5">
         Feel free to review them in the record or head back home to start a new game.
       </Typography>
-      <Button
-        data-testid="saveRecordButton"
-        variant="contained"
-        style={{ width: '35em', fontWeight: 'bold' }}
-        onClick={saveGameRecord}
-        disabled={isSaved}>
-        Save record
-      </Button>
       <Dialog
         open={open}
         onClose={handleClose}

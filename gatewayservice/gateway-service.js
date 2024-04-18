@@ -3,7 +3,7 @@ const axios = require('axios');
 const cors = require('cors');
 const promBundle = require('express-prom-bundle');
 //libraries required for OpenAPI-Swagger
-const swaggerUi = require('swagger-ui-express'); 
+const swaggerUi = require('swagger-ui-express');
 const fs = require("fs")
 const YAML = require('yaml')
 
@@ -20,7 +20,7 @@ app.use(cors());//NOSONAR
 app.use(express.json());
 
 //Prometheus configuration
-const metricsMiddleware = promBundle({includeMethod: true});
+const metricsMiddleware = promBundle({ includeMethod: true });
 app.use(metricsMiddleware);
 
 // Health check endpoint
@@ -37,19 +37,56 @@ const handleRequest = async (url, req, res, method = 'post') => {
   }
 };
 
-app.post('/login', (req, res) => handleRequest(authServiceUrl+'/login', req, res));
-app.post('/adduser', (req, res) => handleRequest(userServiceUrl+'/adduser', req, res));
-app.post('/generateQuestions', (req, res) => handleRequest(getQuestionUrl+'/generateQuestions', req, res));
-app.post('/getQuestion', (req, res) => handleRequest(getQuestionUrl+'/getQuestion', req, res));
-app.post('/saveGameRecord', (req, res) => handleRequest(getHistorialUrl+'/saveGameRecord', req, res));
-app.post('/getGameRecord', (req, res) => handleRequest(getHistorialUrl+'/getGameRecord', req, res));
-app.post('/saveQuestion', (req, res) => handleRequest(getHistorialUrl+'/saveQuestion', req, res));
-app.post('/deleteTempQuestions', (req, res) => handleRequest(getHistorialUrl+'/deleteTempQuestions', req, res));
+app.post('/login', (req, res) => handleRequest(authServiceUrl + '/login', req, res));
+app.post('/adduser', (req, res) => handleRequest(userServiceUrl + '/adduser', req, res));
+app.get('/generateQuestions', (req, res) => handleRequest(getQuestionUrl + '/generateQuestions', req, res, "get"));
+app.get('/getQuestion', (req, res) => handleRequest(getQuestionUrl + '/getQuestion', req, res, "get"));
+app.post('/saveQuestion', (req, res) => handleRequest(getHistorialUrl + '/saveQuestion', req, res));
+app.post('/deleteTempQuestions', (req, res) => handleRequest(getHistorialUrl + '/deleteTempQuestions', req, res));
 
+app.post('/saveGameRecord', async (req, res) => {
+  try {
+    const { username } = req.body;
+
+    const userResponse = await axios.get(`${authServiceUrl}/getUserByUsername`, { username });
+
+    const user = userResponse.data.user;
+
+    if (user !== null) {
+      const saveResponse = await axios.post(`${authServiceUrl}/saveGameRecord`, { user });
+      res.status(200).json(saveResponse.data);
+    }
+    else {
+      res.status(404).json({ error: 'User not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+app.get('/getGameRecord', async (req, res) => {
+  try {
+    const { username } = req.body;
+
+    const userResponse = await axios.get(`${authServiceUrl}/getUserByUsername`, { username });
+
+    const user = userResponse.data.user;
+
+    if (user !== null) {
+      const saveResponse = await axios.get(`${authServiceUrl}/getGameRecord`, { user });
+      res.status(200).json(saveResponse.data);
+    }
+    else {
+      res.status(404).json({ error: 'User not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 //para ver el api-doc, entrar en: http://localhost:8000/api-doc/
 
 // Read the OpenAPI YAML file synchronously
-const openapiPath='./openapi.yaml'
+const openapiPath = './openapi.yaml'
 if (fs.existsSync(openapiPath)) {
   const file = fs.readFileSync(openapiPath, 'utf8');
 
