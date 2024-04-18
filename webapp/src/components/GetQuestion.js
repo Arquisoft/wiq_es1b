@@ -216,7 +216,7 @@ const GetQuestion = () => {
           )}
         </Container>
       ) : (
-        <GameFinale />
+        <GameFinale numberOfQuestions={questionCount-1} />
       ))}
     </div>
   );

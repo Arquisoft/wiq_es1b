@@ -39,6 +39,7 @@ const handleRequest = async (url, req, res, method = 'post') => {
 
 app.post('/login', (req, res) => handleRequest(authServiceUrl+'/login', req, res));
 app.post('/adduser', (req, res) => handleRequest(userServiceUrl+'/adduser', req, res));
+app.post('/getAllUsers', (req, res) => handleRequest(userServiceUrl+'/getAllUsers', req, res));
 app.post('/generateQuestions', (req, res) => handleRequest(getQuestionUrl+'/generateQuestions', req, res));
 app.post('/getQuestion', (req, res) => handleRequest(getQuestionUrl+'/getQuestion', req, res));
 app.post('/saveGameRecord', (req, res) => handleRequest(getHistorialUrl+'/saveGameRecord', req, res));
