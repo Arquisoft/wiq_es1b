@@ -9,13 +9,14 @@ const GameFinale = (props) => {
   
   const navigate = useNavigate();
   const location = useLocation();
-  const { username } = location.state || {};
+  const { username } = localStorage.getItem('username');
 
   const [isSaved, setIsSaved] = useState(false);
   const [open, setOpen] = useState(false);
 
   const saveGameRecord = async () => {
-    await axios.post(`${apiEndpoint}/saveGameRecord`, { username });
+    let user = localStorage.getItem('username');
+    await axios.post(`${apiEndpoint}/saveGameRecord`, { username: user });
     setIsSaved(true);
     setOpen(true);
   }

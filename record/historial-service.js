@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const User = require('./auth-model');
 const Game = require('./historial-model');
-const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/records';
+const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/users';
 
 const app = express();
 app.disable('x-powered-by');
@@ -45,6 +45,7 @@ app.post('/saveGameRecord', async (req, res) => {
   try {
     const { username } = req.body;
 
+
     if (!gameQuestions[username]) {
       return res.status(400).json({ error: "No game questions found for this user" });
     }
@@ -54,6 +55,8 @@ app.post('/saveGameRecord', async (req, res) => {
       if(question.selectedAnswer === question.correctAnswer)
         correctAnswers++;
     });
+
+    console.log(username);
 
     const user = await User.findOne({ username });
 
