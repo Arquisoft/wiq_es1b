@@ -7,7 +7,7 @@ const questionsTemplate = require('./plantillas.json')
 const Question = require('./question-model');
 const Template = require('./templates/template-model')
 
-const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://wiq_es01b_admin:admin@wiq.eckuzci.mongodb.net/wiq?retryWrites=true&w=majority&appName=WIQ';
+const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/questions';
 
 // Connect to MongoDB
 
