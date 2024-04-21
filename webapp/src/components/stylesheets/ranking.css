@@ -6,3 +6,27 @@
     width: '400px';
     z-index: 1;
 }
+
+.charging{
+    position: relative;
+    height: 2em;
+    width: 4.1em;
+    margin: 1em;
+}
+.ball{
+    position: absolute;
+    height: 2em;
+    width: 2em;
+    border-radius: 50%;
+    mix-blend-mode: multiply;
+}
+.ball.one{
+    left: 0;
+    background: #008FDB;
+    animation: 0.7s one-move ease-in-out infinite;
+}
+.ball.two{
+    right: 0;
+    background: #024BAC;
+    animation: 0.7s two-move ease-in-out infinite;
+}

@@ -92,7 +92,10 @@ const Ranking = () => {
             {/* Aquí renderizamos el ranking */}
             <h2>Ranking</h2>
             {loading ? (
-                <p>Cargando...</p>
+                <div className='charging'>
+                  <div className='ball one'></div>
+                  <div className='ball two'></div>
+                </div>
             ) : (
                 <ol>
                     {ranking.map((user, index) => (
@@ -109,7 +112,7 @@ const Ranking = () => {
                 <div className='charging'>
                   <div className='ball one'></div>
                   <div className='ball two'></div>
-              </div>
+                </div>
             ) : (
                 <ul>
                     {record.map((game, index) => (
