@@ -51,7 +51,7 @@ const SettingsPage = () => {
   });  
 
   return(
-    <Container component="main" maxWidth="md" sx={{ margin: 8 }}>
+    <Container component="main" maxWidth="md" sx={{ margin: '8 auto' }}>
       <div style={{ padding: '4em', borderRadius: '15px', boxShadow: '0 0 50px #00a6bc', backgroundColor: 'rgba(255, 255, 255, 0.65)', zIndex: 1, marginTop: '2rem' }}>
         <Typography variant="h4" component="h1" sx={{ paddingBottom: '2em', textAlign: 'center' }}>
           Configuration
