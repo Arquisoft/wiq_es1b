@@ -12,6 +12,7 @@ const Home = () => {
   const location = useLocation();
   const { username } = location.state || {};
   const { createdAt } = location.state || {};
+
   const selectedTimer = localStorage.getItem('selectedTimer');
   const selectedNumQuestions = localStorage.getItem('selectedNumQuestions');
 
@@ -25,9 +26,11 @@ const Home = () => {
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -60,12 +63,22 @@ const Home = () => {
   };
 
   const [openHC, setOpenHC] = useState(false);
+
   const handleClickOpenHC = () => {
     setOpenHC(true);
   };
+  
   const handleCloseHC = () => {
     setOpenHC(false);
     handleHumanCalculator()
+  };
+
+  const buttonStyle = {
+    color: 'white',
+    backgroundColor: '#209cee',
+    '&:hover': {
+      backgroundColor: '#1f89cf',
+    },
   };
 
   return (
@@ -84,10 +97,10 @@ const Home = () => {
           Your account was created on {formatDate(createdAt)}.
         </Typography>
         <Stack spacing={2} sx={{ marginTop: 4 }}>
-          <Button variant="contained" color="primary" size="large" onClick={() => handleStartGame("todo")}>
+          <Button variant="contained" size="large" sx={buttonStyle} onClick={() => handleStartGame("todo")}>
             New Full Random Game
           </Button>
-          <Button variant="contained" color="primary" size="large" onClick={() => handleClickOpenD()}>
+          <Button variant="contained" size="large" sx={buttonStyle} onClick={() => handleClickOpenD()}>
             New Art Gallery Game
           </Button>
           <Dialog open={openD} onClose={handleCloseD} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
@@ -98,12 +111,12 @@ const Home = () => {
               </DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleCloseD} color="primary" autoFocus>
+              <Button onClick={handleCloseD} sx={buttonStyle} autoFocus>
                 Start Game
               </Button>
             </DialogActions>
           </Dialog>
-          <Button variant="contained" color="primary" size="large" onClick={() => handleClickOpenHC()}>
+          <Button variant="contained" size="large" sx={buttonStyle} onClick={() => handleClickOpenHC()}>
             New Human Calculator Game
           </Button>
           <Dialog open={openHC} onClose={handleCloseHC} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
@@ -114,12 +127,12 @@ const Home = () => {
               </DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleCloseHC} color="primary" autoFocus>
+              <Button onClick={handleCloseHC} sx={buttonStyle} autoFocus>
                 Start Game
               </Button>
             </DialogActions>
           </Dialog>
-          <Button variant="contained" color="primary" size="large" onClick={handleClick}>
+          <Button variant="contained" size="large" sx={buttonStyle} onClick={handleClick}>
             Play by Category
           </Button>
           <Menu
