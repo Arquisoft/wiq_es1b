@@ -17,6 +17,7 @@ import Help from './components/Help.js';
 import GameFinale from './components/GameFinale.js';
 import SettingsPage from './components/SettingsPage.js';
 import HumanCalculator from './components/HumanCalculator.js';
+import Ranking from './components/Ranking.js';
 
 function logout() {
   localStorage.removeItem('username');
@@ -43,6 +44,7 @@ root.render(
         <Route path='/finale' element={<GameFinale />} />
         <Route path='/settings' element={<SettingsPage />} />
         <Route path='/humanCalculator' element={<HumanCalculator />} />
+        <Route path='/ranking' element={<Ranking />} />
       </Routes>
     </Box>
     <Footer />
