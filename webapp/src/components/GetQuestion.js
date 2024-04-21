@@ -6,7 +6,6 @@ import { Container, Typography, Box, Button } from '@mui/material';
 import './stylesheets/GetQuestionCss.css';
 import GameFinale from './GameFinale';
 
-
 const GetQuestion = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -206,7 +205,7 @@ const GetQuestion = () => {
               <Button
                 data-testid="nextQuestionButton"
                 variant="contained"
-                style={{ width: '35em', fontWeight: 'bold' }}
+                style={{ width: '35em', fontWeight: 'bold', color: 'white', backgroundColor:'#209cee' }}
                 onClick={getQuestion}
                 disabled={nextQuestion}>
                 Next question
