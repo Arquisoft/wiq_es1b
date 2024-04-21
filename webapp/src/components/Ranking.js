@@ -76,7 +76,9 @@ const Ranking = () => {
   
     return (
         <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
-
+          <div style={{ padding: '4em', borderRadius: '15px', boxShadow: '0 0 50px #00a6bc', backgroundColor: 'rgba(255, 255, 255, 0.65)', zIndex: 1, marginTop: '2rem' }}>
+       
+          </div>
         </Container>
     );
   };

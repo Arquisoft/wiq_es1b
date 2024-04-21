@@ -70,72 +70,73 @@ const Home = () => {
 
   return (
     <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
-      
-      <div className='logoContainer'>
-        <img src={logo} alt="Logo" className="logo" style={{ width: '100px', position: 'relative', left: '50%', transform: 'translate(-50%, -50%)' }} />
+     <div style={{ padding: '4em', borderRadius: '15px', boxShadow: '0 0 50px #00a6bc', backgroundColor: 'rgba(255, 255, 255, 0.65)', zIndex: 1, marginTop: '2rem' }}>
+        <div className='logoContainer'>
+          <img src={logo} alt="Logo" className="logo" style={{ width: '100px', position: 'relative', left: '50%', transform: 'translate(-50%, -50%)' }} />
+        </div>
+        <Typography component="h2" variant="h4" sx={{ textAlign: 'center' }}>
+          Hello {username}!
+        </Typography>
+        <Typography component="h3" variant="h5" sx={{ textAlign: 'center', marginTop: 2 }}>
+          Here you can start a new game!
+        </Typography>
+        <Typography component="p" variant="body1" sx={{ textAlign: 'center', marginTop: 2 }}>
+          Your account was created on {formatDate(createdAt)}.
+        </Typography>
+        <Stack spacing={2} sx={{ marginTop: 4 }}>
+          <Button variant="contained" color="primary" size="large" onClick={() => handleStartGame("todo")}>
+            New Full Random Game
+          </Button>
+          <Button variant="contained" color="primary" size="large" onClick={() => handleClickOpenD()}>
+            New Art Gallery Game
+          </Button>
+          <Dialog open={openD} onClose={handleCloseD} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
+            <DialogTitle id="alert-dialog-title">{"How to Play"}</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                Guess the artwork of the artist.
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleCloseD} color="primary" autoFocus>
+                Start Game
+              </Button>
+            </DialogActions>
+          </Dialog>
+          <Button variant="contained" color="primary" size="large" onClick={() => handleClickOpenHC()}>
+            New Human Calculator Game
+          </Button>
+          <Dialog open={openHC} onClose={handleCloseHC} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
+            <DialogTitle id="alert-dialog-title">{"How to Play"}</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                Solve the math problems as fast as you can.
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleCloseHC} color="primary" autoFocus>
+                Start Game
+              </Button>
+            </DialogActions>
+          </Dialog>
+          <Button variant="contained" color="primary" size="large" onClick={handleClick}>
+            Play by Category
+          </Button>
+          <Menu
+            id="fade-menu"
+            MenuListProps={{
+              'aria-labelledby': 'fade-button',
+            }}
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+          >
+            <MenuItem onClick={() => handleStartGame("image")}>New Images Game</MenuItem>
+            <MenuItem onClick={() => handleStartGame("geography")}>New Geography Game</MenuItem>
+            <MenuItem onClick={() => handleStartGame("science")}>New Science Game</MenuItem>
+          </Menu>
+        </Stack>
       </div>
-      <Typography component="h2" variant="h4" sx={{ textAlign: 'center' }}>
-        Hello {username}!
-      </Typography>
-      <Typography component="h3" variant="h5" sx={{ textAlign: 'center', marginTop: 2 }}>
-        Here you can start a new game!
-      </Typography>
-      <Typography component="p" variant="body1" sx={{ textAlign: 'center', marginTop: 2 }}>
-        Your account was created on {formatDate(createdAt)}.
-      </Typography>
-      <Stack spacing={2} sx={{ marginTop: 4 }}>
-        <Button variant="contained" color="primary" size="large" onClick={() => handleStartGame("todo")}>
-          New Full Random Game
-        </Button>
-        <Button variant="contained" color="primary" size="large" onClick={() => handleClickOpenD()}>
-          New Art Gallery Game
-        </Button>
-        <Dialog open={openD} onClose={handleCloseD} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
-          <DialogTitle id="alert-dialog-title">{"How to Play"}</DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              Guess the artwork of the artist.
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleCloseD} color="primary" autoFocus>
-              Start Game
-            </Button>
-          </DialogActions>
-        </Dialog>
-        <Button variant="contained" color="primary" size="large" onClick={() => handleClickOpenHC()}>
-          New Human Calculator Game
-        </Button>
-        <Dialog open={openHC} onClose={handleCloseHC} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
-          <DialogTitle id="alert-dialog-title">{"How to Play"}</DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              Solve the math problems as fast as you can.
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleCloseHC} color="primary" autoFocus>
-              Start Game
-            </Button>
-          </DialogActions>
-        </Dialog>
-        <Button variant="contained" color="primary" size="large" onClick={handleClick}>
-          Play by Category
-        </Button>
-        <Menu
-          id="fade-menu"
-          MenuListProps={{
-            'aria-labelledby': 'fade-button',
-          }}
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleClose}
-        >
-          <MenuItem onClick={() => handleStartGame("image")}>New Images Game</MenuItem>
-          <MenuItem onClick={() => handleStartGame("geography")}>New Geography Game</MenuItem>
-          <MenuItem onClick={() => handleStartGame("science")}>New Science Game</MenuItem>
-        </Menu>
-      </Stack>
     </Container>
   );
 };

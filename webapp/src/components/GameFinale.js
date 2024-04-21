@@ -36,26 +36,28 @@ const GameFinale = (props) => {
 
   return (
     <Container component="main" maxWidth="md" sx={{ margin: 8 }}>
-      <Typography component="h1" variant="h1" marginBottom={2}>
-        Game finished!
-      </Typography>
-      <Typography component="h2" variant="h5">
-        You've successfully tackled all {props.numberOfQuestions} questions!
-      </Typography>
-      <Typography component="h2" variant="h5">
-        Feel free to review them in the record or head back home to start a new game.
-      </Typography>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-      >
-        <DialogTitle>Record saved successfully!</DialogTitle>
-        <DialogActions>
-          <Button onClick={handleClose}>
-            Close
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <div style={{ padding: '4em', borderRadius: '15px', boxShadow: '0 0 50px #00a6bc', backgroundColor: 'rgba(255, 255, 255, 0.65)', zIndex: 1, marginTop: '2rem' }}>
+        <Typography component="h1" variant="h1" marginBottom={2}>
+          Game finished!
+        </Typography>
+        <Typography component="h2" variant="h5">
+          You've successfully tackled all {props.numberOfQuestions} questions!
+        </Typography>
+        <Typography component="h2" variant="h5">
+          Feel free to review them in the record or head back home to start a new game.
+        </Typography>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+        >
+          <DialogTitle>Record saved successfully!</DialogTitle>
+          <DialogActions>
+            <Button onClick={handleClose}>
+              Close
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
     </Container>
   );
 };

@@ -153,10 +153,16 @@ const GetQuestion = () => {
       justifyContent: 'center',
       alignItems: 'center',
       height: '90vh',
-      width: '80vw'
+      width: '80vw',
+      padding: '1em', 
+      borderRadius: '15px', 
+      boxShadow: '0 0 50px #00a6bc', 
+      backgroundColor: 'rgba(255, 255, 255, 0.65)', 
+      zIndex: 1, 
+      marginTop: '2rem'
     }}>
       {(questionCount <= selectedNumQuestions ? (
-        <Container component="main" maxWidth="md" sx={{ margin: 8, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+        <Container component="main" maxWidth="md" sx={{ margin: 5, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
           {isReady && (
             <div className='answers' style={{
               display: 'flex',
@@ -195,7 +201,7 @@ const GetQuestion = () => {
             </div>
           )}
           {isReady && (
-            <div style={{ paddingBottom: '5em' }}>
+            <div>
               {/* Button to request a new question It will be disabled when the question is not answered */}
               <Button
                 data-testid="nextQuestionButton"

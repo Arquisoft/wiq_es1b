@@ -71,60 +71,62 @@ const Record = () => {
   }, []);
 
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={12} sm={8}>
-        <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
+    <div style={{ padding: '4em', borderRadius: '15px', boxShadow: '0 0 50px #00a6bc', backgroundColor: 'rgba(255, 255, 255, 0.65)', zIndex: 1, marginTop: '2rem' }}>
+      <Grid container spacing={3}>
+        <Grid item xs={12} sm={8}>
+          <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
 
-          <Typography component="h1" variant="h5">
-            Here you can see your record! All about your past games and all!
-          </Typography>
+            <Typography component="h1" variant="h5">
+              Here you can see your record! All about your past games and all!
+            </Typography>
 
-          <SimpleTreeView style={{ paddingTop: '20px' }}>
-            {record.map((game, index) => (
-              <TreeItem key={`game-${index}`} itemId={`Game ${index + 1}`} label={`Game ${index + 1}`}>
-                {game.questions.map((question, qIndex) => (
-                  <TreeItem key={`game-${index}-question-${qIndex}`} itemId={`Game ${index + 1}-question ${qIndex + 1}`} label={question.question}>
-                    <List>
-                      <ListItem key={`game-${index}-question-${qIndex}`}>
-                        <ListItemText primary={
-                            <>
-                              Correct Answer: 
-                              {question.correctAnswer.startsWith('http') ? 
-                                <img src={question.correctAnswer} alt="Correct Answer" style={{maxWidth: '5em', maxHeight: '5em'}} /> : 
-                                question.correctAnswer
-                              }
-                              , Selected: 
-                              {question.selectedAnswer.startsWith('http') ? 
-                                <img src={question.selectedAnswer} alt="Selected Answer" style={{maxWidth: '5em', maxHeight: '5em'}}/> : 
-                                question.selectedAnswer
-                              }
-                            </>
-                          } />  
-                      </ListItem>
-                    </List>
-                  </TreeItem>
-                ))}
-              </TreeItem>
-            ))}
-          </SimpleTreeView>
-        </Container>
+            <SimpleTreeView style={{ paddingTop: '20px' }}>
+              {record.map((game, index) => (
+                <TreeItem key={`game-${index}`} itemId={`Game ${index + 1}`} label={`Game ${index + 1}`}>
+                  {game.questions.map((question, qIndex) => (
+                    <TreeItem key={`game-${index}-question-${qIndex}`} itemId={`Game ${index + 1}-question ${qIndex + 1}`} label={question.question}>
+                      <List>
+                        <ListItem key={`game-${index}-question-${qIndex}`}>
+                          <ListItemText primary={
+                              <>
+                                Correct Answer: 
+                                {question.correctAnswer.startsWith('http') ? 
+                                  <img src={question.correctAnswer} alt="Correct Answer" style={{maxWidth: '5em', maxHeight: '5em'}} /> : 
+                                  question.correctAnswer
+                                }
+                                , Selected: 
+                                {question.selectedAnswer.startsWith('http') ? 
+                                  <img src={question.selectedAnswer} alt="Selected Answer" style={{maxWidth: '5em', maxHeight: '5em'}}/> : 
+                                  question.selectedAnswer
+                                }
+                              </>
+                            } />  
+                        </ListItem>
+                      </List>
+                    </TreeItem>
+                  ))}
+                </TreeItem>
+              ))}
+            </SimpleTreeView>
+          </Container>
+        </Grid>
+        <Grid item xs={12} sm={4}>
+          {!loading && (
+            <Box position="sticky" top={0} paddingTop="20px">
+              <BarChart
+                width={500}
+                height={400}
+                series={[
+                  { data: correct, label: 'Correct answers', id: 'correctId' },
+                  { data: incorrect, label: 'Incorrect answers', id: 'incorrectId' },
+                ]}
+                xAxis={[{ data: labels, scaleType: 'band' }]}
+              />
+            </Box>
+          )}
+        </Grid>
       </Grid>
-      <Grid item xs={12} sm={4}>
-        {!loading && (
-          <Box position="sticky" top={0} paddingTop="20px">
-            <BarChart
-              width={500}
-              height={400}
-              series={[
-                { data: correct, label: 'Correct answers', id: 'correctId' },
-                { data: incorrect, label: 'Incorrect answers', id: 'incorrectId' },
-              ]}
-              xAxis={[{ data: labels, scaleType: 'band' }]}
-            />
-          </Box>
-        )}
-      </Grid>
-    </Grid>
+    </div>
   );
 };
 

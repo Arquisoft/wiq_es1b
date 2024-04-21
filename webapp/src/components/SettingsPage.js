@@ -52,38 +52,40 @@ const SettingsPage = () => {
 
   return(
     <Container component="main" maxWidth="md" sx={{ margin: 8 }}>
-      <Typography variant="h4" component="h1" sx={{ paddingBottom: '2em', textAlign: 'center' }}>
-        Configuration
-      </Typography>
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(2, 1fr)', 
-        gridTemplateRows: 'repeat(2, 1fr)', 
-        gridColumnGap: '15px', 
-        gridRowGap: '15px' 
-      }}> 
-        <Typography variant="h6" component="h2">
-          Number of questions:
+      <div style={{ padding: '4em', borderRadius: '15px', boxShadow: '0 0 50px #00a6bc', backgroundColor: 'rgba(255, 255, 255, 0.65)', zIndex: 1, marginTop: '2rem' }}>
+        <Typography variant="h4" component="h1" sx={{ paddingBottom: '2em', textAlign: 'center' }}>
+          Configuration
         </Typography>
-        <TextField
-          type="number"
-          inputProps={{ min: 1, max: 20 }}
-          value={selectedNumQuestions}
-          onChange={handleNumQuestionsChange}
-          label="questions"
-          variant="outlined"
-        />
-        <Typography variant="h6" component="h2">
-          Time limit:
-        </Typography>
-        <TextField
-          type="number"
-          inputProps={{ min: 1, max: 20 }}
-          value={selectedTimer}
-          onChange={handleTimerChange}
-          label="time"
-          variant="outlined"
-        />
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(2, 1fr)', 
+          gridTemplateRows: 'repeat(2, 1fr)', 
+          gridColumnGap: '15px', 
+          gridRowGap: '15px' 
+        }}> 
+          <Typography variant="h6" component="h2">
+            Number of questions:
+          </Typography>
+          <TextField
+            type="number"
+            inputProps={{ min: 1, max: 20 }}
+            value={selectedNumQuestions}
+            onChange={handleNumQuestionsChange}
+            label="questions"
+            variant="outlined"
+          />
+          <Typography variant="h6" component="h2">
+            Time limit:
+          </Typography>
+          <TextField
+            type="number"
+            inputProps={{ min: 1, max: 20 }}
+            value={selectedTimer}
+            onChange={handleTimerChange}
+            label="time"
+            variant="outlined"
+          />
+        </div>
       </div>
     </Container>
   );

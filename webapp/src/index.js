@@ -27,7 +27,7 @@ window.addEventListener('beforeunload', logout);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <Box sx={{ paddingTop: '64px' }}>
+    <Box sx={{ paddingTop: '64px', paddingBottom: '80px' }}>
       <div className='video-background'>
         <video src='/Line_Network_Background_2.mp4' autoPlay loop muted data-testid="home-video"/>
       </div>
