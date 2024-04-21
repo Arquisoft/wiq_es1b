@@ -21,7 +21,6 @@ const NavigationBar = () => {
   const { selectedNumQuestions } = location.state || {};
   const { selectedTimer } = location.state || {};
 
-  const [anchorElSettingsMenu, setAnchorElSettingsMenu] = React.useState(null);
   const [anchorElInfoMenu, setAnchorElInfoMenu] = React.useState(null);
 
   const deleteTempQuestions = async () => {
@@ -40,10 +39,6 @@ const NavigationBar = () => {
       deleteTempQuestions();
       navigate("/settings", { state: { username, createdAt } });
     }
-  };
-
-  const showApiDoc = () => {
-    window.location.href = 'http://20.26.114.153:8000/api-doc/'; //NOSONAR
   };
 
   const showRecord = () => {
@@ -67,21 +62,20 @@ const NavigationBar = () => {
     }
   };
 
+  const showApiDoc = () => {
+    window.location.href = 'http://20.26.114.153:8000/api-doc/'; //NOSONAR
+  };
+
   const logOut = () => {
     localStorage.removeItem('username');
     navigate('/');
-  };
-
-  const openSettingsMenu = (event) => {
-    setAnchorElSettingsMenu(event.currentTarget);
   };
 
   const openInfoMenu = (event) => {
     setAnchorElInfoMenu(event.currentTarget);
   };
 
-  const closeMenus = () => {
-    setAnchorElSettingsMenu(null);
+  const closeMenu = () => {
     setAnchorElInfoMenu(null);
   };
 
@@ -133,7 +127,7 @@ const NavigationBar = () => {
             icon={<Tooltip title="Settings">
                     <SettingsIcon sx={tabStyle} />
                   </Tooltip>}
-            onClick={openSettingsMenu} />
+            onClick={showSettings} />
           <Tab aria-label="Record"
             sx={tabStyle}
             icon={<Tooltip title="Personal record">
@@ -154,29 +148,10 @@ const NavigationBar = () => {
             onClick={logOut} />
         </Tabs>
       </AppBar>
-      <Menu aria-label="Settings menu"
-        anchorEl={anchorElSettingsMenu}
-        open={Boolean(anchorElSettingsMenu)}
-        onClose={closeMenus}
-        MenuListProps={{
-          sx: menuStyle
-        }}
-      >
-        <MenuItem aria-label="Game settings"
-          sx={menuItemStyle}
-          onClick={showSettings} >
-          Game settings
-        </MenuItem>
-        <MenuItem aria-label="API DOC"
-          sx={menuItemStyle}
-          onClick={showApiDoc} >
-          API DOC
-        </MenuItem>
-      </Menu>
-      <Menu aria-label="Help menu"
+      <Menu aria-label="Info menu"
         anchorEl={anchorElInfoMenu}
         open={Boolean(anchorElInfoMenu)}
-        onClose={closeMenus}
+        onClose={closeMenu}
         MenuListProps={{
           sx: menuStyle
         }}
@@ -190,6 +165,11 @@ const NavigationBar = () => {
           sx={menuItemStyle}
           onClick={showAboutUs} >
           About us
+        </MenuItem>
+        <MenuItem aria-label="API DOC"
+          sx={menuItemStyle}
+          onClick={showApiDoc} >
+          API DOC
         </MenuItem>
       </Menu>
     </div>
