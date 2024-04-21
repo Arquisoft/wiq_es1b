@@ -130,8 +130,17 @@ const HumanCalculator = () => {
     // eslint-disable-next-line
   }, []);
 
+  const buttonStyle = {
+    color: 'white',
+    backgroundColor: '#209cee',
+    '&:hover': {
+      backgroundColor: '#1f89cf',
+    },
+    paddingTop: '10px',
+  };
+
   return (
-    <div style={{ padding: '4em', borderRadius: '15px', boxShadow: '0 0 50px #00a6bc', backgroundColor: 'rgba(255, 255, 255, 0.65)', zIndex: 1, marginTop: '2rem' }}>
+    <div style={{ padding: '3em', borderRadius: '15px', boxShadow: '0 0 50px #00a6bc', backgroundColor: 'rgba(255, 255, 255, 0.65)', zIndex: 1, marginTop: '2rem' }}>
       {(questionCount <= selectedNumQuestions ? (
         <Container>
           <div style={{
@@ -159,7 +168,7 @@ const HumanCalculator = () => {
               <label htmlFor="result">Result:</label>
               <input type="text" id="result" value={result} onChange={(e) => setResult(e.target.value)} />
             </Box>
-            <Button variant="contained" color="primary" onClick={() => checkAnswer()} disabled={isButtonDisabled} style={{ paddingTop: '10px' }}>
+            <Button variant="contained" sx={buttonStyle} onClick={() => checkAnswer()} disabled={isButtonDisabled} >
               Check answer
             </Button>
             <Dialog
