@@ -87,6 +87,7 @@ const NavigationBar = () => {
   const tabStyle = {
     color: 'white',
     fontWeight: 'bold',
+    backgroundColor: '#209cee',
     fontSize: 26,
     flex: '0 0 auto',
     paddingTop: 0,
@@ -101,9 +102,9 @@ const NavigationBar = () => {
   const menuItemStyle = {
     color: 'white',
     fontWeight: 'bold',
-    backgroundColor: '#1976d2',
+    backgroundColor: '#209cee',
     '&:hover': {
-      backgroundColor: '#1976d2',
+      backgroundColor: '#209cee',
     },
   };
 
@@ -124,7 +125,7 @@ const NavigationBar = () => {
           <Tab label="WIQ"
             sx={tabStyle}
             onClick={showHome} />
-          <div style={{ flex: 5 }} />
+          <div style={{ flex: 5, background: '#209cee' }} />
           <Tab aria-label="Settings"
             icon={<Tooltip title="Settings">
                     <SettingsIcon sx={tabStyle} />
