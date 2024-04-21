@@ -89,8 +89,37 @@ const Ranking = () => {
     return (
         <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
           <div style={{ padding: '4em', borderRadius: '15px', boxShadow: '0 0 50px #00a6bc', backgroundColor: 'rgba(255, 255, 255, 0.65)', zIndex: 1, marginTop: '2rem' }}>
-       
-          </div>
+            {/* Aquí renderizamos el ranking */}
+            <h2>Ranking</h2>
+            {loading ? (
+                <p>Cargando...</p>
+            ) : (
+                <ol>
+                    {ranking.map((user, index) => (
+                        <li key={index}>
+                            {user.username}: {user.score}
+                        </li>
+                    ))}
+                </ol>
+            )}
+
+            {/* Aquí renderizamos el registro de juego */}
+            <h2>Registro de Juego</h2>
+            {loading ? (
+                <div className='charging'>
+                  <div className='ball one'></div>
+                  <div className='ball two'></div>
+              </div>
+            ) : (
+                <ul>
+                    {record.map((game, index) => (
+                        <li key={index}>
+                            Juego {index + 1}: {game.score}
+                        </li>
+                    ))}
+                </ul>
+            )}
+        </div>
         </Container>
     );
   };
