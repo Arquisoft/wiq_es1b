@@ -56,6 +56,17 @@ const Ranking = () => {
         let { users } = response.data;
         setRanking(users);
 
+        const rankingWithScores = await Promise.all(
+          users.map(async (userInDB) => {
+              const score = await getScoreForUser(userInDB);
+              return { ...userInDB, score };
+          })
+        );
+        // Sort users based on their scores (descending order)
+        rankingWithScores.sort((a, b) => b.score - a.score);
+        setRanking(rankingWithScores);
+        setLoading(false);
+        /*
         let scoreForUser = 0;
         users.forEach((userInDB, index) => {
             // Extract score from the user record
@@ -67,6 +78,7 @@ const Ranking = () => {
             setRecord(games);
         });
         setLoading(false);
+        */
     }
 
     useEffect(() => {
