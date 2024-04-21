@@ -87,6 +87,7 @@ const NavigationBar = () => {
   const tabStyle = {
     color: 'white',
     fontWeight: 'bold',
+    fontSize: 26,
     flex: '0 0 auto',
     paddingTop: 0,
     paddingBottom: 0,
@@ -109,42 +110,44 @@ const NavigationBar = () => {
   return (
     <div>
       <AppBar position="absolute">
-        <Tabs
+        <Tabs aria-label="navigation tabs"
           value={false}
-          aria-label="navigation tabs"
           variant="fullWidth"
           sx={tabsStyle}
         >
-          <Tab aria-label="WIQ"
-              sx={tabStyle}
-              icon={<Tooltip title="Home">
-                      <img src={IconWIQ} alt="Icono" />
-                    </Tooltip>}   
-              onClick={showHome} />
+          <Tab aria-label="Logo"
+            icon={<Tooltip title="Home">
+                    <img src={IconWIQ} alt="Icono" />
+                  </Tooltip>}   
+            sx={tabStyle}              
+            onClick={showHome} />
+          <Tab label="WIQ"
+            sx={tabStyle}
+            onClick={showHome} />
           <div style={{ flex: 5 }} />
           <Tab aria-label="Settings"
-            sx={tabStyle}
             icon={<Tooltip title="Settings">
                     <SettingsIcon sx={tabStyle} />
-                  </Tooltip>}
+                  </Tooltip>}    
+            sx={tabStyle}
             onClick={showSettings} />
           <Tab aria-label="Record"
-            sx={tabStyle}
             icon={<Tooltip title="Personal record">
                     <AccountCircle sx={tabStyle} />
-                  </Tooltip>}
-            onClick={showRecord} />
-          <Tab aria-label="Info"
+                  </Tooltip>}  
             sx={tabStyle}
+            onClick={showRecord} />
+          <Tab aria-label="Info"          
             icon={<Tooltip title="Info">
                     <HelpIcon sx={tabStyle} />
                   </Tooltip>}
+            sx={tabStyle}
             onClick={openInfoMenu} />
           <Tab aria-label="Log out"
-            sx={tabStyle}
             icon={<Tooltip title="Log out">
                     <LogoutIcon sx={tabStyle} />
-                  </Tooltip>}
+                  </Tooltip>}  
+            sx={tabStyle}
             onClick={logOut} />
         </Tabs>
       </AppBar>
