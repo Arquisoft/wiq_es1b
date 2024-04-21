@@ -7,6 +7,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import HelpIcon from '@mui/icons-material/Help';
 import LogoutIcon from '@mui/icons-material/Logout';
+import LeaderboardIcon from '@mui/icons-material/Leaderboard';
 import IconWIQ from '../favicon2.ico';
 
 const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
@@ -45,6 +46,13 @@ const NavigationBar = () => {
     if (username !== undefined) {
       deleteTempQuestions();
       navigate("/record", { state: { username, createdAt } });
+    }
+  };
+
+  const showRanking = () => {
+    if (username !== undefined) {
+      deleteTempQuestions();
+      navigate("/ranking", { state: { username, createdAt } });
     }
   };
 
@@ -138,6 +146,12 @@ const NavigationBar = () => {
                   </Tooltip>}  
             sx={tabStyle}
             onClick={showRecord} />
+          <Tab aria-label="Ranking"
+            icon={<Tooltip title="Ranking">
+                    <LeaderboardIcon sx={tabStyle} />
+                  </Tooltip>}  
+            sx={tabStyle}
+            onClick={showRanking} />
           <Tab aria-label="Info"          
             icon={<Tooltip title="Info">
                     <HelpIcon sx={tabStyle} />

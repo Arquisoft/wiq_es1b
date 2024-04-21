@@ -1,6 +1,7 @@
 // src/components/Ranking.js
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from "react-router-dom";
+import { Container } from '@mui/material';
 import axios from 'axios';
 
 const Ranking = () => {
