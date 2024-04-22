@@ -4,7 +4,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Container } from '@mui/material';
 import axios from 'axios';
 import './stylesheets/ranking.css';
-import { Link } from 'react-router-dom';
 
 const Ranking = () => {
 
