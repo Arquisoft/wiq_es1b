@@ -76,6 +76,7 @@ const NavigationBar = () => {
 
   const logOut = () => {
     localStorage.removeItem('username');
+    localStorage.removeItem('userProfileUsername');
     navigate('/');
   };
 

@@ -18,9 +18,11 @@ import GameFinale from './components/GameFinale.js';
 import SettingsPage from './components/SettingsPage.js';
 import HumanCalculator from './components/HumanCalculator.js';
 import Ranking from './components/Ranking.js';
+import UserProfile from './components/UserProfile.js';
 
 function logout() {
   localStorage.removeItem('username');
+  localStorage.removeItem('userProfileUsername');
 }
 //before the window is closed, the username is removed from the local storage so that the user is logged out
 window.addEventListener('beforeunload', logout);
@@ -45,6 +47,7 @@ root.render(
         <Route path='/settings' element={<SettingsPage />} />
         <Route path='/humanCalculator' element={<HumanCalculator />} />
         <Route path='/ranking' element={<Ranking />} />
+        <Route path='/userProfile' element={<UserProfile />} />
       </Routes>
     </Box>
     <Footer />
