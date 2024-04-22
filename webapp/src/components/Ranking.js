@@ -22,6 +22,7 @@ const Ranking = () => {
     const location = useLocation();
     const { username } = location.state || {};
     const { createdAt } = location.state || {};
+    const [error, setError] = useState('');
 
     const [record, setRecord] = useState([]);
     const [ranking, setRanking] = useState([]);
@@ -34,42 +35,40 @@ const Ranking = () => {
 
     useEffect(() => {
       const getScoreForUser = async (userInDB) => {
-        const response = await axios.post(`${apiEndpoint}/getGameRecord`, { userInDB });
-        // Extract data from the response
-        let { games } = response.data;
-        setRecord(games);
-    
-        //const totalGames = games.length;
-        // Calculate correct and incorrect answers for the chartbar
-        let correctCount = 0;
-        games.forEach((game) => {
-          game.questions.forEach(question => {
-            if (question.correctAnswer === question.selectedAnswer) {
-              correctCount++;
-            }
-          });
-          //labels.push(`Game ${totalGames - games.length + index + 1}`);
-        });
+        try {
+          const response = await axios.post(`${apiEndpoint}/getGameRecord`, { userInDB });
+          // Extract data from the response
+          let { games } = response.data;
+          setRecord(games);
 
-        return correctCount;
+          return games.correctAnswers;
+        } catch (error) {
+          setError(error.response.data.error);
+        }
+        
       }
 
       const getRanking = async () => {
-        const response = await axios.post(`${apiEndpoint}/getAllUsers`, {});
-        // Extract data from the response
-        let { users } = response.data;
-        setRanking(users);
+        try {
+          const response = await axios.post(`${apiEndpoint}/getAllUsers`, {});
+          // Extract data from the response
+         let { users } = response.data;
+          setRanking(users);
 
-        const rankingWithScores = await Promise.all(
-          users.map(async (userInDB) => {
-              const score = await getScoreForUser(userInDB);
-              return { ...userInDB, score };
-          })
-        );
-        // Sort users based on their scores (descending order)
-        rankingWithScores.sort((a, b) => b.score - a.score);
-        setRanking(rankingWithScores);
-        setLoading(false);
+          const rankingWithScores = await Promise.all(
+            users.map(async (userInDB) => {
+                const score = await getScoreForUser(userInDB);
+                return { ...userInDB, score };
+            })
+          );
+          // Sort users based on their scores (descending order)
+          rankingWithScores.sort((a, b) => b.score - a.score);
+          setRanking(rankingWithScores);
+          setLoading(false);
+        } catch (error) {
+          setError(error.response.data.error);
+        }
+        
         /*
         let scoreForUser = 0;
         users.forEach((userInDB, index) => {
@@ -84,7 +83,6 @@ const Ranking = () => {
         setLoading(false);
         */
       }
-    
 
       getRanking();
 
