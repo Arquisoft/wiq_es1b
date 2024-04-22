@@ -16,6 +16,19 @@
     font-weight: bold;
 }
 
+.user-shadow {
+    display: flex; /* Utilizamos un contenedor flexbox para colocar los elementos en línea */
+    align-items: center;
+    padding: 10px;
+    width: 200px;
+    height: 40px;
+    box-shadow: 0 0 50px #00a6bc;
+    background-color: hsla(227, 72%, 31%, 0.67);
+    border-radius: 20px; /* Borde redondo */
+    font-weight: bold;
+    margin-left: 30px;
+}
+
 .circle {
     width: 30px;
     height: 30px;
@@ -32,8 +45,10 @@
     background-color: rgb(250, 88, 88);
 }
 
-.user-box p {
+.user-shadow p {
     margin: 0;
+    font-weight: bold;
+    color: white;
 }
 
 .user-box p:first-child {

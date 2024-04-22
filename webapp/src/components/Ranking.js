@@ -109,7 +109,10 @@ const Ranking = () => {
                       <div className="user-wrapper" key={index}> 
                         <div className={`user-box ${index < 3 ? 'red-circle' : ''}`}>
                           <div className="circle">{index + 1}</div>
-                          <p>{user.username}  -  Puntuación: {user.score}</p>
+                          <p>{user.username}</p>
+                          <div className="user-shadow">
+                            <p>Score: {user.score}</p>
+                          </div>
                         </div>
                       </div>
                     ))
