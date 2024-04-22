@@ -68,6 +68,18 @@ app.get('/getUserByUsername', async (req, res) => {
   }
 });
 
+app.get('/getAllUsers', async (req, res) => {
+  try {
+
+    const users = await User.findAll();
+
+    res.json(users);
+
+  }catch (error) {
+    res.status(500).json({ error: 'Internal Server Error trying to get users' });
+  }
+})
+
 // Start the server
 const server = app.listen(port, () => {
   console.log(`Auth Service listening at http://localhost:${port}`);
