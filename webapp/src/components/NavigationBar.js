@@ -167,16 +167,19 @@ const NavigationBar = () => {
         }}
       >
        <MenuItem aria-label="Help"
+          data-testid="help-item"
           sx={menuItemStyle}
           onClick={showHelp} >
           Help
         </MenuItem>
         <MenuItem aria-label="About us"
+          data-testid="about-us-item"
           sx={menuItemStyle}
           onClick={showAboutUs} >
           About us
         </MenuItem>
         <MenuItem aria-label="API DOC"
+          data-testid="api-doc-item"
           sx={menuItemStyle}
           onClick={showApiDoc} >
           API DOC
