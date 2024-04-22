@@ -34,14 +34,21 @@ const Ranking = () => {
     
 
     useEffect(() => {
-      const getScoreForUser = async (userInDB) => {
+      const getScoreForUser = async (username) => {
         try {
-          const response = await axios.post(`${apiEndpoint}/getGameRecord`, { userInDB });
+          console.log(username);
+          const response = await axios.post(`${apiEndpoint}/getGameRecord`, { username });
           // Extract data from the response
           let { games } = response.data;
+          //console.log(games);
           setRecord(games);
+          let correctAnswers = 0;
+          games.forEach((game, index) => {
+            let correctCount = game.correctAnswers;
+            correctAnswers += correctCount;
+          });
 
-          return games.correctAnswers;
+          return correctAnswers;
         } catch (error) {
           setError(error.response.data.error);
         }
@@ -52,19 +59,31 @@ const Ranking = () => {
         try {
           const response = await axios.post(`${apiEndpoint}/getAllUsers`, {});
           // Extract data from the response
-         let { users } = response.data;
+          let { users } = response.data;
           setRanking(users);
+          console.log(users);
 
+          const rankingWithScores = [];
+          for (const userInDB of users) {
+            let userInDBName = userInDB.username;
+            const score = await getScoreForUser(userInDBName);
+            rankingWithScores.push({ ...userInDB, score });
+          }
+          /*
           const rankingWithScores = await Promise.all(
             users.map(async (userInDB) => {
-                const score = await getScoreForUser(userInDB);
+                console.log(userInDB.username);
+                let userInDBName = userInDB.username;
+                const score = await getScoreForUser(userInDBName);
                 return { ...userInDB, score };
             })
-          );
+          );*/
           // Sort users based on their scores (descending order)
           rankingWithScores.sort((a, b) => b.score - a.score);
           setRanking(rankingWithScores);
           setLoading(false);
+          //console.log(rankingWithScores);
+          //console.log(ranking);
         } catch (error) {
           setError(error.response.data.error);
         }
@@ -73,10 +92,10 @@ const Ranking = () => {
       getRanking();
 
     }, []);
-  
+    
     return (
         <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
-          <div style={{ padding: '4em', borderRadius: '15px', boxShadow: '0 0 50px #00a6bc', backgroundColor: 'rgba(255, 255, 255, 0.65)', zIndex: 1, marginTop: '2rem' }}>
+          <div style={{ marginTop: '2rem' }}>
             {/* Aquí renderizamos el ranking */}
             <h2>Ranking</h2>
             {loading ? (
@@ -85,13 +104,11 @@ const Ranking = () => {
                   <div className='ball two'></div>
                 </div>
             ) : (
-                <ol>
-                    {ranking.map((user, index) => (
-                        <li className="user-wrapper" key={index}>
-                            {user.username}: {user.score}
-                        </li>
-                    ))}
-                </ol>
+                    ranking.map((user, index) => (
+                        <div className="user-wrapper" key={index}>
+                          <p>{user.username}: {user.score}</p>
+                        </div>
+                    ))
             )}
 
             {/* Aquí renderizamos el registro de juego */}
