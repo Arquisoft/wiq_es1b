@@ -48,15 +48,8 @@ const Record = () => {
     const incorrect = [];
     const labels = [];
     games.forEach((game, index) => {
-      let correctCount = 0;
-      let incorrectCount = 0;
-      game.questions.forEach(question => {
-        if (question.correctAnswer === question.selectedAnswer) {
-          correctCount++;
-        } else {
-          incorrectCount++;
-        }
-      });
+      let correctCount = game.correctAnswers;
+      let incorrectCount = game.questions.length - correctCount;
       correct.push(correctCount);
       incorrect.push(incorrectCount);
       labels.push(`Game ${totalGames - games.length + index + 1}`);
