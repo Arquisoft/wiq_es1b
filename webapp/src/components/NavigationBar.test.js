@@ -48,15 +48,15 @@ describe('NavigationBar component', () => {
     expect(history.location.pathname).toBe('/');
   });
 
-  it('should navigate to record page when "Record" button is clicked', () => {
+  it('should navigate to Record page when record button is clicked', () => {
     const history = createMemoryHistory();
-    const { getByText } = render(
+    const { getByTestId } = render(
       <MemoryRouter>
         <NavigationBar />
       </MemoryRouter>
     );
 
-    const recordButton = getByText('Record');
+    const recordButton = getByTestId('record-tab');
     fireEvent.click(recordButton);
 
     expect(history.location.pathname).toBe('/');
