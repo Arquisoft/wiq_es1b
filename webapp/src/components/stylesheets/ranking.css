@@ -7,6 +7,18 @@
     z-index: 1;
 }
 
+.user-box p {
+    margin: 0;
+}
+
+.user-box p:first-child {
+    font-weight: bold;
+}
+
+.user-box p:not(:first-child) {
+    margin-top: 0.5em;
+}
+
 .charging{
     position: relative;
     height: 2em;

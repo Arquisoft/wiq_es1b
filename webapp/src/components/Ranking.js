@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from "react-router-dom";
 import { Container } from '@mui/material';
 import axios from 'axios';
+import './stylesheets/ranking.css';
 
 const Ranking = () => {
 
@@ -105,27 +106,10 @@ const Ranking = () => {
                 </div>
             ) : (
                     ranking.map((user, index) => (
-                        <div className="user-wrapper" key={index}>
-                          <p>{user.username}: {user.score}</p>
-                        </div>
+                      <div className="user-wrapper" key={index}>
+                        <p>{index + 1}:  {user.username}  -  Puntuación:{user.score}</p>
+                    </div>
                     ))
-            )}
-
-            {/* Aquí renderizamos el registro de juego */}
-            <h2>Registro de Juego</h2>
-            {loading ? (
-                <div className='charging'>
-                  <div className='ball one'></div>
-                  <div className='ball two'></div>
-                </div>
-            ) : (
-                <ul>
-                    {record.map((game, index) => (
-                        <li key={index}>
-                            Juego {index + 1}: {game.score}
-                        </li>
-                    ))}
-                </ul>
             )}
         </div>
         </Container>
