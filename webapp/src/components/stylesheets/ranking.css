@@ -3,8 +3,25 @@
     box-shadow: 0 0 50px #00a6bc;
     background-color: rgba(255, 255, 255, 0.67);
     border-radius: '20px';
-    width: '400px';
+    width: '500px'; /* Ancho ajustado */
+    height: auto; /* Altura ajustada automáticamente según el contenido */
     z-index: 1;
+}
+
+.user-box {
+    display: flex; /* Utilizamos un contenedor flexbox para colocar los elementos en línea */
+    align-items: center; /* Centramos verticalmente los elementos */
+}
+
+.circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
 }
 
 .user-box p {

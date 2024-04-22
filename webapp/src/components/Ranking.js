@@ -106,9 +106,12 @@ const Ranking = () => {
                 </div>
             ) : (
                     ranking.map((user, index) => (
-                      <div className="user-wrapper" key={index}>
-                        <p>{index + 1}:  {user.username}  -  Puntuación:{user.score}</p>
-                    </div>
+                      <div className="user-wrapper" key={index}> 
+                        <div className="user-box">
+                          <div className="circle">{index + 1}</div>
+                          <p>{user.username}: {user.score}</p>
+                        </div>
+                      </div>
                     ))
             )}
         </div>
