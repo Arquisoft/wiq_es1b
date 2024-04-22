@@ -40,7 +40,15 @@ const handleRequest = async (url, req, res, method = 'post') => {
 app.post('/login', (req, res) => handleRequest(authServiceUrl + '/login', req, res));
 app.post('/adduser', (req, res) => handleRequest(userServiceUrl + '/adduser', req, res));
 app.get('/generateQuestions', (req, res) => handleRequest(getQuestionUrl + '/generateQuestions', req, res, "get"));
-app.get('/getQuestion', (req, res) => handleRequest(getQuestionUrl + '/getQuestion', req, res, "get"));
+app.get('/getQuestion', async (req, res) => {
+  try{
+    const category = req.query.category;
+    const response = await axios.get(`${getQuestionUrl}/getQuestion`, { params: { category } });
+    res.json(response.data);
+  }catch(error){
+    res.status(500).json({error: 'Internal Server Error'})
+  }
+});
 app.post('/saveQuestion', (req, res) => handleRequest(getHistorialUrl + '/saveQuestion', req, res));
 app.post('/deleteTempQuestions', (req, res) => handleRequest(getHistorialUrl + '/deleteTempQuestions', req, res));
 
@@ -48,7 +56,7 @@ app.post('/saveGameRecord', async (req, res) => {
   try {
     const { username } = req.body;
 
-    const userResponse = await axios.get(`${authServiceUrl}/getUserByUsername`, { username });
+    const userResponse = await axios.get(`${authServiceUrl}/getUserByUsername`, { params: { username } });
 
     const user = userResponse.data.user;
 
@@ -68,12 +76,12 @@ app.get('/getGameRecord', async (req, res) => {
   try {
     const { username } = req.body;
 
-    const userResponse = await axios.get(`${authServiceUrl}/getUserByUsername`, { username });
+    const userResponse = await axios.get(`${authServiceUrl}/getUserByUsername`, { params: { username } });
 
     const user = userResponse.data.user;
 
     if (user !== null) {
-      const saveResponse = await axios.get(`${authServiceUrl}/getGameRecord`, { user });
+      const saveResponse = await axios.get(`${authServiceUrl}/getGameRecord`, { params: { user } });
       res.status(200).json(saveResponse.data);
     }
     else {
@@ -86,6 +94,7 @@ app.get('/getGameRecord', async (req, res) => {
 
 app.get('/getAllQuestions', async (req, res) => {
   try {
+    console.log("GET ALL QUESTIONS IN GS");
     // 1. Recoge todas las preguntas en formato json.
     const response = await axios.get(`${getQuestionUrl}/getAllQuestions`, {});
 
@@ -105,6 +114,7 @@ app.get('/getAllQuestions', async (req, res) => {
 app.get('/getAllUsers', async (req, res) => {
 
 });
+
 //para ver el api-doc, entrar en: http://localhost:8000/api-doc/
 
 // Read the OpenAPI YAML file synchronously

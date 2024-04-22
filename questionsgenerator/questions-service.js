@@ -21,8 +21,9 @@ mongoose.connect(mongoURI);
 //to respond to the /getQuestion request 
 app.get('/getQuestion', async (req, res) => {
   try {
+
     //category of the game chosen
-    const category = req.body.category;
+    const category = req.query.category;
 
     console.log("Cat: ", category);
 
@@ -60,6 +61,7 @@ app.get('/generateQuestions', async (req, res) => {
 
 app.get('/getAllQuestions', async (req, res) => {
   try {
+    console.log("GETALLQUESTIONS QS");
     const questions = await Question.findAll();
 
     res.json(questions);
