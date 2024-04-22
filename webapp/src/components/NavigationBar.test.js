@@ -6,7 +6,7 @@ import NavigationBar from './NavigationBar';
 
 describe('NavigationBar component', () => {
 
-  it('should navigate to home page when the logo icon button is clicked', () => {
+  it('should navigate to Home page when the logo icon button is clicked', () => {
     const history = createMemoryHistory();
     const { getByTestId } = render(
       <MemoryRouter>
@@ -20,7 +20,7 @@ describe('NavigationBar component', () => {
     expect(history.location.pathname).toBe('/');
   });
 
-  it('should navigate to home page when "WIQ" button is clicked', () => {
+  it('should navigate to Home page when "WIQ" button is clicked', () => {
     const history = createMemoryHistory();
     const { getByTestId } = render(
       <MemoryRouter>
@@ -30,6 +30,20 @@ describe('NavigationBar component', () => {
 
     const wiqButton = getByTestId('wiq-tab');
     fireEvent.click(wiqButton);
+
+    expect(history.location.pathname).toBe('/');
+  });
+
+  it('should navigate to Settings page when settings button is clicked', () => {
+    const history = createMemoryHistory();
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <NavigationBar />
+      </MemoryRouter>
+    );
+
+    const settingsButton = getByTestId('settings-tab');
+    fireEvent.click(settingsButton);
 
     expect(history.location.pathname).toBe('/');
   });
@@ -86,20 +100,6 @@ describe('NavigationBar component', () => {
 
     const apiButton = getByText('API Doc');
     fireEvent.click(apiButton);
-
-    expect(history.location.pathname).toBe('/');
-  });
-
-  it('should navigate to Settings page when settings button is clicked', () => {
-    const history = createMemoryHistory();
-    const { getByTestId } = render(
-      <MemoryRouter>
-        <NavigationBar />
-      </MemoryRouter>
-    );
-
-    const settingsButton = getByTestId('settings-button');
-    fireEvent.click(settingsButton);
 
     expect(history.location.pathname).toBe('/');
   });
