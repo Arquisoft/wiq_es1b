@@ -51,14 +51,14 @@ app.post('/login', async (req, res) => {
   }
 });
 
-app.post('/getUserByUsername', async (req, res) => {
+app.get('/getUserByUsername', async (req, res) => {
   try {
     // Obtener el nombre de usuario desde el cuerpo de la solicitud
-    const username = req.body.username;
+    const username = req.query.username;
 
     // Aquí iría la lógica para buscar el usuario en tu base de datos
     // Por ejemplo, si estás utilizando MongoDB, sería algo así
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ username: username });
 
     // Devolver el usuario encontrado en la respuesta
     res.json({ user });

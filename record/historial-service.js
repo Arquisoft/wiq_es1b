@@ -43,6 +43,8 @@ app.post('/saveGameRecord', async (req, res) => {
   try {
     const { user } = req.body;
 
+    const username = user.username;
+
     if (!gameQuestions[username]) {
       return res.status(400).json({ error: "No game questions found for this user" });
     }
@@ -78,7 +80,7 @@ app.post('/saveGameRecord', async (req, res) => {
 
 app.get('/getGameRecord', async (req, res) => {
   try {
-    const { user } = req.body;
+    const user = req.query.user;
 
     const games = await Game.find({ user: user._id });
 

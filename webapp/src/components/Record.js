@@ -36,7 +36,7 @@ const Record = () => {
   const [labels, setLabels] = useState([]);
 
   const getHistorialForLoggedUser = async () => {
-    const response = await axios.get(`${apiEndpoint}/getGameRecord`, { username });
+    const response = await axios.get(`${apiEndpoint}/getGameRecord`, { params: { username } });
     // Extract data from the response
     let { games } = response.data;
     setRecord(games);

@@ -61,7 +61,7 @@ app.post('/saveGameRecord', async (req, res) => {
     const user = userResponse.data.user;
 
     if (user !== null) {
-      const saveResponse = await axios.post(`${authServiceUrl}/saveGameRecord`, { user });
+      const saveResponse = await axios.post(`${getHistorialUrl}/saveGameRecord`, { user: user });
       res.status(200).json(saveResponse.data);
     }
     else {
@@ -74,14 +74,14 @@ app.post('/saveGameRecord', async (req, res) => {
 
 app.get('/getGameRecord', async (req, res) => {
   try {
-    const { username } = req.body;
+    const username = req.query.username;
 
     const userResponse = await axios.get(`${authServiceUrl}/getUserByUsername`, { params: { username } });
 
     const user = userResponse.data.user;
 
     if (user !== null) {
-      const saveResponse = await axios.get(`${authServiceUrl}/getGameRecord`, { params: { user } });
+      const saveResponse = await axios.get(`${getHistorialUrl}/getGameRecord`, { params: { user } });
       res.status(200).json(saveResponse.data);
     }
     else {

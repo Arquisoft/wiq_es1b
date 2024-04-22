@@ -21,18 +21,11 @@ mongoose.connect(mongoURI);
 //to respond to the /getQuestion request 
 app.get('/getQuestion', async (req, res) => {
   try {
-
     //category of the game chosen
     const category = req.query.category;
 
-    console.log("Cat: ", category);
-
     //if the category is all, it will choose a random question from all the categories
     const question = await getRandomQuestionByCategory(category);
-
-    console.log("Question: ", question);
-
-    console.log("ID: ", question._id);
 
     if (question) {
       var tittle = question.tittle;
