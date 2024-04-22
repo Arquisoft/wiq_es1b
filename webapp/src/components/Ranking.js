@@ -30,7 +30,10 @@ const Ranking = () => {
     //data for the chart
     const [loading, setLoading] = useState(true);
   
-    const getScoreForUser = async (userInDB) => {
+    
+
+    useEffect(() => {
+      const getScoreForUser = async (userInDB) => {
         const response = await axios.post(`${apiEndpoint}/getGameRecord`, { userInDB });
         // Extract data from the response
         let { games } = response.data;
@@ -49,9 +52,9 @@ const Ranking = () => {
         });
 
         return correctCount;
-    }
+      }
 
-    const getRanking = async () => {
+      const getRanking = async () => {
         const response = await axios.post(`${apiEndpoint}/getAllUsers`, {});
         // Extract data from the response
         let { users } = response.data;
@@ -80,11 +83,11 @@ const Ranking = () => {
         });
         setLoading(false);
         */
-    }
+      }
+    
 
-    useEffect(() => {
-        getRanking();
-        
+      getRanking();
+
     }, []);
   
     return (

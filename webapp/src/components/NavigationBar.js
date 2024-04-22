@@ -151,6 +151,7 @@ const NavigationBar = () => {
             sx={tabStyle}
             onClick={showRecord} />
           <Tab aria-label="Ranking"
+            data-testid="ranking-tab"    
             icon={<Tooltip title="Ranking">
                     <LeaderboardIcon sx={tabStyle} />
                   </Tooltip>}  
