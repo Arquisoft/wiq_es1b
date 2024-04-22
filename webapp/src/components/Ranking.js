@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Container } from '@mui/material';
 import axios from 'axios';
 import './stylesheets/ranking.css';
+import { Link } from 'react-router-dom';
 
 const Ranking = () => {
 
@@ -32,16 +33,12 @@ const Ranking = () => {
     //data for the chart
     const [loading, setLoading] = useState(true);
   
-    
-
     useEffect(() => {
       const getScoreForUser = async (username) => {
         try {
-          console.log(username);
           const response = await axios.post(`${apiEndpoint}/getGameRecord`, { username });
           // Extract data from the response
           let { games } = response.data;
-          console.log(games);
           setRecord(games);
           let correctAnswers = 0;
           games.forEach((game, index) => {
@@ -62,30 +59,17 @@ const Ranking = () => {
           // Extract data from the response
           let { users } = response.data;
           setRanking(users);
-          console.log(users);
 
           const rankingWithScores = [];
           for (const userInDB of users) {
             let userInDBName = userInDB.username;
             const score = await getScoreForUser(userInDBName);
-            console.log(score);
             rankingWithScores.push({ ...userInDB, score });
           }
-          /*
-          const rankingWithScores = await Promise.all(
-            users.map(async (userInDB) => {
-                console.log(userInDB.username);
-                let userInDBName = userInDB.username;
-                const score = await getScoreForUser(userInDBName);
-                return { ...userInDB, score };
-            })
-          );*/
           // Sort users based on their scores (descending order)
           rankingWithScores.sort((a, b) => b.score - a.score);
           setRanking(rankingWithScores);
           setLoading(false);
-          //console.log(rankingWithScores);
-          //console.log(ranking);
         } catch (error) {
           setError(error.response.data.error);
         }
@@ -95,6 +79,11 @@ const Ranking = () => {
 
     }, []);
     
+    const showUserProfile = (userProfileName) =>{
+      localStorage.setItem('userProfileUsername', userProfileName)
+      navigate("/userProfile", {state: {username, createdAt, userProfileName}});
+    }
+
     return (
         <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
           <div style={{ marginTop: '2rem' }}>
@@ -106,17 +95,22 @@ const Ranking = () => {
                   <div className='ball two'></div>
                 </div>
             ) : (
-                    ranking.map((user, index) => (
-                      <div className="user-wrapper" key={index}> 
-                        <div className={`user-box ${index < 3 ? 'red-circle' : ''}`}>
-                          <div className="circle">{index + 1}</div>
-                          <p>{user.username}</p>
-                          <div className="user-shadow">
-                            <p>Score: {user.score}</p>
-                          </div>
-                        </div>
-                      </div>
-                    ))
+              ranking.map((user, index) => (
+                <div className="user-wrapper" key={index}> 
+                  <div className={`user-box ${index < 3 ? 'red-circle' : ''}`}>
+                    <div className="circle">{index + 1}</div>
+                    <button 
+                      style={{background: 'transparent', border: 'none', cursor: 'pointer'}} 
+                      onClick={() => showUserProfile(user.username)}
+                    >
+                      <p>{user.username}</p>
+                    </button>
+                    <div className="user-shadow">
+                      <p>Score: {user.score}</p>
+                    </div>
+                  </div>
+                </div>
+              ))
             )}
         </div>
         </Container>

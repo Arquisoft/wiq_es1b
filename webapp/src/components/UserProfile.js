@@ -34,11 +34,13 @@ const UserProfile = () => {
   const [incorrect, setIncorrect] = useState([]);
   const [labels, setLabels] = useState([]);
 
-  const getHistorialForLoggedUser = async () => {
-    const response = await axios.post(`${apiEndpoint}/getGameRecord`, { userUsername });
+  const getHistorialForUser = async () => {
+    const response = await axios.post(`${apiEndpoint}/getGameRecord`, { username: userUsername });
     // Extract data from the response
     let { games } = response.data;
     setRecord(games);
+
+    console.log(username);
 
     const totalGames = games.length;
     games = games.slice(-10);
@@ -67,7 +69,7 @@ const UserProfile = () => {
   }
 
   useEffect(() => {
-    getHistorialForLoggedUser();
+    getHistorialForUser();
     // eslint-disable-next-line
   }, []);
 
