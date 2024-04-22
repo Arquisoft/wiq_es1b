@@ -68,20 +68,6 @@ const Ranking = () => {
         } catch (error) {
           setError(error.response.data.error);
         }
-        
-        /*
-        let scoreForUser = 0;
-        users.forEach((userInDB, index) => {
-            // Extract score from the user record
-            scoreForUser = getScoreForUser(userInDB);
-
-            // Algorithm for sorting the users
-            // ...
-
-            setRecord(games);
-        });
-        setLoading(false);
-        */
       }
 
       getRanking();
@@ -101,7 +87,7 @@ const Ranking = () => {
             ) : (
                 <ol>
                     {ranking.map((user, index) => (
-                        <li key={index}>
+                        <li className="user-wrapper" key={index}>
                             {user.username}: {user.score}
                         </li>
                     ))}
