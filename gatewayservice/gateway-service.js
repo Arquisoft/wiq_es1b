@@ -83,6 +83,28 @@ app.get('/getGameRecord', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+app.get('/getAllQuestions', async (req, res) => {
+  try {
+    // 1. Recoge todas las preguntas en formato json.
+    const response = await axios.get(`${getQuestionUrl}/getAllQuestions`, {});
+
+    // 2. Transforma response.data (donde están las preguntas) a un fichero questions.json
+    const preguntasJSON = JSON.stringify(response.data);
+    fs.writeFileSync('questions.json', preguntasJSON);
+
+    // 3. Descarga AUTOMÁTICAMENTE el fichero questions.json
+    const filePath = `${__dirname}/questions.json`;
+    res.download(filePath, 'questions.json');
+
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+app.get('/getAllUsers', async (req, res) => {
+
+});
 //para ver el api-doc, entrar en: http://localhost:8000/api-doc/
 
 // Read the OpenAPI YAML file synchronously

@@ -12,8 +12,7 @@ const port = 8002;
 app.use(express.json());
 
 // Connect to MongoDB
-const mongoURI = process.env.MONGODB_URI;
-console.log("debajo de la const: " + mongoURI);
+const mongoURI = process.env.MONGODB_URI || 'mongodb://mongodb:27017/users';
 
 mongoose.connect(mongoURI);
 
@@ -29,7 +28,6 @@ function validateRequiredFields(req, requiredFields) {
 // Route for user login
 app.post('/login', async (req, res) => {
   try {
-    console.log(mongoURI)
     // Check if required fields are present in the request body
     validateRequiredFields(req, ['username', 'password']);
 

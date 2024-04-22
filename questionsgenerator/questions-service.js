@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const QuestionGenerator = require('./questionGenerator.js');
 const Question = require('./question-model')
-const mongoURI = process.env.MONGODB_URI;
+const mongoURI = process.env.MONGODB_URI || 'mongodb://mongodb:27017/questions';
 
 const app = express();
 app.disable('x-powered-by');
@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 
 
 // Connect to MongoDB
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(mongoURI);
 
 
 //to respond to the /getQuestion request 
@@ -24,8 +24,12 @@ app.get('/getQuestion', async (req, res) => {
     //category of the game chosen
     const category = req.body.category;
 
+    console.log("Cat: ", category);
+
     //if the category is all, it will choose a random question from all the categories
     const question = await getRandomQuestionByCategory(category);
+
+    console.log("Question: ", question);
 
     console.log("ID: ", question._id);
 
@@ -54,8 +58,18 @@ app.get('/generateQuestions', async (req, res) => {
   res.status(200).json({ msg: "Questions generated successfully" });
 })
 
-async function getRandomQuestionByCategory(category) {
+app.get('/getAllQuestions', async (req, res) => {
+  try {
+    const questions = await Question.findAll();
 
+    res.json(questions);
+
+  }catch (error) {
+    res.status(500).json({ error: 'Internal Server Error inside service' });
+  }
+});
+
+async function getRandomQuestionByCategory(category) {
   try {
     let query = {}; // Inicializar consulta vacía por defecto
 
@@ -87,6 +101,7 @@ async function getRandomQuestionByCategory(category) {
     return null;
   }
 }
+
 
 const server = app.listen(port, () => {
   console.log(`Question Generator Service listening at http://localhost:${port}`);
