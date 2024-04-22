@@ -1,6 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { render, fireEvent, getByTestId } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import NavigationBar from './NavigationBar';
 
@@ -20,7 +20,7 @@ describe('NavigationBar component', () => {
     expect(history.location.pathname).toBe('/');
   });
 
-  it('should navigate to home page when "Home" button is clicked', () => {
+  it('should navigate to home page when "WIQ" button is clicked', () => {
     const history = createMemoryHistory();
     const { getByTestId } = render(
       <MemoryRouter>
@@ -28,8 +28,8 @@ describe('NavigationBar component', () => {
       </MemoryRouter>
     );
 
-    const homeButton = getByTestId('logo-tab');
-    fireEvent.click(homeButton);
+    const wiqButton = getByTestId('wiq-tab');
+    fireEvent.click(wiqButton);
 
     expect(history.location.pathname).toBe('/');
   });
