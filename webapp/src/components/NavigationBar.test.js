@@ -110,21 +110,24 @@ describe('NavigationBar component', () => {
 
     expect(history.location.pathname).toBe('/');
   });
-/*
-  it('should navigate to API Doc page when "API Doc" button is clicked', () => {
+
+  it('should navigate to API Doc page when api doc button is clicked', () => {
     const history = createMemoryHistory();
-    const { getByText } = render(
+    const { getByTestId } = render(
       <MemoryRouter>
         <NavigationBar />
       </MemoryRouter>
     );
 
-    const apiButton = getByText('API Doc');
+    const infoButton = getByTestId('info-tab');
+    fireEvent.click(infoButton);
+
+    const apiButton = getByTestId('api-doc-item');
     fireEvent.click(apiButton);
 
     expect(history.location.pathname).toBe('/');
   });
-*/
+
   it('should navigate to Login page when log out button is clicked', () => {
     const history = createMemoryHistory();
     const { getByTestId } = render(
