@@ -117,6 +117,7 @@ const NavigationBar = () => {
           sx={tabsStyle}
         >
           <Tab aria-label="Logo"
+            data-testid="logo-tab"
             icon={<Tooltip title="Home">
                     <img src={IconWIQ} alt="Icono" />
                   </Tooltip>}   

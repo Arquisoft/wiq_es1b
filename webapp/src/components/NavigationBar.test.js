@@ -1,19 +1,34 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import NavigationBar from './NavigationBar';
+import { render, fireEvent, getByTestId } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
+import NavigationBar from './NavigationBar';
 
 describe('NavigationBar component', () => {
-  it('should navigate to home page when "Home" button is clicked', () => {
+
+  it('should navigate to home page when the logo icon button is clicked', () => {
     const history = createMemoryHistory();
-    const { getByText } = render(
+    const { getByTestId } = render(
       <MemoryRouter>
         <NavigationBar />
       </MemoryRouter>
     );
 
-    const homeButton = getByText('Home');
+    const logoButton = getByTestId('logo-tab');
+    fireEvent.click(logoButton);
+
+    expect(history.location.pathname).toBe('/');
+  });
+
+  it('should navigate to home page when "Home" button is clicked', () => {
+    const history = createMemoryHistory();
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <NavigationBar />
+      </MemoryRouter>
+    );
+
+    const homeButton = getByTestId('logo-tab');
     fireEvent.click(homeButton);
 
     expect(history.location.pathname).toBe('/');
