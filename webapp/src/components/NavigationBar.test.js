@@ -93,21 +93,24 @@ describe('NavigationBar component', () => {
 
     expect(history.location.pathname).toBe('/');
   });
-/*
-  it('should navigate to aboutUs page when "About Us" button is clicked', () => {
+
+  it('should navigate to AboutUs page when about us button is clicked', () => {
     const history = createMemoryHistory();
-    const { getByText } = render(
+    const { getByTestId } = render(
       <MemoryRouter>
         <NavigationBar />
       </MemoryRouter>
     );
 
-    const aboutUsButton = getByText('About Us');
+    const infoButton = getByTestId('info-tab');
+    fireEvent.click(infoButton);
+
+    const aboutUsButton = getByTestId('about-us-item');
     fireEvent.click(aboutUsButton);
 
     expect(history.location.pathname).toBe('/');
   });
-
+/*
   it('should navigate to API Doc page when "API Doc" button is clicked', () => {
     const history = createMemoryHistory();
     const { getByText } = render(
