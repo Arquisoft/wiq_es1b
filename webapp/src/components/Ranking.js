@@ -41,7 +41,7 @@ const Ranking = () => {
           const response = await axios.post(`${apiEndpoint}/getGameRecord`, { username });
           // Extract data from the response
           let { games } = response.data;
-          //console.log(games);
+          console.log(games);
           setRecord(games);
           let correctAnswers = 0;
           games.forEach((game, index) => {
@@ -68,6 +68,7 @@ const Ranking = () => {
           for (const userInDB of users) {
             let userInDBName = userInDB.username;
             const score = await getScoreForUser(userInDBName);
+            console.log(score);
             rankingWithScores.push({ ...userInDB, score });
           }
           /*

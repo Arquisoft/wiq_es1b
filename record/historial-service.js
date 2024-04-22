@@ -52,7 +52,7 @@ app.post('/saveGameRecord', async (req, res) => {
 
     var correctAnswers = 0;
     gameQuestions[username].forEach(question => {
-      if(question.selectedAnswer === question.correctAnswer)
+      if(question.isCorrect)
         correctAnswers++;
     });
 
