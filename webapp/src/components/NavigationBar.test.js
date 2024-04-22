@@ -76,21 +76,24 @@ describe('NavigationBar component', () => {
     expect(getByTestId("about-us-item")).toBeInTheDocument();
     expect(getByTestId("api-doc-item")).toBeInTheDocument();
   });
-/*
-  it('should navigate to help page when "Help" button is clicked', () => {
+
+  it('should navigate to Help page when help button is clicked', () => {
     const history = createMemoryHistory();
-    const { getByText } = render(
+    const { getByTestId } = render(
       <MemoryRouter>
         <NavigationBar />
       </MemoryRouter>
     );
 
-    const helpButton = getByText('Help');
+    const infoButton = getByTestId('info-tab');
+    fireEvent.click(infoButton);
+
+    const helpButton = getByTestId('help-item');
     fireEvent.click(helpButton);
 
     expect(history.location.pathname).toBe('/');
   });
-
+/*
   it('should navigate to aboutUs page when "About Us" button is clicked', () => {
     const history = createMemoryHistory();
     const { getByText } = render(
