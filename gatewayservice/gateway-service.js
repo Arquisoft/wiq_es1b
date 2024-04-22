@@ -95,14 +95,12 @@ app.get('/getGameRecord', async (req, res) => {
 app.get('/getAllQuestions', async (req, res) => {
   try {
     console.log("GET ALL QUESTIONS IN GS");
-    // 1. Recoge todas las preguntas en formato json.
-    const response = await axios.get(`${getQuestionUrl}/getAllQuestions`, {});
 
-    // 2. Transforma response.data (donde están las preguntas) a un fichero questions.json
-    const preguntasJSON = JSON.stringify(response.data);
-    fs.writeFileSync('questions.json', preguntasJSON);
+    const response = await axios.get(`${getQuestionUrl}/getAllQuestions`, { params: {} });
 
-    // 3. Descarga AUTOMÁTICAMENTE el fichero questions.json
+    const questionsJSON = JSON.stringify(response.data);
+    fs.writeFileSync('questions.json', questionsJSON);
+
     const filePath = `${__dirname}/questions.json`;
     res.download(filePath, 'questions.json');
 
@@ -112,6 +110,21 @@ app.get('/getAllQuestions', async (req, res) => {
 });
 
 app.get('/getAllUsers', async (req, res) => {
+  try{
+    console.log("GET ALL USERS IN GS");
+  
+    // 1. Recoge todos los usuarios en formato json.
+    const response = await axios.get(`${authServiceUrl}/getAllUsers`, {params : {}})
+  
+    const usersJSON = JSON.stringify(response.data);
+    fs.writeFileSync('users.json', usersJSON);
+  
+    const filePath = `${__dirname}/users.json`;
+    res.download(filePath, 'users.json');
+
+  }catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 
 });
 

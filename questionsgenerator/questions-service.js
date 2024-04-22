@@ -60,7 +60,7 @@ app.get('/getAllQuestions', async (req, res) => {
     res.json(questions);
 
   }catch (error) {
-    res.status(500).json({ error: 'Internal Server Error inside service' });
+    res.status(500).json({ error: 'Internal Server Error trying to get questions' });
   }
 });
 
