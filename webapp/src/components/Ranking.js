@@ -98,7 +98,7 @@ const Ranking = () => {
         <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
           <div style={{ marginTop: '2rem' }}>
             {/* Aquí renderizamos el ranking */}
-            <h2>Ranking</h2>
+            <h1>Ranking</h1>
             {loading ? (
                 <div className='charging'>
                   <div className='ball one'></div>
@@ -107,9 +107,9 @@ const Ranking = () => {
             ) : (
                     ranking.map((user, index) => (
                       <div className="user-wrapper" key={index}> 
-                        <div className="user-box">
+                        <div className={`user-box ${index < 3 ? 'red-circle' : ''}`}>
                           <div className="circle">{index + 1}</div>
-                          <p>{user.username}: {user.score}</p>
+                          <p>{user.username}  -  Puntuación: {user.score}</p>
                         </div>
                       </div>
                     ))

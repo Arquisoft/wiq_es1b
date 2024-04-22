@@ -1,27 +1,35 @@
 .user-wrapper {
-    padding: 4em;
-    box-shadow: 0 0 50px #00a6bc;
-    background-color: rgba(255, 255, 255, 0.67);
-    border-radius: '20px';
-    width: '500px'; /* Ancho ajustado */
-    height: auto; /* Altura ajustada automáticamente según el contenido */
+    /*padding: 4em;*/
+    margin-bottom: 15px; /* Agregamos margen inferior para separar los recuadros */
     z-index: 1;
 }
 
 .user-box {
     display: flex; /* Utilizamos un contenedor flexbox para colocar los elementos en línea */
     align-items: center; /* Centramos verticalmente los elementos */
+    padding: 10px;
+    width: 500px;
+    height: 60px;
+    box-shadow: 0 0 50px #00a6bc;
+    background-color: rgba(255, 255, 255, 0.67);
+    border-radius: 20px; /* Borde redondo */
+    font-weight: bold;
 }
 
 .circle {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background-color: #ccc;
+    background-color: #6ec4ee;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.red-circle .circle {
+    background-color: rgb(250, 88, 88);
 }
 
 .user-box p {
