@@ -124,28 +124,33 @@ const NavigationBar = () => {
             sx={tabStyle}              
             onClick={showHome} />
           <Tab label="WIQ"
+            data-testid="wiq-tab"
             sx={tabStyle}
             onClick={showHome} />
           <div style={{ flex: 5, background: '#209cee' }} />
           <Tab aria-label="Settings"
+            data-testid="settings-tab"
             icon={<Tooltip title="Settings">
                     <SettingsIcon sx={tabStyle} />
                   </Tooltip>}    
             sx={tabStyle}
             onClick={showSettings} />
           <Tab aria-label="Record"
+            data-testid="record-tab"
             icon={<Tooltip title="Personal record">
                     <AccountCircle sx={tabStyle} />
                   </Tooltip>}  
             sx={tabStyle}
             onClick={showRecord} />
-          <Tab aria-label="Info"          
+          <Tab aria-label="Info"
+            data-testid="info-tab"          
             icon={<Tooltip title="Info">
                     <HelpIcon sx={tabStyle} />
                   </Tooltip>}
             sx={tabStyle}
             onClick={openInfoMenu} />
           <Tab aria-label="Log out"
+            data-testid="logout-tab"
             icon={<Tooltip title="Log out">
                     <LogoutIcon sx={tabStyle} />
                   </Tooltip>}  
