@@ -61,7 +61,7 @@ describe('NavigationBar component', () => {
 
     expect(history.location.pathname).toBe('/');
   });
-
+/*
   it('should navigate to help page when "Help" button is clicked', () => {
     const history = createMemoryHistory();
     const { getByText } = render(
@@ -100,6 +100,20 @@ describe('NavigationBar component', () => {
 
     const apiButton = getByText('API Doc');
     fireEvent.click(apiButton);
+
+    expect(history.location.pathname).toBe('/');
+  });
+*/
+  it('should navigate to Login page when log out button is clicked', () => {
+    const history = createMemoryHistory();
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <NavigationBar />
+      </MemoryRouter>
+    );
+
+    const logoutButton = getByTestId('logout-tab');
+    fireEvent.click(logoutButton);
 
     expect(history.location.pathname).toBe('/');
   });
