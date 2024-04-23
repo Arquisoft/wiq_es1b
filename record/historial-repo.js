@@ -1,7 +1,7 @@
 const Game = require('./historial-model');
 const mongoose = require('mongoose');
 
-const mongoURI = process.env.MONGODB_URI || 'mongodb://mongodb:27017/records';
+const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/records';
 
 class recordRepository {
     constructor() {
