@@ -34,13 +34,11 @@ const UserProfile = () => {
   const [incorrect, setIncorrect] = useState([]);
   const [labels, setLabels] = useState([]);
 
-  const getHistorialForUser = async () => {
+  const getRecordForUser = async () => {
     const response = await axios.post(`${apiEndpoint}/getGameRecord`, { username: userUsername });
     // Extract data from the response
     let { games } = response.data;
     setRecord(games);
-
-    console.log(username);
 
     const totalGames = games.length;
     games = games.slice(-10);
@@ -69,7 +67,7 @@ const UserProfile = () => {
   }
 
   useEffect(() => {
-    getHistorialForUser();
+    getRecordForUser();
     // eslint-disable-next-line
   }, []);
 
@@ -78,11 +76,9 @@ const UserProfile = () => {
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
           <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
-
             <Typography component="h1" variant="h5">
               Here you can see your record! All about your past games and all!
             </Typography>
-
             <SimpleTreeView style={{ paddingTop: '20px' }}>
               {record.map((game, index) => (
                 <TreeItem key={`game-${index}`} itemId={`Game ${index + 1}`} label={`Game ${index + 1}`}>
