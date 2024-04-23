@@ -27,7 +27,6 @@ const GameFinale = (props) => {
 
   useEffect(() => {
     const user = localStorage.getItem('username');
-    saveGameRecord();
     if (user === null) {
       navigate('/');
     }
