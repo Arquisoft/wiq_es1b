@@ -16,18 +16,22 @@ class recordRepository {
                 return records;
             }
         } catch (error) {
-            console.error("Error in record repository");
-            return null;
+            console.error("Error in record repository: ", error);
         }
     }
 
     async saveGame(game) {
         try {
-            if(game != null) {
+            if (game != null) {
+                const validationError = game.validateSync();
+                if (validationError) {
+                    return false;
+                }
                 await game.save();
+                return true;
             }
-        }catch (error){
-            console.error("Error in record repository");
+        } catch (error) {
+            console.error("Error in record repository: ", error);
         }
     }
 

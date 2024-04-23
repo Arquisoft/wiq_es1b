@@ -1,10 +1,8 @@
 // questions-service.js
 const express = require('express');
-const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const QuestionGenerator = require('./questionGenerator.js');
-const Question = require('./question-model')
-const mongoURI = process.env.MONGODB_URI || 'mongodb://mongodb:27017/questions';
+const QuestionsRepository = require('./questions-repo.js');
 
 const app = express();
 app.disable('x-powered-by');
@@ -14,8 +12,7 @@ const port = 8003;
 app.use(bodyParser.json());
 
 
-// Connect to MongoDB
-mongoose.connect(mongoURI);
+const questionRepo = new QuestionsRepository();
 
 
 //to respond to the /getQuestion request 
@@ -35,7 +32,8 @@ app.get('/getQuestion', async (req, res) => {
       var answerSet = question.answers;
 
       // Delete the question so as not to have repeated questions.
-      await Question.deleteOne({ _id: question._id });
+      questionRepo.delete(question);
+      // await Question.deleteOne({ _id: question._id });
 
       res.json({ question: tittle, correctAnswerLabel: correctAnswer, answerLabelSet: answerSet });
     }
@@ -55,11 +53,12 @@ app.get('/generateQuestions', async (req, res) => {
 app.get('/getAllQuestions', async (req, res) => {
   try {
     console.log("GETALLQUESTIONS QS");
-    const questions = await Question.findAll();
+    const questions = questionRepo.getAll();
+    //const questions = await Question.findAll();
 
     res.json(questions);
 
-  }catch (error) {
+  } catch (error) {
     res.status(500).json({ error: 'Internal Server Error trying to get questions' });
   }
 });
@@ -76,14 +75,18 @@ async function getRandomQuestionByCategory(category) {
       query = {};
     }
 
+    const randomQuestion = questionRepo.getQuestion(query);
+    /*
     const randomQuestion = await Question.aggregate([
       { $match: query }, // Filtrar por categoría si no es "todo"
       { $sample: { size: 1 } } // Obtener una muestra aleatoria
     ]);
+    */
 
-    if (randomQuestion.length > 0) {
-      return randomQuestion[0]; // Devuelve la pregunta aleatoria encontrada
-    } else {
+    if (randomQuestion) {
+      return randomQuestion; // Devuelve la pregunta aleatoria encontrada
+    }
+    else {
       if (category === 'todo') {
         console.log('No se encontraron preguntas en la base de datos.');
       } else {
@@ -104,8 +107,8 @@ const server = app.listen(port, () => {
 
 // Listen for the 'close' event on the Express.js server
 server.on('close', () => {
-  // Close the Mongoose connection
-  mongoose.connection.close();
+  // Close the connection
+  questionRepo.close();
 });
 
 module.exports = server

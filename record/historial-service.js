@@ -67,7 +67,10 @@ app.post('/saveGameRecord', async (req, res) => {
     }
     
     // Guarda el juego en la base de datos
-    await recordRepo.saveGame(game);
+    const gameResult = await recordRepo.saveGame(game);
+    if(!gameResult) {
+      return res.status(400).json({ error: "Error validating the game" });
+    }
 
     delete gameQuestions[username];
 
