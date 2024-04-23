@@ -1,13 +1,10 @@
 /**
  * Class that generates the questions and stores them in the corresponding DB.
  */
-const mongoose = require('mongoose');
 const WikiUtils = require('./wikidata/WikiUtils');
-const questionsTemplate = require('./plantillas.json')
+const QuestionsRepository = require('./questions-repo');
 const Question = require('./question-model');
-const Template = require('./templates/template-model')
 
-const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/questions';
 
 // Connect to MongoDB
 
@@ -15,15 +12,18 @@ class questionGenerator {
 
   constructor() {
     this.wiki = new WikiUtils();
-
-    mongoose.connect(mongoURI, { userNewUrlParser: true, useUnifiedTopology: true });
+    this.questionRepo = new QuestionsRepository();
   }
 
   // This method will load the templates in the db.
   async loadTemplates() {
     try {
+      await this.questionRepo.deleteAllTemplates();
+      await this.questionRepo.loadTemplates();
+      /*
       await Template.deleteMany({});
       await Template.insertMany(questionsTemplate);
+      */
     } catch (error) {
       console.error("Error loading templates: ", error);
     }
@@ -34,11 +34,9 @@ class questionGenerator {
     try {
       for (let i = 0; i < 10; i++) {
 
-        const result = await Template.aggregate([{ $sample: { size: 1 } }]);
+        const template = await this.questionRepo.getTemplate();
 
-        if (result.length > 0) {
-          const template = result[0];
-
+        if (template) {
           const query = template.queryOf;
           const category = template.category;
 
@@ -96,7 +94,7 @@ class questionGenerator {
             category: category
           });
 
-          await question.save();
+          this.questionRepo.saveQuestion(question);
 
         } else {
           console.error("No templates.");
