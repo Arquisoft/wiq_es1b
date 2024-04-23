@@ -8,7 +8,7 @@ import { TreeItem } from '@mui/x-tree-view/TreeItem';
 import { BarChart } from '@mui/x-charts/BarChart';
 import './stylesheets/record.css';
 
-const Record = () => {
+const UserProfile = () => {
 
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
   
@@ -26,6 +26,7 @@ const Record = () => {
   const location = useLocation();
   const { username } = location.state || {};
   const [record, setRecord] = useState([]);
+  const userUsername = localStorage.getItem('userProfileUsername');
 
   //data for the chart
   const [loading, setLoading] = useState(true);
@@ -33,11 +34,13 @@ const Record = () => {
   const [incorrect, setIncorrect] = useState([]);
   const [labels, setLabels] = useState([]);
 
-  const getHistorialForLoggedUser = async () => {
-    const response = await axios.get(`${apiEndpoint}/getGameRecord`, { params: { username } });
+  const getHistorialForUser = async () => {
+    const response = await axios.post(`${apiEndpoint}/getGameRecord`, { username: userUsername });
     // Extract data from the response
     let { games } = response.data;
     setRecord(games);
+
+    console.log(username);
 
     const totalGames = games.length;
     games = games.slice(-10);
@@ -46,8 +49,15 @@ const Record = () => {
     const incorrect = [];
     const labels = [];
     games.forEach((game, index) => {
-      let correctCount = game.correctAnswers;
-      let incorrectCount = game.questions.length - correctCount;
+      let correctCount = 0;
+      let incorrectCount = 0;
+      game.questions.forEach(question => {
+        if (question.correctAnswer === question.selectedAnswer) {
+          correctCount++;
+        } else {
+          incorrectCount++;
+        }
+      });
       correct.push(correctCount);
       incorrect.push(incorrectCount);
       labels.push(`Game ${totalGames - games.length + index + 1}`);
@@ -59,14 +69,14 @@ const Record = () => {
   }
 
   useEffect(() => {
-    getHistorialForLoggedUser();
+    getHistorialForUser();
     // eslint-disable-next-line
   }, []);
 
   return (
     <div style={{ padding: '4em', borderRadius: '15px', boxShadow: '0 0 50px #00a6bc', backgroundColor: 'rgba(255, 255, 255, 0.65)', zIndex: 1, marginTop: '2rem' }}>
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={8}>
           <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
 
             <Typography component="h1" variant="h5">
@@ -123,4 +133,4 @@ const Record = () => {
   );
 };
 
-export default Record;
+export default UserProfile;

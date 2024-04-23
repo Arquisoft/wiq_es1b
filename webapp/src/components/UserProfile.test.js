@@ -8,7 +8,7 @@ import { createMemoryHistory } from 'history';
 
 const mockAxios = new MockAdapter(axios);
 
-describe('Record component', () => {
+describe('UserProfile component', () => {
   
   beforeEach(() => {
     mockAxios.reset();

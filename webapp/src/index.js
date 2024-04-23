@@ -16,9 +16,13 @@ import Footer from './components/Footer';
 import Help from './components/Help.js';
 import GameFinale from './components/GameFinale.js';
 import SettingsPage from './components/SettingsPage.js';
+import HumanCalculator from './components/HumanCalculator.js';
+import Ranking from './components/Ranking.js';
+import UserProfile from './components/UserProfile.js';
 
 function logout() {
   localStorage.removeItem('username');
+  localStorage.removeItem('userProfileUsername');
 }
 //before the window is closed, the username is removed from the local storage so that the user is logged out
 window.addEventListener('beforeunload', logout);
@@ -26,7 +30,7 @@ window.addEventListener('beforeunload', logout);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <Box sx={{ paddingTop: '64px' }}>
+    <Box sx={{ paddingTop: '64px', paddingBottom: '80px' }}>
       <div className='video-background'>
         <video src='/Line_Network_Background_2.mp4' autoPlay loop muted data-testid="home-video"/>
       </div>
@@ -41,6 +45,9 @@ root.render(
         <Route path='/help' element={<Help />} />
         <Route path='/finale' element={<GameFinale />} />
         <Route path='/settings' element={<SettingsPage />} />
+        <Route path='/humanCalculator' element={<HumanCalculator />} />
+        <Route path='/ranking' element={<Ranking />} />
+        <Route path='/userProfile' element={<UserProfile />} />
       </Routes>
     </Box>
     <Footer />

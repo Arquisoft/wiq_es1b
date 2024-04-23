@@ -1,0 +1,84 @@
+.user-wrapper {
+    /*padding: 4em;*/
+    margin-bottom: 15px; /* Agregamos margen inferior para separar los recuadros */
+    z-index: 1;
+}
+
+.user-box {
+    display: flex; /* Utilizamos un contenedor flexbox para colocar los elementos en línea */
+    align-items: center; /* Centramos verticalmente los elementos */
+    padding: 10px;
+    width: 500px;
+    height: 60px;
+    box-shadow: 0 0 50px #00a6bc;
+    background-color: rgba(255, 255, 255, 0.67);
+    border-radius: 20px; /* Borde redondo */
+    font-weight: bold;
+}
+
+.user-shadow {
+    display: flex; /* Utilizamos un contenedor flexbox para colocar los elementos en línea */
+    align-items: center;
+    padding: 10px;
+    width: 200px;
+    height: 40px;
+    box-shadow: 0 0 50px #00a6bc;
+    background-color: hsla(227, 72%, 31%, 0.67);
+    border-radius: 20px; /* Borde redondo */
+    font-weight: bold;
+    margin-left: 30px;
+}
+
+.circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #6ec4ee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.red-circle .circle {
+    background-color: rgb(250, 88, 88);
+}
+
+.user-shadow p {
+    margin: 0;
+    font-weight: bold;
+    color: white;
+}
+
+.user-box p:first-child {
+    font-weight: bold;
+}
+
+.user-box p:not(:first-child) {
+    margin-top: 0.5em;
+}
+
+.charging{
+    position: relative;
+    height: 2em;
+    width: 4.1em;
+    margin: 1em;
+}
+.ball{
+    position: absolute;
+    height: 2em;
+    width: 2em;
+    border-radius: 50%;
+    mix-blend-mode: multiply;
+}
+.ball.one{
+    left: 0;
+    background: #008FDB;
+    animation: 0.7s one-move ease-in-out infinite;
+}
+.ball.two{
+    right: 0;
+    background: #024BAC;
+    animation: 0.7s two-move ease-in-out infinite;
+}

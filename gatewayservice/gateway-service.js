@@ -128,6 +128,9 @@ app.get('/getAllUsers', async (req, res) => {
 
 });
 
+app.post('/getAllUsers', (req, res) => handleRequest(userServiceUrl+'/getAllUsers', req, res));
+
+
 //para ver el api-doc, entrar en: http://localhost:8000/api-doc/
 
 // Read the OpenAPI YAML file synchronously

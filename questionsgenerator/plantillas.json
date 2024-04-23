@@ -83,5 +83,10 @@
         "tittle": "What is the heat of fusion of ??",
         "queryOf": "SELECT ?entity ?entityLabel ?answerLabel WHERE {?entity wdt:P31 wd:Q11344; wdt:P2062 ?answerLabel. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
         "category": "science"
+    },
+    {
+        "tittle": "What is the art work of ??",
+        "queryOf": "SELECT ?entity ?entityLabel ?answerLabel WHERE { VALUES ?entity { wd:Q762 wd:Q5593 wd:Q297 wd:Q5577 wd:Q5582 wd:Q296 wd:Q5598 wd:Q5432 } ?artwork wdt:P170 ?entity; wdt:P18 ?answerLabel. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }}",
+        "category": "art"
     }
 ]

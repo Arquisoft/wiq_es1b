@@ -50,7 +50,7 @@ app.post('/saveGameRecord', async (req, res) => {
 
     var correctAnswers = 0;
     gameQuestions[username].forEach(question => {
-      if(question.selectedAnswer === question.correctAnswer)
+      if(question.isCorrect)
         correctAnswers++;
     });
 
@@ -59,12 +59,6 @@ app.post('/saveGameRecord', async (req, res) => {
       correctAnswers: correctAnswers,
       questions: gameQuestions[username]
     });
-    
-    // Valida el juego antes de guardarlo
-    const validationError = game.validateSync();
-    if (validationError) {
-      return res.status(400).json({ error: validationError.message });
-    }
     
     // Guarda el juego en la base de datos
     const gameResult = await recordRepo.saveGame(game);
