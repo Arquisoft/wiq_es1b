@@ -41,12 +41,12 @@ app.post('/login', (req, res) => handleRequest(authServiceUrl + '/login', req, r
 app.post('/adduser', (req, res) => handleRequest(userServiceUrl + '/adduser', req, res));
 app.get('/generateQuestions', (req, res) => handleRequest(getQuestionUrl + '/generateQuestions', req, res, "get"));
 app.get('/getQuestion', async (req, res) => {
-  try{
+  try {
     const category = req.query.category;
     const response = await axios.get(`${getQuestionUrl}/getQuestion`, { params: { category } });
     res.json(response.data);
-  }catch(error){
-    res.status(500).json({error: 'Internal Server Error'})
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' })
   }
 });
 app.post('/saveQuestion', (req, res) => handleRequest(getHistorialUrl + '/saveQuestion', req, res));
@@ -93,15 +93,29 @@ app.get('/getGameRecord', async (req, res) => {
 });
 
 app.get('/getAllQuestions', async (req, res) => {
-  try {;
+  try {
+    const download = req.query.download;
 
     const response = await axios.get(`${getQuestionUrl}/getAllQuestions`, { params: {} });
 
     const questionsJSON = JSON.stringify(response.data, null, 4);
     fs.writeFileSync('questions.json', questionsJSON);
 
-    const filePath = `${__dirname}/questions.json`;
-    res.download(filePath, 'questions.json');
+
+    if (download) {
+      const filePath = `${__dirname}/questions.json`;
+      res.download(filePath, 'questions.json', (err) => {
+        if(err) {
+          console.error('Error al descargar el archivo:', err);
+          // Manejar el error
+          //res.status(500).send('Error al descargar el archivo');
+        } else {
+          console.log('Archivo descargado exitosamente');
+        }
+      });
+    }
+    else
+      res.json(response.data);
 
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
@@ -109,25 +123,29 @@ app.get('/getAllQuestions', async (req, res) => {
 });
 
 app.get('/getAllUsers', async (req, res) => {
-  try{
-  
-    // 1. Recoge todos los usuarios en formato json.
-    const response = await axios.get(`${authServiceUrl}/getAllUsers`, {params : {}})
+  try {
+    const download = req.query.download;
 
-  
+    const response = await axios.get(`${authServiceUrl}/getAllUsers`, { params: {} })
+
     const usersJSON = JSON.stringify(response.data, null, 4);
     fs.writeFileSync('users.json', usersJSON);
-  
-    const filePath = `${__dirname}/users.json`;
-    res.download(filePath, 'users.json');
 
-  }catch (error) {
+    if (download) {
+      const filePath = `${__dirname}/users.json`;
+      res.download(filePath, 'users.json');
+    }
+    else
+      res.json(response.data);
+
+
+  } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 
 });
 
-app.post('/getAllUsers', (req, res) => handleRequest(userServiceUrl+'/getAllUsers', req, res));
+app.post('/getAllUsers', (req, res) => handleRequest(userServiceUrl + '/getAllUsers', req, res));
 
 
 //para ver el api-doc, entrar en: http://localhost:8000/api-doc/
