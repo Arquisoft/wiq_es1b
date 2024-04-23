@@ -1,8 +1,7 @@
 // historial-service.js
 const express = require('express');
-const mongoose = require('mongoose');
 const Game = require('./historial-model');
-const mongoURI = process.env.MONGODB_URI || 'mongodb://mongodb:27017/records';
+const recordRepository = require('./historial-repo');
 
 const app = express();
 app.disable('x-powered-by');
@@ -11,8 +10,8 @@ const port = 8004;
 // Middleware to parse JSON in request body
 app.use(express.json());
 
-//Connect to MongoDB
-mongoose.connect(mongoURI);
+// Create the repository
+const recordRepo = new recordRepository();
 
 // Temporary storage for game questions
 const gameQuestions = {};
@@ -68,7 +67,7 @@ app.post('/saveGameRecord', async (req, res) => {
     }
     
     // Guarda el juego en la base de datos
-    await game.save();
+    await recordRepo.saveGame(game);
 
     delete gameQuestions[username];
 
@@ -82,7 +81,7 @@ app.get('/getGameRecord', async (req, res) => {
   try {
     const user = req.query.user;
 
-    const games = await Game.find({ user: user._id });
+    const games = await recordRepo.getGameRecord(user);
 
     res.status(200).json({ games: games });
   } catch (error) {
@@ -110,7 +109,7 @@ const server = app.listen(port, () => {
 
 server.on('close', () => {
   // Close the Mongoose connection
-  mongoose.connection.close();
+  recordRepo.close();
 });
 
 
