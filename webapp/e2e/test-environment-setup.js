@@ -15,12 +15,7 @@ async function startServer() {
     mongoserver = await MongoMemoryServer.create();
     const mongoUri = mongoserver.getUri();
     process.env.MONGODB_URI = mongoUri;
-    userservice = await require("../../users/userservice/user-service");
-    authservice = await require("../../users/authservice/auth-service");
-    gatewayservice = await require("../../gatewayservice/gateway-service");
-    questionservice = await require("../../questionsgenerator/questions-service");
-    historialservice = await require("../../record/historial-service");
-
+    
     // Add the user for the tests, if the user already exists, it will not be added
     await mongoose.connect(mongoUri);
     const existingUser = await User.findOne({ username: "userTests" });
@@ -32,6 +27,13 @@ async function startServer() {
       });
       await newUser.save();
     }
+
+    userservice = await require("../../users/userservice/user-service");
+    authservice = await require("../../users/authservice/auth-service");
+    gatewayservice = await require("../../gatewayservice/gateway-service");
+    questionservice = await require("../../questionsgenerator/questions-service");
+    historialservice = await require("../../record/historial-service");
+
 
   }
 
