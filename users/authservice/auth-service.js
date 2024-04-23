@@ -71,7 +71,7 @@ app.get('/getUserByUsername', async (req, res) => {
 app.get('/getAllUsers', async (req, res) => {
   try {
 
-    const users = await User.findAll();
+    const users = await User.find();
 
     res.json(users);
 

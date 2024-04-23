@@ -93,12 +93,11 @@ app.get('/getGameRecord', async (req, res) => {
 });
 
 app.get('/getAllQuestions', async (req, res) => {
-  try {
-    console.log("GET ALL QUESTIONS IN GS");
+  try {;
 
     const response = await axios.get(`${getQuestionUrl}/getAllQuestions`, { params: {} });
 
-    const questionsJSON = JSON.stringify(response.data);
+    const questionsJSON = JSON.stringify(response.data, null, 4);
     fs.writeFileSync('questions.json', questionsJSON);
 
     const filePath = `${__dirname}/questions.json`;
@@ -111,12 +110,12 @@ app.get('/getAllQuestions', async (req, res) => {
 
 app.get('/getAllUsers', async (req, res) => {
   try{
-    console.log("GET ALL USERS IN GS");
   
     // 1. Recoge todos los usuarios en formato json.
     const response = await axios.get(`${authServiceUrl}/getAllUsers`, {params : {}})
+
   
-    const usersJSON = JSON.stringify(response.data);
+    const usersJSON = JSON.stringify(response.data, null, 4);
     fs.writeFileSync('users.json', usersJSON);
   
     const filePath = `${__dirname}/users.json`;

@@ -52,8 +52,7 @@ app.get('/generateQuestions', async (req, res) => {
 
 app.get('/getAllQuestions', async (req, res) => {
   try {
-    console.log("GETALLQUESTIONS QS");
-    const questions = questionRepo.getAll();
+    const questions = await questionRepo.getAll();
     //const questions = await Question.findAll();
 
     res.json(questions);
