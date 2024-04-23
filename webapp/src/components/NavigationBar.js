@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import { AppBar, Tabs, Tab, Tooltip, Menu, MenuItem, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button} from '@mui/material';
+import { AppBar, Tabs, Tab, Tooltip, Menu, MenuItem, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import HelpIcon from '@mui/icons-material/Help';
@@ -134,16 +134,8 @@ const NavigationBar = () => {
 
   const handleCloseDialogDownload = async () => {
     setOpenDialog(false);
-    await axios.get(`${apiEndpoint}/getAllQuestions`, { params: { download: true}});
-    await axios.get(`${apiEndpoint}/getAllUsers`, { params: { download: true}});
-  }
-  
-  const handleCloseDialogSee = async () => {
-    setOpenDialog(false);
-    const responseQuestions = await axios.get(`${apiEndpoint}/getAllQuestions`, { params: { download: false}});
-    const responseUsers = await axios.get(`${apiEndpoint}/getAllUsers`, { params: { download: false}});
-
-    navigate('/database_data', {state: {questions: responseQuestions, users: responseUsers}});
+    await axios.get(`${apiEndpoint}/getAllQuestions`, { params: { download: true } });
+    await axios.get(`${apiEndpoint}/getAllUsers`, { params: { download: true } });
   }
 
   return (
@@ -240,15 +232,12 @@ const NavigationBar = () => {
         <DialogTitle id="alert-dialog-title">{"Database data"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            See or download all questions and users in database.
+            You will download all questions and users in database.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseDialogDownload} sx={buttonStyle} autoFocus>
             Download
-          </Button>
-          <Button onClick={handleCloseDialogSee} sx={buttonStyle}>
-            See
           </Button>
         </DialogActions>
       </Dialog>

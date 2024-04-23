@@ -94,29 +94,21 @@ app.get('/getGameRecord', async (req, res) => {
 
 app.get('/getAllQuestions', async (req, res) => {
   try {
-    const download = req.query.download;
-
     const response = await axios.get(`${getQuestionUrl}/getAllQuestions`, { params: {} });
 
     const questionsJSON = JSON.stringify(response.data, null, 4);
     fs.writeFileSync('questions.json', questionsJSON);
 
-
-    if (download) {
-      const filePath = `${__dirname}/questions.json`;
-      res.download(filePath, 'questions.json', (err) => {
-        if(err) {
-          console.error('Error al descargar el archivo:', err);
-          // Manejar el error
-          //res.status(500).send('Error al descargar el archivo');
-        } else {
-          console.log('Archivo descargado exitosamente');
-        }
-      });
-    }
-    else
-      res.json(response.data);
-
+    const filePath = `${__dirname}/questions.json`;
+    res.download(filePath, 'questions.json', (err) => {
+      if (err) {
+        console.error('Error al descargar el archivo:', err);
+        // Manejar el error
+        //res.status(500).send('Error al descargar el archivo');
+      } else {
+        console.log('Archivo descargado exitosamente');
+      }
+    });
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
   }
@@ -131,13 +123,8 @@ app.get('/getAllUsers', async (req, res) => {
     const usersJSON = JSON.stringify(response.data, null, 4);
     fs.writeFileSync('users.json', usersJSON);
 
-    if (download) {
-      const filePath = `${__dirname}/users.json`;
-      res.download(filePath, 'users.json');
-    }
-    else
-      res.json(response.data);
-
+    const filePath = `${__dirname}/users.json`;
+    res.download(filePath, 'users.json');
 
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
