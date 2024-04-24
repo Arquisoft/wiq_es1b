@@ -1,10 +1,7 @@
 // historial-service.js
 const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const User = require('./auth-model');
 const Game = require('./historial-model');
-const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/users';
+const recordRepository = require('./historial-repo');
 
 const app = express();
 app.disable('x-powered-by');
@@ -13,8 +10,8 @@ const port = 8004;
 // Middleware to parse JSON in request body
 app.use(express.json());
 
-//Connect to MongoDB
-mongoose.connect(mongoURI);
+// Create the repository
+const recordRepo = new recordRepository();
 
 // Temporary storage for game questions
 const gameQuestions = {};
@@ -43,8 +40,9 @@ app.post('/saveQuestion', async (req, res) => {
 
 app.post('/saveGameRecord', async (req, res) => {
   try {
-    const { username } = req.body;
+    const { user } = req.body;
 
+    const username = user.username;
 
     if (!gameQuestions[username]) {
       return res.status(400).json({ error: "No game questions found for this user" });
@@ -56,24 +54,17 @@ app.post('/saveGameRecord', async (req, res) => {
         correctAnswers++;
     });
 
-    console.log(username);
-
-    const user = await User.findOne({ username });
-
     const game = new Game({
       user: user,
       correctAnswers: correctAnswers,
       questions: gameQuestions[username]
     });
     
-    // Valida el juego antes de guardarlo
-    const validationError = game.validateSync();
-    if (validationError) {
-      return res.status(400).json({ error: validationError.message });
-    }
-    
     // Guarda el juego en la base de datos
-    await game.save();
+    const gameResult = await recordRepo.saveGame(game);
+    if(!gameResult) {
+      return res.status(400).json({ error: "Error validating the game" });
+    }
 
     delete gameQuestions[username];
 
@@ -83,15 +74,11 @@ app.post('/saveGameRecord', async (req, res) => {
   }
 });
 
-app.post('/getGameRecord', async (req, res) => {
+app.get('/getGameRecord', async (req, res) => {
   try {
-    const { username } = req.body;
+    const user = req.query.user;
 
-
-    const user = await User.findOne({ username: username });
-
-    const games = await Game.find({ user: user._id });
-
+    const games = await recordRepo.getGameRecord(user);
 
     res.status(200).json({ games: games });
   } catch (error) {
@@ -119,7 +106,7 @@ const server = app.listen(port, () => {
 
 server.on('close', () => {
   // Close the Mongoose connection
-  mongoose.connection.close();
+  recordRepo.close();
 });
 
 

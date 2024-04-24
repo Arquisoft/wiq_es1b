@@ -1,10 +1,8 @@
 // questions-service.js
 const express = require('express');
-const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const QuestionGenerator = require('./questionGenerator.js');
-const Question = require('./question-model')
-const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/questions';
+const QuestionsRepository = require('./questions-repo.js');
 
 const app = express();
 app.disable('x-powered-by');
@@ -14,20 +12,17 @@ const port = 8003;
 app.use(bodyParser.json());
 
 
-// Connect to MongoDB
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
+const questionRepo = new QuestionsRepository();
 
 
 //to respond to the /getQuestion request 
-app.post('/getQuestion', async (req, res) => {
+app.get('/getQuestion', async (req, res) => {
   try {
     //category of the game chosen
-    const category = req.body.category;
+    const category = req.query.category;
 
     //if the category is all, it will choose a random question from all the categories
     const question = await getRandomQuestionByCategory(category);
-
-    console.log("ID: ", question._id);
 
     if (question) {
       var tittle = question.tittle;
@@ -37,7 +32,8 @@ app.post('/getQuestion', async (req, res) => {
       var answerSet = question.answers;
 
       // Delete the question so as not to have repeated questions.
-      await Question.deleteOne({ _id: question._id });
+      questionRepo.delete(question);
+      // await Question.deleteOne({ _id: question._id });
 
       res.json({ question: tittle, correctAnswerLabel: correctAnswer, answerLabelSet: answerSet });
     }
@@ -47,16 +43,27 @@ app.post('/getQuestion', async (req, res) => {
   }
 });
 
-app.post('/generateQuestions', async (req, res) => {
+app.get('/generateQuestions', async (req, res) => {
   const generator = new QuestionGenerator();
   await generator.loadTemplates();
   await generator.generate10Questions();
   res.status(200).json({ msg: "Questions generated successfully" });
 })
 
+app.get('/getAllQuestions', async (req, res) => {
+  try {
+    console.log("GETALLQUESTIONS QS");
+    const questions = questionRepo.getAll();
+    //const questions = await Question.findAll();
+
+    res.json(questions);
+
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error trying to get questions' });
+  }
+});
 
 async function getRandomQuestionByCategory(category) {
-
   try {
     let query = {}; // Inicializar consulta vacía por defecto
 
@@ -68,14 +75,18 @@ async function getRandomQuestionByCategory(category) {
       query = {};
     }
 
+    const randomQuestion = questionRepo.getQuestion(query);
+    /*
     const randomQuestion = await Question.aggregate([
       { $match: query }, // Filtrar por categoría si no es "todo"
       { $sample: { size: 1 } } // Obtener una muestra aleatoria
     ]);
+    */
 
-    if (randomQuestion.length > 0) {
-      return randomQuestion[0]; // Devuelve la pregunta aleatoria encontrada
-    } else {
+    if (randomQuestion) {
+      return randomQuestion; // Devuelve la pregunta aleatoria encontrada
+    }
+    else {
       if (category === 'todo') {
         console.log('No se encontraron preguntas en la base de datos.');
       } else {
@@ -89,14 +100,15 @@ async function getRandomQuestionByCategory(category) {
   }
 }
 
+
 const server = app.listen(port, () => {
   console.log(`Question Generator Service listening at http://localhost:${port}`);
 });
 
 // Listen for the 'close' event on the Express.js server
 server.on('close', () => {
-  // Close the Mongoose connection
-  mongoose.connection.close();
+  // Close the connection
+  questionRepo.close();
 });
 
 module.exports = server

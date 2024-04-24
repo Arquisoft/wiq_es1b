@@ -23,10 +23,8 @@ const UserProfile = () => {
   }, []);
 
   //accedo al usuario logeado
-  const location = useLocation();
-  const { username } = location.state || {};
   const [record, setRecord] = useState([]);
-  const userUsername = localStorage.getItem('userProfileUsername');
+  const username = localStorage.getItem('userProfileUsername');
 
   //data for the chart
   const [loading, setLoading] = useState(true);
