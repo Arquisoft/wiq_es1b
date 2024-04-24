@@ -33,7 +33,7 @@ const UserProfile = () => {
   const [labels, setLabels] = useState([]);
 
   const getRecordForUser = async () => {
-    const response = await axios.post(`${apiEndpoint}/getGameRecord`, { username: userUsername });
+    const response = await axios.post(`${apiEndpoint}/getGameRecord`, { username: username });
     // Extract data from the response
     let { games } = response.data;
     setRecord(games);
