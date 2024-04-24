@@ -44,7 +44,7 @@ const GetQuestion = () => {
       setAnswerFeedback('');
 
       //call to get a question
-      const response = await axios.post(`${apiEndpoint}/getQuestion`, { params: { category: category } });
+      const response = await axios.get(`${apiEndpoint}/getQuestion`, { params: { category: category } });
 
       // Extract data from the response, the question, the correct and the incorrect answers
       const { question: q, correctAnswerLabel: correctAnswer, answerLabelSet: answers } = response.data;

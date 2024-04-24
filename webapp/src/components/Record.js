@@ -34,7 +34,7 @@ const Record = () => {
   const [labels, setLabels] = useState([]);
 
   const getRecordForLoggedUser = async () => {
-    const response = await axios.post(`${apiEndpoint}/getGameRecord`, { username });
+    const response = await axios.get(`${apiEndpoint}/getGameRecord`, { params: { username } });
     // Extract data from the response
     let { games } = response.data;
     setRecord(games);
