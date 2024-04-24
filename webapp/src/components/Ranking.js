@@ -1,7 +1,7 @@
 // src/components/Ranking.js
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from "react-router-dom";
-import { Container } from '@mui/material';
+import { Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button } from '@mui/material';
 import axios from 'axios';
 import './stylesheets/ranking.css';
 
@@ -11,6 +11,12 @@ const Ranking = () => {
     
     const navigate = useNavigate();
    
+    const [open, setOpen] = useState(false);
+
+    const handleClose = () => {
+      setOpen(false);
+    };
+
     useEffect(() => {
       const user = localStorage.getItem('username');
       if (user === null) {
@@ -79,8 +85,12 @@ const Ranking = () => {
     }, []);
     
     const showUserProfile = (userProfileName) =>{
-      localStorage.setItem('userProfileUsername', userProfileName)
-      navigate("/userProfile", {state: {username, createdAt, userProfileName}});
+      if(userProfileName === username){
+        setOpen(true);
+      } else {
+        localStorage.setItem('userProfileUsername', userProfileName)
+        navigate("/userProfile", {state: {username, createdAt, userProfileName}});
+      }
     }
 
     return (
@@ -111,7 +121,23 @@ const Ranking = () => {
                 </div>
               ))
             )}
-        </div>
+            <Dialog
+              open={open}
+              onClose={handleClose}
+            >
+              <DialogTitle>{"Information"}</DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  You can see your profile in the profile section in the navigation bar above.
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose}>
+                  Close
+                </Button>
+              </DialogActions>
+            </Dialog>
+          </div>
         </Container>
     );
   };

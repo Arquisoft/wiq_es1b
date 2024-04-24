@@ -42,7 +42,7 @@ const AddUser = () => {
   return (
     <Container component="main">
       <div className="welcome-container">
-          <Typography variant="h4" className="welcome-text" color='#209cee'>
+          <Typography variant="h4" className="welcome-text">
             Welcome to WIQ!
           </Typography>
       </div>
