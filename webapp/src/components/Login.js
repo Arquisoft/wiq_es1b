@@ -38,7 +38,7 @@ const Login = (onLoginSuccess) => {
       setSelectedTimer(15);
       setSelectedNumQuestions(10);
 
-      await axios.get(`${apiEndpoint}/generateQuestions`, {});
+      await axios.post(`${apiEndpoint}/generateQuestions`, {});
 
     } catch (error) {
       setError(error.response.data.error);
