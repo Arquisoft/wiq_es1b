@@ -1,3 +1,4 @@
+// src/components/AboutUs.test.js
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { render, screen, waitFor } from '@testing-library/react';

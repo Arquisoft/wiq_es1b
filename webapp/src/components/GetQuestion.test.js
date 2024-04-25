@@ -1,3 +1,4 @@
+// src/components/GetQuestion.test.js
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { render, fireEvent, screen, waitFor, act } from '@testing-library/react';

@@ -1,3 +1,4 @@
+// src/components/SettingsPage.test.js
 import React from 'react';
 import { BrowserRouter as Router, MemoryRouter } from 'react-router-dom';
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
