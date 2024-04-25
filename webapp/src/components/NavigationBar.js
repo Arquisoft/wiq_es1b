@@ -138,6 +138,10 @@ const NavigationBar = () => {
     await axios.get(`${apiEndpoint}/getAllUsers`, { params: { download: true } });
   }
 
+  const cancelDialog = () => {
+    setOpenDialog(false);
+  }
+
   return (
     <div>
       <AppBar position="absolute">
@@ -238,6 +242,9 @@ const NavigationBar = () => {
         <DialogActions>
           <Button onClick={handleCloseDialogDownload} sx={buttonStyle} autoFocus>
             Download
+          </Button>
+          <Button onClick={cancelDialog} sx={buttonStyle}>
+            Cancel
           </Button>
         </DialogActions>
       </Dialog>
