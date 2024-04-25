@@ -8,7 +8,7 @@ import Settings from './SettingsPage';
 
 const mockAxios = new MockAdapter(axios);
 
-describe('Record component', () => {
+describe('SettingsPage component', () => {
   
   beforeEach(() => {
     mockAxios.reset();

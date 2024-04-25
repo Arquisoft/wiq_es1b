@@ -28,7 +28,7 @@ const ul3text = "The Help section is where you can learn how to navigate through
 const ul4title = "About us";
 const ul4text = "The About us section is where you can discover information about the development team behind the WIQ game.";
 
-describe('AboutUs component', () => {
+describe('Help component', () => {
   beforeEach(() => {
     mockAxios.reset();
   });
