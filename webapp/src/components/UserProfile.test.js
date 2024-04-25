@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { render, screen, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import Record from './Record';
+import UserProfile from './UserProfile';
 import { createMemoryHistory } from 'history';
 
 const mockAxios = new MockAdapter(axios);
@@ -15,34 +15,48 @@ describe('UserProfile component', () => {
   });
 
   beforeAll(() => {
-    Object.defineProperty(window, 'matchMedia', {
-      writable: true,
-      value: jest.fn().mockImplementation(query => ({
-        matches: false,
-        media: query,
-        onchange: null,
-        addListener: jest.fn(), // deprecated
-        removeListener: jest.fn(), // deprecated
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn(),
-        dispatchEvent: jest.fn(),
-      })),
+    localStorage.setItem('userProfileUsername', 'expectedUsername');
+    mockAxios.onGet(`http://localhost:8000/getGameRecord`).reply(function(config) {
+      if (config.params.username === 'expectedUsername') {
+        return [200, { /* respuesta para 'expectedUsername' */ }];
+      } else {
+        return [404, { message: 'User not found' }];
+      }
     });
+    mockAxios.onGet(`http://localhost:8000/getUserByUsername`).reply(200, {user: {
+      createdAt: "2024-04-22T20:11:53.053Z",
+      password: "$2b$10$m6RxpAY0yd23plXLXWn0cOUNTObjrpbsoPlLvFBwJk3VTdbwzxg92",
+      username: "mery2",
+      __v: 0,
+      _id: "6626c489de07476e84fe74f2"
+    }});
+    /**mockAxios.onGet(`http://localhost:8000/getUserByUsername`).reply(function(config) {
+      // config.params contiene los parámetros de la petición
+      if (config.params.username === 'expectedUsername') {
+        return [200, {
+          user: {
+            createdAt: "2024-04-22T20:11:53.053Z",
+            password: "$2b$10$m6RxpAY0yd23plXLXWn0cOUNTObjrpbsoPlLvFBwJk3VTdbwzxg92",
+            username: "mery2",
+            __v: 0,
+            _id: "6626c489de07476e84fe74f2"
+          }
+        }];
+      } else {
+        return [404, { message: 'User not found' }];
+      }
+    });**/
   });
 
   it('should render succesfully', async () => {
-
-    mockAxios.onPost('http://localhost:8000/getGameRecord').reply(200, {games: []});
+    
     
     render(
     <Router>
-      <Record />
+      <UserProfile />
     </Router>);
 
-    await waitFor(() => screen.getByText(/Here you can see your record! All about your past games and all!/i));
-
-    const linkElement = screen.getByText(/Here you can see your record! All about your past games and all!/i);
-    expect(linkElement).toBeInTheDocument();
+    screen.debug();
 
   });
 /**
