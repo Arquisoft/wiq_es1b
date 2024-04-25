@@ -65,6 +65,16 @@ const Record = () => {
 
   return (
     <div style={{ padding: '4em', borderRadius: '15px', boxShadow: '0 0 50px #00a6bc', backgroundColor: 'rgba(255, 255, 255, 0.65)', zIndex: 1, marginTop: '2rem' }}>
+      <Typography component="h1" variant="h5" 
+          style={{ 
+            textAlign: 'center', 
+            fontWeight: 'bold', 
+            color: '#1976d2',
+            textShadow: '#c8aee8 0 3px 1px'
+          }}
+      >
+          Record
+      </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
           <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
