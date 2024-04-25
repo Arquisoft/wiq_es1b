@@ -25,7 +25,7 @@ class QuestionsRepository {
             return null;
 
         } catch (error) {
-            console.error("Error in question repository");
+            console.error("Error in question repository: ", error);
         }
     }
 
@@ -42,7 +42,7 @@ class QuestionsRepository {
             }
 
         } catch (error) {
-            console.log("Error in question repository");
+            console.error("Error in question repository: ", error);
         }
     }
 
@@ -54,17 +54,17 @@ class QuestionsRepository {
                 await Question.deleteOne({ _id: id });
             }
         } catch (error) {
-            console.log("Error in question repository");
+            console.error("Error in question repository: ", error);
         }
     }
 
     async getAll() {
         try {
-            const questions = await Question.findAll();
+            const questions = await Question.find();
 
             return questions;
         } catch (error) {
-            console.error("Error in question repository");
+            console.error("Error in question repository: ", error);
         }
     }
 
@@ -72,7 +72,7 @@ class QuestionsRepository {
         try {
             await Template.deleteMany({});
         } catch (error) {
-            console.log("Error in question repository");
+            console.error("Error in question repository: ", error);
         }
     }
 
@@ -80,7 +80,7 @@ class QuestionsRepository {
         try {
             await Template.insertMany(questionsTemplate);
         } catch (error) {
-            console.log("Error in question repository");
+            console.error("Error in question repository: ", error);
         }
     }
 
@@ -94,7 +94,7 @@ class QuestionsRepository {
             }
             return null;
         } catch (error) {
-            console.log("Error in question repository");
+            console.error("Error in question repository: ", error);
         }
     }
 
@@ -102,7 +102,7 @@ class QuestionsRepository {
         try {
             mongoose.connection.close();
         } catch (error) {
-            console.log("Error in question repository");
+            cconsole.error("Error in question repository: ", error);
         }
     }
 

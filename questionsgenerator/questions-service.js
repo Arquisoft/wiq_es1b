@@ -52,12 +52,11 @@ app.get('/generateQuestions', async (req, res) => {
 
 app.get('/getAllQuestions', async (req, res) => {
   try {
-    console.log("GETALLQUESTIONS QS");
-    const questions = questionRepo.getAll();
+    console.log("getall in qs");
+    const questions = await questionRepo.getAll();
     //const questions = await Question.findAll();
 
     res.json(questions);
-
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error trying to get questions' });
   }

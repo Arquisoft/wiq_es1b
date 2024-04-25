@@ -1,7 +1,7 @@
 // src/components/Help.js
 import React, { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import { Container, Typography, List, ListItem, ListItemText  } from '@mui/material';
+import { Container, Typography, List, ListItem, ListItemText } from '@mui/material';
 
 const Help = () => {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ const Help = () => {
     // eslint-disable-next-line
   }, []);
 
-  return(
+  return (
     <Container component="main" maxWidth="md" sx={{ margin: 8 }}>
       <div style={{ padding: '4em', borderRadius: '15px', boxShadow: '0 0 50px #00a6bc', backgroundColor: 'rgba(255, 255, 255, 0.65)', zIndex: 1, marginTop: '2rem' }}>
         <Typography component="h1" variant="h1" marginBottom={2} data-testid='title'>
