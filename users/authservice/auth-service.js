@@ -55,13 +55,10 @@ app.get('/getUserByUsername', async (req, res) => {
   try {
     // Obtener el nombre de usuario desde el cuerpo de la solicitud
     const username = req.query.username;
-
-    // Aquí iría la lógica para buscar el usuario en tu base de datos
-    // Por ejemplo, si estás utilizando MongoDB, sería algo así
+    //buscarlo en la base de datos
     const user = await User.findOne({ username: username });
-
     // Devolver el usuario encontrado en la respuesta
-    res.json({ user });
+    res.status(200).json({ user });
   } catch (error) {
     // Manejar cualquier error que pueda ocurrir durante el proceso
     res.status(500).json({ error: 'Internal Server Error' });

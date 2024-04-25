@@ -1,3 +1,4 @@
+// src/components/Record.test.js
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { render, screen, waitFor } from '@testing-library/react';
@@ -32,7 +33,7 @@ describe('Record component', () => {
 
   it('should render succesfully', async () => {
 
-    mockAxios.onPost('http://localhost:8000/getGameRecord').reply(200, {games: []});
+    mockAxios.onGet('http://localhost:8000/getGameRecord').reply(200, {games: []});
     
     render(
     <Router>

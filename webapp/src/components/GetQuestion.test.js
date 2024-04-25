@@ -1,3 +1,4 @@
+// src/components/GetQuestion.test.js
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { render, fireEvent, screen, waitFor, act } from '@testing-library/react';
@@ -12,7 +13,7 @@ describe('GetQuestion component', () => {
     localStorage.setItem('username', 'testUser');
 
     mockAxios.reset();
-    mockAxios.onPost('http://localhost:8000/getQuestion').reply(200, {
+    mockAxios.onGet('http://localhost:8000/getQuestion').reply(200, {
       question: 'Test question',
       correctAnswerLabel: 'Test correct answer',
       answerLabelSet: ['Test answer 1', 'Test answer 2', 'Test answer 3', 'Test correct answer']
@@ -44,7 +45,6 @@ describe('GetQuestion component', () => {
     
     const buttons = await screen.findAllByRole('button');
     expect(buttons.length).toBe(5);
-
     expect(screen.getByText('Test answer 1')).toBeInTheDocument();
     expect(screen.getByText('Test answer 2')).toBeInTheDocument();
     expect(screen.getByText('Test answer 3')).toBeInTheDocument();

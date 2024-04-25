@@ -38,7 +38,7 @@ const Login = (onLoginSuccess) => {
       setSelectedTimer(15);
       setSelectedNumQuestions(10);
 
-      await axios.get(`${apiEndpoint}/generateQuestions`, {});
+      await axios.post(`${apiEndpoint}/generateQuestions`, {});
 
     } catch (error) {
       setError(error.response.data.error);
@@ -61,7 +61,8 @@ const Login = (onLoginSuccess) => {
   };
 
   return (
-    <Container component="main" >
+    <Container component="main" 
+        style={{ width: '27vw' }}>
         <div className="welcome-container">
           <Typography variant="h4" className="welcome-text">
             Welcome to WIQ!

@@ -1,3 +1,4 @@
+// src/components/NavigationBar.test.js
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { render, fireEvent } from '@testing-library/react';
@@ -58,6 +59,20 @@ describe('NavigationBar component', () => {
 
     const recordButton = getByTestId('record-tab');
     fireEvent.click(recordButton);
+
+    expect(history.location.pathname).toBe('/');
+  });
+
+  it('should navigate to Ranking page when ranking button is clicked', () => {
+    const history = createMemoryHistory();
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <NavigationBar />
+      </MemoryRouter>
+    );
+
+    const rankingButton = getByTestId('ranking-tab');
+    fireEvent.click(rankingButton);
 
     expect(history.location.pathname).toBe('/');
   });

@@ -1,3 +1,4 @@
+// src/components/Home.test.js
 import React from 'react';
 import { BrowserRouter as Router, MemoryRouter } from 'react-router-dom';
 import { render, fireEvent, screen } from '@testing-library/react';

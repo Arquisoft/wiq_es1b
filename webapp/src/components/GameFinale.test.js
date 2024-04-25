@@ -1,5 +1,6 @@
+// src/components/GameFinale.test.js
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, MemoryRouter } from 'react-router-dom';
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
@@ -14,14 +15,18 @@ const paragraph3 = "Feel free to review them in the record or head back home to 
 describe('GameFinale component', () => {
   beforeEach(() => {
     mockAxios.reset();
+    localStorage.setItem('username', 'usernamePrueba');
   });
 
   it('should render text succesfully', async () => {    
     mockAxios.onPost('http://localhost:8000/saveGameRecord').reply(200);
+    const date = new Date();
+    
     render(
-    <Router>
+    <MemoryRouter initialEntries={[{ pathname: '/gameFinale', state: { username: "usernamePrueba", createdAt: date } }]}>
       <GameFinale numberOfQuestions={10} />
-    </Router>);
+    </MemoryRouter>
+      );
 
     await waitFor(() => screen.getByText(paragraph1));
 

@@ -39,6 +39,15 @@ const handleRequest = async (url, req, res, method = 'post') => {
 
 app.post('/login', (req, res) => handleRequest(authServiceUrl + '/login', req, res));
 app.post('/adduser', (req, res) => handleRequest(userServiceUrl + '/adduser', req, res));
+app.get('/getUserByUsername', async (req, res) => {
+  try{
+    const username = req.query.username;
+    const response = await axios.get(`${authServiceUrl}/getUserByUsername`, { params: { username } });
+    res.json(response.data);
+  }catch(error){
+    res.status(500).json({error: 'Internal Server Error'})
+  }
+});
 app.get('/generateQuestions', (req, res) => handleRequest(getQuestionUrl + '/generateQuestions', req, res, "get"));
 app.get('/getQuestion', async (req, res) => {
   try {
