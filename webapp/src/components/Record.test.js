@@ -32,7 +32,7 @@ describe('Record component', () => {
 
   it('should render succesfully', async () => {
 
-    mockAxios.onPost('http://localhost:8000/getGameRecord').reply(200, {games: []});
+    mockAxios.onGet('http://localhost:8000/getGameRecord').reply(200, {games: []});
     
     render(
     <Router>
