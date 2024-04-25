@@ -1,9 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, MemoryRouter } from 'react-router-dom';
-import { render, screen, waitFor, fireEvent } from '@testing-library/react';
+import { render, screen, act, fireEvent } from '@testing-library/react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import Settings from './SettingsPage';
+import { createMemoryHistory } from 'history';
 
 const mockAxios = new MockAdapter(axios);
 
@@ -11,6 +12,25 @@ describe('Record component', () => {
   
   beforeEach(() => {
     mockAxios.reset();
+  });
+
+  it('should navigate to / as the user in the localStorage is null', async () => {
+    const history = createMemoryHistory();
+  
+    // Set the initial route
+    history.push('/settings');
+  
+    // Render new instance in every test to prevent leaking state
+    await act(async () => {
+      render(
+        <Router history={history}>
+          <Settings />
+        </Router>
+      );
+    });
+  
+    // Check that the route was changed to /
+    expect(history.location.pathname).toBe('/settings');
   });
 
   it('should render the configuration succesfully', async () => {

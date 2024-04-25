@@ -98,4 +98,72 @@ describe('HumanCalculator component', () => {
     expect(inputField).toHaveStyle('background-color: red');
   });
 
+  it('Should render the component and enter an invalid input', async () => {   
+    const { getByTestId, getByLabelText, getByText } = await setupTest();
+
+    await waitFor(() => screen.getByText('Human calculator'));
+  
+    const questionElement = getByTestId('question');
+    const operation = questionElement.textContent;
+    const result = String(eval(operation));
+
+    const inputField = screen.getByLabelText('Result:');
+    const button = screen.getByText('Check answer');
+
+    fireEvent.change(inputField, { target: { value: "i" } });
+    fireEvent.click(button);
+
+    expect(getByLabelText('Invalid Input')).toBeInTheDocument();
+    expect(getByText('Please enter a valid number')).toBeInTheDocument();
+
+  });
+
+  it('Should render the component and answer one questions right and other wrong', async () => {   
+    const { getByTestId, getByLabelText, getByText } = render(
+      <MemoryRouter initialEntries={[{
+        pathname: '/question',
+        state: {
+          selectedNumQuestions: 10,
+          selectedTimer: 15, 
+          username: 'testUser', 
+          category: 'todo'
+        }
+      }]}>
+        <HumanCalculator />
+      </MemoryRouter>
+    );
+
+    act(() => {
+      jest.useFakeTimers();
+
+      waitFor(() => screen.getByText('Human calculator'));
+    
+      let questionElement = getByTestId('question');
+      let operation = questionElement.textContent;
+      let result = String(eval(operation));
+
+      let inputField = screen.getByLabelText('Result:');
+      let button = screen.getByText('Check answer');
+
+      fireEvent.change(inputField, { target: { value: result } });
+      fireEvent.click(button);
+
+      expect(inputField).toHaveStyle('background-color: green');
+
+
+      jest.advanceTimersByTime(2000);
+    
+      questionElement = getByTestId('question');
+      operation = questionElement.textContent;
+      result = String(eval(operation)) +55 ;
+    
+      inputField = screen.getByLabelText('Result:');
+      fireEvent.change(inputField, { target: { value: result } });
+      fireEvent.click(button);
+      
+      expect(inputField).toHaveStyle('background-color: green');
+    });
+
+  });
+
 });
