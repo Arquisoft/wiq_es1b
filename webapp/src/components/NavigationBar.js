@@ -134,8 +134,45 @@ const NavigationBar = () => {
 
   const handleCloseDialogDownload = async () => {
     setOpenDialog(false);
-    await axios.get(`${apiEndpoint}/getAllQuestions`, { params: { download: true } });
-    await axios.get(`${apiEndpoint}/getAllUsers`, { params: { download: true } });
+    axios({
+      url: `${apiEndpoint}/getAllQuestions`,
+      method: 'GET',
+      responseType: 'blob',
+    }).then((data) => {
+      console.log(data);
+      const href = URL.createObjectURL(data);
+
+      const link = document.createElement('a');
+      link.href = href;
+      link.setAttribute('download', 'questions.json');
+      document.body.appendChild(link);
+      link.click();
+
+      document.body.removeChild(link);
+      URL.revokeObjectURL(href);
+    }).catch((error) => {
+      console.error('Error en la solicitud:', error); // Aquí se imprimirá el error en la consola
+      // Aquí puedes manejar el error de la solicitud de otra manera si lo necesitas
+    });
+
+    await axios({
+      url: `${apiEndpoint}/getAllUsers`,
+      method: 'GET',
+      responseType: 'blob',
+    }).then((response) => {
+      const href = URL.createObjectURL(response.data);
+
+      const link = document.createElement('a');
+      link.href = href;
+      link.setAttribute('download', 'users.json');
+      document.body.appendChild(link);
+      link.click();
+
+      document.body.removeChild(link);
+      URL.revokeObjectURL(href);
+    });
+
+    showHome();
   }
 
   const cancelDialog = () => {

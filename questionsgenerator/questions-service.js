@@ -56,7 +56,6 @@ app.get('/getAllQuestions', async (req, res) => {
     //const questions = await Question.findAll();
 
     res.json(questions);
-
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error trying to get questions' });
   }
