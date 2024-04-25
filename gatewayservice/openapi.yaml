@@ -142,21 +142,107 @@ paths:
                     type: string
                     description: Error information.
                     example: Internal Server Error
+  /getUserByUsername:
+    get:
+      summary: Retrieve a user by username from the database.
+      operationId: getUserByUsername
+      parameters:
+        - in: query
+          name: username
+          schema:
+            type: string
+          required: true
+          description: Username of the user to retrieve.
+      responses:
+        '200':
+          description: User retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    type: object
+                    properties:
+                      username:
+                        type: string
+                        description: User ID
+                      password:
+                        type: string
+                        description: Hashed password
+                      _id:
+                        type: string
+                        description: Identification
+                      createdAt:
+                        type: string
+                        description: Creation date.
+                      ___v:
+                        type: integer
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error information.
+                    example: Internal Server Error
+  /getAllUsers:
+    get:
+      summary: Retrieve all users from the database.
+      operationId: getAllUsers
+      responses:
+        '200':
+          description: Users retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  users:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        username:
+                          type: string
+                          description: User ID
+                        password:
+                          type: string
+                          description: Hashed password
+                        _id:
+                          type: string
+                          description: Identification
+                        createdAt:
+                          type: string
+                          description: Creation date.
+                        ___v:
+                          type: integer
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error information.
+                    example: Internal Server Error trying to get users
   /getQuestion:
-    post:
+    get:
       summary: Gets a question for the game.
       operationId: getQuestion
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                category:
-                  type: string
-                  description: category of the game.
-                  example: sports
+      parameters:
+        - in: query
+          name: category
+          schema:
+            type: string
+          required: true
+          description: category of the game.
+          example: sports
       responses:
         '200':
           description: Gets a question for the game successfully. Returns que title of the question, the correct answer and an array with the correct and incorrect answer randomly ordered.
@@ -210,6 +296,42 @@ paths:
                     type: string
                     description: Success message.
                     example: Questions generated successfully
+  /getAllQuestions:
+    get:
+      summary: Retrieve all questions from the database.
+      operationId: getAllQuestions
+      responses:
+        '200':
+          description: Questions retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    question:
+                      type: string
+                      description: The question text.
+                    correctAnswerLabel:
+                      type: string
+                      description: The correct answer.
+                    answerLabelSet:
+                      type: array
+                      items:
+                        type: string
+                      description: An array with all the answers, 1 correct and 3 incorrect.
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error information.
+                    example: Internal Server Error trying to get questions
   /saveQuestion:
     post:
       summary: Saves the data of a question the user answered locally.
@@ -313,20 +435,17 @@ paths:
                     description: Error information.
                     example: Internal Server Error
   /getGameRecord:
-    post:
+    get:
       summary: gets the data of all games and questions of the user logged in.
       operationId: getGameRecord
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                username:
-                  type: string
-                  description: username of the user logged in
-                  example: user1234
+      parameters:
+        - in: query
+          name: username
+          schema:
+            type: string
+          required: true
+          description: username of the user logged in
+          example: user1234
       responses:
         '200':
           description: gets the data from the database for the user logged in. Returns an array with all the games and questions.

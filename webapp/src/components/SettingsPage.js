@@ -56,6 +56,9 @@ const SettingsPage = () => {
         <Typography component="h1" variant="h4" sx={{ paddingBottom: '2em', textAlign: 'center' }} fontWeight='bold'>
           Configuration
         </Typography>
+        <Typography component="h5" variant="h5" sx={{ paddingBottom: '2em' }} fontWeight='bold'>
+          The configuration is saved automatically.
+        </Typography>
         <div style={{ 
           display: 'grid', 
           gridTemplateColumns: 'repeat(2, 1fr)', 
