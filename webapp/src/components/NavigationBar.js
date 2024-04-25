@@ -134,13 +134,13 @@ const NavigationBar = () => {
 
   const handleCloseDialogDownload = async () => {
     setOpenDialog(false);
-    axios({
+
+    await axios({
       url: `${apiEndpoint}/getAllQuestions`,
       method: 'GET',
       responseType: 'blob',
-    }).then((data) => {
-      console.log(data);
-      const href = URL.createObjectURL(data);
+    }).then((response) => {
+      const href = URL.createObjectURL(response.data);
 
       const link = document.createElement('a');
       link.href = href;
@@ -154,6 +154,7 @@ const NavigationBar = () => {
       console.error('Error en la solicitud:', error); // Aquí se imprimirá el error en la consola
       // Aquí puedes manejar el error de la solicitud de otra manera si lo necesitas
     });
+
 
     await axios({
       url: `${apiEndpoint}/getAllUsers`,
@@ -171,6 +172,7 @@ const NavigationBar = () => {
       document.body.removeChild(link);
       URL.revokeObjectURL(href);
     });
+
 
     showHome();
   }

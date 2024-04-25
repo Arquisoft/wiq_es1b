@@ -93,17 +93,30 @@ app.get('/getGameRecord', async (req, res) => {
 });
 
 app.get('/getAllQuestions', async (req, res) => {
-  handleRequest(getQuestionUrl + '/getAllQuestions', req, res, "get");
+  try {
+
+    const response = await axios.get(`${getQuestionUrl}/getAllQuestions`, { params: {} });
+
+    const questionsJSON = JSON.stringify(response.data, null, 4);
+    fs.writeFileSync('questions.json', questionsJSON);
+
+    const filePath = `${__dirname}/questions.json`;
+    res.download(filePath, 'questions.json');
+
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error in gateway service: ' + error });
+  }
 });
 
 app.get('/getAllUsers', async (req, res) => {
   try {
     const response = await axios.get(`${authServiceUrl}/getAllUsers`, { params: {} })
 
-    if (response)
-      res.json(response);
-    else
-      res.status(404).json({ error: 'Error getting all questions' });
+    const usersJSON = JSON.stringify(response.data, null, 4);
+    fs.writeFileSync('users.json', usersJSON);
+
+    const filePath = `${__dirname}/users.json`;
+    res.download(filePath, 'users.json');
 
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
