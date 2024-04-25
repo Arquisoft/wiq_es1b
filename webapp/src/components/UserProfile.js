@@ -27,7 +27,7 @@ const UserProfile = () => {
 
   const getHistorialForUser = async () => {
     const response = await axios.get(`${apiEndpoint}/getGameRecord`, { params: { username} });
-    saveInfoUser();
+    await saveInfoUser();
     // Extract data from the response
     let { games } = response.data;
     setRecord(games);
@@ -70,7 +70,9 @@ const UserProfile = () => {
     if (user === null) {
       navigate('/');
     } else {
-      getHistorialForUser();
+      (async () => {
+        await getHistorialForUser();
+      })();
     }
     // eslint-disable-next-line
   }, []);

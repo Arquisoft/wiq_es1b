@@ -7,6 +7,7 @@ import Record from './Record';
 import { createMemoryHistory } from 'history';
 
 const mockAxios = new MockAdapter(axios);
+jest.mock('axios');
 
 describe('Record component', () => {
   
@@ -28,78 +29,72 @@ describe('Record component', () => {
         dispatchEvent: jest.fn(),
       })),
     });
+    localStorage.setItem('username', 'user');
   });
 
   it('should render succesfully', async () => {
-
-    mockAxios.onGet('http://localhost:8000/getGameRecord').reply(200, {games: []});
+    const games = [
+      {
+        user: '60d6c47e0b5f5c15d44c9a2c',
+        correctAnswers: 2,
+        questions: [
+          {
+            question: 'What is the capital of Spain?',
+            answersArray: ['Madrid', 'Barcelona', 'Valencia', 'Seville'],
+            correctAnswer: 'Madrid',
+            selectedAnswer: 'Madrid',
+            isCorrect: true
+          },
+          {
+            question: 'What is the capital of France?',
+            answersArray: ['Paris', 'Lyon', 'Marseille', 'Nice'],
+            correctAnswer: 'Paris',
+            selectedAnswer: 'Lyon',
+            isCorrect: false
+          },
+          {
+            question: 'What is the capital of Italia?',
+            answersArray: ['Rome', 'Lyon', 'Marseille', 'Nice'],
+            correctAnswer: 'Rome',
+            selectedAnswer: 'Rome',
+            isCorrect: false
+          }
+        ]
+      },
+      {
+        user: '60d6c47e0b5f5c15d44c9a2d',
+        correctAnswers: 1,
+        questions: [
+          {
+            question: 'What is the capital of Italy?',
+            answersArray: ['Rome', 'Milan', 'Naples', 'Turin'],
+            correctAnswer: 'Rome',
+            selectedAnswer: 'Rome',
+            isCorrect: true
+          },
+          {
+            question: 'What is the capital of Germany?',
+            answersArray: ['Berlin', 'Hamburg', 'Munich', 'Cologne'],
+            correctAnswer: 'Berlin',
+            selectedAnswer: 'Munich',
+            isCorrect: false
+          }
+        ]
+      }
+    ]
+    axios.get.mockResolvedValueOnce({ data: { games } });
     
     render(
     <Router>
       <Record />
     </Router>);
 
-    await waitFor(() => screen.getByText(/Here you can see your record! All about your past games and all!/i));
+    expect(screen.getByText('Record')).toBeInTheDocument();
 
-    const linkElement = screen.getByText(/Here you can see your record! All about your past games and all!/i);
-    expect(linkElement).toBeInTheDocument();
+    await waitFor(() => screen.getByText('Here you can see your record! All about your past games and all!'));
+
+  
 
   });
-/**
-  it('should render the games succesfully', async () => {
-
-    mockAxios.onPost('http://localhost:8000/getGameRecord').reply(200, {
-      games: [
-        {
-          user: '60d6c47e0b5f5c15d44c9a2c',
-          questions: [
-            {
-              question: 'What is the capital of Spain?',
-              answersArray: ['Madrid', 'Barcelona', 'Valencia', 'Seville'],
-              correctAnswer: 'Madrid',
-              selectedAnswer: 'Madrid',
-              isCorrect: true
-            },
-            {
-              question: 'What is the capital of France?',
-              answersArray: ['Paris', 'Lyon', 'Marseille', 'Nice'],
-              correctAnswer: 'Paris',
-              selectedAnswer: 'Lyon',
-              isCorrect: false
-            }
-          ]
-        },
-        {
-          user: '60d6c47e0b5f5c15d44c9a2d',
-          questions: [
-            {
-              question: 'What is the capital of Italy?',
-              answersArray: ['Rome', 'Milan', 'Naples', 'Turin'],
-              correctAnswer: 'Rome',
-              selectedAnswer: 'Rome',
-              isCorrect: true
-            },
-            {
-              question: 'What is the capital of Germany?',
-              answersArray: ['Berlin', 'Hamburg', 'Munich', 'Cologne'],
-              correctAnswer: 'Berlin',
-              selectedAnswer: 'Munich',
-              isCorrect: false
-            }
-          ]
-        }
-      ],
-    });
-
-    const history = createMemoryHistory();
-    render(
-      <Router history={history}>
-        <Record />
-      </Router>
-    );
-  
-      await waitFor(() => screen.getByText(/Here you can see your record! All about your past games and all!/i));
-      
-  });**/
 
 });
