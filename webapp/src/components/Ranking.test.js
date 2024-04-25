@@ -1,11 +1,10 @@
+// src/components/Ranking.test.js
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { render, screen, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import Record from './Record';
 import Ranking from './Ranking';
-import { createMemoryHistory } from 'history';
 
 const mockAxios = new MockAdapter(axios);
 
@@ -32,8 +31,17 @@ describe('Ranking component', () => {
   });
 
   it('should render succesfully', async () => {
+    const localStorageMock = {
+        getItem: jest.fn(),
+    };
 
-    mockAxios.onGet('http://localhost:8000/getAllUsers').reply({users: []});
+    Object.defineProperty(window, 'localStorage', {
+        value: localStorageMock,
+    });
+
+    mockAxios.onGet('http://localhost:8000/getGameRecord').reply(200, {games: []});
+
+    mockAxios.onPost('http://localhost:8000/getAllUsers').reply(200, {users: []});
     
     render(
     <Router>
