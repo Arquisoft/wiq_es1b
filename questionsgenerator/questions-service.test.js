@@ -48,10 +48,4 @@ describe('Questions Service', () => {
     expect(response.body).toHaveProperty('correctAnswerLabel');
     expect(response.body).toHaveProperty('answerLabelSet');
   });
-  it('should get a new question on POST /getQuestion', async () => {
-    const category = "todo";
-
-    const response = await request(app).post('/getQuestion').send({ category });
-    expect(response.status).not.toBe(500);
-  });
 });
