@@ -260,7 +260,7 @@ const NavigationBar = () => {
           About us
         </MenuItem>
         <MenuItem aria-label="Get DB data"
-          data-testid="about-us-item"
+          data-testid="get-db-data-item"
           sx={menuItemStyle}
           onClick={showDBData} >
           Get DB data
@@ -273,7 +273,7 @@ const NavigationBar = () => {
         </MenuItem>
       </Menu>
       <Dialog open={openDialog} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
-        <DialogTitle id="alert-dialog-title">{"Database data"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">Database data</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             You will download all questions and users in database.
