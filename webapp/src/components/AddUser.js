@@ -41,7 +41,7 @@ const AddUser = () => {
 
   return (
     <Container component="main"
-        style={{ width: '27vw' }}>
+        style={{ width: '26em' }}>
       <div className="welcome-container">
           <Typography variant="h4" className="welcome-text">
             Welcome to WIQ!

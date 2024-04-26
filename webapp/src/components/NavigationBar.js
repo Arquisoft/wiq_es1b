@@ -210,6 +210,7 @@ const NavigationBar = () => {
             onClick={showSettings} />
           <Tab aria-label="Record"
             data-testid="record-tab"
+            id='recordID'
             icon={<Tooltip title="Personal record">
               <AccountCircle sx={tabStyle} />
             </Tooltip>}

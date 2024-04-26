@@ -37,8 +37,9 @@ const Record = () => {
     const response = await axios.get(`${apiEndpoint}/getGameRecord`, { params: { username } });
     // Extract data from the response
     let { games } = response.data;
+    console.log(games);
     setRecord(games);
-
+    
     const totalGames = games.length;
     games = games.slice(-10);
     // Calculate correct and incorrect answers for the chartbar
