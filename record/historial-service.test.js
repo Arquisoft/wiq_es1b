@@ -3,8 +3,8 @@ const { MongoMemoryServer } = require('mongodb-memory-server');
 const axios = require('axios');
 const sinon = require('sinon');
 const sinonMongoose = require('sinon-mongoose');
-const User = require('./auth-model');
 const Game = require('./historial-model');
+const User = require('../users/userservice/user-model');
 
 let mongoServer;
 let app;
@@ -92,9 +92,9 @@ describe('Historial Service', () => {
   
   });
 
-  it('should get a new question on POST /getGameRecord', async () => {
+  it('should get a new question on GET /getGameRecord', async () => {
     const username = "Example username";
-    const response = await request(app).post('/getGameRecord').send({ username });
+     const response = await request(app).get(`/getGameRecord?user=1234gvfsdfgr33cfdc3w`);
 
     expect(response.status).toBe(200);
     expect(response.body).toHaveProperty('games');

@@ -27,6 +27,7 @@
         "yaml": "^2.4.1"
     },
     "devDependencies": {
+        "axios-mock-adapter": "^1.22.0",
         "jest": "^29.7.0",
         "supertest": "^6.3.4"
     }

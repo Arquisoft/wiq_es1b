@@ -77,6 +77,7 @@ app.post('/saveGameRecord', async (req, res) => {
 app.get('/getGameRecord', async (req, res) => {
   try {
     const user = req.query.user;
+    console.log(user);
 
     const games = await recordRepo.getGameRecord(user);
 

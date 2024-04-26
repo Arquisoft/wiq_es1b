@@ -181,7 +181,11 @@ defineFeature(feature, test => {
         await expect(page).toMatchElement("button", { style: { color: 'green' } });
         await expect(page).toMatchElement("div", { text: "You have won! Congratulations!" });
         //click the next button to get another question
-        await expect(page).toClick('button', { text: 'Next question' });
+        await page.evaluate(() => {
+          const button = document.querySelector("button[data-testid=\"nextQuestionButton\"]");
+          button.scrollIntoView();
+          button.click();
+        });
         //answer the question wrong
         await expect(page).toClick('button', { text: 'Test answer 1' });
         await expect(page).toMatchElement("button", { style: { color: 'red' } });

@@ -42,7 +42,9 @@ app.post('/adduser', (req, res) => handleRequest(userServiceUrl + '/adduser', re
 app.get('/getUserByUsername', async (req, res) => {
   try{
     const username = req.query.username;
+    console.log(username);
     const response = await axios.get(`${authServiceUrl}/getUserByUsername`, { params: { username } });
+    console.log(response);
     res.json(response.data);
   }catch(error){
     res.status(500).json({error: 'Internal Server Error'})

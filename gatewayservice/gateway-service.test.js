@@ -8,6 +8,7 @@ afterAll(async () => {
 
 jest.mock('axios');
 
+
 describe('Gateway Service', () => {
   // Mock responses from external services
   axios.post.mockImplementation((url, data) => {
@@ -23,7 +24,23 @@ describe('Gateway Service', () => {
       return Promise.resolve({ data: { message: 'generating questions' } });
     } else if(url.endsWith('/deleteTempQuestions')){
       return Promise.resolve({ data: { message: 'deleting questions' } });
-    } else if(url.endsWith('/getGameRecord')){
+    } else if (url.endsWith('/getQuestion')) {
+      return Promise.resolve({
+        data: {
+          question: "¿Cuál es la capital de España?",
+          correctAnswerLabel: "Madrid",
+          answerLabelSet: ["Estocolmo", "Madrid", "Oslo", "Copenhague"]
+        }
+      });
+    }
+  });
+  
+  axios.get.mockImplementation((url) => {
+    if(url.includes('/generateQuestions')){
+      return Promise.resolve({ data: { message: 'generating questions' } });
+    } else if(url.includes('/deleteTempQuestions')){
+      return Promise.resolve({ data: { message: 'deleting questions' } });
+    } else if(url.includes('/getGameRecord')){
       return Promise.resolve({
         data: [
           {
@@ -39,7 +56,7 @@ describe('Gateway Service', () => {
           }
         ],
       });
-    } else if (url.endsWith('/getQuestion')) {
+    } else if (url.includes('/getQuestion')) {
       return Promise.resolve({
         data: {
           question: "¿Cuál es la capital de España?",
@@ -47,9 +64,61 @@ describe('Gateway Service', () => {
           answerLabelSet: ["Estocolmo", "Madrid", "Oslo", "Copenhague"]
         }
       });
+    } else if (url.includes('/getUserByUsername')) {
+      return Promise.resolve({
+        data: {
+          user: "usuario"
+        }
+      });
+    } else if (url.includes('/health')) {
+      return Promise.resolve({
+        data: {
+          status: "OK"
+        }
+      });
+    } else if (url.includes('/getAllQuestions')) {
+      return Promise.resolve({
+        data: [
+          {
+            question: "¿Cuál es la capital de España?",
+            correctAnswerLabel: "Madrid",
+            answerLabelSet: ["Estocolmo", "Madrid", "Oslo", "Copenhague"]
+          },
+          {
+            question: "¿Cuál es la capital de Francia?",
+            correctAnswerLabel: "Paris",
+            answerLabelSet: ["Estocolmo", "Madrid", "Paris", "Copenhague"]
+          },
+        ]
+      });
+    } else if (url.includes('/getAllUsers')) {
+      return Promise.resolve({
+        data: [
+          {
+            _id: "6626bd80de07476e84fe74da",
+            username: "maria2",
+            password: "$2b$10$GnDbxj5LffsFTh1JGUCm.OYmZwe8P.KklXEd38EA5liukCUeDpIPa",
+            createdAt: "2024-04-22T19:41:52.245+00:00",
+            __v: 0
+          },
+          {
+            _id: "6626bazf0df55711esdfe74da",
+            username: "maria",
+            password: "$2b$10$Gnawesrthyj4uyfhgdd54634Cm.OYmZwe8P.KklXEd38EA5liukCUeDpIPa",
+            createdAt: "2024-03-19T19:41:52.245+00:00",
+            __v: 0
+          }
+        ]
+      });
     }
   });
 
+  it('should return OK status from /health endpoint', async () => {
+    const response = await request(app).get('/health');
+  
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toEqual({ status: 'OK' });
+  });
 
   // Test /login endpoint
   it('should forward login request to auth service', async () => {
@@ -71,14 +140,25 @@ describe('Gateway Service', () => {
     expect(response.body.userId).toBe('mockedUserId');
   });
 
+  // Test /getUserByUsername endpoint
+  it('should forward add user request to auth service', async () => {
+    const response = await request(app)
+      .get('/getUserByUsername')
+      .query({ username: 'newuser' });
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body.user).toBe('usuario');
+  });
+
   // Test /getQuestion endpoint
   it('should forward get question reques to question service', async () => {
     const response = await request(app)
-      .post('/getQuestion');
+      .get('/getQuestion');
 
     expect(response.statusCode).toBe(200);
     expect(response.body.question).toBe("¿Cuál es la capital de España?");
     expect(response.body.correctAnswerLabel).toBe("Madrid");
+    expect(response.body.answerLabelSet).toEqual(["Estocolmo", "Madrid", "Oslo", "Copenhague"]);
   });
 
   // Test /saveQuestion endpoint
@@ -103,7 +183,7 @@ describe('Gateway Service', () => {
   // Test /generateQuestions endpoint
   it('should forward generateQuestions request to questions service', async () => {
     const response = await request(app)
-      .post('/generateQuestions');
+      .get('/generateQuestions');
     expect(response.statusCode).toBe(200);
   });
   
@@ -118,8 +198,8 @@ describe('Gateway Service', () => {
   // Test /getGameRecord endpoint
   it('should forward getGameRecord request to historial service', async () => {
     const response = await request(app)
-      .post('/getGameRecord')
-      .send({ username2: 'testuser'});
+      .get('/getGameRecord')
+      .send({ username: 'testuser'});
 
     expect(response.statusCode).toBe(200);
     expect(response.body[0].games[0].correctAnswer).toBe('Madrid');
@@ -128,4 +208,38 @@ describe('Gateway Service', () => {
     expect(response.body[0].games[0].answeredRight).toBe(true);
     expect(response.body[0].games[0].selectedAnswer).toBe("Madrid");
   });
+
+  //test /getAllQuestions endpoint
+  it('should forward get all questions request to question service', async () => {
+    const response = await request(app).get('/getAllQuestions');
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body[0].question).toBe("¿Cuál es la capital de España?");
+    expect(response.body[0].correctAnswerLabel).toBe("Madrid");
+    expect(response.body[0].answerLabelSet).toEqual(["Estocolmo", "Madrid", "Oslo", "Copenhague"]);
+    
+    expect(response.body[1].question).toBe("¿Cuál es la capital de Francia?");
+    expect(response.body[1].correctAnswerLabel).toBe("Paris");
+    expect(response.body[1].answerLabelSet).toEqual(["Estocolmo", "Madrid", "Paris", "Copenhague"]);
+  });
+
+  //test /getAllUsers endpoint
+  it('should forward get all users request to user service', async () => {
+
+    const response = await request(app).get('/getAllUsers');
+  
+    expect(response.statusCode).toBe(200);
+    expect(response.body[0]._id).toBe("6626bd80de07476e84fe74da");
+    expect(response.body[0].username).toBe("maria2");
+    expect(response.body[0].password).toBe("$2b$10$GnDbxj5LffsFTh1JGUCm.OYmZwe8P.KklXEd38EA5liukCUeDpIPa");
+    expect(response.body[0].createdAt).toBe("2024-04-22T19:41:52.245+00:00");
+    expect(response.body[0].__v).toBe(0);
+
+    expect(response.body[1]._id).toBe("6626bazf0df55711esdfe74da");
+    expect(response.body[1].username).toBe("maria");
+    expect(response.body[1].password).toBe("$2b$10$Gnawesrthyj4uyfhgdd54634Cm.OYmZwe8P.KklXEd38EA5liukCUeDpIPa");
+    expect(response.body[1].createdAt).toBe("2024-03-19T19:41:52.245+00:00");
+    expect(response.body[1].__v).toBe(0);
+  });
+
 });

@@ -41,7 +41,7 @@ describe('Questions Service', () => {
   it('should get a new question on POST /getQuestion', async () => {
     const category = "todo";
 
-    const response = await request(app).post('/getQuestion').send({ category });
+    const response = await request(app).get('/getQuestion').send({ category });
     expect(response.status).toBe(200);
     expect(response.body).toHaveProperty('question');
     expect(response.body).toHaveProperty('correctAnswerLabel');
