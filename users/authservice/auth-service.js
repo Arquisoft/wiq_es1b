@@ -12,8 +12,7 @@ const port = 8002;
 app.use(express.json());
 
 // Connect to MongoDB
-const mongoURI = process.env.MONGODB_URI;
-console.log("debajo de la const: " + mongoURI);
+const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/users';
 
 mongoose.connect(mongoURI);
 
@@ -29,7 +28,6 @@ function validateRequiredFields(req, requiredFields) {
 // Route for user login
 app.post('/login', async (req, res) => {
   try {
-    console.log(mongoURI)
     // Check if required fields are present in the request body
     validateRequiredFields(req, ['username', 'password']);
 
@@ -52,6 +50,32 @@ app.post('/login', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+app.get('/getUserByUsername', async (req, res) => {
+  try {
+    // Obtener el nombre de usuario desde el cuerpo de la solicitud
+    const username = req.query.username;
+    //buscarlo en la base de datos
+    const user = await User.findOne({ username: username });
+    // Devolver el usuario encontrado en la respuesta
+    res.status(200).json({ user });
+  } catch (error) {
+    // Manejar cualquier error que pueda ocurrir durante el proceso
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+app.get('/getAllUsers', async (req, res) => {
+  try {
+
+    const users = await User.find();
+
+    res.json(users);
+
+  }catch (error) {
+    res.status(500).json({ error: 'Internal Server Error trying to get users' });
+  }
+})
 
 // Start the server
 const server = app.listen(port, () => {

@@ -1,3 +1,4 @@
+// src/components/AddUser.test.js
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { render, fireEvent, screen, waitFor } from '@testing-library/react';
@@ -62,7 +63,8 @@ describe('AddUser component', () => {
       </Router>
     );
     await waitFor(() => {
-      expect(screen.getByText(/Welcome to WIQ! Create an account to start playing!/i)).toBeInTheDocument();
+      expect(screen.getByText(/Welcome to WIQ!/i)).toBeInTheDocument();
+      expect(screen.getByText(/Create an account to start playing!/i)).toBeInTheDocument();
     });
   });
 });

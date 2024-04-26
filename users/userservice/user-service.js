@@ -13,7 +13,7 @@ const port = 8001;
 app.use(bodyParser.json());
 
 // Connect to MongoDB
-const mongoURI = process.env.MONGODB_URI;
+const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/users';
 
 mongoose.connect(mongoURI);
 
@@ -64,6 +64,17 @@ app.post('/adduser', async (req, res) => {
     res.json(newUser);
   } catch (error) {
     res.status(400).json({ error: error.message });
+  }
+});
+
+app.post('/getAllUsers', async (req, res) => {
+  try {
+
+    const users = await User.find({});
+
+    res.status(200).json({ users: users });
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 

@@ -7,13 +7,14 @@ import './stylesheets/login.css';
 import '../index.css';
 
 const Login = (onLoginSuccess) => {
+
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [createdAt, setCreatedAt] = useState('');
-  const navigate = useNavigate();
-
   const [selectedTimer, setSelectedTimer] = useState('');
   const [selectedNumQuestions, setSelectedNumQuestions] = useState('');
 
@@ -51,8 +52,17 @@ const Login = (onLoginSuccess) => {
     }
   }, [loginSuccess, navigate, username, createdAt, selectedTimer, selectedNumQuestions]);
 
+  const buttonStyle = {
+    color: 'white',
+    backgroundColor: '#209cee',
+    '&:hover': {
+      backgroundColor: '#1f89cf',
+    },
+  };
+
   return (
-    <Container component="main" >
+    <Container component="main" 
+        style={{ width: '26em' }}>
         <div className="welcome-container">
           <Typography variant="h4" className="welcome-text">
             Welcome to WIQ!
@@ -79,7 +89,7 @@ const Login = (onLoginSuccess) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Button data-testid="loginButton" variant="contained" color="primary" onClick={loginUser}>
+          <Button data-testid="loginButton" variant="contained" sx={buttonStyle} onClick={loginUser}>
             Login
           </Button>
           {/* dialog to show error during adding a user */}
@@ -92,7 +102,7 @@ const Login = (onLoginSuccess) => {
                 </DialogContentText>
               </DialogContent>
               <DialogActions>
-                <Button onClick={() => setError('')} color="primary">
+                <Button sx={buttonStyle} onClick={() => setError('')} >
                   Close
                 </Button>
               </DialogActions>

@@ -13,7 +13,7 @@ defineFeature(feature, test => {
 
     browser = process.env.GITHUB_ACTIONS
       ? await puppeteer.launch()
-      : await puppeteer.launch({ headless: false, slowMo: 100 });
+      : await puppeteer.launch({ headless: false, slowMo: 50 });
     page = await browser.newPage();
 
     await page.setRequestInterception(true);
@@ -29,7 +29,7 @@ defineFeature(feature, test => {
               'Access-Control-Allow-Headers': '*'
           }
         });
-      } else if (req.url().endsWith('/getQuestion')) {
+      } else if (req.url().includes('/getQuestion?category=')) {
             req.respond({
                 status: 200,
                 headers: {
@@ -42,7 +42,7 @@ defineFeature(feature, test => {
                     answerLabelSet: ['Test answer 1', 'Test answer 2', 'Test answer 3', 'Test correct answer']
                 })
             });
-        } else if(req.url().endsWith('/saveQuestion')){
+        } else if(req.url().endsWith('/saveQuestion') || req.url().endsWith('/generateQuestions')){
           req.respond({
             status: 200,
             headers: {
@@ -55,7 +55,7 @@ defineFeature(feature, test => {
     });
 
     //Way of setting up the timeout
-    setDefaultOptions({ timeout: 300000 })
+    setDefaultOptions({ timeout: 450000 })
   });
 
   //before each test, the page is back to the login page

@@ -1,4 +1,4 @@
-// src/components/Record.js
+// src/components/UserProfile.js
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from 'axios';
@@ -8,24 +8,16 @@ import { TreeItem } from '@mui/x-tree-view/TreeItem';
 import { BarChart } from '@mui/x-charts/BarChart';
 import './stylesheets/record.css';
 
-const Record = () => {
+const UserProfile = () => {
 
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
   
   const navigate = useNavigate();
- 
-  useEffect(() => {
-    const user = localStorage.getItem('username');
-    if (user === null) {
-      navigate('/');
-    }
-    // eslint-disable-next-line 
-  }, []);
 
   //accedo al usuario logeado
-  const location = useLocation();
-  const { username } = location.state || {};
   const [record, setRecord] = useState([]);
+  const username = localStorage.getItem('userProfileUsername');
+  const [userCreated, setUserCreated] = useState('');
 
   //data for the chart
   const [loading, setLoading] = useState(true);
@@ -33,13 +25,13 @@ const Record = () => {
   const [incorrect, setIncorrect] = useState([]);
   const [labels, setLabels] = useState([]);
 
-  const getRecordForLoggedUser = async () => {
-    const response = await axios.get(`${apiEndpoint}/getGameRecord`, { params: { username } });
+  const getHistorialForUser = async () => {
+    const response = await axios.get(`${apiEndpoint}/getGameRecord`, { params: { username} });
+    await saveInfoUser();
     // Extract data from the response
     let { games } = response.data;
-    console.log(games);
     setRecord(games);
-    
+
     const totalGames = games.length;
     games = games.slice(-10);
     // Calculate correct and incorrect answers for the chartbar
@@ -47,8 +39,15 @@ const Record = () => {
     const incorrect = [];
     const labels = [];
     games.forEach((game, index) => {
-      let correctCount = game.correctAnswers;
-      let incorrectCount = game.questions.length - correctCount;
+      let correctCount = 0;
+      let incorrectCount = 0;
+      game.questions.forEach(question => {
+        if (question.correctAnswer === question.selectedAnswer) {
+          correctCount++;
+        } else {
+          incorrectCount++;
+        }
+      });
       correct.push(correctCount);
       incorrect.push(incorrectCount);
       labels.push(`Game ${totalGames - games.length + index + 1}`);
@@ -59,13 +58,35 @@ const Record = () => {
     setLabels(labels);
   }
 
+  const saveInfoUser = async () => {
+    const response = await axios.get(`${apiEndpoint}/getUserByUsername`, { params: { username} });
+    let date = new Date(response.data.user.createdAt);
+    date = `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`
+    setUserCreated(date);
+  }
+
   useEffect(() => {
-    getRecordForLoggedUser();
+    const user = localStorage.getItem('username');
+    if (user === null) {
+      navigate('/');
+    } else {
+      (async () => {
+        await getHistorialForUser();
+      })();
+    }
     // eslint-disable-next-line
   }, []);
 
   return (
-    <div style={{ padding: '4em', borderRadius: '15px', boxShadow: '0 0 50px #00a6bc', backgroundColor: 'rgba(255, 255, 255, 0.65)', zIndex: 1, marginTop: '2rem' }}>
+    <div style={{ 
+          padding: '4em', 
+          borderRadius: '15px', 
+          boxShadow: '0 0 50px #00a6bc', 
+          backgroundColor: 'rgba(255, 255, 255, 0.65)', 
+          zIndex: 1, 
+          marginTop: '2rem' ,
+          width: '65vw'
+      }}>
       <Typography component="h1" variant="h5" 
           style={{ 
             textAlign: 'center', 
@@ -74,13 +95,26 @@ const Record = () => {
             textShadow: '#c8aee8 0 3px 1px'
           }}
       >
-          Record
+          {username}'s profile and record
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
           <Container component="main" maxWidth="sm" sx={{ marginTop: 4 }}>
-            <Typography component="h1" variant="h5">
-              Here you can see your record! All about your past games and all!
+            <Typography component="h2" variant="h5">
+              User information.
+            </Typography>
+            <div>
+              <List>
+                <ListItem>
+                  <ListItemText primary="Username" secondary={username} />
+                </ListItem>
+                <ListItem>
+                  <ListItemText primary="Account created on" secondary={userCreated} />
+                </ListItem>
+              </List>
+            </div>
+            <Typography component="h2" variant="h5">
+              User record.
             </Typography>
             <SimpleTreeView style={{ paddingTop: '20px' }}>
               {record.map((game, index) => (
@@ -132,4 +166,4 @@ const Record = () => {
   );
 };
 
-export default Record;
+export default UserProfile;

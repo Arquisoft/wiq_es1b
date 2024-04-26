@@ -31,8 +31,17 @@ const AddUser = () => {
     navigate('/login');
   };
 
+  const buttonStyle = {
+    color: 'white',
+    backgroundColor: '#209cee',
+    '&:hover': {
+      backgroundColor: '#1f89cf',
+    },
+  };
+
   return (
-    <Container component="main">
+    <Container component="main"
+        style={{ width: '26em' }}>
       <div className="welcome-container">
           <Typography variant="h4" className="welcome-text">
             Welcome to WIQ!
@@ -59,7 +68,7 @@ const AddUser = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button variant="contained" color="primary" onClick={addUser}>
+        <Button variant="contained" sx={buttonStyle} onClick={addUser}>
           Add User
         </Button>
         {/* dialogs to show sucess or error during adding a user */}
@@ -71,7 +80,7 @@ const AddUser = () => {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleCloseDialog} color="primary">
+            <Button onClick={handleCloseDialog} sx={buttonStyle}>
               Close
             </Button>
           </DialogActions>
@@ -85,7 +94,7 @@ const AddUser = () => {
               </DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button onClick={() => setError('')} color="primary">
+              <Button onClick={() => setError('')} sx={buttonStyle}>
                 Close
               </Button>
             </DialogActions>

@@ -4,7 +4,7 @@ import { Typography } from '@mui/material';
 
 const styles = {
   footer: {
-    position: 'sticky',
+    position: 'fixed',
     bottom: 0,
     left: 0,
     width: '100%',

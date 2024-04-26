@@ -1,3 +1,4 @@
+// src/components/Home.test.js
 import React from 'react';
 import { BrowserRouter as Router, MemoryRouter } from 'react-router-dom';
 import { render, fireEvent, screen } from '@testing-library/react';
@@ -29,7 +30,7 @@ describe('Home component', () => {
 
     //compruebo que hay dos botones, jugar y record
     const buttons = await screen.findAllByRole('button');
-    expect(buttons.length).toBe(2);
+    expect(buttons.length).toBe(4);
 
     expect(screen.getByText(/Here you can start a new game!/i)).toBeInTheDocument();
     expect(screen.getByText(`Hello ${usernamePrueba}!`)).toBeInTheDocument();
