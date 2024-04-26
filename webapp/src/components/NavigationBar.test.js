@@ -89,6 +89,7 @@ describe('NavigationBar component', () => {
 
     expect(getByTestId("help-item")).toBeInTheDocument();
     expect(getByTestId("about-us-item")).toBeInTheDocument();
+    expect(getByTestId("get-db-data-item")).toBeInTheDocument();
     expect(getByTestId("api-doc-item")).toBeInTheDocument();
   });
 
