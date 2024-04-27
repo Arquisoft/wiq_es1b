@@ -1,35 +1,33 @@
 ifndef::imagesdir[:imagesdir: ../images]
 
 [[section-system-scope-and-context]]
+
 == System Scope and Context
 
-
 In WIQ, users can use the WebApp to learn various knowledge through questions created from Wikidata contents. The user interacts directly with the WebApp, 
-it extracts information from WikiData to formulate the questions with their answers and stores them in our database. We use various technologies such as JavaScript, 
+which extracts information from WikiData to formulate the questions with their answers and stores them in our database. We use various technologies such as JavaScript, 
 GitHub and MongoDB in the process of creating and maintaining this project.
 
-
 === Business Context
-
 
 image::03_Business_Context.png["Overall System"]
 
 [options="header",cols="1,2,2"]
 |===
-|Communications |Ins | Outs
-| _User_ | Interactions with the application | Responses to that interactions
-| _Wikidata_ | Requests by the WIQ application | Responses to that requests with the information stored in Wikidata
-| _WIQ_ | WikiData information | Various information received from the APIs and the database
-| _Database_ | Requests by the WIQ application | Responses to that requests with the information stored in this database
+| Communications | Ins | Outs
+| _User_ | Interactions with the application | Responses to that interactions.
+| _WIQ_ | WikiData information | Various information received from the APIs and the database.
+| _Wikidata_ | Requests by the WIQ application | Responses to that requests with the information stored in Wikidata.
 |===
 
 === Technical Context
 
 [options="header",cols="1,2"]
 |===
-|Technology |Description
-| _JavaScript_ | Language used for most of the application development
-| _Wikidata_ | Information base used to formulate WIQ questions
-| _WIQ_ | Web application
-| _MongoDB_ | Database used for WIQ data
+| Technology | Description
+| _JavaScript_ | Language used for most of the application development.
+| _Wikidata_ | Information base used to formulate WIQ questions.
+| _WIQ_ | Web application.
+| _MongoDB_ | Database used for WIQ data.
+| _GitHub_ | Code collaboration platform.
 |===
