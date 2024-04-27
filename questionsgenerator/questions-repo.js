@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Template = require('./templates/template-model')
 const questionsTemplate = require('./plantillas.json')
 
-const mongoURI = process.env.MONGODB_URI;
+const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/questions';
 
 class QuestionsRepository {
 
@@ -100,7 +100,7 @@ class QuestionsRepository {
 
     async close() {
         try {
-            mongoose.connection.close();
+           await mongoose.connection.close();
         } catch (error) {
             cconsole.error("Error in question repository: ", error);
         }
