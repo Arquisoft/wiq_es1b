@@ -16,25 +16,19 @@ image::05_Building_Block_1.png["Overall System"]
 Motivation::
 
 The user interacts with the webapp interface to be able to play the game. In the diagram it is clear to see that the webbApp interacts
-with two external box which is Wikidata, as it is a requirement of the game to generate the qestions, and Mongodb, the database used to keep our data stored.
-In other levels, the webApp will decompose in more detail.
+with an external box which is Wikidata, as it is a requirement of the game to generate the questions.
+In subsequent levels, the webApp will be decomposed into more detail.
 
 
 ==== WebApp
 
 The WebApp box consists of the entire game with all the different responsibilities the game might have all together.
-The interface of the WebApp will be the frontend of a web that will be seen better in other diagrams.
+The interface of the WebApp serves as the frontend of a web application, that will be detailed in other diagrams.
 
-==== Wikdata
+==== Wikidata
 
-The purpose of the Wikidata box is to get the necessary information to generate all the questions of all the games.
-The game will interact with Wikidata by sparql querys which will be stored in the database. 
-
-==== MongoDb
-
-MongoDb is the service we will use to store our data. We will keep it in a cluster in which there are 
-different collections to separate the data. Templates of the entities we save are seen in the project and
-there are some for the users and their record and others for the questions.
+The purpose of the Wikidata box is to get the necessary information to generate all the questions for all the games.
+The web app will interact with Wikidata by SPARQL querys which will be stored in the database. 
 
 
 === Level 2
@@ -59,6 +53,12 @@ The different services are the ones that internally take care of all the data in
 the requests sent by the gateway and generate a response to it, a good one or the error related to it. To generate the response,
 the services need data from the database or Wikidata, so they interact with them and sends the data as the response to show the user, for example.
 
+==== MongoDb
+
+MongoDb is the service we will use to store our data. We will keep it in a cluster in which there are 
+different collections to separate the data. Templates of the entities we save are seen in the project and
+there are some for the users and their record and others for the questions.
+
 
 === Level 3
 
@@ -77,12 +77,15 @@ It interacts with the user collection in the MongoDb database and stores there t
 user to see.
 
 ====  Users
+
 ===== Auth service
+
 This is one service inside the users part of the webapp. It is in charge of authenticating the users when they register for the 
 first time in the game. All the data gets collected and saved in the collection users in MongoDb for when they login later. It uses the same 
 database that the record service uses.
 
 ===== Users service
+
 This is one service inside the users part of the webapp. This one is the one users use everytime when they log in. It retrieves
 all their data from the database and shows them in the webApp as the users will have an option to view all their past data. It gets 
 the data from the same collection as the auth service and the record.
