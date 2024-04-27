@@ -113,5 +113,9 @@ class questionGenerator {
     }
     return array;
   }
+
+  close(){
+    this.questionRepo.close();
+  }
 }
 module.exports = questionGenerator;

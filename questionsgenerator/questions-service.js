@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const QuestionGenerator = require('./questionGenerator.js');
 const QuestionsRepository = require('./questions-repo.js');
+const questionGenerator = require('./questionGenerator.js');
 
 const app = express();
 app.disable('x-powered-by');
@@ -13,6 +14,7 @@ app.use(bodyParser.json());
 
 
 const questionRepo = new QuestionsRepository();
+const generator = new QuestionGenerator();
 
 
 //to respond to the /getQuestion request 
@@ -44,7 +46,6 @@ app.get('/getQuestion', async (req, res) => {
 });
 
 app.get('/generateQuestions', async (req, res) => {
-  const generator = new QuestionGenerator();
   await generator.loadTemplates();
   await generator.generate10Questions();
   res.status(200).json({ msg: "Questions generated successfully" });
