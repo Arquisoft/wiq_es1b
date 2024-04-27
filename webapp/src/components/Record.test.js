@@ -98,4 +98,23 @@ describe('Record component', () => {
 
   });
 
+  it('should render succesfully', async () => {
+    localStorage.removeItem('username');
+
+    const games = [
+  
+    ]
+    axios.get.mockResolvedValueOnce({ data: { games } });
+
+    render(
+    <Router>
+      <Record />
+    </Router>);
+
+    expect(screen.getByText('Record')).toBeInTheDocument();
+
+    await waitFor(() => screen.getByText('Here you can see your record! All about your past games and all!'));
+
+  });
+
 });

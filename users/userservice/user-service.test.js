@@ -17,6 +17,7 @@ afterAll(async () => {
 });
 
 describe('User Service', () => {
+
   it('should add a new user on POST /adduser', async () => {
     const newUser = {
       username: 'testuser',
@@ -27,4 +28,13 @@ describe('User Service', () => {
     expect(response.status).toBe(200);
     expect(response.body).toHaveProperty('username', 'testuser');
   });
+
+  it('Should perform a getAllUsers operation /getAllUsers', async () => {
+    const response = await request(app).post('/getAllUsers');
+    expect(response.status).toBe(200);
+    //array de tamaño 1 porque solo hay un usuario en la base de datos de test
+    expect(response.body).toHaveProperty('users');
+    expect(response.body.users).toHaveLength(1);
+  });
+
 });

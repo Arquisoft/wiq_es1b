@@ -121,4 +121,15 @@ describe('Home component', () => {
     expect(await screen.findByText('Start Game')).toBeInTheDocument();
   });
 
+  it('should not render the information about the user as the username is null in the localstorage', async () => {
+    localStorage.removeItem('username');
+    const history = createMemoryHistory();
+    render(
+      <Router history={history}>
+        <Home />
+      </Router>
+    );
+    expect(screen.queryByText('Hello username!')).not.toBeInTheDocument();
+  });
+
 });
