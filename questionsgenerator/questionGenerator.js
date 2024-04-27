@@ -20,10 +20,6 @@ class questionGenerator {
     try {
       await this.questionRepo.deleteAllTemplates();
       await this.questionRepo.loadTemplates();
-      /*
-      await Template.deleteMany({});
-      await Template.insertMany(questionsTemplate);
-      */
     } catch (error) {
       console.error("Error loading templates: ", error);
     }
@@ -93,7 +89,7 @@ class questionGenerator {
             correctAnswer: correctAnswer,
             category: category
           });
-
+          
           this.questionRepo.saveQuestion(question);
 
         } else {

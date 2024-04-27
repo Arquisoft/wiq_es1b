@@ -34,7 +34,6 @@ app.get('/getQuestion', async (req, res) => {
 
       // Delete the question so as not to have repeated questions.
       questionRepo.delete(question);
-      console.log(tittle);
 
       res.json({ question: tittle, correctAnswerLabel: correctAnswer, answerLabelSet: answerSet });
     }
@@ -48,7 +47,6 @@ app.get('/generateQuestions', async (req, res) => {
   const generator = new QuestionGenerator();
   await generator.loadTemplates();
   await generator.generate10Questions();
-  await generator.close();
   res.status(200).json({ msg: "Questions generated successfully" });
 })
 

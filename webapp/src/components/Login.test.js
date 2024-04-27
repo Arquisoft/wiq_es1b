@@ -26,7 +26,7 @@ describe('Login component', () => {
 
     // Mock the axios.post request to simulate a successful response
     mockAxios.onPost('http://localhost:8000/login').reply(200, { createdAt: '2024-01-01T12:34:56Z' });
-    mockAxios.onPost('http://localhost:8000/generateQuestions').reply(200);
+    mockAxios.onGet('http://localhost:8000/generateQuestions').reply(200);
 
     // Simulate user input
     await act(async () => {
