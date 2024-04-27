@@ -17,7 +17,7 @@ image::07_Deployment_View_Level1.png["Deployment view - Infrastructure level 1"]
 | Element | Description
 | _Device_ | The device used by end-users to access the web application, such as desktop computers, laptops, tablets, or smartphones.
 | _Azure server_ | The virtual machine, hosted on the Microsoft Azure platform, responsible for hosting and running the web application.
-| _Docker_ | Thre containerization platform utilized to encapsulate and deploy microservices, providing lightweight, portable environments for running specific components of the web application stack.
+| _Docker_ | The containerization platform utilized to encapsulate and deploy microservices, providing lightweight, portable environments for running specific components of the web application stack.
 | _Database_ | MongoDB is utilized as the database management system, serving as the backend storage for the application's functionality. It stores user data, generated questions, and game-related information.
 |===
 
