@@ -25,9 +25,9 @@ beforeAll(async () => {
       category: 'todo'
     }
   ]); 
-  /**mock the deleteOne from the service
+  //mock the deleteOne from the service
   const deleteOneStub = sinon.stub(Question, 'deleteOne');
-  deleteOneStub.resolves({ n: 1 });**/
+  deleteOneStub.resolves({ n: 1 });
 });
 
 afterAll(async () => {
