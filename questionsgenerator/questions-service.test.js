@@ -6,6 +6,7 @@ const sinonMongoose = require('sinon-mongoose');
 const Question = require('./question-model');
 const Template = require('./templates/template-model');
 const QuestionGenerator = require('./questionGenerator.js');
+const mongoose = require('mongoose');
 
 let mongoServer;
 let app;
@@ -29,23 +30,22 @@ beforeAll(async () => {
   //mock the deleteOne from the service
   const deleteOneStub = sinon.stub(Question, 'deleteOne');
   deleteOneStub.resolves({ n: 1 });
-
 });
 
 afterAll(async () => {
-    await mongoServer.stop();
-    await app.close();
-    sinon.restore();
+  app.close();
+  await mongoose.connection.close();
+  await mongoServer.stop();
 });
 
 describe('Questions Service', () => {
-  it('should get a new question on POST /getQuestion', async () => {
-    /**const category = "todo";
+  it('should get a new question on GET /getQuestion', async () => {
+    const category = "todo";
 
     const response = await request(app).get('/getQuestion').query({ category });;
     expect(response.status).toBe(200);
     expect(response.body).toHaveProperty('question');
     expect(response.body).toHaveProperty('correctAnswerLabel');
-    expect(response.body).toHaveProperty('answerLabelSet');**/
+    expect(response.body).toHaveProperty('answerLabelSet');
   });
 });
