@@ -6,7 +6,6 @@ const sinonMongoose = require('sinon-mongoose');
 const Question = require('./question-model');
 const Template = require('./templates/template-model');
 const QuestionGenerator = require('./questionGenerator.js');
-const mongoose = require('mongoose');
 
 let mongoServer;
 let app;
@@ -34,7 +33,6 @@ beforeAll(async () => {
 
 afterAll(async () => {
   app.close();
-  await mongoose.connection.close();
   await mongoServer.stop();
 });
 
