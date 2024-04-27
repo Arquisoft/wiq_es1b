@@ -12,7 +12,7 @@ GitHub and MongoDB in the process of creating and maintaining this project.
 === Business Context
 
 
-image::buildingBlock1.png["Overall System"]
+image::03_Business_Context.png["Overall System"]
 
 [options="header",cols="1,2,2"]
 |===
