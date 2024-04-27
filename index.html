@@ -1157,7 +1157,7 @@ games saved up to the date of the logged in user.</p>
 <div class="paragraph">
 <p>The deployment view describes the deployment architecture of the web application.
 It illustrates how the software elements are deployed onto the hardware infrastructure.
-This view provides insights into the physical deployment structure, including servers, databases, and network configurations.</p>
+This view provides insights into the physical deployment structure, including servers, databases and network configurations.</p>
 </div>
 <div class="sect2">
 <h3 id="_infrastructure_level_1">7.1. Infrastructure Level 1</h3>
@@ -1180,7 +1180,7 @@ This view provides insights into the physical deployment structure, including se
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Device</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The device used by end-users to access the web application, such as desktop computers, laptops, tablets, or smartphones.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The device used by end-users to access the web application, such as desktop computers, laptops, tablets or smartphones.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Azure server</em></p></td>
@@ -1189,10 +1189,6 @@ This view provides insights into the physical deployment structure, including se
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Docker</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The containerization platform utilized to encapsulate and deploy microservices, providing lightweight, portable environments for running specific components of the web application stack.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Database</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">MongoDB is utilized as the database management system, serving as the backend storage for the application&#8217;s functionality. It stores user data, generated questions, and game-related information.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1222,7 +1218,7 @@ This view provides insights into the physical deployment structure, including se
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Auth service</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Authenticates the users when they register for the first time in the game. All the data gets collected and saved in the database MongoDb for when they login later.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ensure user authentication during their initial registration in the game. Collect and securely store all their information in the MongoDB database to facilitate seamless login experiences in subsequent sessions.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Gateway service</em></p></td>
@@ -1235,6 +1231,10 @@ This view provides insights into the physical deployment structure, including se
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Record</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Manages and stores records of user played games, stats and other relevant data in the database MongoDb.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>MongoDB</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The database management system, serving as the backend storage for the application&#8217;s functionality. It stores user data, generated questions and other game-related information.</p></td>
 </tr>
 </tbody>
 </table>
