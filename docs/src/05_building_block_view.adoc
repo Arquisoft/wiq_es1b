@@ -11,7 +11,7 @@ aspects of the webapp. It will help by giving a clear image of the overall syste
 
 === Whitebox Overall System
 
-image::buildingBlock1.png["Overall System"]
+image::05_Building_Block_1.png["Overall System"]
 
 Motivation::
 
