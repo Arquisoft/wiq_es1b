@@ -64,6 +64,9 @@ describe('Home component', () => {
     );
 
     // Make sure all the buttons are rendered
+    expect(screen.getByText('New Full Random Game')).toBeInTheDocument();
+    expect(screen.getByText('New Art Gallery Game')).toBeInTheDocument();
+    expect(screen.getByText('New Human Calculator Game')).toBeInTheDocument();
     expect(screen.getByText('Play by Category')).toBeInTheDocument();
   });
 
@@ -83,5 +86,39 @@ describe('Home component', () => {
     expect(await screen.findByText('New Geography Game')).toBeInTheDocument();
     expect(await screen.findByText('New Science Game')).toBeInTheDocument();
   });
+
+  it('should render the category buttons when clicking the play by category', async () => {
+    const history = createMemoryHistory();
+    render(
+      <Router history={history}>
+        <Home />
+      </Router>
+    );
+  
+    // Click the 'Play by Category' button
+    fireEvent.click(screen.getByText('New Art Gallery Game'));
+  
+    // Make sure the information is rendered
+    expect(await screen.findByText('How to Play')).toBeInTheDocument();
+    expect(await screen.findByText('Guess the artwork of the artist.')).toBeInTheDocument();
+    expect(await screen.findByText('Start Game')).toBeInTheDocument();
+  });
     
+  it('should render the category buttons when clicking the play by category', async () => {
+    const history = createMemoryHistory();
+    render(
+      <Router history={history}>
+        <Home />
+      </Router>
+    );
+  
+    // Click the 'Play by Category' button
+    fireEvent.click(screen.getByText('New Human Calculator Game'));
+  
+    // Make sure the information is rendered
+    expect(await screen.findByText('How to Play')).toBeInTheDocument();
+    expect(await screen.findByText('Solve the math problems as fast as you can.')).toBeInTheDocument();
+    expect(await screen.findByText('Start Game')).toBeInTheDocument();
+  });
+
 });

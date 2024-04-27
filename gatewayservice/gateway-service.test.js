@@ -97,14 +97,14 @@ describe('Gateway Service', () => {
           {
             _id: "6626bd80de07476e84fe74da",
             username: "maria2",
-            password: "$2b$10$GnDbxj5LffsFTh1JGUCm.OYmZwe8P.KklXEd38EA5liukCUeDpIPa",
+            password: "$2b$10$GnDbxj5LffsFTh1JGUCm.OYmZwe8P.KklXEd38EA5liukCUeDpIPa", //NOSONAR
             createdAt: "2024-04-22T19:41:52.245+00:00",
             __v: 0
           },
           {
             _id: "6626bazf0df55711esdfe74da",
             username: "maria",
-            password: "$2b$10$Gnawesrthyj4uyfhgdd54634Cm.OYmZwe8P.KklXEd38EA5liukCUeDpIPa",
+            password: "$2b$10$Gnawesrthyj4uyfhgdd54634Cm.OYmZwe8P.KklXEd38EA5liukCUeDpIPa", //NOSONAR
             createdAt: "2024-03-19T19:41:52.245+00:00",
             __v: 0
           }

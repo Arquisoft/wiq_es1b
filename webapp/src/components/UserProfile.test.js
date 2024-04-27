@@ -52,7 +52,7 @@ describe('UserProfile component', () => {
     mockAxios.onGet(`http://localhost:8000/getUserByUsername`, { params: { username: 'expectedUsername' } }).reply(200, {
       user: {
         createdAt: "2024-04-22T20:11:53.053Z",
-        password: "$2b$10$m6RxpAY0yd23plXLXWn0cOUNTObjrpbsoPlLvFBwJk3VTdbwzxg92",
+        password: "$2b$10$m6RxpAY0yd23plXLXWn0cOUNTObjrpbsoPlLvFBwJk3VTdbwzxg92", //NOSONAR
         username: "mery2",
         __v: 0,
         _id: "6626c489de07476e84fe74f2"

@@ -9,9 +9,13 @@ const QuestionGenerator = require('./questionGenerator.js');
 
 let mongoServer;
 let app;
-//jest.mock('axios');
+jest.mock('axios');
 
 beforeAll(async () => {
+  mongoServer = await MongoMemoryServer.create();
+  const mongoUri = mongoServer.getUri();
+  process.env.MONGODB_URI = mongoUri;
+  app = require('./questions-service');
   //mongoServer = await MongoMemoryServer.create();
   //const mongoUri = mongoServer.getUri();
   //process.env.MONGODB_URI = mongoUri;
@@ -32,8 +36,8 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  //app.close();
-  //await mongoServer.stop();
+  app.close();
+  await mongoServer.stop();
 });
 
 describe('Questions Service', () => {

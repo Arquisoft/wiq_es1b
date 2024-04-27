@@ -56,6 +56,7 @@ beforeAll(async () => {
       isCorrect: true
     }]
   }]);
+
 });
 
 afterAll(async () => {
@@ -64,7 +65,7 @@ afterAll(async () => {
 });
 
 describe('Historial Service', () => {
-  it('should get a new question on POST /saveQuestion', async () => {
+  it('should save a question on POST /saveQuestion', async () => {
     const question = "Example question";
     const answersArray = ["Answer 1", "Answer 2", "Answer 3", "Answer 4"];
     const correctAnswer = 0; 
@@ -85,11 +86,36 @@ describe('Historial Service', () => {
     expect(response.body).toHaveProperty('msg', 'Question saved successfully');
   });
 
-  it('should get a new question on POST /saveGameRecord', async () => {
+  it('should give error as there is no record to save on POST /saveGameRecord', async () => {
     const username = "Example username";
-    const response = await request(app).post('/saveGameRecord').send({ username });
+    const response = await request(app).post('/saveGameRecord').send({ user: { username: 'someUsername' } });
     //guarda el juego en la base de datos
-  
+    expect(response.status).toBe(400);
+    expect(response.body).toHaveProperty('error', 'No game questions found for this user');
+  });
+
+  it('should return error while validating the game on POST /saveGameRecord', async () => {
+    const question = "Example question";
+    const answersArray = ["Answer 1", "Answer 2", "Answer 3", "Answer 4"];
+    const correctAnswer = 0; 
+    const selectedAnswer = 1; 
+    const isCorrect = correctAnswer === selectedAnswer;
+    const username = "Example username";
+
+    let response = await request(app).post('/saveQuestion').send({
+      question,
+      answersArray,
+      correctAnswer,
+      selectedAnswer,
+      isCorrect,
+      username
+    });
+
+    response = await request(app).post('/saveGameRecord').send({ user: { username: 'Example username' } });
+    //guarda el juego en la base de datos
+    expect(response.status).toBe(400);
+    expect(response.body).toHaveProperty('error', 'Error validating the game');
+    
   });
 
   it('should get a new question on GET /getGameRecord', async () => {
