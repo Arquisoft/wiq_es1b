@@ -35,8 +35,8 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  app.close();
   await mongoServer.stop();
+  await app.close();
 });
 
 describe('Questions Service', () => {
