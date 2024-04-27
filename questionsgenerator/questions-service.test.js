@@ -9,7 +9,6 @@ const QuestionGenerator = require('./questionGenerator.js');
 
 let mongoServer;
 let app;
-jest.mock('axios');
 
 beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();

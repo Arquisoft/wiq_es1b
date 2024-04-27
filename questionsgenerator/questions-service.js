@@ -14,7 +14,6 @@ app.use(bodyParser.json());
 
 
 const questionRepo = new QuestionsRepository();
-const generator = new QuestionGenerator();
 
 
 //to respond to the /getQuestion request 
@@ -35,7 +34,6 @@ app.get('/getQuestion', async (req, res) => {
 
       // Delete the question so as not to have repeated questions.
       questionRepo.delete(question);
-      // await Question.deleteOne({ _id: question._id });
 
       res.json({ question: tittle, correctAnswerLabel: correctAnswer, answerLabelSet: answerSet });
     }
@@ -46,6 +44,7 @@ app.get('/getQuestion', async (req, res) => {
 });
 
 app.get('/generateQuestions', async (req, res) => {
+  const generator = new QuestionGenerator();
   await generator.loadTemplates();
   await generator.generate10Questions();
   res.status(200).json({ msg: "Questions generated successfully" });
@@ -55,7 +54,6 @@ app.get('/getAllQuestions', async (req, res) => {
   try {
     console.log("getall in qs");
     const questions = await questionRepo.getAll();
-    //const questions = await Question.findAll();
 
     res.json(questions);
   } catch (error) {
@@ -76,13 +74,7 @@ async function getRandomQuestionByCategory(category) {
     }
 
     const randomQuestion = questionRepo.getQuestion(query);
-    /*
-    const randomQuestion = await Question.aggregate([
-      { $match: query }, // Filtrar por categoría si no es "todo"
-      { $sample: { size: 1 } } // Obtener una muestra aleatoria
-    ]);
-    */
-
+  
     if (randomQuestion) {
       return randomQuestion; // Devuelve la pregunta aleatoria encontrada
     }
@@ -99,7 +91,6 @@ async function getRandomQuestionByCategory(category) {
     return null;
   }
 }
-
 
 const server = app.listen(port, () => {
   console.log(`Question Generator Service listening at http://localhost:${port}`);
