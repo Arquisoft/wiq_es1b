@@ -29,11 +29,8 @@ const Ranking = () => {
     const location = useLocation();
     const { username } = location.state || {};
     const { createdAt } = location.state || {};
-    const [error, setError] = useState('');
 
-    const [record, setRecord] = useState([]);
     const [ranking, setRanking] = useState([]);
-    const [puntuacion, setPuntuacion] = useState(0);
 
     //data for the chart
     const [loading, setLoading] = useState(true);
@@ -44,7 +41,6 @@ const Ranking = () => {
           const response = await axios.get(`${apiEndpoint}/getGameRecord`, { params: { username} });
           // Extract data from the response
           let { games } = response.data;
-          setRecord(games);
           let correctAnswers = 0;
           games.forEach((game, index) => {
             let correctCount = game.correctAnswers;
@@ -53,7 +49,7 @@ const Ranking = () => {
 
           return correctAnswers;
         } catch (error) {
-          setError(error.response.data.error);
+          console.log(error.response.data.error);
         }
         
       }
@@ -76,7 +72,7 @@ const Ranking = () => {
           setRanking(rankingWithScores);
           setLoading(false);
         } catch (error) {
-          setError(error.response.data.error);
+          console.log(error.response.data.error);
         }
       }
 

@@ -44,10 +44,6 @@ app.post('/saveGameRecord', async (req, res) => {
 
     const username = user.username;
 
-    console.log(username);
-    console.log(gameQuestions);
-    console.log(gameQuestions[username]);
-
     if (!gameQuestions[username]) {
       return res.status(400).json({ error: "No game questions found for this user" });
     }
@@ -63,8 +59,6 @@ app.post('/saveGameRecord', async (req, res) => {
       correctAnswers: correctAnswers,
       questions: gameQuestions[username]
     });
-
-    console.log(game);
     
     // Guarda el juego en la base de datos
     const gameResult = await recordRepo.saveGame(game);

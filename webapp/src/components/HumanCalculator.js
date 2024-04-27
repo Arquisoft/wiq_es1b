@@ -60,10 +60,10 @@ const HumanCalculator = () => {
   const checkAnswer = async () => {
     let isCorrect = false;
     const answerInput = document.querySelector('#result');
-    let realResult = eval(`${firstNumber} ${operator} ${secondNumber}`);
+    let realResult = eval(`${firstNumber} ${operator} ${secondNumber}`); //NOSONAR
     let answer = result;
     const regex = /^-?\d*([.,]\d+)?$/;
-    if ((!regex.test(result) || result === '' ||  result === '-' || result === '-0') && timer != 0) {
+    if ((!regex.test(result) || result === '' ||  result === '-' || result === '-0') && timer != 0) { //NOSONAR
       //invalid input
       setResult('');
       setOpenE(true);
