@@ -5,6 +5,7 @@ import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import AddUser from './AddUser';
+import { createMemoryHistory } from 'history';
 
 const mockAxios = new MockAdapter(axios);
 
@@ -38,6 +39,21 @@ describe('AddUser component', () => {
     await waitFor(() => {
       expect(screen.getByText(/User added successfully/i)).toBeInTheDocument();
     });
+  });
+
+  it('should add user successfully and when closed the dialog, go to login', async () => {
+    const history = createMemoryHistory();
+
+    await setupTest('testUser', 'testPassword', [200]);
+
+    await waitFor(() => {
+      expect(screen.getByText(/User added successfully/i)).toBeInTheDocument();
+    });
+
+    const closeButton = screen.getByText('Close');
+    fireEvent.click(closeButton);
+
+    expect(history.location.pathname).toBe('/');
   });
 
   it('should handle error when adding user with a short password', async () => {
