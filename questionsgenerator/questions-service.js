@@ -48,7 +48,7 @@ app.get('/generateQuestions', async (req, res) => {
   const generator = new QuestionGenerator();
   await generator.loadTemplates();
   await generator.generate10Questions();
-  generator.close();
+  await generator.close();
   res.status(200).json({ msg: "Questions generated successfully" });
 })
 
