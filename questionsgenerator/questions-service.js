@@ -34,6 +34,7 @@ app.get('/getQuestion', async (req, res) => {
 
       // Delete the question so as not to have repeated questions.
       questionRepo.delete(question);
+      console.log(tittle);
 
       res.json({ question: tittle, correctAnswerLabel: correctAnswer, answerLabelSet: answerSet });
     }

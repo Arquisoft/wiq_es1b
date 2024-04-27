@@ -15,12 +15,8 @@ beforeAll(async () => {
   const mongoUri = mongoServer.getUri();
   process.env.MONGODB_URI = mongoUri;
   app = require('./questions-service');
-  //mongoServer = await MongoMemoryServer.create();
-  //const mongoUri = mongoServer.getUri();
-  //process.env.MONGODB_URI = mongoUri;
-  //app = require('./questions-service');
   //mock the query gotten from mongo
-  /**const aggregateStub = sinon.stub(Question, 'aggregate');
+  const aggregateStub = sinon.stub(Question, 'aggregate');
   aggregateStub.resolves([
     {
       tittle: 'Test title ??',
@@ -29,7 +25,7 @@ beforeAll(async () => {
       category: 'todo'
     }
   ]); 
-  //mock the deleteOne from the service
+  /**mock the deleteOne from the service
   const deleteOneStub = sinon.stub(Question, 'deleteOne');
   deleteOneStub.resolves({ n: 1 });**/
 });
@@ -39,7 +35,7 @@ afterAll(async () => {
   await app.close();
 });
 
-/**describe('Questions Service', () => {
+describe('Questions Service', () => {
   it('should get a new question on GET /getQuestion', async () => {
     const category = "todo";
 
@@ -48,5 +44,9 @@ afterAll(async () => {
     expect(response.body).toHaveProperty('question');
     expect(response.body).toHaveProperty('correctAnswerLabel');
     expect(response.body).toHaveProperty('answerLabelSet');
+
+    expect(response.body.question).toEqual('Test title ??');
+    expect(response.body.correctAnswerLabel).toEqual('Test correct answer');
+    expect(response.body.answerLabelSet).toEqual(['Test answer 1', 'Test correct answer', 'Test answer 3', 'Test answer 4']);
   });
-});**/
+});

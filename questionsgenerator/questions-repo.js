@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Template = require('./templates/template-model')
 const questionsTemplate = require('./plantillas.json')
 
-const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/questions';
+const mongoURI = process.env.MONGODB_URI;
 
 class QuestionsRepository {
 
