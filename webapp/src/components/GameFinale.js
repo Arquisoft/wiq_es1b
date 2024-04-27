@@ -1,7 +1,7 @@
 // src/components/GameFinale.js
 import React, { useEffect, useState } from 'react';
 import { Container, Typography, Button, Dialog, DialogTitle, DialogActions} from '@mui/material';
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 

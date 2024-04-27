@@ -60,10 +60,12 @@ const HumanCalculator = () => {
   const checkAnswer = async () => {
     let isCorrect = false;
     const answerInput = document.querySelector('#result');
-    let realResult = eval(`${firstNumber} ${operator} ${secondNumber}`); //NOSONAR
+    // eslint-disable-next-line
+    let realResult = eval(`${firstNumber} ${operator} ${secondNumber}`);
     let answer = result;
     const regex = /^-?\d*([.,]\d+)?$/;
-    if ((!regex.test(result) || result === '' ||  result === '-' || result === '-0') && timer != 0) { //NOSONAR
+    // eslint-disable-next-line
+    if ((!regex.test(result) || result === '' ||  result === '-' || result === '-0') && timer != 0) {
       //invalid input
       setResult('');
       setOpenE(true);

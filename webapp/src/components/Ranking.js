@@ -4,11 +4,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button } from '@mui/material';
 import axios from 'axios';
 import './stylesheets/ranking.css';
+const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
 const Ranking = () => {
 
-    const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
-    
     const navigate = useNavigate();
    
     const [open, setOpen] = useState(false);
