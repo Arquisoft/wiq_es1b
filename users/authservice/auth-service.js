@@ -54,7 +54,7 @@ app.post('/login', async (req, res) => {
 app.get('/getUserByUsername', async (req, res) => {
   try {
     // Obtener el nombre de usuario desde el cuerpo de la solicitud
-    const username = req.query.username;
+    const username = req.query.username.toString();
     //buscarlo en la base de datos
     const user = await User.findOne({ username: username });
     // Devolver el usuario encontrado en la respuesta

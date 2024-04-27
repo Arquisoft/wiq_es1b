@@ -12,8 +12,10 @@ const user = {
   password: 'testpassword',//NOSONAR
 };
 
+let hashedPassword = '';
+
 async function addUser(user){
-  const hashedPassword = await bcrypt.hash(user.password, 10);
+  hashedPassword = await bcrypt.hash(user.password, 10);
   const newUser = new User({
     username: user.username,
     password: hashedPassword,
@@ -42,4 +44,20 @@ describe('Auth Service', () => {
     expect(response.status).toBe(200);
     expect(response.body).toHaveProperty('username', 'testuser');
   });
+
+  it('Should perform a getUserByUsername operation /getUserByUsername', async () => {
+    const response = await request(app).get('/getUserByUsername').query({ username: 'testuser' });
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty('user');
+    expect(response.body.user).toHaveProperty('username', 'testuser');
+    expect(response.body.user).toHaveProperty('password', hashedPassword);
+  });
+
+  it('Should perform a getAllUsers operation /getAllUsers', async () => {
+    const response = await request(app).get('/getAllUsers');
+    expect(response.status).toBe(200);
+    //array de tamaño 1 porque solo hay un usuario en la base de datos de test
+    expect(response.body).toHaveLength(1);
+  });
+
 });
