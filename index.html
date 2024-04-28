@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.21">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 <title></title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
@@ -141,7 +141,7 @@ p a>code:hover{color:rgba(0,0,0,.9)}
 #content::before{content:none}
 #header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
 #header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
-#header>h1:only-child{border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
 #header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
 #header .details span:first-child{margin-left:-.125em}
 #header .details span.email a{color:rgba(0,0,0,.85)}
@@ -163,7 +163,6 @@ p a>code:hover{color:rgba(0,0,0,.9)}
 #toctitle{color:#7a2518;font-size:1.2em}
 @media screen and (min-width:768px){#toctitle{font-size:1.375em}
 body.toc2{padding-left:15em;padding-right:0}
-body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
 #toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
 #toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
 #toc.toc2>ul{font-size:.9em;margin-bottom:0}
@@ -329,7 +328,7 @@ a.image{text-decoration:none;display:inline-block}
 a.image object{pointer-events:none}
 sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
 sup.footnote a,sup.footnoteref a{text-decoration:none}
-sup.footnote a:active,sup.footnoteref a:active,#footnotes .footnote a:first-of-type:active{text-decoration:underline}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
 #footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
 #footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
 #footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
@@ -511,14 +510,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </li>
 <li><a href="#section-technical-risks">11. Risks and Technical Debts</a></li>
-<li><a href="#section-glossary">12. Glossary</a></li>
-<li><a href="#section-tests">13. Tests</a>
+<li><a href="#section-tests">12. Tests</a>
 <ul class="sectlevel2">
-<li><a href="#_unit_tests">13.1. Unit tests</a></li>
-<li><a href="#_e2e_tests">13.2. E2E tests</a></li>
-<li><a href="#_load_tests">13.3. Load tests</a></li>
+<li><a href="#_unit_tests">12.1. Unit tests</a></li>
+<li><a href="#_e2e_tests">12.2. E2E tests</a></li>
+<li><a href="#_load_tests">12.3. Load tests</a></li>
 </ul>
 </li>
+<li><a href="#section-glossary">13. Glossary</a></li>
 </ul>
 </div>
 </div>
@@ -1558,7 +1557,134 @@ visual appearance of the application.</p></td>
 </div>
 </div>
 <div class="sect1">
-<h2 id="section-glossary">12. Glossary</h2>
+<h2 id="section-tests">12. Tests</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Information about the different tests we have done.</p>
+</div>
+<div class="sect2">
+<h3 id="_unit_tests">12.1. Unit tests</h3>
+<div class="paragraph">
+<p>We have done unit testing in all the different components of the webapp and services, all of these trying to test
+every aspect of the component by mocking database accesses to be able to get the most coverage percentage possible.
+All the tests pass successfully and give us a really good test coverage on the lines of the component they test.
+Here are the overall results of the components of the webapp:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/unittests.png" alt="Webapp components unit tests results">
+</div>
+</div>
+<div class="paragraph">
+<p>There is a test suite for each service or app has. Here are the results of those tests:</p>
+</div>
+<div class="paragraph">
+<p>Question service.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/questionsServiceTests.png" alt="Questions service unit tests results">
+</div>
+</div>
+<div class="paragraph">
+<p>Record service</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/recordServiceTests.png" alt="Record service unit tests results">
+</div>
+</div>
+<div class="paragraph">
+<p>Gateway service</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/gatewayServiceTests.png" alt="Gateway service unit tests results">
+</div>
+</div>
+<div class="paragraph">
+<p>Users Service</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/usersServiceTests.png" alt="Users service unit tests results">
+</div>
+</div>
+<div class="paragraph">
+<p>Auth Service</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/authServiceTests.png" alt="Auth service unit tests results">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_e2e_tests">12.2. E2E tests</h3>
+<div class="paragraph">
+<p>In addition to the unit tests we have done some E2E tests too. These tests are able to make sure
+all our components work well while used together. We have done this tests in the cases of a user
+creating an account, loging in, playing the game and whatching the record. Here are the results of those tests, all
+of them pass successfully.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/testsE2E.png" alt="E2E results">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/testsE2EClasses.png" alt="E2E classes">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_load_tests">12.3. Load tests</h3>
+<div class="paragraph">
+<p>Gatling was used to make load tests to test our gateway and see how it performed with a lot of requests.
+We made load tests to the login and to the game. All the information about these tests are in the folder loadtests of the project.
+Here are some important data of the tests to give an overall view of how they went.</p>
+</div>
+<div class="paragraph">
+<p>These tests consist of two users starting to do the test each second for 60 seconds, in total 120 users.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/typeOfLoadTests.png" alt="Type of load tests">
+</div>
+</div>
+<div class="paragraph">
+<p>Login Simulation.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/loginSimulationLoadTest.png" alt="Login load tests">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/loginSimulationLoadTest2.png" alt="Login load tests 2">
+</div>
+</div>
+<div class="paragraph">
+<p>Answer questions Simulation.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/answerQuestionSimulationLoadTest.png" alt="Answer question load tests">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/answerQuestionSimulationLoadTest2.png" alt="Answer question load tests 2">
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="section-glossary">13. Glossary</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Definition on some of the most important terms of this documentation.</p>
@@ -1627,37 +1753,13 @@ graphical elements, and other visual elements, as well as the logic that control
 </tr>
 </tbody>
 </table>
-<div style="page-break-after: always;"></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="section-tests">13. Tests</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Information about the different tests we have done.</p>
-</div>
-<div class="sect2">
-<h3 id="_unit_tests">13.1. Unit tests</h3>
-<div class="paragraph">
-<p>We have done unit testing in all the different components of the webapp, all of these trying to tests
-every aspect of the component.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_e2e_tests">13.2. E2E tests</h3>
-
-</div>
-<div class="sect2">
-<h3 id="_load_tests">13.3. Load tests</h3>
-
-</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 8.2 EN<br>
-Last updated 2024-04-27 18:32:51 +0200
+Last updated 2024-04-28 16:42:55 +0200
 </div>
 </div>
 </body>
