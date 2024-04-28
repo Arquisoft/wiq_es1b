@@ -3,7 +3,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const QuestionGenerator = require('./questionGenerator.js');
 const QuestionsRepository = require('./questions-repo.js');
-const questionGenerator = require('./questionGenerator.js');
 
 const app = express();
 app.disable('x-powered-by');

@@ -1,0 +1,27 @@
+ifndef::imagesdir[:imagesdir: ../images]
+
+[[section-tests]]
+
+== Tests
+
+Information about the different tests we have done.
+
+=== Unit tests
+
+We have done unit testing in all the different components of the webapp and services, all of these trying to tests
+every aspect of the component. All the tests pass successfully and give us a really good test coverage on the lines of the component they test.
+Here are the overall results of the components of the webapp:
+
+image::unittests.png["Webapp components unit tests results"]
+
+There is a test suite for each service or app has. Here are the results of those tests:
+
+
+
+=== E2E tests
+
+
+
+=== Load tests
+
+
