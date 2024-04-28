@@ -1,61 +1,58 @@
 ifndef::imagesdir[:imagesdir: ../images]
 
 [[section-introduction-and-goals]]
+
 == Introduction and Goals
+
 HappySw, a software development company, has been hired by RTVE in order to develop an experimental online version of the famous spanish program “Saber y Ganar”, a well-known question and answer contest.
 
-Our main objective is to create a web application in which users have to sign up and answer a series of questions generated automatically from the data stored in Wikidata. After that, users will be awarded according to the number of correct answers.
+Our main objective is to create a web application in which users have to sign up and answer a series of questions generated automatically from the data stored in Wikidata. 
+After that, users will be awarded according to the number of correct answers.
 
 We also expect to provide a practical software that fulfills customer expectations.
-
 
 === Requirements Overview
 
 [options="header",cols="1,2"]
 |===
-|Requirement|Description
-| *Web access* | The system will rely on at least one web frontend that will be deployed and access will be through web
-| *Users registration* | Users must sign up first to be able to access their historial of the game: number of games, times, correct/incorrect answers, etc.
-| *Automatic generation of data* | Questions and answers have to be generated automatically from Wikidata
-| *Questions must have a timer* | Questions must be answered on a determined time, otherwise the response will be count as a fail
-| *Only one correct answer* | System must originate only one correct answer and the rest of them will be wrong so as not to confuse the player
-| *Data access through an API* | System must allow access to the information about users and the generated answers through an API
+| Requirement | Description
+| _Web access_ | The system will rely on at least one web frontend that will be deployed and access will be through web.
+| _Users registration_ | Users must sign up first to be able to access their historial of the game: number of games, times, correct/incorrect answers, etc.
+| _Automatic generation of data_ | Questions and answers have to be generated automatically from Wikidata.
+| _Questions must have a timer_ | Questions must be answered on a determined time, otherwise the response will be count as a fail.
+| _Only one correct answer_ | System must originate only one correct answer and the rest of them will be wrong so as not to confuse the player.
+| _Data access through an API_ | System must allow access to the information about users and the generated answers through an API.
 |===
-
-
 
 === Quality Goals
 
 [options="header",cols="1,2,2"]
 |===
-|Priority|Quality goal|Motivation
-| _High_ | *Usability* | The application interface has to be satisfying and easy to handle to users even if their web
-                        skills are zero
-| _High_ | *Maintainability* | Our software should be designed in a way that it won´t be difficult to modify, extend and
-                        adjust to changes that could suddenly happen
-| _Medium_ | *Availability* | Users may consider a basic that the system let them watch their personal data and results
-                        whenever they want
+| Priority |  Quality goal | Motivation
+| _High_ | *Usability* | The application interface has to be satisfying and easy to handle to users even if their web skills are zero.
+| _High_ | *Maintainability* | Our software should be designed in a way that it won´t be difficult to modify, extend and adjust to changes that could suddenly happen.
+| _Medium_ | *Availability* | Users may consider a basic that the system let them watch their personal data and results whenever they want.
 |===
-
 
 === Stakeholders
 
 [options="header",cols="1,2"]
 |===
-|Role/Name|Expectations
-| *Teachers* | Providing guidance to the development team in order to build the required functional software
-| *Development team* | The group of people in charge of developing the application which goals are to satisfy the stakeholders, learn new technologies, maintain a good relationship between us and be proud of the effort put into the project
-| *Other students* | They can be interested in this project to learn how we work as a team and to have other points of view
-| *Users* | Every one that will be using the application and who should find it practical, enjoyable and easy to use
-| *RTVE* | The main client, it´s the company that hired us and provided the requirements needed
-| *Businesses* | Companies involved in software development that might be looking for future engineers
+| Role/Name | Expectations
+| _Teachers_ | Providing guidance to the development team in order to build the required functional software.
+| _Development team_ | The group of people in charge of developing the application which goals are to satisfy the stakeholders, learn new technologies, 
+                      maintain a good relationship between us and be proud of the effort put into the project.
+| _Other students_ | They can be interested in this project to learn how we work as a team and to have other points of view.
+| _Users_ | Every one that will be using the application and who should find it practical, enjoyable and easy to use.
+| _RTVE_ | The main client, it´s the company that hired us and provided the requirements needed.
+| _Businesses_ | Companies involved in software development that might be looking for future engineers.
 |===
 
 === Group members
 
 [options="header",cols="1,2"]
 |===
-|Role/Name|Contact
+| Name | Contact
 | _Álex Fernández Salé_ | uo279375@uniovi.es
 | _María López García-Consuegra_ | uo289029@uniovi.es
 | _Mauro Varea Fernández_ | uo270734@uniovi.es
