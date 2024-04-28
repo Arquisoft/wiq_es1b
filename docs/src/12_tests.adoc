@@ -8,20 +8,61 @@ Information about the different tests we have done.
 
 === Unit tests
 
-We have done unit testing in all the different components of the webapp and services, all of these trying to tests
-every aspect of the component. All the tests pass successfully and give us a really good test coverage on the lines of the component they test.
+We have done unit testing in all the different components of the webapp and services, all of these trying to test
+every aspect of the component by mocking database accesses to be able to get the most coverage percentage possible.
+All the tests pass successfully and give us a really good test coverage on the lines of the component they test.
 Here are the overall results of the components of the webapp:
 
 image::unittests.png["Webapp components unit tests results"]
 
 There is a test suite for each service or app has. Here are the results of those tests:
 
+Question service.
 
+image::questionsServiceTests.png["Questions service unit tests results"]
+
+Record service
+
+image::recordServiceTests.png["Record service unit tests results"]
+
+Gateway service
+
+image::gatewayServiceTests.png["Gateway service unit tests results"]
+
+Users Service
+
+image::usersServiceTests.png["Users service unit tests results"]
+
+Auth Service
+
+image::authServiceTests.png["Auth service unit tests results"]
 
 === E2E tests
 
+In addition to the unit tests we have done some E2E tests too. These tests are able to make sure 
+all our components work well while used together. We have done this tests in the cases of a user
+creating an account, loging in, playing the game and whatching the record. Here are the results of those tests, all 
+of them pass successfully.
 
+image::testsE2E.png["E2E results"]
+image::testsE2EClasses.png["E2E classes"]
 
 === Load tests
 
+Gatling was used to make load tests to test our gateway and see how it performed with a lot of requests.
+We made load tests to the login and to the game. All the information about these tests are in the folder loadtests of the project.
+Here are some important data of the tests to give an overall view of how they went.
 
+These tests consist of two users starting to do the test each second for 60 seconds, in total 120 users.
+
+image::typeOfLoadTests.png["Type of load tests"]
+
+Login Simulation.
+
+image::loginSimulationLoadTest.png["Login load tests"]
+image::loginSimulationLoadTest2.png["Login load tests 2"]
+
+Answer questions Simulation.
+
+image::answerQuestionSimulationLoadTest.png["Answer question load tests"]
+image::answerQuestionSimulationLoadTest2.png["Answer question load tests 2"]
