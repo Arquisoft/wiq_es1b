@@ -33,7 +33,7 @@ The web app will interact with Wikidata by SPARQL querys which will be stored in
 
 === Level 2
 
-image::buildingblock2.png["More detailed webApp diagram"]
+image::05_Building_Block_2.png["More detailed webApp diagram"]
 
 
 ==== Interfaces
@@ -62,19 +62,7 @@ there are some for the users and their record and others for the questions.
 
 === Level 3
 
-image::buildingBlock3.png["More detailed microservices diagram"]
-
-==== Question Generator
-
-The Question Generator is the service that interacts with the Wikidata external service through SPARQL querys.
-It is dedicated to generate the questions and the answers and send them to the database to store there to later show 
-in the game. 
-
-==== Record
-
-The record service is the one that answers the requests related to save or get the games and statistics of the player.
-It interacts with the user collection in the MongoDb database and stores there the data. It also sends the data for the 
-user to see.
+image::05_Building_Block_3.png["More detailed microservices diagram"]
 
 ====  Users
 
@@ -89,3 +77,15 @@ database that the record service uses.
 This is one service inside the users part of the webapp. This one is the one users use everytime when they log in. It retrieves
 all their data from the database and shows them in the webApp as the users will have an option to view all their past data. It gets 
 the data from the same collection as the auth service and the record.
+
+==== Question Generator
+
+The Question Generator is the service that interacts with the Wikidata external service through SPARQL querys.
+It is dedicated to generate the questions and the answers and send them to the database to store there to later show 
+in the game. 
+
+==== Record
+
+The record service is the one that answers the requests related to save or get the games and statistics of the player.
+It interacts with the user collection in the MongoDb database and stores there the data. It also sends the data for the 
+user to see.
