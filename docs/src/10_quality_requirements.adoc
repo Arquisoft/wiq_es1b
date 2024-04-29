@@ -10,7 +10,7 @@ The main quality objectives of the project will be:
 * Functionality: The system will offer a set of features and tools to fulfill user needs.
 * Performance: The system will provide fast and effective responses to the user.
 * Maintainability: The system will be easy to maintain, upgrade or extend, without putting the whole project at risk.
-* Security: The system will ensure the privacy and integrity of user data.
+* Security: El sistema será seguro para las contraseñas, ya que están hasheadas, y tendrá seguridad contra inyección en URL.
 
 === Quality Tree
 
@@ -28,6 +28,8 @@ We will categorize the quality scenarios into three main types: usage, change, a
 | Players | A player wants to start a game | Performance | Game Interface | The system creates the game | Game creation time less than 0.5s
 | Players | A player wants to answer a question | Performance | Game Interface | The system updates the question interface | Question update time less than 0.5s
 | Players | A player wants to login with username and password | Security | User Interface | The system stores these credentials | These credentials will be encrypted to maintain their security.
+| Players | A player wants to access his personal game history | Performance | The system will show the personal game history | These games will be showned in less than 1s
+| Players | A player wants to see the global ranking | Ranking Interface | The system will show the global ranking ordered by number of correct answers | All user's ranking will be showned ni less than 1.5s
 |===
 
 ==== Change scenarios
@@ -45,4 +47,6 @@ We will categorize the quality scenarios into three main types: usage, change, a
 |===
 | Source | Stimulus | Attribute | Artifact/Environment | Reply | Response measure
 | Game error | An error occurs during the creation of a game | Failure | Game Interface | The system doesn't create the game | The system will alert the user of the error in the creation
+| Question error | A user wants to play a category mode y no hay preguntas de esa categoría | Failure | Game Interface | The system doesn't create the question | The system will alert the user of the error
+| Record error | An error occurs durante el acceso al historial de un usuario | Failure | Record Interface | The system wont show the record | The system will alert the user with a internall server error 
 |===
