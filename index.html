@@ -483,6 +483,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_login_scenario">6.3. Login Scenario</a></li>
 <li><a href="#_save_record_scenario">6.4. Save record Scenario</a></li>
 <li><a href="#_get_record_scenario">6.5. Get record Scenario</a></li>
+<li><a href="#_get_all_questions_scenario">6.6. Get all questions Scenario</a></li>
+<li><a href="#_get_all_users_scenario">6.7. Get all users Scenario</a></li>
 </ul>
 </li>
 <li><a href="#section-deployment-view">7. Deployment View</a>
@@ -728,20 +730,8 @@ Additionally, users will also have access to the history of their games.</p></td
 <td class="tableblock halign-left valign-top"><p class="tableblock">Diagrams and ASCIIDoc will be used along with the Arc42 template to keep the documentation updated throughout the development of the web app.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>SPARQL</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">To generate the questions and answers for the game, we will use SPARQL in Wikidata as it is a great source of information to provide
-different types of questions to the users, making the game versatile and non-repetitive.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Question generator</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Using the Sparql querys, questions will be automatically generated along with the correct and three incorrect answers. This questions will be
-answered by the user and saved in their history. By using this generator, we ensure that the likelihood of getting the same question in another game is almost none.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Users login</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The login of the users must be the first thing that shows up when you open the web of the game. Users will be able to register and to log in. After registering,
-it will be necessary to log in to access the website and start the game.
-Users who already have an account will have the option to start the game or view their data from previus games (number of games, correct and incorrect answers, time played, etc).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Question generator with Wikidata</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Questions will be automatically generated along with the correct and three incorrect answers. This questions will be generated with Wikidata.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Deployment</em></p></td>
@@ -1069,7 +1059,7 @@ user to see.</p>
 </div>
 <div class="paragraph">
 <p>In this scenario, the question will first be collected from the database. To do so, the question view will call getQuestion, which will propagate to the question service
-propagate to question service where, by means of an aggregate, a random question will be fetched. Afterwards, this question will be deleted from
+propagate to question service where, thanks to the question repository, a random question will be fetched. Afterwards, this question will be deleted from
 the database to avoid repeating questions.
 Once the question has been retrieved, it is displayed in the view. When the user selects one of the 4 answers, the selected answer is checked, the user is notified of the answer.
 the selected answer is checked, the user is notified of this check (whether it is correct or incorrect), and the process of saving the question begins.
@@ -1126,10 +1116,9 @@ When the user is logged, then 10 questions will be generated with wikidata and s
 <div class="paragraph">
 <p>In this diagram we can see the sequence for saving a game. When the game is over, the user is redirected to the Game Final screen,
 where he/she will click on the "Save record" button to save that game in the record.
-First, the gateway service will recognize the action of saving a game, and redirect the request to the historial service,
-who, after creating the connection to the database, will search for the current user. Once the current user has been obtained from the database, the object
-object is created, with the obtained user and the game questions (which have been stored at game time). Finally, the game is saved
-in the database.</p>
+First, the gateway service will recognize the action of saving a game. It will start by obtaining the user by username by calling the /getUserByUsername endpoint of authservice which,
+by a findOne() query will retrieve the user with that username.
+Once the user has been obtained, gateway service will call history service to store the queries and the user in the same batch, thanks to the history repository.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1142,8 +1131,34 @@ in the database.</p>
 <div class="paragraph">
 <p>This diagram shows the process by which a user, previously logged in, accesses the records of his games.
 First, the user will click on the navBar button to access his game record. This will make a call to the /getGameRecord endpoint,
-which the gateway service will redirect to the historial service. This will first check that the user exists and, if so, will return all of the user&#8217;s
-games saved up to the date of the logged in user.</p>
+which the gateway service will catch. This controller will call user service to obtain the user for whom the complete history is to be obtained.
+Once the user is obtained, gateway service will call history service to, through the history repository, obtain the complete history of the user.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_get_all_questions_scenario">6.6. Get all questions Scenario</h3>
+<div class="imageblock">
+<div class="content">
+<img src="./images/getAllQuestions.png" alt="Diagram of a logged user getting all questions">
+</div>
+</div>
+<div class="paragraph">
+<p>This diagram shows the process to get all the questions from the database. Once logged in, the user will click the get DB data button. This will make a call
+to the /getAllQuestions endpoint which, in turn, will get all the questions from the question service.
+Once the questions are obtained, the gateway service will create a temporary questions.json file with all the questions and pass it to the view, which will create a link to download it.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_get_all_users_scenario">6.7. Get all users Scenario</h3>
+<div class="imageblock">
+<div class="content">
+<img src="./images/getAllUsers.png" alt="Diagram of a logged user getting all questions">
+</div>
+</div>
+<div class="paragraph">
+<p>This diagram shows the process to get all the users from the database. Once logged in, the user will click the get DB data button. This will make a call
+to the /getAllUsers endpoint which, in turn, will get all the users from the user service.
+Once the users are obtained, the gateway service will create a temporary users.json file with all the questions and pass it to the view, which will create a link to download it.</p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -1287,18 +1302,27 @@ Crafting intuitive interfaces that facilitate effortless interaction with the sy
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>React.js</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">We decided to use React.js because it is one of the most popular Javascript libraries used nowadays.
-              Although none of us were familiar with it, we thought it would make programming the front-end part of the app better and easier for us.</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Javascript</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">We chose to stick with Javascript for the development of this web app because we already had knowledge of this language from other subjects.
                 We found it to be an accessible language capable of fulfilling all the app&#8217;s requirements, including using APIs such as the one from Wikidata.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>React.js</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">We decided to use React.js because it is one of the most popular Javascript libraries used nowadays.
+              Although none of us were familiar with it, we thought it would make programming the front-end part of the app better and easier for us.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Mongodb</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">For the database aspect of the app, we opted for Mongodb as we believe it is a well-suited option for storing the data necessary for the design and development of the app.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>SPARQL</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To generate the questions and answers for the game, we will use SPARQL in Wikidata as it is a great source of information to provide
+different types of questions to the users, making the game versatile and non-repetitive.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Users login</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When a user logs into the application, 10 questions will be automatically generated and saved in the database. The decision was made based on the performance demonstrated compared to the other options.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1343,6 +1367,10 @@ Crafting intuitive interfaces that facilitate effortless interaction with the sy
 <td class="tableblock halign-left valign-top"><p class="tableblock">It is responsible for creating the web application´s user interface and involves various functionalities such as rendering views, handling user interactions and communicating with backend services.
             It uses React as the base framework, and html and css to manage the visual appearance of the application.</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>LoadTests</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Handles load tests to test the functionality and performance of the application.</p></td>
+</tr>
 </tbody>
 </table>
 <div style="page-break-after: always;"></div>
@@ -1370,7 +1398,7 @@ Crafting intuitive interfaces that facilitate effortless interaction with the sy
 <p>Maintainability: The system will be easy to maintain, upgrade or extend, without putting the whole project at risk.</p>
 </li>
 <li>
-<p>Security: The system will ensure the privacy and integrity of user data.</p>
+<p>Security: El sistema será seguro para las contraseñas, ya que están hasheadas, y tendrá seguridad contra inyección en URL.</p>
 </li>
 </ul>
 </div>
@@ -1432,6 +1460,14 @@ Crafting intuitive interfaces that facilitate effortless interaction with the sy
 <td class="tableblock halign-left valign-top"><p class="tableblock">User Interface</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The system stores these credentials</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">These credentials will be encrypted to maintain their security.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Players</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A player wants to access his personal game history</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Performance</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The system will show the personal game history</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">These games will be showned in less than 1s</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Players</p></td>
 </tr>
 </tbody>
 </table>
@@ -1506,6 +1542,22 @@ Crafting intuitive interfaces that facilitate effortless interaction with the sy
 <td class="tableblock halign-left valign-top"><p class="tableblock">Game Interface</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The system doesn&#8217;t create the game</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The system will alert the user of the error in the creation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Question error</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A user wants to play a category mode y no hay preguntas de esa categoría</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Failure</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Game Interface</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The system doesn&#8217;t create the question</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The system will alert the user of the error</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Record error</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An error occurs durante el acceso al historial de un usuario</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Failure</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Record Interface</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The system wont show the record</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The system will alert the user with a internall server error</p></td>
 </tr>
 </tbody>
 </table>
@@ -1768,7 +1820,7 @@ graphical elements, and other visual elements, as well as the logic that control
 <div id="footer">
 <div id="footer-text">
 Version 8.2 EN<br>
-Last updated 2024-04-28 18:51:35 +0200
+Last updated 2024-04-28 21:16:33 +0200
 </div>
 </div>
 </body>
